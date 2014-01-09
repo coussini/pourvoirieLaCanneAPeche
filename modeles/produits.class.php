@@ -23,7 +23,10 @@ class Produits
 
         $requete = $id->prepare("SELECT id_produit,
     									statut,
-    									image,
+    									imageFacade,
+										imageInterieur1,
+										imageInterieur2,
+										imageInterieur3,
     									nom,
     									emplacement,
     									description,
@@ -36,7 +39,10 @@ class Produits
     	
         $requete->bindColumn('id_produit',$id_produit);
     	$requete->bindColumn('statut',$statut);
-    	$requete->bindColumn('image',$image);
+    	$requete->bindColumn('imageFacade',$imageFacade);
+		$requete->bindColumn('imageInerieur1',$imageInterieur1);
+		$requete->bindColumn('imageInerieur2',$imageInterieur2);
+		$requete->bindColumn('imageInerieur3',$imageInterieur3);
     	$requete->bindColumn('nom',$nom);
     	$requete->bindColumn('emplacement',$emplacement);
         $requete->bindColumn('description',$description);
@@ -50,7 +56,10 @@ class Produits
         {
             $produits[$i]["id_produit"] = $id_produit;
             $produits[$i]["statut"] = $statut;
-    		$produits[$i]["image"] = $image;
+    		$produits[$i]["imageFacade"] = $imageFacade;
+    		$produits[$i]["imageInterieur1"] = $imageInterieur1;
+    		$produits[$i]["imageInterieur2"] = $imageInterieur2;
+    		$produits[$i]["imageInterieur3"] = $imageInterieur3;
             $produits[$i]["nom"] = $nom;
     		$produits[$i]["emplacement"] = $emplacement;
     		$produits[$i]["description"] = $description;
@@ -78,7 +87,10 @@ class Produits
 
         $requete = $id->prepare("SELECT id_produit,
     									statut,
-    									image,
+    									imageFacade,
+										imageInterieur1,
+										imageInterieur2,
+										imageInterieur3,
     									nom,
     									emplacement,
     									description,
@@ -95,7 +107,10 @@ class Produits
     	
         $requete->bindColumn('id_produit',$id_produit);
     	$requete->bindColumn('statut',$statut);
-    	$requete->bindColumn('image',$image);
+    	$requete->bindColumn('imageFacade',$imageFacade);
+		$requete->bindColumn('imageInerieur1',$imageInterieur1);
+		$requete->bindColumn('imageInerieur2',$imageInterieur2);
+		$requete->bindColumn('imageInerieur3',$imageInterieur3);
     	$requete->bindColumn('nom',$nom);
     	$requete->bindColumn('emplacement',$emplacement);
         $requete->bindColumn('description',$description);
@@ -109,7 +124,10 @@ class Produits
         {
             $produits[$i]["id_produit"] = $id_produit;
             $produits[$i]["statut"] = $statut;
-    		$produits[$i]["image"] = $image;
+    		$produits[$i]["imageFacade"] = $imageFacade;
+    		$produits[$i]["imageInterieur1"] = $imageInterieur1;
+    		$produits[$i]["imageInterieur2"] = $imageInterieur2;
+    		$produits[$i]["imageInterieur3"] = $imageInterieur3;
             $produits[$i]["nom"] = $nom;
     		$produits[$i]["emplacement"] = $emplacement;
     		$produits[$i]["description"] = $description;
@@ -128,7 +146,7 @@ class Produits
     }
     // -----------------------------------------------------------------------------------------------------//
 
-    public function creerUnProduit($id_utilisateur,$id_produit,$statut,$image,$nom,
+    public function creerUnProduit($id_utilisateur,$id_produit,$statut,$imageFacade,$imageInterieur1,$imageInterieur2,$imageInterieur3,$nom,
     						$description,$nombre_de_chambre,$nombre_de_salle_de_bain,$prix_par_jour,
     						$prix_par_semaine)
     {
@@ -145,9 +163,24 @@ class Produits
             throw new Exception("Statut invalide");
         }
     	
-    	else if ($image == "")
+    	else if ($imageFacade == "")
         {
-            throw new Exception("Image invalide");
+            throw new Exception("Image de la facade invalide");
+        }
+		
+		else if ($imageInterieur1 == "")
+        {
+            throw new Exception("Image interieur1 invalide");
+        }
+		
+		else if ($imageInterieur2 == "")
+        {
+            throw new Exception("Image interieur2 invalide");
+        }
+		
+		else if ($imageInterieur3 == "")
+        {
+            throw new Exception("Image interieur3 invalide");
         }
     	
         else if ($nom == "")
@@ -190,7 +223,10 @@ class Produits
         $id_utilisateur = htmlentities($id_utilisateur, ENT_QUOTES, "UTF-8");
         $id_produit = htmlentities($id_produit, ENT_QUOTES, "UTF-8");
         $statut = htmlentities($statut, ENT_QUOTES, "UTF-8");
-    	$image = htmlentities($image, ENT_QUOTES, "UTF-8");
+    	$imageFacade = htmlentities($image, ENT_QUOTES, "UTF-8");
+		$imageInterieur1 = htmlentities($imageInterieur1, ENT_QUOTES, "UTF-8");
+		$imageInterieur2 = htmlentities($imageInterieur2, ENT_QUOTES, "UTF-8");
+		$imageInterieur3 = htmlentities($imageInterieur3, ENT_QUOTES, "UTF-8");
         $nom = htmlentities($nom, ENT_QUOTES, "UTF-8");
     	$emplacement = htmlentities($emplacement, ENT_QUOTES, "UTF-8");
         $description = htmlentities($description, ENT_QUOTES, "UTF-8");
@@ -202,29 +238,35 @@ class Produits
         $id = $this->connexionBD;
 
         $requete = $id->prepare("INSERT INTO produits 
-                                 (id_utilisateur,
-                                  id_produit,
-                                  statut,
-    							  image,
-                                  nom,
-    							  emplacement,
-                                  description,
-    							  nombre_de_chambre,
-    							  nombre_de_salle_de_bain,
-    							  prix_par_jour,
-    							  prix_par_semaine
-    							  )
-                                  VALUES (:id_utilisateur, 
-                                          :id_produit,
-    									  :statut,
-    									  :image,
-    									  :nom,
-    									  :emplacement,
-    									  :description,
-    									  :nombre_de_chambre,
-                                          :nombre_de_salle_de_bain,
-                                          :prix_par_jour, 
-                                          :prix_par_semaine)");
+							 (id_utilisateur,
+							  id_produit,
+							  statut,
+							  imageFacade,
+							  imageInterieur1,
+							  imageInterieur2,
+							  imageInterieur3,
+							  nom,
+							  emplacement,
+							  description,
+							  nombre_de_chambre,
+							  nombre_de_salle_de_bain,
+							  prix_par_jour,
+							  prix_par_semaine
+							  )
+							  VALUES (:id_utilisateur, 
+									  :id_produit,
+									  :statut,
+									  :imageFacade,
+									  :imageInterieur1,
+									  :imageInterieur2,
+									  :imageInterieur3,
+									  :nom,
+									  :emplacement,
+									  :description,
+									  :nombre_de_chambre,
+									  :nombre_de_salle_de_bain,
+									  :prix_par_jour, 
+									  :prix_par_semaine)");
 
         if (!$requete) 
         {
@@ -234,7 +276,10 @@ class Produits
         $requete->bindParam(':id_utilisateur',$id_utilisateur,PDO::PARAM_INT);
         $requete->bindParam(':id_produit',$id_produit,PDO::PARAM_INT);
         $requete->bindParam(':statut',$statut,PDO::PARAM_STR);
-    	$requete->bindParam(':image',$image,PDO::PARAM_STR);
+    	$requete->bindParam(':imageFacade',$imageFacade,PDO::PARAM_STR);
+    	$requete->bindParam(':imageInterieur1',$imageInterieur1,PDO::PARAM_STR);
+    	$requete->bindParam(':imageInterieur2',$imageInterieur2,PDO::PARAM_STR);
+    	$requete->bindParam(':imageInterieur3',$imageInterieur3,PDO::PARAM_STR);
     	$requete->bindParam(':nom',$nom,PDO::PARAM_STR);
     	$requete->bindParam(':emplacement',$emplacement,PDO::PARAM_STR);
     	$requete->bindParam(':description',$description,PDO::PARAM_STR);
@@ -259,7 +304,7 @@ class Produits
     }
     // -----------------------------------------------------------------------------------------------------//
 
-    public function modifierUnProduit($id_utilisateur,$id_produit,$statut,$image,$nom,$emplacement,$description,$nombre_de_chambre,$nombre_de_salle_de_bain,$prix_par_jour,$prix_par_semaine)
+    public function modifierUnProduit($id_utilisateur,$id_produit,$statut,$imageFacade,$imageInterieur1,$imageInterieur2,$imageInterieur3,$nom,$emplacement,$description,$nombre_de_chambre,$nombre_de_salle_de_bain,$prix_par_jour,$prix_par_semaine)
     {
         if (!is_numeric($id_utilisateur))
         {
@@ -273,10 +318,26 @@ class Produits
         {
             throw new Exception("Statut invalide");
         }
-        else if ($image == "")
+        else if ($imageFacade == "")
         {
-            throw new Exception("Image invalide");
+            throw new Exception("Image de la facade invalide");
         }
+		
+		else if ($imageInterieur1 == "")
+        {
+            throw new Exception("Image interieur1 invalide");
+        }
+		
+		else if ($imageInterieur2 == "")
+        {
+            throw new Exception("Image interieur2 invalide");
+        }
+		
+		else if ($imageInterieur3 == "")
+        {
+            throw new Exception("Image interieur3 invalide");
+        }
+		
         else if ($nom == "")
         {
             throw new Exception("Nom invalide");
@@ -316,7 +377,10 @@ class Produits
         $id_utilisateur = htmlentities($id_utilisateur, ENT_QUOTES, "UTF-8");
         $id_produit = htmlentities($id_produit, ENT_QUOTES, "UTF-8");
         $statut = htmlentities($statut, ENT_QUOTES, "UTF-8");
-        $image = htmlentities($image, ENT_QUOTES, "UTF-8");
+        $imageFacade = htmlentities($image, ENT_QUOTES, "UTF-8");
+		$imageInterieur1 = htmlentities($imageInterieur1, ENT_QUOTES, "UTF-8");
+		$imageInterieur2 = htmlentities($imageInterieur2, ENT_QUOTES, "UTF-8");
+		$imageInterieur3 = htmlentities($imageInterieur3, ENT_QUOTES, "UTF-8");
         $nom = htmlentities($nom, ENT_QUOTES, "UTF-8");
         $emplacement = htmlentities($emplacement, ENT_QUOTES, "UTF-8");
         $description = htmlentities($description, ENT_QUOTES, "UTF-8");
@@ -331,7 +395,10 @@ class Produits
                                   SET id_utilisateur            = :id_utilisateur,
                                       id_produit                = :id_produit,
                                       statut                    = :statut,
-                                      image                     = :image,
+                                      imageFacade               = :imageFacade,
+									  imageInterieur1           = :imageInterieur1,
+									  imageInterieur2           = :imageInterieur2,
+									  imageInterieur3           = :imageInterieur3,
                                       nom                       = :nom,
                                       emplacement               = :emplacement,
                                       description               = :description,
@@ -344,7 +411,10 @@ class Produits
         $requete->bindParam(':id_utilisateur',$id_utilisateur,PDO::PARAM_INT);
         $requete->bindParam(':id_produit',$id_produit,PDO::PARAM_INT);
         $requete->bindParam(':statut',$statut,PDO::PARAM_STR);
-        $requete->bindParam(':image',$id_produit,PDO::PARAM_STR);
+        $requete->bindParam(':imageFacade',$imageFacade,PDO::PARAM_STR);
+    	$requete->bindParam(':imageInterieur1',$imageInterieur1,PDO::PARAM_STR);
+    	$requete->bindParam(':imageInterieur2',$imageInterieur2,PDO::PARAM_STR);
+    	$requete->bindParam(':imageInterieur3',$imageInterieur3,PDO::PARAM_STR);
         $requete->bindParam(':nom',$id_produit,PDO::PARAM_STR);
         $requete->bindParam(':emplacement',$id_produit,PDO::PARAM_STR);
         $requete->bindParam(':description',$id_produit,PDO::PARAM_STR);
