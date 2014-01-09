@@ -247,7 +247,7 @@ class Produits
 
         if (!$result) 
         {
-            throw new Exception("Erreur d'insertion sur la table réservations " . $id->errorCode());
+            throw new Exception("Erreur d'insertion sur la table produits " . $id->errorCode());
         }
         
         $requete->closeCursor();
@@ -357,7 +357,7 @@ class Produits
 
         if (!$result) 
         {
-            throw new Exception("Erreur de mise à jour sur la table reservations " . $id->errorCode());
+            throw new Exception("Erreur de mise à jour sur la table produits " . $id->errorCode());
         }
         
         $requete->closeCursor();
