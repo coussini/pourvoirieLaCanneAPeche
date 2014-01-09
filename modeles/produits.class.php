@@ -377,7 +377,7 @@ class Produits
         $id_utilisateur = htmlentities($id_utilisateur, ENT_QUOTES, "UTF-8");
         $id_produit = htmlentities($id_produit, ENT_QUOTES, "UTF-8");
         $statut = htmlentities($statut, ENT_QUOTES, "UTF-8");
-        $imageFacade = htmlentities($image, ENT_QUOTES, "UTF-8");
+        $imageFacade = htmlentities($imageFacade, ENT_QUOTES, "UTF-8");
 		$imageInterieur1 = htmlentities($imageInterieur1, ENT_QUOTES, "UTF-8");
 		$imageInterieur2 = htmlentities($imageInterieur2, ENT_QUOTES, "UTF-8");
 		$imageInterieur3 = htmlentities($imageInterieur3, ENT_QUOTES, "UTF-8");
