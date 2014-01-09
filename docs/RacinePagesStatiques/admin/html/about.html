@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pourvoirie La Canne &agrave; P&ecirc;che - Administration</title>
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/stylesheet.css" rel="stylesheet">
+    <link href="../css/bouton.css" rel="stylesheet">
+            <style>
+
+            #alert{
+             visibility:hidden;
+            }
+        </style>
+
+
+
+    <script src="../../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+  </head>
+
+  <body>
+    <div id="wrap">
+      <!-- Début du menu de navigation -->
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <ul class="nav navbar-nav ">
+              <li><a href="../index.html"><span class="titresMenu">SECTION ADMINISTRATION</span></a></li>
+              <li><a href="../html/about.html"><span class="titresMenu">ÉLÉMENTS STATIQUES</span></a></li>
+              <li><a href="../html/clients.html"><span class="titresMenu">CLIENTS</span></a></li>
+              <li><a href="../html/reservations.html"><span class="titresMenu">RÉSERVATIONS</span></a></li>
+              <li><a href="../html/chalet1.html"><span class="titresMenu">PRODUITS</span></a></li>
+
+              <li><img src="../../images/connexion.png" alt="cadenas" class="img-responsive hidden-xs">
+              <a href="../../index.html"><span class="titresLogin">DECONNEXION</span></a>
+              </li>
+            </ul>
+        </div>
+      </div>
+      <div class="container main">
+        <div class="row">
+    <!-- DÉBUT CONTENU DE LA PAGE -->
+<!-- Début du formulaire -->
+       <fieldset>
+      <form role="form">
+
+        <div class="form-group">
+        <label class="control-label" for="contenu">Choisir le contenu à modifier:</label> <br/> 
+            <select id="contenu">
+
+                <option value="about.html" selected>À propos</option>
+                <option value="about.html">Contact</option>
+                <option value="about.html">Informations</option>
+                <option value="about.html">Pêche</option>
+                <option value="about.html">Activités</option>
+                <option value="about.html">Politique d’utilisation du site</option>
+                <option value="about.html">Politique de réservation</option>
+                <option value="about.html">Politique de confidentialité</option>
+                <option value="about.html">Goolge Maps</option>
+            </select>
+          </div>
+
+         <div class="form-group">
+            <label for="nom" class="control-label">Modifications</label>
+            <textarea id="texte" class="form-control" rows="15">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </textarea>
+        </div>
+       </form>
+    </fieldset>
+    <button id="confirm" class="btn btn-custom-gris btn-lg">Enregister les modifications</button><br/><br/>
+    <div id="alert" class="alert alert-warning ">
+  <strong>Modifications enregistrées</strong>
+</div>
+<!-- Fin du formulaire -->
+    <!-- FIN CONTENU DE LA PAGE -->     
+      </div><!-- /.row -->
+    </div> <!-- /.container -->
+<!--      
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted">&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
+      </div>
+    </div> -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script>
+      document.getElementById("contenu").onchange = function() {
+        if (this.selectedIndex!==0) {
+        window.location.href = this.value;
+        }        
+      };
+      document.getElementById("confirm").onmouseup = function() { 
+          document.getElementById("alert").style.visibility= 'visible' ;
+      };
+      document.getElementById("texte").onclick = function() { 
+          document.getElementById("alert").style.visibility= 'hidden' ;
+      };
+      document.getElementById("alert").onclick = function() { 
+          document.getElementById("alert").style.visibility= 'hidden' ;
+      };
+   </script>
+
+    <script src="../../js/vendor/jquery-1.10.1.min.js"></script>
+    <script src="../../js/vendor/bootstrap.min.js"></script>
+  </body>
+</html>
