@@ -58,6 +58,9 @@ CREATE TABLE IF NOT EXISTS `reservations` (
   `date_debut` datetime NOT NULL,
   `date_fin` datetime NOT NULL,
   `nombre_de_semaine` tinyint(4) NOT NULL,
+  `nom_carte` enum('Mastercard','Visa','American Express') NOT NULL,
+  `numero_carte` tinyint(4) NOT NULL,
+  `id_carte` tinyint(4) NOT NULL,
   PRIMARY KEY (`id_reservation`),
   KEY `id_utilisateur` (`id_utilisateur`),
   KEY `id_produit` (`id_produit`)
