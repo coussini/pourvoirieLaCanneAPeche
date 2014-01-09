@@ -9,6 +9,9 @@ require_once("./includes/connexionPDO.class.php");
 /* INITIALISATION */
 /******************/
 require_once("./inits/maitre.init.php");
+require_once("./inits/utilisateurs.init.php");
+require_once("./inits/produits.init.php");
+require_once("./inits/statiques.init.php");
 require_once("./inits/reservations.init.php");
 
 /**********/
@@ -34,7 +37,7 @@ require_once("./vues/statiques.class.php");
 /*****************************/
 /* il n'y a qu'un controleur */
 /*****************************/
-require_once("./controleurs/controleur.class.php");
+require_once("./controleurs/controleur.class.php"); // CECI EST LE CONTROLEUR FINAL
 
 /************************/
 /* SQUELETTES DES PAGES */

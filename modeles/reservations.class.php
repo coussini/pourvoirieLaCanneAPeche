@@ -1,5 +1,4 @@
-<?php
-// adfgsdfgdf
+﻿<?php
 class Reservations
 {
     private $connexionBD;
