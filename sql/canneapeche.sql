@@ -36,8 +36,6 @@ CREATE TABLE IF NOT EXISTS `produits` (
   `imageInterieur1` varchar(200) NOT NULL,
   `imageInterieur2` varchar(200) NOT NULL,
   `imageInterieur3` varchar(200) NOT NULL,
-  `imageFacade` varchar(200) NOT NULL,
-  `imageFacade` varchar(200) NOT NULL,
   `description` text NOT NULL,
   `nombre_de_chambre` tinyint(4) NOT NULL,
   `nombre_de_salle_de_bain` tinyint(4) NOT NULL,
