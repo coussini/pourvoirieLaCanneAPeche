@@ -2,7 +2,7 @@
 // public function SQL qui permet de vérifier si un utilisateur (son courriel) est présent
 // RETOURNE 0 si le courriel n'est pas trouvé
 
-
+//salut
 
 class Produits
 {
