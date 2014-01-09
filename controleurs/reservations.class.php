@@ -4,6 +4,8 @@ class Controleur
 {
     public static function gererRequetes()
     {
+        $_GET['requete'] = 'req_extraireDesReservations';
+        
         switch ($_GET['requete']) 
         {
             case 'req_extraireDesReservations':

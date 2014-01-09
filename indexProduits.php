@@ -8,6 +8,7 @@ require_once("./includes/connexionPDO.class.php");
 /******************/
 /* INITIALISATION */
 /******************/
+require_once("./inits/maitre.init.php");
 require_once("./inits/produits.init.php");
 
 /**********/

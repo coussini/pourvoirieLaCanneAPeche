@@ -20,6 +20,9 @@ class VueReservations
             $form .= '<p> date_debut: ' . $reservations[$i]["date_debut"] . '</p>';
             $form .= '<p> date_fin: ' . $reservations[$i]["date_fin"] . '</p>';
             $form .= '<p> nombre_de_semaine: ' . $reservations[$i]["nombre_de_semaine"] . '</p>';
+            $form .= '<p> nombre_de_semaine: ' . $reservations[$i]["nom_carte"] . '</p>';
+            $form .= '<p> nombre_de_semaine: ' . $reservations[$i]["numero_carte"] . '</p>';
+            $form .= '<p> nombre_de_semaine: ' . $reservations[$i]["id_carte"] . '</p>';
         }
 
         $form .= '<div class="erreur">';

@@ -23,7 +23,10 @@ class Reservations
                                          id_produit,
                                          date_debut,
                                          date_fin,
-                                         nombre_de_semaine
+                                         nombre_de_semaine,
+                                         nom_carte,
+                                         numero_carte,
+                                         id_carte
                                   FROM reservations"); 
 
         if (!$requete) 
@@ -44,6 +47,9 @@ class Reservations
         $requete->bindColumn('date_debut',$date_debut);
         $requete->bindColumn('date_fin',$date_fin);
         $requete->bindColumn('nombre_de_semaine',$nombre_de_semaine);
+        $requete->bindColumn('nom_carte',$nom_carte);
+        $requete->bindColumn('numero_carte',$numero_carte);
+        $requete->bindColumn('id_carte',$id_carte);
      
         $i = 0;
         while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
@@ -54,6 +60,9 @@ class Reservations
             $reservations[$i]["date_debut"] = $date_debut;
             $reservations[$i]["date_fin"] = $date_fin;
             $reservations[$i]["nombre_de_semaine"] = $nombre_de_semaine;
+            $reservations[$i]["nom_carte"] = $nom_carte;
+            $reservations[$i]["numero_carte"] = $numero_carte;
+            $reservations[$i]["id_carte"] = $id_carte;
             $i++;
         }
 
@@ -83,6 +92,9 @@ class Reservations
                                          date_debut,
                                          date_fin,
                                          nombre_de_semaine
+                                         nom_carte,
+                                         numero_carte,
+                                         id_carte
                                   FROM reservations
                                   WHERE id_utilisateur = :id_utilisateur");
 
@@ -106,6 +118,9 @@ class Reservations
         $requete->bindColumn('date_debut',$date_debut);
         $requete->bindColumn('date_fin',$date_fin);
         $requete->bindColumn('nombre_de_semaine',$nombre_de_semaine);
+        $requete->bindColumn('nom_carte',$nom_carte);
+        $requete->bindColumn('numero_carte',$numero_carte);
+        $requete->bindColumn('id_carte',$id_carte);
 
         $i = 0;
         while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
@@ -116,6 +131,9 @@ class Reservations
             $reservations[$i]["date_debut"] = $date_debut;
             $reservations[$i]["date_fin"] = $date_fin;
             $reservations[$i]["nombre_de_semaine"] = $nombre_de_semaine;
+            $reservations[$i]["nom_carte"] = $nom_carte;
+            $reservations[$i]["numero_carte"] = $numero_carte;
+            $reservations[$i]["id_carte"] = $id_carte;
             $i++;
         }
 
