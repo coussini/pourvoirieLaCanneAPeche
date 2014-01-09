@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pourvoirie La Canne &agrave; P&ecirc;che - Administration</title>
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="./css/stylesheet.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+  </head>
+
+  <body>
+    <div id="wrap">
+      <!-- Début du menu de navigation -->
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <ul class="nav navbar-nav ">
+              <li><a href="./index.html"><span class="titresMenu">SECTION ADMINISTRATION</span></a></li>
+              <li><a href="./html/about.html"><span class="titresMenu">ÉLÉMENTS STATIQUES</span></a></li>
+              <li><a href="./html/clients.html"><span class="titresMenu">CLIENTS</span></a></li>
+              <li><a href="./html/reservations.html"><span class="titresMenu">RÉSERVATIONS</span></a></li>
+              <li><a href="./html/chalet1.html"><span class="titresMenu">PRODUITS</span></a></li>
+              <li><img src="../images/connexion.png" alt="cadenas" class="img-responsive hidden-xs">
+              <a href="../index.html"><span class="titresLogin">DECONNEXION</span></a>
+              </li>
+            </ul>
+        </div>
+      </div>
+      <div class="container main">
+        <div class="row">
+    <!-- DÉBUT CONTENU DE LA PAGE -->
+
+
+<h1>Bienvenue dans la page d'administration</h1>
+La demande de tourisme accessible au Québec, dans sa large conception du tourisme pour tous, 
+est en pleine expansion. Plus de 800 000 personnes vivent avec une incapacits physique et cette 
+clientèle est en croissance, en raison du vieillissement de la population.
+
+Le Québec a beau être grand, il n’y a aucune raison pour limiter les déplacements des voyageurs 
+à mobilité réduite et les priver des splendides atouts naturels et culturels dont regorgent les 
+diverses régions de la province!La pourvoirie La Canne à Pêche offre un expériencee 
+100% accessible: Des chalets adaptés, ses circuits de randonnées accessibles en 
+fauteuil roulant, équipements adaptés et personnel formé.
+La demande de tourisme accessible au Québec, dans sa large conception du tourisme pour tous, 
+est en pleine expansion. Plus de 800 000 personnes vivent avec une incapacits physique et cette 
+clientèle est en croissance, en raison du vieillissement de la population.
+
+Le Québec a beau être grand, il n’y a aucune raison pour limiter les déplacements des voyageurs 
+à mobilité réduite et les priver des splendides atouts naturels et culturels dont regorgent les 
+diverses régions de la province!La pourvoirie La Canne à Pêche offre un expériencee 
+100% accessible: Des chalets adaptés, ses circuits de randonnées accessibles en 
+fauteuil roulant, équipements adaptés et personnel formé.
+
+
+
+
+
+
+    <!-- FIN CONTENU DE LA PAGE -->     
+      </div><!-- /.row -->
+    </div> <!-- /.container -->
+<!--      
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted">&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
+      </div>
+    </div> -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src=".../js/vendor/jquery-1.10.1.min.js"></script>
+    <script src=".../js/vendor/bootstrap.min.js"></script>
+  </body>
+</html>
