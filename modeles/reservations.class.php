@@ -9,6 +9,59 @@ class Reservations
 		$this->connexionBD = $oConnexionPDO->rConnexion;
     }
     
+    // FUNCTION TEMPORAIRE POUR LES TEST
+    // FUNCTION TEMPORAIRE POUR LES TEST
+    // FUNCTION TEMPORAIRE POUR LES TEST
+    // FUNCTION TEMPORAIRE POUR LES TEST
+    public function extraireuUnUtilisateur($id_utilisateur)
+    {
+        $utilisateur = array();
+
+        // cette requete est ce qu'on apelle un sub-select
+        // permet de récupérer les données d'une commande et le total des détails 
+        // pour permettre d'afficher sa valeur dans la liste des commandes passées 
+        $id = $this->connexionBD;
+        $requete = $id->prepare("SELECT courriel,
+                                        prenom,
+                                        nom,
+                                        date_de_naissance 
+                              FROM utilisateurs
+                              WHERE id_utilisateur = :id_utilisateur
+                              AND   statut = 'actif'"); 
+        
+        if (!$requete) 
+        {
+            throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
+        }
+
+        $result = $requete->execute();
+
+        if (!$result) 
+        {
+            throw new Exception("Erreur d'extraction sur la table utilisateur " . $id->errorCode());
+        }
+
+        $requete->bindColumn('courriel',$courriel);
+        $requete->bindColumn('prenom',$prenom);
+        $requete->bindColumn('nom',$nom);
+        $requete->bindColumn('date_de_naissance',$date_de_naissance);
+     
+        $i = 0;
+        while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
+        {
+            $utilisateur[$i]["courriel"] = $courriel;
+            $utilisateur[$i]["prenom"] = $prenom;
+            $utilisateur[$i]["nom"] = $nom;
+            $utilisateur[$i]["date_de_naissance"] = $date_de_naissance;
+            $i++;
+        }
+
+        $requete->closeCursor();
+        $id = null;
+
+        return $utilisateur;
+    }
+    
     // function SQL qui permet de récupérer un commande d'un utilisateur
     public function extraireDesReservations()
     {
