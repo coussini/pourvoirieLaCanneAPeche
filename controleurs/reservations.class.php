@@ -4,12 +4,12 @@ class Controleur
 {
     public static function gererRequetes()
     {
-        $_GET['requete'] = 'req_extraireDesReservations';
+        $_GET['requete'] = 'req_extraireuUnUtilisateur';
         
         switch ($_GET['requete']) 
         {
-            case 'req_extraireDesReservations':
-                self::req_extraireDesReservations();
+            case 'req_extraireuUnUtilisateur':
+                self::req_extraireuUnUtilisateur();
                 break;        
             case 'req_extraireUneReservation':
                 self::req_extraireUneReservation();
@@ -25,6 +25,22 @@ class Controleur
                 break;
         }
     }
+    // traitement extraire un utilisateur
+    private static function req_extraireuUnUtilisateur()
+    {
+        try
+        {
+            $oReservations = new Reservations();
+            $utilisateur = $oReservations->extraireuUnUtilisateur("");
+            VueReservations::formulaire_extraireuUnUtilisateur($utilisateur);
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            VueReservations::formulaire_extraireuUnUtilisateur("");
+        }
+    }
+
     // traitement extraire des réservations
     private static function req_extraireDesReservations()
     {
