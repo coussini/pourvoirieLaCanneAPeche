@@ -1,0 +1,10 @@
+/* override free days background in jquery ui datepicker */
+.free-day 
+{
+  background: #2e9500;
+}
+ 
+.free-day a 
+{
+  opacity: 0.7;
+}
