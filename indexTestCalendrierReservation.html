@@ -39,8 +39,11 @@
                     arrDisabledDates[new Date('05/16/2013')] = new Date('05/16/2013');
                     arrDisabledDates[new Date('06/30/2013')] = new Date('06/30/2013');
 
-                    $('#txtDate').datepicker(
+                    $('#txtDate').datepicker({selectWeek:true,rangeSelect:true,closeOnSelect:false});
+                    /*
                     {
+                        selectWeek: true,
+                        closeOnSelect: false,
                         beforeShowDay: function (dt) 
                         {
                             var bDisable = arrDisabledDates[dt];
@@ -48,6 +51,7 @@
                             else return [true, '', ''];
                         }
                     });
+                    */
                 });
             });//]]>  
         </script>
