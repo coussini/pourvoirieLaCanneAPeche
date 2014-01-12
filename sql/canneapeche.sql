@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `reservations` (
   `id_produit` int(11) NOT NULL,
   `date_debut` datetime NOT NULL,
   `date_fin` datetime NOT NULL,
-  `nombre_de_semaine` tinyint(4) NOT NULL,
+  `numero_de_semaine` tinyint(4) NOT NULL,
   `nom_carte` enum('Mastercard','Visa','American Express') NOT NULL,
   `numero_carte` varchar(16) NOT NULL,
   `id_carte` varchar(3) NOT NULL,
