@@ -28,7 +28,7 @@ class ConnexionPDO
 		$this->sDsn = "mysql:host=" . $this->sHost . ";dbname=" . $this->sBase;
 		$this->rConnexion = new PDO($this->sDsn,$this->sUser,$this->sPass);
 
-		$this->rConnexion->exec("SET NAMES" . $this->sCharset);
+		$this->rConnexion->exec("SET NAMES " . $this->sCharset);
 	}
 }
 ?>

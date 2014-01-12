@@ -1,10 +1,53 @@
 <?php
 // ICI on met tout ce qui va être insérer dans les quelettes
-// Je vous reviens là dessus
 
-// function qui retourne le formulaire "passer une commande" à panier.html dans le cas d'une erreur
 class VueReservations
 {
+    // function qui retourne le formulaire reserver.html
+    public static function formulaire_reserver($produit,$reservations)
+    {
+        $form = '';
+        $form .= '<form id="formulaire_reserver">';
+        $form .= '<h2>formulaire_reserver</h2>';
+
+        for ($i = 0; $i < count($produit); $i++) 
+        {
+            $form .= '<p> id_produit: ' . $produit[$i]["id_produit"] . '</p>';
+            $form .= '<p> nom: ' . $produit[$i]["nom"] . '</p>';
+            $form .= '<p> imageFacade: ' . $produit[$i]["imageFacade"] . '</p>';
+            $form .= '<p> description: ' . $produit[$i]["description"] . '</p>';
+        }
+
+        for ($i = 0; $i < count($reservations); $i++) 
+        {
+            $form .= '<h2>les plages de date réservées</h2>';
+            $form .= '<p> id_reservation: ' . $reservations[$i]["id_reservation"] . '</p>';
+            $form .= '<p> date_debut: ' . $reservations[$i]["date_debut"] . '</p>';
+            $form .= '<p> date_fin: ' . $reservations[$i]["date_fin"] . '</p>';
+            $form .= '<p> numero_semaine: ' . $reservations[$i]["numero_semaine"] . '</p>';
+        }
+
+        $form .= '<div class="erreur">';
+        $form .= '<p>' . $_GET["erreur"] . '</p>';
+        $form .= '</div>';
+        $form .= '</form>';
+        echo $form;
+    }
+    // function qui retourne les erreurs
+    public static function formulaire_erreur()
+    {
+        $form = '';
+        $form .= '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>';
+        $form .= '<form id="formulaire_erreur">';
+        $form .= '<h2>formulaire_erreur</h2>';
+        $form .= '<div class="erreur">';
+        $form .= '<p>' . $_GET["erreur"] . '</p>';
+        $form .= '</div>';
+        $form .= '</form>';
+        $form .= '</body>';
+        $form .= '</html>';
+        echo $form;
+    }
     public static function formulaire_extraireDesReservations($reservations)
     {
         $form = '';
@@ -19,10 +62,7 @@ class VueReservations
             $form .= '<p> id_produit: ' . $reservations[$i]["id_produit"] . '</p>';
             $form .= '<p> date_debut: ' . $reservations[$i]["date_debut"] . '</p>';
             $form .= '<p> date_fin: ' . $reservations[$i]["date_fin"] . '</p>';
-            $form .= '<p> nombre_de_semaine: ' . $reservations[$i]["nombre_de_semaine"] . '</p>';
-            $form .= '<p> nombre_de_semaine: ' . $reservations[$i]["nom_carte"] . '</p>';
-            $form .= '<p> nombre_de_semaine: ' . $reservations[$i]["numero_carte"] . '</p>';
-            $form .= '<p> nombre_de_semaine: ' . $reservations[$i]["id_carte"] . '</p>';
+            $form .= '<p> numero_semaine: ' . $reservations[$i]["numero_semaine"] . '</p>';
         }
 
         $form .= '<div class="erreur">';

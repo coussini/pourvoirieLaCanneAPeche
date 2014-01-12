@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
 
-    <title>La cannne &agrave; p&ecirc;che acceuil</title>
+    <title>La cannne &agrave; p&ecirc;che accueil</title>
 	
 	<!-- JS -->
 	<script type="text/JavaScript" language="JavaScript" src="js/javascript.js"></script> 

@@ -9,57 +9,105 @@ class Reservations
 		$this->connexionBD = $oConnexionPDO->rConnexion;
     }
     
-    // FUNCTION TEMPORAIRE POUR LES TEST
-    // FUNCTION TEMPORAIRE POUR LES TEST
-    // FUNCTION TEMPORAIRE POUR LES TEST
-    // FUNCTION TEMPORAIRE POUR LES TEST
-    public function extraireuUnUtilisateur($id_utilisateur)
+    // function SQL qui permet de récupérer les données du produit
+    // nécessaire à une réservation
+    public function extraireLeProduit($id_produit)
     {
-        $utilisateur = array();
+        $produit = array();
 
-        // cette requete est ce qu'on apelle un sub-select
-        // permet de récupérer les données d'une commande et le total des détails 
-        // pour permettre d'afficher sa valeur dans la liste des commandes passées 
         $id = $this->connexionBD;
-        $requete = $id->prepare("SELECT courriel,
-                                        prenom,
-                                        nom,
-                                        date_de_naissance 
-                              FROM utilisateurs
-                              WHERE id_utilisateur = :id_utilisateur
-                              AND   statut = 'actif'"); 
+        $requete = $id->prepare("SELECT nom,
+                                        imageFacade,
+                                        description
+                                 FROM   produits
+                                 WHERE  id_produit = :id_produit
+                                 AND    statut = 'actif'"); 
         
         if (!$requete) 
         {
             throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
         }
 
+        $requete->bindParam(':id_produit',$id_produit,PDO::PARAM_INT);
+
         $result = $requete->execute();
 
         if (!$result) 
         {
-            throw new Exception("Erreur d'extraction sur la table utilisateur " . $id->errorCode());
+            throw new Exception("Erreur d'extraction sur la table produits " . $id->errorCode());
         }
 
-        $requete->bindColumn('courriel',$courriel);
-        $requete->bindColumn('prenom',$prenom);
         $requete->bindColumn('nom',$nom);
-        $requete->bindColumn('date_de_naissance',$date_de_naissance);
+        $requete->bindColumn('imageFacade',$imageFacade);
+        $requete->bindColumn('description',$description);
      
         $i = 0;
         while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
         {
-            $utilisateur[$i]["courriel"] = $courriel;
-            $utilisateur[$i]["prenom"] = $prenom;
-            $utilisateur[$i]["nom"] = $nom;
-            $utilisateur[$i]["date_de_naissance"] = $date_de_naissance;
+            $produit[$i]["id_produit"] = $id_produit;
+            $produit[$i]["nom"] = $nom;
+            $produit[$i]["imageFacade"] = $imageFacade;
+            $produit[$i]["description"] = $description;
             $i++;
         }
 
         $requete->closeCursor();
         $id = null;
 
-        return $utilisateur;
+        return $produit;
+    }
+    
+    // function SQL qui permet de récupérer toutes les réservation
+    // faite sur ce produit et par cet utilisateur
+    // et la date de début doit être plus grande que la date du jour
+    public function extraireLesReservationPourCeProduit($id_utilisateur,$id_produit)
+    {
+        $reservations = array();
+
+        $id = $this->connexionBD;
+        $requete = $id->prepare("SELECT id_reservation,
+                                        date_debut,
+                                        date_fin,
+                                        numero_semaine
+                                  FROM  reservations 
+                                  WHERE id_utilisateur = :id_utilisateur
+                                  AND   id_produit     = :id_produit
+                                  AND   DATE(date_debut) >= CURRENT_DATE()");
+
+        if (!$requete) 
+        {
+            throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
+        }
+
+        $requete->bindParam(':id_utilisateur',$id_utilisateur,PDO::PARAM_INT);
+        $requete->bindParam(':id_produit',$id_produit,PDO::PARAM_INT);
+
+        $result = $requete->execute();
+
+        if (!$result) 
+        {
+            throw new Exception("Erreur d'extraction sur la table reservations " . $id->errorCode());
+        }
+
+        $requete->bindColumn('id_reservation',$id_reservation);
+        $requete->bindColumn('date_debut',$date_debut);
+        $requete->bindColumn('date_fin',$date_fin);
+        $requete->bindColumn('numero_semaine',$numero_semaine);
+     
+        $i = 0;
+        while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
+        {
+            $reservations[$i]["id_reservation"] = $id_reservation;
+            $reservations[$i]["date_debut"] = $date_debut;
+            $reservations[$i]["date_fin"] = $date_fin;
+            $reservations[$i]["numero_semaine"] = $numero_semaine;
+            $i++;
+        }
+
+        $requete->closeCursor();
+        $id = null;
+
+        return $reservations;
     }
     
     // function SQL qui permet de récupérer un commande d'un utilisateur

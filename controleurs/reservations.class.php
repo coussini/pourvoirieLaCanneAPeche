@@ -4,10 +4,13 @@ class Controleur
 {
     public static function gererRequetes()
     {
-        $_GET['requete'] = 'req_extraireuUnUtilisateur';
+        $_GET['requete'] = 'req_reserver';
         
         switch ($_GET['requete']) 
         {
+            case 'req_reserver':
+                self::req_reserver();
+                break;        
             case 'req_extraireuUnUtilisateur':
                 self::req_extraireuUnUtilisateur();
                 break;        
@@ -25,6 +28,23 @@ class Controleur
                 break;
         }
     }
+    // extraire les données pour générer la page reserver.html
+    private static function req_reserver()
+    {
+        try
+        {
+            $oReservations = new Reservations();
+            $produit = $oReservations->extraireLeProduit(1);
+            $reservations = $oReservations->extraireLesReservationPourCeProduit(1,1);
+            VueReservations::formulaire_reserver($produit,$reservations);
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            VueReservations::formulaire_erreur();
+        }
+    }
+
     // traitement extraire un utilisateur
     private static function req_extraireuUnUtilisateur()
     {
@@ -37,7 +57,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueReservations::formulaire_extraireuUnUtilisateur("");
+            VueReservations::formulaire_erreur();
         }
     }
 
@@ -53,7 +73,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueReservations::formulaire_extraireDesReservations("");
+            VueReservations::formulaire_erreur();
         }
     }
 
@@ -69,7 +89,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueReservations::formulaire_extraireUneReservation("");
+            VueReservations::formulaire_erreur();
         }
     }
 
@@ -85,7 +105,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueReservations::formulaire_creerUneReservation("");
+            VueReservations::formulaire_erreur();
         }
     }    
 }
