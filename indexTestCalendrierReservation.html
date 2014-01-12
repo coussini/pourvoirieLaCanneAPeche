@@ -6,11 +6,6 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
         <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
-        <link rel="stylesheet" type="text/css" href="./css/result-light.css">
-        <link href="./css/custom-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">
-        <script src="./js/jquery-ui-1.10.3.custom.js"></script>
-
-
 
         <style type="text/css">
             body 
@@ -39,8 +34,7 @@
                     arrDisabledDates[new Date('05/16/2013')] = new Date('05/16/2013');
                     arrDisabledDates[new Date('06/30/2013')] = new Date('06/30/2013');
 
-                    $('#txtDate').datepicker({selectWeek:true,rangeSelect:true,closeOnSelect:false});
-                    /*
+                    $('#txtDate').datepicker(
                     {
                         selectWeek: true,
                         closeOnSelect: false,
@@ -51,12 +45,12 @@
                             else return [true, '', ''];
                         }
                     });
-                    */
                 });
             });//]]>  
         </script>
     </head>
     <body>
+        <h1>PAR JOUR</h1
         <p>For Demo, Following dates are set disabled.
         <br/>
         <ul>
