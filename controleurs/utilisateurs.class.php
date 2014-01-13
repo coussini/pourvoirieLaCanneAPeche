@@ -31,7 +31,7 @@ class Controleur
 			//-------------------------------------------------------------------------------------
 			$oUtilisateurs = new Utilisateurs();
 			
-			//$id_utilisateur = $oUtilisateurs->chercherIdUtilisateur($_GET["courriel"]);  a rementre
+			//$id_utilisateur = $oUtilisateurs->chercherIdUtilisateur($_GET["courriel"]);  a remetre
 			
 											//fonction chercherIdUtilisateur
 			$id_utilisateur = $oUtilisateurs->chercherIdUtilisateur("toto@gmail.com");
@@ -79,7 +79,7 @@ class Controleur
 		//-------------------------------------ETAPE 2 TEST------------------------------------------------
 		//-------------------------------------------------------------------------------------------
 			
-	// validation du formulaire
+	// extrare les information sur utilisateur
 	 private static function req_extraireUtilisateur()
 	{
 		try
@@ -87,10 +87,10 @@ class Controleur
 
 			$oUtilisateurs = new Utilisateurs();
 
-											//fonction extraireUtilisateur
-									
+											//fonction extraireUtilisateur						
 			$utilisateurs = $oUtilisateurs->extraireUtilisateur("toto@gmail.com");
             VueUtilisateurs::formulaire_extraireUtilisateur($utilisateurs);
+			//VueUtilisateurs::formulaire_extraireUtilisateur($utilisateurs);
 		}
 			
 			

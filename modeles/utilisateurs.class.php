@@ -60,13 +60,17 @@ class Utilisateurs
 	public function extraireUtilisateur($courriel)
 	{
 
-		echo("def");	
+		var_dump("def")	
        $utilisateurs = array();
+	   
+	   $courriel = htmlentities($courriel, ENT_QUOTES, "UTF-8");
 
         // cette requete est ce qu'on apelle un sub-select
         // permet de récupérer les données d'une commande et le total des détails 
         // pour permettre d'afficher sa valeur dans la liste des commandes passées 
+		
         $id = $this->connexionBD;
+		
         $requete = $id->prepare("SELECT  id_utilisateur,
                                          nom,
                                          prenom,
@@ -75,7 +79,7 @@ class Utilisateurs
 										 date_de_naissance
                                   FROM utilisateurs
                                   WHERE courriel = :courriel
-                                  AND    statut  = 'actif'");
+                                 //AND    statut  = 'actif'");
         if (!$requete) 
         {
             throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
@@ -113,8 +117,7 @@ class Utilisateurs
 
         return $utilisateurs;
 	}
-
-
-}
+}	
+	
 
 ?>
