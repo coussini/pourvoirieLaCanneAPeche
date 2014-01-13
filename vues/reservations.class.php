@@ -3,6 +3,21 @@
 
 class VueReservations
 {
+    // function qui retourne les erreurs seulement
+    public static function formulaire_erreur()
+    {
+        $form = '';
+        $form .= '<form id="formulaire_erreur">';
+        $form .= '<h2>formulaire_erreur</h2>';
+        $form .= '<div class="erreur">';
+        $form .= '<p>' . $_GET["erreur"] . '</p>';
+        $form .= '</div>';
+        $form .= '</form>';
+        $form .= '</body>';
+        $form .= '</html>';
+        echo $form;
+    }
+
     // function qui retourne le formulaire reserver.html
     public static function formulaire_reserver($produit,$reservations)
     {
@@ -31,21 +46,6 @@ class VueReservations
         $form .= '<p>' . $_GET["erreur"] . '</p>';
         $form .= '</div>';
         $form .= '</form>';
-        echo $form;
-    }
-    // function qui retourne les erreurs
-    public static function formulaire_erreur()
-    {
-        $form = '';
-        $form .= '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>';
-        $form .= '<form id="formulaire_erreur">';
-        $form .= '<h2>formulaire_erreur</h2>';
-        $form .= '<div class="erreur">';
-        $form .= '<p>' . $_GET["erreur"] . '</p>';
-        $form .= '</div>';
-        $form .= '</form>';
-        $form .= '</body>';
-        $form .= '</html>';
         echo $form;
     }
     public static function formulaire_extraireDesReservations($reservations)
