@@ -97,7 +97,7 @@ class Controleur
 		catch(Exception $e)
 		{
 			$_GET['erreur']  = $e->getMessage();
-			VueUtilisateurs::formulaire_extraireUtilisateur("");
+			VueUtilisateurs::formulaire_erreur();
 			
 		}	
 	}
