@@ -29,31 +29,10 @@
                 $(document).ready(function () 
                 {
                     var arrDisabledDates = {};
-
-                    var curr = new Date; // get current date
-                    var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-
-                    for (var i = 0; i < 7; i++) 
-                    {
-                        var last = first + i;
-                        var lastday = new Date(curr.setDate(last));
-                        var mm = lastday.getMonth() + 1;
-                        var dd = lastday.getDate();
-                        var yyyy = lastday.getFullYear();
-                        var x = mm + "/" + dd + "/" + yyyy;
-                        console.log(x);
-                        arrDisabledDates[new Date(x)] = new Date(x);
-                    }
-
-                    /*
-                        arrDisabledDates[new Date('03/22/2013')] = new Date('03/22/2013');
-                        arrDisabledDates[new Date('04/04/2013')] = new Date('04/04/2013');
-                        arrDisabledDates[new Date('05/16/2013')] = new Date('05/16/2013');
-                        arrDisabledDates[new Date('06/30/2013')] = new Date('06/30/2013');
-                    */
-
-                      //arrDisabledDates[x] = x;
-                    //};
+                    arrDisabledDates[new Date('03/22/2013')] = new Date('03/22/2013');
+                    arrDisabledDates[new Date('04/04/2013')] = new Date('04/04/2013');
+                    arrDisabledDates[new Date('05/16/2013')] = new Date('05/16/2013');
+                    arrDisabledDates[new Date('06/30/2013')] = new Date('06/30/2013');
 
                     $('#txtDate').datepicker(
                     {

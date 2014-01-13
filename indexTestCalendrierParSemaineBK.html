@@ -30,7 +30,7 @@ $(function() {
         isRTL: false,
         showMonthAfterYear: false,
         yearSuffix: '',
-        minDate: 0,
+        //minDate: 0,
         maxDate: '+24M +0D',
         numberOfMonths: 1,
         showButtonPanel: true
@@ -46,25 +46,6 @@ $(function() {
             $('.week-picker').find('.ui-datepicker-current-day a').addClass('ui-state-active')
         }, 1);
     }
-
-    // Élimine la semaine courante
-    var arrDisabledDates = {};
-
-    var curr = new Date; // get current date
-    var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-
-    for (var i = 0; i < 7; i++) 
-    {
-        var last = first + i;
-        var lastday = new Date(curr.setDate(last));
-        var mm = lastday.getMonth() + 1;
-        var dd = lastday.getDate();
-        var yyyy = lastday.getFullYear();
-        var x = mm + "/" + dd + "/" + yyyy;
-        console.log(x);
-        arrDisabledDates[new Date(x)] = new Date(x);
-    }
-
     
     $('.week-picker').datepicker( {
         showOtherMonths: true,
@@ -85,15 +66,7 @@ $(function() {
             var cssClass = '';
             if(date >= startDate && date <= endDate)
                 cssClass = 'ui-datepicker-current-day';
-            var bDisable = arrDisabledDates[date];
-            if (bDisable)
-            {
-                return [false, cssClass];
-            }
-            else
-            {
-                return [true, cssClass];
-            }              
+            return [true, cssClass];
         },
         onChangeMonthYear: function(year, month, inst) {
             selectCurrentWeek();

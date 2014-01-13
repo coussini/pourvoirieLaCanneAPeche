@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Réservation">
+    <meta name="author" content="">
+    <title>Pourvoirie La Canne &agrave; P&ecirc;che - Réserver</title>
+    <link href="./css/bootstrap.css" rel="stylesheet">
+   <link href="./css/stylesheet.css" rel="stylesheet">
+   <link href="./css/bouton.css" rel="stylesheet">
+   <link href="./css/custom-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+    
+    <script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script src="./js/jquery-1.9.1.js"></script>
+    <script src="./js/jquery-ui-1.10.3.custom.js"></script>
+    <script type="text/JavaScript" language="JavaScript" src="./js/javascript.js"></script>    
+    <script type="text/JavaScript" language="JavaScript">
+
+      $(window).load(function()
+      {
+
+        var curr = new Date; // get current date
+        var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+        var last = first + 6; // last day is the first day + 6
+
+        var firstday = new Date(curr.setDate(first)).toUTCString();
+        var lastday = new Date(curr.setDate(last)).toUTCString();
+        console.log(firstday); 
+        console.log(lastday); 
+        //
+        // Le calcul de date provient de la page internet suivante:
+        //
+        // http://stackoverflow.com/questions/5210376/how-to-get-first-and-last-day-of-the-week-in-javascript
+        //        
+        var curr = new Date; // get current date
+        var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+
+        for (var i = 0; i < 7; i++) 
+        {
+          var last = first + i; // last day is the first day + 6
+          var lastday = new Date(curr.setDate(last)).toUTCString();
+          console.log(lastday); 
+        };
+
+      }); 
+    </script>    
+  </head>
+
+  <body>
+
+    <!-- Wrap all page content here -->
+    <div id="wrap">
+
+      <!-- Fixed navbar -->
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="row">
+              <ul class="nav navbar-nav ">
+              <li><a href="./index.html"><a href="./index.html"><img src="./images/logo.png" alt="logo" class="img-responsive hidden-xs"></a></li>
+              <li><a href="./index.html"><img src="./images/accueil.png" alt="image accueil" class="img-responsive hidden-xs"><span class="titresMenu">ACCUEIL</span></a></li>
+              <li class="active"><a href="./chalets.html"><img src="./images/chalets.png" alt="image chalets" class="img-responsive hidden-xs"><span class="titresMenu">NOS CHALETS</span></a></li>
+              <li><a href="./infos.html"><img src="./images/info.png" alt="image infos" class="img-responsive hidden-xs"><span class="titresMenu">INFORMATIONS</span></a></li>
+              <li><a href="./contact.html"><img src="./images/contact.png" alt="image contact" class="img-responsive hidden-xs"><span class="titresMenu">CONTACT</span></a></li>
+              <li><img src="./images/connexion.png" alt="cadenas" class="img-responsive hidden-xs">
+                <a href="./login.html"><span class="titresLogin">PROFIL</span>
+                <a href="./login.html"><span class="titresLogin">CONNEXION</span></a>
+                <a href="./login.html"><span class="titresLogin">DÉCONNEXION</span></a>
+              </li>
+            </ul>
+        </div>
+      </div>
+      </div>
+      </div>
+      <div class="container main">
+        <div class="row">
+          <h1>Réservation de chalet</h1>
+          <p>Veuillez choisir vos dates.</p>
+          <div class="col-lg-4">
+            <h2>La Bohème</h2>
+            <img class="img-responsive" src="./images/chaletLaBoheme.jpg" alt="Chalet la bohème">
+            <p>Le chalet la bohème est dans un cadre enchanteur. On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même. L'avantage du Lorem Ipsum sur un texte générique comme 'Du texte. Du texte. Du texte.' est qu'il possède une distribution de lettres plus ou moins normale, et en tout cas comparable avec celle du français standard.</p>
+          </div>
+          <div class="col-lg-8">
+            <h2>Semaine de réservation pour votre chalet</h2>
+            <h4>Veuillez choisir la semaine de votre séjour</h4>
+            <div class="semaineChoisi"></div>
+            <h4>Vous avez choisi la semaine :</h4>
+            <h4><span id="semaine"></span> <span id="startDate"></span><span id="endDate"></strong></span></h4>
+            <br/><br/>
+            <button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteConnexion('confirmation.html')">RÉSERVER</button>
+         </div><!--  fin  col-lg-12 -->
+      </div><!-- /.row -->
+    </div> <!-- /.container -->
+      <!-- FOOTER -->
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted">&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
+      </div>
+    </div>
+  </body>
+</html>
+
