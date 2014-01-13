@@ -14,7 +14,6 @@ class ConnexionPDO
 	public function __construct($param,
 								$charset)
 	{
-		
 		$this->sParam = $param;
 
 		include_once("c5#dDy09!-aQd9_/" . $this->sParam . ".inc.php");
