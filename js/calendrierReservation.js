@@ -102,21 +102,57 @@ var CalendrierReservation = (function(win,doc,$)
                 if (xhr.status == 200 && xhr.readyState == xhr.DONE) 
                 {
                     var reponse = JSON.parse(xhr.responseText);
-                    console.log("-----------");
-                    console.log(reponse);
-                    console.log("-----------");
-                    console.log(" ");
                     dates=reponse.split(','); 
 
                     for (var i = 0; i < dates.length; i++) 
                     {
                         var dateFiltre = new Date(dates[i]);
-                        console.log(dateFiltre);
-                        console.log("-----------");
                         CalendrierReservation.elimineUneSemaineSelonLaDate(dateFiltre);
+                        CalendrierReservation.preparerLeCalendrier();
                     }
                 }
             };
+        },
+        
+        // Permet de préparer le calendrier pour l'affichage en enlevant les dates de non disponibilités
+        preparerLeCalendrier: function() 
+        {
+            var tableDeDatesNonDisponible = CalendrierReservation.getTableauDatesReservees();
+
+            $('.semaineChoisi').datepicker( 
+            {
+                onSelect: function(dateText, inst) 
+                { 
+                    var date = $(this).datepicker('getDate');
+                    startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
+                    endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 6);
+                    var dateFormat = inst.settings.dateFormat || $.datepicker._defaults.dateFormat;
+                    $('#semaine').text("(" + $.datepicker.iso8601Week(startDate) + ") du ");
+                    $('#startDate').text($.datepicker.formatDate( dateFormat, startDate, inst.settings ) + " au ");
+                    $('#endDate').text($.datepicker.formatDate( dateFormat, endDate, inst.settings ));
+                    
+                    CalendrierReservation.selectionneSemaineActive();
+                },
+                beforeShowDay: function(date) 
+                {
+                    var cssClass = '';
+                    if(date >= startDate && date <= endDate)
+                        cssClass = 'ui-datepicker-current-day';
+                    var bDisable = tableDeDatesNonDisponible[date];
+                    if (bDisable)
+                    {
+                        return [false, cssClass];
+                    }
+                    else
+                    {
+                        return [true, cssClass];
+                    }              
+                },
+                onChangeMonthYear: function(year, month, inst) 
+                {
+                    CalendrierReservation.selectionneSemaineActive();
+                }
+            });
         },
         
         // Permet de mettre active la semaine choisi en ajoutant la classe en conséquence
@@ -128,11 +164,10 @@ var CalendrierReservation = (function(win,doc,$)
             },1);
         },
 
-
         // Cette méthode met les dates dans un tableau de dates réservées
         setTableauDatesReservees: function(datesReservees) 
         {
-            tableauDatesReservees.push(datesReservees);
+            tableauDatesReservees[new Date(datesReservees)] = new Date(datesReservees);
         },
         
         // Cette méthode retourne un tableau de dates réservées
