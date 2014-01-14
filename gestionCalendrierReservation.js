@@ -2,6 +2,11 @@ $(function() {
 
     // Préférence en français et sélection des options du calendrier
     // en fonction des besoins
+    // l'idée provient des sites suivants:
+    // http://stevethomas.com.au/jquery/jquery-datepicker-ajax-request-to-highlight-days-from-mysql.html
+    // http://forum.alsacreations.com/topic-5-62863-1-Resolu-Calendrier-en-jquery-datepicker-La-galere-.html
+    //
+
     $.datepicker.regional['fr'] = 
     {
         closeText: 'Fermer',
@@ -33,15 +38,22 @@ $(function() {
 
     var dateAEliminer = {}; // Tableau des dates réservés et de la semaine courante
 
+    
+    var dateDuFiltre = new Date(); // Date courante et heure
+    elimineSemaineSelonPremierJour(dateDuFiltre);
+    
+    var startDate;
+    var endDate;
+    
     // Élimine la semaine courante dans le cadre d'une réservation
-    function elimineSemaineSelonPremierJour(courante) 
+    function elimineSemaineSelonPremierJour(dateFiltre) 
     {
-        var courante = new Date; // Date courante
-        var premierJourDeSemaine = courante.getDate() - courante.getDay(); // Jour - Numéro de jour de la semaine
+        window.alert("date du filtre = " + dateFiltre);
+        var premierJourDeSemaine = dateFiltre.getDate() - dateFiltre.getDay(); // Jour - Numéro de jour de la semaine
         for (var i = 0; i < 7; i++) 
         {
             var selection = premierJourDeSemaine + i;
-            var dateSelection = new Date(courante.setDate(selection));
+            var dateSelection = new Date(dateFiltre.setDate(selection));
             var mm = dateSelection.getMonth() + 1;
             var dd = dateSelection.getDate();
             var yyyy = dateSelection.getFullYear();
@@ -49,12 +61,9 @@ $(function() {
             dateAEliminer[new Date(formatDateSelection)] = new Date(formatDateSelection);
         }
     }
-    
-    var startDate;
-    var endDate;
-    
+
     // Permet de mettre active la semaine choisi en ajoutant la classe en conséquence
-    var selectCurrentWeek = function() 
+    var selectionneSemaineActive = function() 
     {
         window.setTimeout(function () 
         {
@@ -72,7 +81,7 @@ $(function() {
             $('#startDate').text($.datepicker.formatDate( dateFormat, startDate, inst.settings ) + " au ");
             $('#endDate').text($.datepicker.formatDate( dateFormat, endDate, inst.settings ));
             
-            selectCurrentWeek();
+            selectionneSemaineActive();
         },
         beforeShowDay: function(date) {
             var cssClass = '';
@@ -89,10 +98,10 @@ $(function() {
             }              
         },
         onChangeMonthYear: function(year, month, inst) {
-            selectCurrentWeek();
+            selectionneSemaineActive();
         }
     });
     
-    $('.semaineChoisi .ui-datepicker-calendar tr').live('mousemove', function() { $(this).find('td a').addClass('ui-state-hover'); });
-    $('.semaineChoisi .ui-datepicker-calendar tr').live('mouseleave', function() { $(this).find('td a').removeClass('ui-state-hover'); });
+    $(".semaineChoisi .ui-datepicker-calendar tr").on("mousemove",function() { $(this).find('td a').addClass('ui-state-hover'); });
+    $(".semaineChoisi .ui-datepicker-calendar tr").on("mouseleave",function() { $(this).find('td a').removeClass('ui-state-hover'); });
 });

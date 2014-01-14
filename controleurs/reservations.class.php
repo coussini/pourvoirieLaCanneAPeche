@@ -2,12 +2,28 @@
 
 class Controleur
 {
-    public static function gererRequetes()
+    public static function gererRequetes($requeteAJAX)
     {
-        $_GET['requete'] = 'req_reserver';
-        
-        switch ($_GET['requete']) 
+        // si le champ requete dédié au appel AJAX est vide, on
+        // on prend le get de la requete normale
+        // sinon on traite la requete AJAX tel quel
+        //
+        $requete = "";
+
+        if ($requeteAJAX == "")
         {
+            $requete = $_GET['requete'];
+        }
+        else
+        {
+            $requete = $_GET['requeteAJAX'];
+        }
+
+        switch ($requete) 
+        {
+            case 'req_chercher_dates_reservees':
+                self::req_chercher_dates_reservees();
+                break;        
             case 'req_reserver':
                 self::req_reserver();
                 break;        
@@ -28,6 +44,23 @@ class Controleur
                 break;
         }
     }
+
+    // extraire les données pour générer le calendrier de réservation
+    private static function req_chercher_dates_reservees()
+    {
+        try
+        {
+            $oReservations = new Reservations();
+            $reservations = $oReservations->extraireLesReservationPourCeProduit(1,1);
+            VueReservations::formulaire_chercher_dates_reservees($reservations);
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            VueReservations::formulaire_erreur();
+        }
+    }
+    
     // extraire les données pour générer la page reserver.html
     private static function req_reserver()
     {
@@ -35,8 +68,7 @@ class Controleur
         {
             $oReservations = new Reservations();
             $produit = $oReservations->extraireLeProduit(1);
-            $reservations = $oReservations->extraireLesReservationPourCeProduit(1,1);
-            VueReservations::formulaire_reserver($produit,$reservations);
+            VueReservations::formulaire_reserver($produit);
         }
         catch(Exception $e)
         {
@@ -67,7 +99,7 @@ class Controleur
         try
         {
             $oReservations = new Reservations();
-            $reservations = $oReservations->extraireDesReservations($_GET["id_reservation"]);
+            $reservations = $oReservations->extraireDesReservations();
             VueReservations::formulaire_extraireDesReservations($reservations);
         }
         catch(Exception $e)

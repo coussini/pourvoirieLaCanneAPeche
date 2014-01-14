@@ -65,10 +65,7 @@ class Reservations
         $reservations = array();
 
         $id = $this->connexionBD;
-        $requete = $id->prepare("SELECT id_reservation,
-                                        date_debut,
-                                        date_fin,
-                                        numero_semaine
+        $requete = $id->prepare("SELECT date_debut
                                   FROM  reservations 
                                   WHERE id_utilisateur = :id_utilisateur
                                   AND   id_produit     = :id_produit
@@ -89,18 +86,12 @@ class Reservations
             throw new Exception("Erreur d'extraction sur la table reservations " . $id->errorCode());
         }
 
-        $requete->bindColumn('id_reservation',$id_reservation);
         $requete->bindColumn('date_debut',$date_debut);
-        $requete->bindColumn('date_fin',$date_fin);
-        $requete->bindColumn('numero_semaine',$numero_semaine);
      
         $i = 0;
         while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
         {
-            $reservations[$i]["id_reservation"] = $id_reservation;
             $reservations[$i]["date_debut"] = $date_debut;
-            $reservations[$i]["date_fin"] = $date_fin;
-            $reservations[$i]["numero_semaine"] = $numero_semaine;
             $i++;
         }
 

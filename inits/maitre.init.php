@@ -9,6 +9,11 @@ if (empty($_GET["requetePage"]))
     $_GET["requetePage"] = '';
 }
 
+if (empty($_GET["requeteAJAX"]))
+{
+    $_GET["requeteAJAX"] = '';
+}
+
 // pour les messages d'erreur
 $_GET["erreur"] = '';
 

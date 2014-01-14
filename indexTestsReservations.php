@@ -1,5 +1,12 @@
 <?php
 
+// temporaire
+$_GET["requetePage"] = "client";
+$_GET['requete'] = "req_reserver";
+$_GET["id_reservation"] = "";
+$_GET["id_utilisateur"] = 1;
+$_GET["id_produit"] = 1;
+
 /*****************************************/
 /* CONNEXION DE LA BASE DE DONNÉE EN PDO */
 /*****************************************/
@@ -32,15 +39,21 @@ require_once("./controleurs/reservations.class.php"); // CONTROLEUR DE TEST POUR
 /************************/
 /* SQUELETTES DES PAGES */
 /************************/
-if ($_GET["requetePage"] = "client")
+if ($_GET["requeteAJAX"] == "")
 {
-	// pages pour les reservations normaux du site
-	require_once("./squelettes/client.php");
+    if ($_GET["requetePage"] == "client")
+    {
+        // pages pour les reservations normaux du site
+        require_once("./squelettes/client.php");
+    }
+    else
+    {
+        // pages pour les administrateurs du site
+        require_once("./squelettes/admin.php");
+    } 
 }
 else
 {
-	// pages pour les administrateurs du site
-	require_once("./squelettes/admin.php");
-} 
-
+    Controleur::gererRequetes($_GET["requeteAJAX"]);
+}
 ?>

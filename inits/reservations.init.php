@@ -1,15 +1,4 @@
 <?php
-// temporaire
-if (empty($_GET["requete"]))
-{
-    $_GET["requete"] = '';
-}
-
-if (empty($_GET["requetePage"]))
-{
-    $_GET["requetePage"] = '';
-}
-// Fin du temporaire
 
 if (empty($_GET["id_reservation"]))
 {

@@ -17,19 +17,28 @@
 
     <!-- NOS CSS -->
     <link href="./css/bootstrap.css" rel="stylesheet">
-    <link href="./css/sticky-footer-navbar.css" rel="stylesheet">
-    <link href="./css/stylesheetclient.css" rel="stylesheet">
     <link href="./css/stylesheet.css" rel="stylesheet">
     <link href="./css/bouton.css" rel="stylesheet">
     <link href="../css/custom-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 
     <!-- NOS JS -->
-	  <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    <script src="../js/vendor/bootstrap.min.js"></script>
-    <script src="../js/jquery.js"></script>    
-    <script src="../js/jquery-1.9.1.js"></script>
-    <script src="../js/jquery-ui-1.10.3.custom.js"></script>
+    <script src="./js/vendor/jquery-1.10.1.min.js"></script>
+    <script src="./js/jquery-1.9.1.js"></script>
+    <script src="./js/jquery-ui-1.10.3.custom.js"></script>
+    <script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script src="./js/vendor/bootstrap.min.js"></script>
     <script type="text/JavaScript" language="JavaScript" src="js/javascript.js"></script> 
+
+    <!-- TRAITEMENT SPÉCIFIQUE POUR LA RÉSERVATION -->    
+    <?php
+      if ($_GET['requete'] == 'req_reserver')
+      {
+    ?>
+        <script src="js/calendrierReservation.js"></script>
+        <script src="js/traitementCalendrierReservation.js"></script>
+    <?php
+      }    
+    ?>
 
   </head>
 
@@ -53,7 +62,7 @@
       </div>
       
  <!---------------------------- -->
-      <?php Controleur::gererRequetes(); ?>
+      <?php Controleur::gererRequetes(""); ?>
     <!---------------------------- -->
       <!-- PIED DE PAGE -->
     <div id="footer">
@@ -61,9 +70,5 @@
         <p class="text-muted">&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
       </div>
     </div>
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <script src="./js/vendor/jquery-1.10.1.min.js"></script>
-    <script src="./js/vendor/bootstrap.min.js"></script>
   </body>
 </html>

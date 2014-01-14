@@ -50,19 +50,23 @@ $(function() {
     // Élimine la semaine courante
     var arrDisabledDates = {};
 
-    var curr = new Date; // get current date
-    var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+    var courante = new Date; // Date courante
 
-    for (var i = 0; i < 7; i++) 
+    elimineSemaineSelonPremierJour(courante);
+    // Élimine la semaine courante dans le cadre d'une réservation
+    function elimineSemaineSelonPremierJour(courante) 
     {
-        var last = first + i;
-        var lastday = new Date(curr.setDate(last));
-        var mm = lastday.getMonth() + 1;
-        var dd = lastday.getDate();
-        var yyyy = lastday.getFullYear();
-        var x = mm + "/" + dd + "/" + yyyy;
-        console.log(x);
-        arrDisabledDates[new Date(x)] = new Date(x);
+        var premierJourDeSemaine = courante.getDate() - courante.getDay(); // Jour - Numéro de jour de la semaine
+        for (var i = 0; i < 7; i++) 
+        {
+            var selection = premierJourDeSemaine + i;
+            var dateSelection = new Date(courante.setDate(selection));
+            var mm = dateSelection.getMonth() + 1;
+            var dd = dateSelection.getDate();
+            var yyyy = dateSelection.getFullYear();
+            var formatDateSelection = mm + "/" + dd + "/" + yyyy;
+            arrDisabledDates[new Date(formatDateSelection)] = new Date(formatDateSelection);
+        }
     }
 
     
