@@ -2,7 +2,7 @@
 
 // temporaire
 $_GET["requetePage"] = "client";
-$_GET['requete'] = "req_confirmation";
+$_GET['requete'] = "req_reserver";
 $_GET["id_reservation"] = "";
 $_GET["id_utilisateur"] = 1;
 $_GET["id_produit"] = 1;
