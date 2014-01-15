@@ -30,6 +30,9 @@ class Controleur
             case 'req_confirmation':
                 self::req_confirmation();
                 break;        
+            case 'req_historique':
+                self::req_historique();
+                break;        
             case 'req_extraireuUnUtilisateur':
                 self::req_extraireuUnUtilisateur();
                 break;        
@@ -88,7 +91,23 @@ class Controleur
             $oReservations = new Reservations();
             $produit = $oReservations->extraireLeProduit(1);
             $utilisateur = $oReservations->extraireUtilisateur(1);
-            VueReservations::formulaire_confirmation($produit,$utilisateur);
+            VueReservations::formulaire_confirmation($produit,$utilisateur,"12/01/2014","18/01/2014");
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            VueReservations::formulaire_erreur();
+        }
+    }
+    
+    // extraire les données pour générer la page historique.html
+    private static function req_historique()
+    {
+        try
+        {
+            $oReservations = new Reservations();
+            $reservations = $oReservations->extraireUneReservation();
+            VueReservations::formulaire_extraireUneReservation($reservations);
         }
         catch(Exception $e)
         {

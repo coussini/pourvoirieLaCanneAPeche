@@ -40,7 +40,6 @@ CREATE TABLE IF NOT EXISTS `produits` (
   `nombre_de_chambre` tinyint(4) NOT NULL,
   `nombre_de_salle_de_bain` tinyint(4) NOT NULL,
   `emplacement` varchar(50) NOT NULL,
-  `prix_par_jour` float NOT NULL,
   `prix_par_semaine` float NOT NULL,
   PRIMARY KEY (`id_produit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -61,6 +60,7 @@ CREATE TABLE IF NOT EXISTS `reservations` (
   `nom_carte` enum('Mastercard','Visa','American Express') NOT NULL,
   `numero_carte` varchar(16) NOT NULL,
   `id_carte` varchar(3) NOT NULL,
+  `prix_a_la_reservation` float NOT NULL,
   PRIMARY KEY (`id_reservation`),
   KEY `id_utilisateur` (`id_utilisateur`),
   KEY `id_produit` (`id_produit`)
