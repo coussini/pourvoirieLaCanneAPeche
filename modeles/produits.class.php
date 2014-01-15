@@ -78,7 +78,7 @@ class Produits
 
     // -----------------------------------------------------------------------------------------------------//
 
-    public function selectUnProduit($idProduit)
+    public function selectUnProduit($id_produit)
     {
         $produits = array();
     	
@@ -145,16 +145,10 @@ class Produits
     }
     // -----------------------------------------------------------------------------------------------------//
 
-    public function creerUnProduit($id_produit,$statut,$imageFacade,$imageInterieur1,$imageInterieur2,$imageInterieur3,$nom,
-    						$description,$nombre_de_chambre,$nombre_de_salle_de_bain,$prix_par_jour,
-    						$prix_par_semaine)
+    public function creerUnProduit($id_produit,$statut,$imageFacade,$imageInterieur1,$imageInterieur2,$imageInterieur3,$nom,$emplacement,$description,$nombre_de_chambre,$nombre_de_salle_de_bain,$prix_par_jour,$prix_par_semaine)
     {
 
-        if (!is_numeric($id_produit))
-        {
-            throw new Exception("Identifiant produit invalide");
-        }
-        else if ($statut == "")
+        if ($statut == "")
         {
             throw new Exception("Statut invalide");
         }
@@ -216,7 +210,6 @@ class Produits
 
         // enlever ou convertir les caractères spéciaux
 
-        $id_produit = htmlentities($id_produit, ENT_QUOTES, "UTF-8");
         $statut = htmlentities($statut, ENT_QUOTES, "UTF-8");
     	$imageFacade = htmlentities($imageFacade, ENT_QUOTES, "UTF-8");
 		$imageInterieur1 = htmlentities($imageInterieur1, ENT_QUOTES, "UTF-8");
@@ -233,7 +226,7 @@ class Produits
         $id = $this->connexionBD;
 
         $requete = $id->prepare("INSERT INTO produits 
-							  (id_produit,
+							  (
 							  statut,
 							  imageFacade,
 							  imageInterieur1,
@@ -247,7 +240,7 @@ class Produits
 							  prix_par_jour,
 							  prix_par_semaine
 							  )
-							  VALUES (:id_produit,
+							  VALUES (
 									  :statut,
 									  :imageFacade,
 									  :imageInterieur1,
@@ -266,7 +259,7 @@ class Produits
             throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
         }
         
-        $requete->bindParam(':id_produit',$id_produit,PDO::PARAM_INT);
+      
         $requete->bindParam(':statut',$statut,PDO::PARAM_STR);
     	$requete->bindParam(':imageFacade',$imageFacade,PDO::PARAM_STR);
     	$requete->bindParam(':imageInterieur1',$imageInterieur1,PDO::PARAM_STR);
@@ -280,7 +273,7 @@ class Produits
     	$requete->bindParam(':prix_par_jour',$prix_par_jour,PDO::PARAM_INT);
     	$requete->bindParam(':prix_par_semaine',$prix_par_semaine,PDO::PARAM_INT);
 
-        $result &= $requete->execute();
+        $result = $requete->execute();
 
         if (!$result) 
         {
@@ -296,13 +289,15 @@ class Produits
     }
     // -----------------------------------------------------------------------------------------------------//
 
-    public function modifierUnProduit($id_produit,$statut,$imageFacade,$imageInterieur1,$imageInterieur2,$imageInterieur3,$nom,$emplacement,$description,$nombre_de_chambre,$nombre_de_salle_de_bain,$prix_par_jour,$prix_par_semaine)
+    public function modifierUnProduit($statut,$imageFacade,$imageInterieur1,$imageInterieur2,$imageInterieur3,$nom,$emplacement,$description,$nombre_de_chambre,$nombre_de_salle_de_bain,$prix_par_jour,$prix_par_semaine)
     {
-       if (!is_numeric($id_produit))
+        /*if (!is_numeric($id_produit))
         {
             throw new Exception("Identifiant produit invalide");
         }
-        else if ($statut == "")
+        else*/ 
+
+        if ($statut == "")
         {
             throw new Exception("Statut invalide");
         }
@@ -362,7 +357,7 @@ class Produits
 
         // enlever ou convertir les caractères spéciaux
 		
-        $id_produit = htmlentities($id_produit, ENT_QUOTES, "UTF-8");
+        //$id_produit = htmlentities($id_produit, ENT_QUOTES, "UTF-8");
         $statut = htmlentities($statut, ENT_QUOTES, "UTF-8");
         $imageFacade = htmlentities($imageFacade, ENT_QUOTES, "UTF-8");
 		$imageInterieur1 = htmlentities($imageInterieur1, ENT_QUOTES, "UTF-8");
@@ -379,8 +374,7 @@ class Produits
         $id = $this->connexionBD;
 
         $requete &= $id->prepare("UPDATE produits 
-                                  SET id_produit                = :id_produit,
-                                      statut                    = :statut,
+                                  SET statut                    = :statut,
                                       imageFacade               = :imageFacade,
 									  imageInterieur1           = :imageInterieur1,
 									  imageInterieur2           = :imageInterieur2,
@@ -392,9 +386,9 @@ class Produits
                                       nombre_de_salle_de_bain   = :nombre_de_salle_de_bain,
                                       prix_par_jour             = :prix_par_jour,
                                       prix_par_semaine          = :prix_par_semaine
-                                  WHERE id_produit              = :id_produit");
+                                  WHERE id_produit              = 1");
 
-        $requete->bindParam(':id_produit',$id_produit,PDO::PARAM_INT);
+        //$requete->bindParam(':id_produit',$id_produit,PDO::PARAM_INT);
         $requete->bindParam(':statut',$statut,PDO::PARAM_STR);
         $requete->bindParam(':imageFacade',$imageFacade,PDO::PARAM_STR);
     	$requete->bindParam(':imageInterieur1',$imageInterieur1,PDO::PARAM_STR);
@@ -408,7 +402,7 @@ class Produits
         $requete->bindParam(':prix_par_jour',$prix_par_jour,PDO::PARAM_INT);
         $requete->bindParam(':prix_par_semaine',$prix_par_semaine,PDO::PARAM_INT);
         
-        $result &= $requete->execute();
+        $result = $requete->execute();
 
         if (!$result) 
         {
