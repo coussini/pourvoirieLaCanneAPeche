@@ -7,7 +7,8 @@ class Controleur
 		//$_GET['requete'] = 'req_selectTousProduits';
 		//$_GET['requete'] = 'req_selectUnProduit';
 		//$_GET['requete'] = 'req_creerUnProduit';
-        $_GET['requete'] = 'req_modifierUnProduit';
+        //$_GET['requete'] = 'req_modifierUnProduit';
+        $_GET['requete'] = 'req_selectionChalet';
 		
         switch ($_GET['requete']) 
         {
@@ -22,7 +23,10 @@ class Controleur
                 break;        
             case 'req_modifierUnProduit':
                 self::req_modifierUnProduit();
-                break;        
+                break;
+            case 'req_selectionChalet':
+                self::req_selectionChalet();
+                break;
             default:
                 // erreur
                 break;
@@ -66,6 +70,29 @@ class Controleur
         }
 
     }
+
+
+
+    // traitement extraire un produit
+    private static function req_selectionChalet()
+    {
+        try
+        {
+            $oProduits = new Produits();
+            $Produits = $oProduits->selectUnProduit('1');
+            
+            VueProduits::formulaire_selectionChalet($Produits);
+        }
+        
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            VueProduits::formulaire_erreur();
+        }
+
+    }
+
+
 
 //-------------------------------------------------------------------------------------------------------------------//
 

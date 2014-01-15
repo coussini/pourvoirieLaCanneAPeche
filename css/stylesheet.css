@@ -25,11 +25,6 @@
   font-size: 16px;
 }
 
-.nav > li > a {
-  width: 150px;
-
-}
-
 .navbar-default .navbar-nav > li > a:hover {
   color: #FFFFFF; 
   text-decoration: underline;
@@ -44,9 +39,9 @@
 
 .titresMenu {
   position:relative;
+  top:-50px;
   z-index:1000;
-  font-size: 16px;
-  top: 55px;
+  font-size: 18px;
 }
 
 .titresLogin {
@@ -58,14 +53,15 @@
 
 .navbar-default .navbar-nav .active a{
   background-color:#304716;
-  color: #FFFFFF;
   height: 154px;
+  color: #FFFFFF;
 }
 
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
   background-color:#304716;
+  height: 154px;
   color: #FFFFFF;
 }
 
@@ -83,12 +79,10 @@
   top:0px;
 }
 
-
 .titresLogin {
   font-size: 14px;
   line-height: 40px;
   top:0px;
-  width: auto;
 }
 
  .navbar-fixed-top {
@@ -105,11 +99,6 @@
   height: auto;
   background-color: #809060;
 }
-
-.nav > li > a {
-  width: auto;
-}
-
 
 }
 
