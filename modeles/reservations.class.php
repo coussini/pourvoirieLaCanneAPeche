@@ -58,17 +58,17 @@ class Reservations
     }
     
     // function SQL qui permet de récupérer toutes les réservation
-    // faite sur ce produit et par cet utilisateur
+    // faite sur ce produit
     // et la date de début doit être plus grande que la date du jour
-    public function extraireLesReservationPourCeProduit($id_utilisateur,$id_produit)
+    // car on ne prend pas les vieilles réservations en compte
+    public function extraireLesReservationPourCeProduit($id_produit)
     {
         $reservations = array();
 
         $id = $this->connexionBD;
         $requete = $id->prepare("SELECT date_debut
                                   FROM  reservations 
-                                  WHERE id_utilisateur = :id_utilisateur
-                                  AND   id_produit     = :id_produit
+                                  WHERE id_produit     = :id_produit
                                   AND   DATE(date_debut) >= CURRENT_DATE()");
 
         if (!$requete) 
@@ -76,7 +76,6 @@ class Reservations
             throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
         }
 
-        $requete->bindParam(':id_utilisateur',$id_utilisateur,PDO::PARAM_INT);
         $requete->bindParam(':id_produit',$id_produit,PDO::PARAM_INT);
 
         $result = $requete->execute();
@@ -99,6 +98,57 @@ class Reservations
         $id = null;
 
         return $reservations;
+    }
+    
+    // function SQL qui permet de récupérer les données de l'utilisateur
+    // nécessaire pour valider les coordonnées lors d'une confirmation
+    public function extraireUtilisateur($id_utilisateur)
+    {
+        $utilisateur = array();
+
+        $id = $this->connexionBD;
+        $requete = $id->prepare("SELECT nom,
+                                        prenom,
+                                        courriel,
+                                        date_de_naissance
+                                 FROM   utilisateurs
+                                 WHERE  id_utilisateur = :id_utilisateur
+                                 AND    statut = 'actif'"); 
+        
+        if (!$requete) 
+        {
+            throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
+        }
+
+        $requete->bindParam(':id_utilisateur',$id_utilisateur,PDO::PARAM_INT);
+
+        $result = $requete->execute();
+
+        if (!$result) 
+        {
+            throw new Exception("Erreur d'extraction sur la table utilisateurs " . $id->errorCode());
+        }
+
+        $requete->bindColumn('nom',$nom);
+        $requete->bindColumn('prenom',$prenom);
+        $requete->bindColumn('courriel',$courriel);
+        $requete->bindColumn('date_de_naissance',$date_de_naissance);
+     
+        $i = 0;
+        while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
+        {
+            $utilisateur[$i]["id_utilisateur"] = $id_utilisateur;
+            $utilisateur[$i]["nom"] = $nom;
+            $utilisateur[$i]["prenom"] = $prenom;
+            $utilisateur[$i]["courriel"] = $courriel;
+            $utilisateur[$i]["date_de_naissance"] = $date_de_naissance;
+            $i++;
+        }
+
+        $requete->closeCursor();
+        $id = null;
+
+        return $utilisateur;
     }
     
     // function SQL qui permet de récupérer un commande d'un utilisateur

@@ -18,7 +18,7 @@ class VueReservations
         echo $form;
     }
 
-    // function qui retourne le formulaire reserver.html
+    // function qui retourne les plages de dates réservées pour un produit
     public static function formulaire_chercher_dates_reservees($reservations)
     {
         $form = '';
@@ -33,6 +33,8 @@ class VueReservations
             $form .= ',';
             $form .= $date[0];
         }
+        echo json_encode($form);
+        
         /*
         $form .= '<form id="formulaire_chercher_dates_reservees">';
         $form .= '<h2>formulaire_chercher_dates_reservees</h2>';
@@ -47,8 +49,8 @@ class VueReservations
         $form .= '<p>' . $_GET["erreur"] . '</p>';
         $form .= '</div>';
         $form .= '</form>';
+        echo $form;
         */
-        echo json_encode($form);
     }
 
     // function qui retourne le formulaire reserver.html
@@ -97,8 +99,45 @@ class VueReservations
         $form .= '<p>' . $_GET["erreur"] . '</p>';
         $form .= '</div>';
         $form .= '</form>';
+        echo $form;
         */
     }
+
+
+    // function qui retourne le formulaire confirmation.html
+    public static function formulaire_confirmation($produit,$utilisateur)
+    {
+
+        /*
+        $form = '';
+        $form .= '<form id="formulaire_confirmation">';
+        $form .= '<h2>formulaire_confirmation</h2>';
+
+        for ($i = 0; $i < count($produit); $i++) 
+        {
+            $form .= '<p> id_produit: ' . $produit[$i]["id_produit"] . '</p>';
+            $form .= '<p> nom: ' . $produit[$i]["nom"] . '</p>';
+            $form .= '<p> imageFacade: ' . $produit[$i]["imageFacade"] . '</p>';
+            $form .= '<p> description: ' . $produit[$i]["description"] . '</p>';
+        }
+
+        for ($i = 0; $i < count($utilisateur); $i++) 
+        {
+            $form .= '<p> id_utilisateur: ' . $utilisateur[$i]["id_utilisateur"] . '</p>';
+            $form .= '<p> nom: ' . $utilisateur[$i]["nom"] . '</p>';
+            $form .= '<p> prenom: ' . $utilisateur[$i]["prenom"] . '</p>';
+            $form .= '<p> courriel: ' . $utilisateur[$i]["courriel"] . '</p>';
+            $form .= '<p> date_de_naissance: ' . $utilisateur[$i]["date_de_naissance"] . '</p>';
+        }
+
+        $form .= '<div class="erreur">';
+        $form .= '<p>' . $_GET["erreur"] . '</p>';
+        $form .= '</div>';
+        $form .= '</form>';
+        echo $form;
+        */
+    }
+
     public static function formulaire_extraireDesReservations($reservations)
     {
         $form = '';

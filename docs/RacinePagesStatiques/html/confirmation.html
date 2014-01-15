@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="historique">
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
@@ -48,60 +47,64 @@
             <img class="img-responsive" src="../images/chaletLaBoheme.jpg" alt="Chalet la bohème">
             <p>Le chalet la bohème est dans un cadre enchanteur. On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même. L'avantage du Lorem Ipsum sur un texte générique comme 'Du texte. Du texte. Du texte.' est qu'il possède une distribution de lettres plus ou moins normale, et en tout cas comparable avec celle du français standard.</p>
             <h4>VOS CHOIX DE DATES</h2>
-            <div class="form-group">
-              <label for="dateDebut">DATE DE DÉBUT</label><br/>
-              <input class="datepicker" value="12/08/2013">
-            </div>
-            <div class="form-group">
-              <label for="dateFin">DATE DE FIN</label><br/>
-              <input class="datepicker" value="12/08/2013">
-            </div>
+            <form role="form">
+              <div class="form-group">
+                <label for="dateDebut">DATE DE DÉBUT</label><br/>
+                <input class="datepicker" value="12/08/2013">
+              </div>
+              <div class="form-group">
+                <label for="dateFin">DATE DE FIN</label><br/>
+                <input class="datepicker" value="12/08/2013">
+              </div>
+            </form>
           </div><!--  fin -->
           <div class="col-lg-4">
             <h2>Vos coordonnées</h2>
             <p class="help-block">Veuillez vérifier vos coordonnées afin que nous puissions vous envoyez une confirmation de paiement</p>  
             <form role="form">
-            <div class="form-group">
-              <label for="exampleInputEmail1">NOM</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Lepage">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">PRÉNOM</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Marie">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">ADRESSE COURRIEL</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="mariel@gmail.com">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">DATE DE NAISSANCE (jj-mm-aaaa)</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="10-30-56">
-            </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">NOM</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Lepage">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">PRÉNOM</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Marie">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">ADRESSE COURRIEL</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="mariel@gmail.com">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">DATE DE NAISSANCE (jj-mm-aaaa)</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="10-30-56">
+              </div>
             </form>
           </div>
           <div class="col-lg-4">
             <h2>Carte de crédit</h2>
-            <div class="libelle">
-                <label for="selCarte">Carte de crédit</label>
-            </div>
-            <select name="selCarte" size="1" >
-                <option value="MC">Mastercard</option>
-                <option value="VS">Visa</option>
-                <option value="AX">American Express</option>
-            </select><br/><br/><!-- fin de la sélection de province -->
-            <div class="libelle">
-                <label for="selCarte">Numéro de votre carte</label>
-            </div>
-            <input type="text" name="txtNumCarte" pattern="^[a-zA-Z\-\,\s\u00C0-\u00FF]{1,}$" placeholder="numéro de carte" required/><br/>
-            <div class="libelle">
-                <label for="selIdCarte">Id au verso de votre carte</label>
-            </div>
-            <input type="text" name="txtIdCarte" pattern="^[a-zA-Z\-\,\s\u00C0-\u00FF]{1,}$" placeholder="ID" required/><br/>
+            <form role="form">
+              <div class="libelle">
+                  <label for="selCarte">Carte de crédit</label>
+              </div>
+              <select name="selCarte" size="1" >
+                  <option value="MC">Mastercard</option>
+                  <option value="VS">Visa</option>
+                  <option value="AX">American Express</option>
+              </select><br/><br/><!-- fin de la sélection de province -->
+              <div class="libelle">
+                  <label for="selCarte">Numéro de votre carte</label>
+              </div>
+              <input type="text" name="txtNumCarte" pattern="^[a-zA-Z\-\,\s\u00C0-\u00FF]{1,}$" placeholder="numéro de carte" required/><br/>
+              <div class="libelle">
+                  <label for="selIdCarte">Id au verso de votre carte</label>
+              </div>
+              <input type="text" name="txtIdCarte" pattern="^[a-zA-Z\-\,\s\u00C0-\u00FF]{1,}$" placeholder="ID" required/><br/>
+            </form>
             <br/><br/>
             <button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteConnexion('chalets.html')">CONFIRMER</button><br/><br/>           
             <button type="button" class="btn btn-custom-gris btn-lg" onclick="traiteConnexion('reserver.html')">&laquo; ÉTAPE PRÉCÉDENTE</button>           
-         </div><!--  fin -->
-      </div><!-- /.row -->
+         </div> <!--  fin -->
+      </div> <!-- /.row -->
     </div> <!-- /.container -->
       <!-- FOOTER -->
     <div id="footer">

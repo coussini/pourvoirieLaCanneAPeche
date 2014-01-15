@@ -27,6 +27,9 @@ class Controleur
             case 'req_reserver':
                 self::req_reserver();
                 break;        
+            case 'req_confirmation':
+                self::req_confirmation();
+                break;        
             case 'req_extraireuUnUtilisateur':
                 self::req_extraireuUnUtilisateur();
                 break;        
@@ -51,7 +54,7 @@ class Controleur
         try
         {
             $oReservations = new Reservations();
-            $reservations = $oReservations->extraireLesReservationPourCeProduit(1,1);
+            $reservations = $oReservations->extraireLesReservationPourCeProduit(1);
             VueReservations::formulaire_chercher_dates_reservees($reservations);
         }
         catch(Exception $e)
@@ -69,6 +72,23 @@ class Controleur
             $oReservations = new Reservations();
             $produit = $oReservations->extraireLeProduit(1);
             VueReservations::formulaire_reserver($produit);
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            VueReservations::formulaire_erreur();
+        }
+    }
+    
+    // extraire les données pour générer la page confirmation.html
+    private static function req_confirmation()
+    {
+        try
+        {
+            $oReservations = new Reservations();
+            $produit = $oReservations->extraireLeProduit(1);
+            $utilisateur = $oReservations->extraireUtilisateur(1);
+            VueReservations::formulaire_confirmation($produit,$utilisateur);
         }
         catch(Exception $e)
         {
