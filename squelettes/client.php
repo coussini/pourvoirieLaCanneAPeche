@@ -19,7 +19,7 @@
     <link href="./css/bootstrap.css" rel="stylesheet">
     <link href="./css/stylesheet.css" rel="stylesheet">
     <link href="./css/bouton.css" rel="stylesheet">
-    <link href="../css/custom-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+    <link href="./css/custom-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 
     <!-- NOS JS -->
     <script src="./js/vendor/jquery-1.10.1.min.js"></script>

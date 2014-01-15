@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 // temporaire
 $_GET["requetePage"] = "client";
