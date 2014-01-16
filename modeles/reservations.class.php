@@ -21,7 +21,7 @@ class Reservations
                                         description
                                  FROM   produits
                                  WHERE  id_produit = :id_produit
-                                 AND    statut = 'actif'"); 
+                                 AND    statut     = 'actif'"); 
         
         if (!$requete) 
         {
@@ -168,7 +168,8 @@ class Reservations
                                          nombre_de_semaine,
                                          nom_carte,
                                          numero_carte,
-                                         id_carte
+                                         id_carte,
+                                         prix_a_la_reservation
                                   FROM reservations"); 
 
         if (!$requete) 
@@ -192,6 +193,7 @@ class Reservations
         $requete->bindColumn('nom_carte',$nom_carte);
         $requete->bindColumn('numero_carte',$numero_carte);
         $requete->bindColumn('id_carte',$id_carte);
+        $requete->bindColumn('prix_a_la_reservation',$prix_a_la_reservation);
      
         $i = 0;
         while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
@@ -205,6 +207,7 @@ class Reservations
             $reservations[$i]["nom_carte"] = $nom_carte;
             $reservations[$i]["numero_carte"] = $numero_carte;
             $reservations[$i]["id_carte"] = $id_carte;
+            $reservations[$i]["prix_a_la_reservation"] = $prix_a_la_reservation;
             $i++;
         }
 
@@ -236,7 +239,8 @@ class Reservations
                                          nombre_de_semaine
                                          nom_carte,
                                          numero_carte,
-                                         id_carte
+                                         id_carte,
+                                         prix_a_la_reservation
                                   FROM reservations
                                   WHERE id_utilisateur = :id_utilisateur");
 
@@ -263,6 +267,7 @@ class Reservations
         $requete->bindColumn('nom_carte',$nom_carte);
         $requete->bindColumn('numero_carte',$numero_carte);
         $requete->bindColumn('id_carte',$id_carte);
+        $requete->bindColumn('prix_a_la_reservation',$prix_a_la_reservation);
 
         $i = 0;
         while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
@@ -276,6 +281,7 @@ class Reservations
             $reservations[$i]["nom_carte"] = $nom_carte;
             $reservations[$i]["numero_carte"] = $numero_carte;
             $reservations[$i]["id_carte"] = $id_carte;
+            $reservations[$i]["prix_a_la_reservation"] = $prix_a_la_reservation;
             $i++;
         }
 
@@ -286,7 +292,7 @@ class Reservations
     }
 
     // function SQL qui permet de traiter une commande provenant du panier
-    public function creerUneReservation($id_utilisateur,$id_produit,$date_debut,$date_fin,$nombre_de_semaine)
+    public function creerUneReservation($id_utilisateur,$id_produit,$date_debut,$date_fin,$nombre_de_semaine,$prix_a_la_reservation)
     {
         if (!is_numeric($id_utilisateur))
         {
@@ -308,6 +314,10 @@ class Reservations
         {
             throw new Exception("nombre_de_semaine invalide");
         }
+        else if ($prix_a_la_reservation == "")
+        {
+            throw new Exception("prix_a_la_reservation invalide");
+        }
 
         // enlever ou convertir les caractères spéciaux
         $id_utilisateur = htmlentities($id_utilisateur, ENT_QUOTES, "UTF-8");
@@ -315,6 +325,7 @@ class Reservations
         $date_debut = htmlentities($date_debut, ENT_QUOTES, "UTF-8");
         $date_fin = htmlentities($date_fin, ENT_QUOTES, "UTF-8");
         $nombre_de_semaine = htmlentities($nombre_de_semaine, ENT_QUOTES, "UTF-8");
+        $prix_a_la_reservation = htmlentities($prix_a_la_reservation, ENT_QUOTES, "UTF-8");
 
         $id = $this->connexionBD;
         $requete = $id->prepare("INSERT INTO reservations 
@@ -322,12 +333,14 @@ class Reservations
                                   id_produit,
                                   date_debut,
                                   date_fin,
-                                  nombre_de_semaine)
+                                  nombre_de_semaine,
+                                  prix_a_la_reservation)
                                   VALUES (:id_utilisateur, 
                                           :id_produit, 
                                           :date_debut, 
                                           :date_fin, 
-                                          :nombre_de_semaine)");
+                                          :nombre_de_semaine,
+                                          :prix_a_la_reservation)");
 
         if (!$requete) 
         {
@@ -339,6 +352,7 @@ class Reservations
         $requete->bindParam(':date_debut',$date_debut,PDO::PARAM_INT);
         $requete->bindParam(':date_fin',$date_fin,PDO::PARAM_INT);
         $requete->bindParam(':nombre_de_semaine',$nombre_de_semaine,PDO::PARAM_INT);
+        $requete->bindParam(':prix_a_la_reservation',$prix_a_la_reservation,PDO::PARAM_INT);
 
         $result = $requete->execute();
 
@@ -356,7 +370,7 @@ class Reservations
     }
 
     // function SQL qui permet de traiter une commande provenant du panier
-    public function modifierUneReservation($id_reservation,$id_utilisateur,$id_produit,$date_debut,$date_fin,$nombre_de_semaine)
+    public function modifierUneReservation($id_reservation,$id_utilisateur,$id_produit,$date_debut,$date_fin,$nombre_de_semaine,$prix_a_la_reservation)
     {
         if (!is_numeric($id_reservation))
         {
@@ -382,6 +396,10 @@ class Reservations
         {
             throw new Exception("nombre_de_semaine invalide");
         }
+        else if ($prix_a_la_reservation == "")
+        {
+            throw new Exception("prix_a_la_reservation invalide");
+        }
 
         // enlever ou convertir les caractères spéciaux
         $id_reservation = htmlentities($id_reservation, ENT_QUOTES, "UTF-8");
@@ -390,21 +408,24 @@ class Reservations
         $date_debut = htmlentities($date_debut, ENT_QUOTES, "UTF-8");
         $date_fin = htmlentities($date_fin, ENT_QUOTES, "UTF-8");
         $nombre_de_semaine = htmlentities($nombre_de_semaine, ENT_QUOTES, "UTF-8");
+        $prix_a_la_reservation = htmlentities($prix_a_la_reservation, ENT_QUOTES, "UTF-8");
 
         $id = $this->connexionBD;
         $requete = $id->prepare("UPDATE reservations 
-                                  SET id_Utilisateur     = :id_utilisateur,
-                                      id_produit         = :id_produit,
-                                      date_debut         = :date_debut,
-                                      date_fin           = :date_fin,
-                                      nombre_de_semaine  = :nombre_de_semaine
-                                  WHERE id_reservation   = :id_reservation");
+                                  SET id_Utilisateur         = :id_utilisateur,
+                                      id_produit             = :id_produit,
+                                      date_debut             = :date_debut,
+                                      date_fin               = :date_fin,
+                                      nombre_de_semaine      = :nombre_de_semaine
+                                      prix_a_la_reservation  = :prix_a_la_reservation
+                                  WHERE id_reservation       = :id_reservation");
 
         $requete->bindParam(':id_reservation',$id_reservation,PDO::PARAM_INT);
         $requete->bindParam(':id_utilisateur',$id_utilisateur,PDO::PARAM_INT);
         $requete->bindParam(':id_produit',$id_produit,PDO::PARAM_STR);
         $requete->bindParam(':date_fin',$date_fin,PDO::PARAM_STR);
         $requete->bindParam(':nombre_de_semaine',$nombre_de_semaine,PDO::PARAM_INT);
+        $requete->bindParam(':prix_a_la_reservation',$prix_a_la_reservation,PDO::PARAM_INT);
         
         $result = $requete->execute();
 

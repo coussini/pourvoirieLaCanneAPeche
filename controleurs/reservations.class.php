@@ -24,26 +24,26 @@ class Controleur
             case 'req_chercher_dates_reservees':
                 self::req_chercher_dates_reservees();
                 break;        
-            case 'req_reserver':
+            case 'reserver.html':
                 self::req_reserver();
                 break;        
-            case 'req_confirmation':
+            case 'confirmation.html':
                 self::req_confirmation();
                 break;        
-            case 'req_historique':
+            case 'historique.html':
                 self::req_historique();
                 break;        
-            case 'req_extraireuUnUtilisateur':
-                self::req_extraireuUnUtilisateur();
+            case 'reservations.html':
+                self::req_reservations();
+                break;        
+            case 'req_extraireDesReservations':
+                self::req_extraireDesReservations();
                 break;        
             case 'req_extraireUneReservation':
                 self::req_extraireUneReservation();
                 break;        
             case 'req_creerUneReservation':
                 self::req_creerUneReservation();
-                break;        
-            case 'req_modifierUneReservation':
-                //req_modifierUneReservation();
                 break;        
             default:
                 // erreur
@@ -57,7 +57,7 @@ class Controleur
         try
         {
             $oReservations = new Reservations();
-            $reservations = $oReservations->extraireLesReservationPourCeProduit(1);
+            $reservations = $oReservations->extraireLesReservationPourCeProduit($_GET["id_produit"]);
             VueReservations::formulaire_chercher_dates_reservees($reservations);
         }
         catch(Exception $e)
@@ -73,7 +73,7 @@ class Controleur
         try
         {
             $oReservations = new Reservations();
-            $produit = $oReservations->extraireLeProduit(1);
+            $produit = $oReservations->extraireLeProduit($_GET["id_produit"]);
             VueReservations::formulaire_reserver($produit);
         }
         catch(Exception $e)
@@ -89,9 +89,9 @@ class Controleur
         try
         {
             $oReservations = new Reservations();
-            $produit = $oReservations->extraireLeProduit(1);
-            $utilisateur = $oReservations->extraireUtilisateur(1);
-            VueReservations::formulaire_confirmation($produit,$utilisateur,"12/01/2014","18/01/2014");
+            $produit = $oReservations->extraireLeProduit($_GET["id_produit"]);
+            $utilisateur = $oReservations->extraireUtilisateur($_GET["id_utilisateur"]);
+            VueReservations::formulaire_confirmation($produit,$utilisateur,($_GET["date_debut"],($_GET["date_fin"]);
         }
         catch(Exception $e)
         {
@@ -106,24 +106,8 @@ class Controleur
         try
         {
             $oReservations = new Reservations();
-            $reservations = $oReservations->extraireUneReservation();
-            VueReservations::formulaire_extraireUneReservation($reservations);
-        }
-        catch(Exception $e)
-        {
-            $_GET['erreur']  = $e->getMessage();
-            VueReservations::formulaire_erreur();
-        }
-    }
-
-    // traitement extraire un utilisateur
-    private static function req_extraireuUnUtilisateur()
-    {
-        try
-        {
-            $oReservations = new Reservations();
-            $utilisateur = $oReservations->extraireuUnUtilisateur("");
-            VueReservations::formulaire_extraireuUnUtilisateur($utilisateur);
+            $reservations = $oReservations->extraireUneReservation($_GET["id_utilisateur"]);
+            VueReservations::formulaire_historique($reservations);
         }
         catch(Exception $e)
         {
@@ -154,7 +138,7 @@ class Controleur
         try
         {
             $oReservations = new Reservations();
-            $reservations = $oReservations->extraireUneReservation();
+            $reservations = $oReservations->extraireUneReservation(($_GET["id_utilisateur"]);
             VueReservations::formulaire_extraireUneReservation($reservations);
         }
         catch(Exception $e)
@@ -170,7 +154,7 @@ class Controleur
         try
         {
             $oReservations = new Reservations();            
-            $resultat = $oReservations->creerUneReservation($_GET["id_utilisateur"],$_GET["id_produit"],$_GET["date_debut"],$_GET["date_fin"],$_GET["nombre_de_semaine"]);
+            $resultat = $oReservations->creerUneReservation($_GET["id_utilisateur"],$_GET["id_produit"],$_GET["date_debut"],$_GET["date_fin"],$_GET["nombre_de_semaine"],$_GET["prix_a_la_reservation"]);
             VueReservations::formulaire_creerUneReservation($resultat);
         }
         catch(Exception $e)

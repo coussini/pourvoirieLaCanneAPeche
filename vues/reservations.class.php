@@ -206,12 +206,11 @@ class VueReservations
         */
     }
 
-    public static function formulaire_extraireDesReservations($reservations)
+    public static function formulaire_historique($reservations)
     {
         $form = '';
-        $form .= '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>';
-        $form .= '<form id="formulaireExtraireDesReservations">';
-        $form .= '<h2>Liste des reservation(s)</h2>';
+        $form .= '<form id="formulaire_historique">';
+        $form .= '<h2>formulaire_historique</h2>';
 
         for ($i = 0; $i < count($reservations); $i++) 
         {
@@ -221,14 +220,17 @@ class VueReservations
             $form .= '<p> date_debut: ' . $reservations[$i]["date_debut"] . '</p>';
             $form .= '<p> date_fin: ' . $reservations[$i]["date_fin"] . '</p>';
             $form .= '<p> numero_semaine: ' . $reservations[$i]["numero_semaine"] . '</p>';
+            $form .= '<p> nom_carte: ' . $nom_carte[$i]["nom_carte"] . '</p>';
+            $form .= '<p> numero_carte: ' . $numero_carte[$i]["numero_carte"] . '</p>';
+            $form .= '<p> id_carte: ' . $id_carte[$i]["id_carte"] . '</p>';
+            $form .= '<p> prix_a_la_reservation: ' . $prix_a_la_reservation[$i]["prix_a_la_reservation"] . '</p>';
+
         }
 
         $form .= '<div class="erreur">';
         $form .= '<p>' . $_GET["erreur"] . '</p>';
         $form .= '</div>';
         $form .= '</form>';
-        $form .= '</body>';
-        $form .= '</html>';
         echo $form;
     }
 
