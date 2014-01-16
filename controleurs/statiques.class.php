@@ -2,74 +2,71 @@
 
 class Controleur
 {
+
     public static function gererRequetes()
     {
         switch ($_GET['requete']) 
         {
-            case 'req_extraireDesReservations':
-                self::req_extraireDesReservations();
-                break;        
-            case 'req_extraireUneReservation':
-                self::req_extraireUneReservation();
-                break;        
-            case 'req_creerUneReservation':
-                self::req_creerUneReservation();
-                break;        
-            case 'req_modifierUneReservation':
-                //req_modifierUneReservation();
-                break;        
+            case 'formulaireModifierStatique':
+                self::req_formulaireModifierStatique();
+                break; 
+            case 'modifierContenuStatique':
+                self::req_modifierContenuStatique();
+                break;   
             default:
-                // erreur
-                break;
-        }
-    }
-    // traitement extraire des réservations
-    private static function req_extraireDesReservations()
-    {
-        try
-        {
-            $oReservations = new Reservations();
-            $reservations = $oReservations->extraireDesReservations($_GET["id_reservation"]);
-            VueReservations::formulaire_extraireDesReservations($reservations);
-        }
-        catch(Exception $e)
-        {
-            $_GET['erreur']  = $e->getMessage();
-            VueReservations::formulaire_extraireDesReservations("");
+                self::req_formulaireModifierStatique(); // Premier affichage
+                break; 
         }
     }
 
-    // traitement extraire une réservation
-    private static function req_extraireUneReservation()
+    // Générer le formulaire   
+    private static function req_formulaireModifierStatique()
     {
         try
         {
-            $oReservations = new Reservations();
-            $reservations = $oReservations->extraireUneReservation();
-            VueReservations::formulaire_extraireUneReservation($reservations);
+            $oStatiques = new Statiques();
+
+            $nomsStatique = $oStatiques->getNomsContenuStatique();    // Récupère tous les noms
+
+            if ($_POST['nom'] == "")  // Si premier affichage de la page
+            {
+                $contenuStatique = $oStatiques->getContenuStatique($nomsStatique[0]);
+                VueStatiques::formulaire_SelectionStatique($nomsStatique,$nomsStatique[0]); // Param: Tous les noms, option sélectionnée
+                VueStatiques::formulaire_ModifierStatique($nomsStatique[0],$contenuStatique);
+    
+            } 
+            else                    // Si premier contenu sélectionné
+            {
+                $contenuStatique = $oStatiques->getContenuStatique($_POST['nom']);
+                VueStatiques::formulaire_SelectionStatique($nomsStatique,$_POST['nom']); // Param: Tous les noms, option sélectionnée
+                VueStatiques::formulaire_ModifierStatique($_POST['nom'],$contenuStatique);
+            }
         }
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueReservations::formulaire_extraireUneReservation("");
+            VueStatiques::formulaire_erreur();
         }
     }
 
-    // traitement de confirmation d'un courriel dans le but d'y extraire les commandes
-    private static function req_creerUneReservation()
+    // Modifier le contenu statique   
+    private static function req_modifierContenuStatique()
     {
         try
         {
-            $oReservations = new Reservations();            
-            $resultat = $oReservations->creerUneReservation($_GET["id_utilisateur"],$_GET["id_produit"],$_GET["date_debut"],$_GET["date_fin"],$_GET["nombre_de_semaine"]);
-            VueReservations::formulaire_creerUneReservation($resultat);
+            $oStatiques = new Statiques();
+            $idStatique = $oStatiques->getidStatiqueByName($_POST['nom']); // Récupérer l'id d'un contenu par son nom
+            $nomsStatique = $oStatiques->updateContenuStatique($idStatique,$_POST['contenuStatique']);  // Modifier contenu statique
+
+            self::req_formulaireModifierStatique();
         }
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueReservations::formulaire_creerUneReservation("");
+            VueStatiques::formulaire_erreur();
         }
-    }    
+    }
+ 
 }
 
 ?>

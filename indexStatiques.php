@@ -1,5 +1,50 @@
 <?php
 
+        ///// TESTS UNITAIRES /////
+
+        ///// Récupérer contenu /////
+        //$_GET['nom'] = 'test4';
+        //$_GET['nom'] = 'nom_inexistant';    
+
+        ///// Récupérer contenu par l'id /////
+        //$_GET['requete'] = 'req_getContenuStatiqueParID';
+        //$_GET['idStatique'] = 'test';      
+        //$_GET['idStatique'] = 31;   
+
+        ///// Récupérer id par le nom /////
+        //$_GET['requete'] = 'req_getidstatiqueByName';
+        //$_GET['nom'] = 'test3';   
+
+        ///// Récupérer tous les noms des contenus statiques /////
+        //$_GET['requete'] = 'req_getNomsContenuStatique';    
+
+        ///// Créer contenu /////
+        //$_GET['requete'] = 'req_setContenuStatique';
+        //$_GET['statut'] = 'actif';
+        //$_GET['nom'] = 'test2';
+        //$_GET['contenu'] = 'ceci est le test 2';
+        //$_GET['statut'] = 'inactif';
+        //$_GET['nom'] = 'test3';
+        //$_GET['contenu'] = 'ceci est le test 2#%&(*&*"';
+        //$_GET['requete'] = 'req_setContenuStatique';
+        //$_GET['statut'] = 'detruit';
+        //$_GET['nom'] = 'test4';
+        //$_GET['contenu'] = 'Ceci est encore un contenu';
+
+        ///// Changer le statut d'un contenu /////
+        //$_GET['requete'] = 'req_changeStatutStatique';
+        //$_GET['nom'] = 'test';
+        //$_GET['idStatique'] = '31';
+        //$_GET['statut'] = 'rien';
+        //$_GET['statut'] = 'inactif';
+
+        ///// Modifier un contenu /////
+        //$_GET['requete'] = 'req_updateContenuStatique';
+        //$_GET['idStatique'] = 'quoi';
+        //$_GET['idStatique'] = '31';
+        //$_GET['contenu'] = 'Ceci est un nouveau contenu';
+
+
 /*****************************************/
 /* CONNEXION DE LA BASE DE DONNÉE EN PDO */
 /*****************************************/
@@ -32,7 +77,11 @@ require_once("./controleurs/statiques.class.php"); // CONTROLEUR DE TEST POUR LE
 /************************/
 /* SQUELETTES DES PAGES */
 /************************/
-if ($_GET["requetePage"] = "client")
+
+require_once("./squelettes/admin.php");
+
+
+/*if ($_GET["requetePage"] = "client")
 {
 	// pages pour les statiques normaux du site
 	require_once("./squelettes/client.php");
@@ -41,6 +90,6 @@ else
 {
 	// pages pour les administrateurs du site
 	require_once("./squelettes/admin.php");
-} 
+} */
 
 ?>

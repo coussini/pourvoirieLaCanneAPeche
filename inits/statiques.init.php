@@ -1,13 +1,21 @@
 <?php
-if (empty($_GET["c1"]))
+
+
+if (empty($_POST["nom"]))
 {
-    $_GET["c1"] = '';
+    $_POST["nom"] = '';
 }
 
-if (empty($_GET["c2"]))
+if (empty($_POST["contenuStatique"]))
 {
-    $_GET["c2"] = '';
+    $_POST["contenuStatique"] = '';
 }
+
+if (empty($_GET["contenu"]))
+{
+    $_GET["contenu"] = '';
+}
+
 
 // ETC...
 

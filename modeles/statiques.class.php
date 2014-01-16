@@ -16,37 +16,39 @@ class Statiques
         {
             throw new Exception("Nom invalide");
         }
+
         $contenuStatique = array();
 
         $id = $this->connexionBD;
-
-        $requete = $id->prepare("SELECT statut,nom,contenu
-                             FROM statiques 
-                             WHERE nom = :nom");
-
+        $requete = $id->prepare("SELECT statut,
+                                        nom,
+                                        contenu
+                                 FROM   statiques 
+                                 WHERE  nom = :nom");
+        
         if (!$requete) 
         {
             throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
         }
 
+        $requete->bindParam(':nom',$nom,PDO::PARAM_STR);
+        
         $result = $requete->execute();
 
-        if (!$result) 
-        {
-            throw new Exception("Erreur d'extraction sur la table statiques " . $id->errorCode());
-        }
-
-        $requete->bindParam(':nom',$nom,PDO::PARAM_STR);
-        $requete->execute();
         $requete->bindColumn('statut',$statut);
         $requete->bindColumn('nom',$nom);
         $requete->bindColumn('contenu',$contenu);
 
         while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
         {
-            $contenuStatique['statut'] = $statut; //htmlentities??
+            $contenuStatique['statut'] = $statut; 
             $contenuStatique['nom'] = $nom;  
             $contenuStatique['contenu'] = $contenu;       
+        }
+
+        if ((!$statut) || (!$nom) || (!$contenu))
+        {
+            throw new Exception("Erreur d'extraction sur la table statiques " . $id->errorCode());
         }
 
         $requete->closeCursor();
@@ -55,11 +57,11 @@ class Statiques
         return $contenuStatique;
     }
 
-    // Récupérer un contenustatique par l'id
+    // Récupérer un contenu statique par l'id
 
-    public function getContenuStatiqueParID($idstatique)
+    public function getContenuStatiqueParID($idStatique)
     {
-        if (!is_numeric($idstatique))
+        if (!is_numeric($idStatique))
         {
             throw new Exception("Identifiant invalide");
         }
@@ -76,15 +78,10 @@ class Statiques
             throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
         }
 
+        $requete->bindParam(':id_statique',$idStatique,PDO::PARAM_STR);
+
         $result = $requete->execute();
 
-        if (!$result) 
-        {
-            throw new Exception("Erreur d'extraction sur la table statiques " . $id->errorCode());
-        }
-
-        $requete->bindParam(':id_statique',$idstatique,PDO::PARAM_STR);
-        $requete->execute();
         $requete->bindColumn('statut',$statut);
         $requete->bindColumn('nom',$nom);
         $requete->bindColumn('contenu',$contenu);
@@ -96,6 +93,11 @@ class Statiques
             $contenuStatique['contenu'] = $contenu;       
         }
 
+        if ((!$statut) || (!$nom) || (!$contenu))
+        {
+            throw new Exception("Erreur d'extraction sur la table statiques " . $id->errorCode());
+        }
+
         $requete->closeCursor();
         $id=null;
 
@@ -103,7 +105,7 @@ class Statiques
     }
 
     // Récupérer l'id d'un contenu statique par le nom
-    public function getidstatiqueByName($nom)
+    public function getidStatiqueByName($nom)
     {
         $id = $this->connexionBD;
 
@@ -116,7 +118,7 @@ class Statiques
             throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
         }
 
-        $requete->bindParam(':id_utilisateur',$id_utilisateur,PDO::PARAM_INT);
+        $requete->bindParam(':nom',$nom,PDO::PARAM_INT);
 
         $result = $requete->execute();
 
@@ -125,9 +127,8 @@ class Statiques
             throw new Exception("Erreur d'extraction sur la table statiques " . $id->errorCode());
         }
         
-        $requete->bindParam(':nom',$nom,PDO::PARAM_STR);
-        $requete->execute();
-        $requete->bindColumn('id_statique',$idstatique);
+        $requete->bindColumn('id_statique',$idStatique);
+
         $result = $requete -> fetchColumn();
         $requete->closeCursor();
         $id=null;
@@ -135,10 +136,48 @@ class Statiques
         return $result;
     }
 
+    // Récupérer les noms de tous les contenus statiques
+    public function getNomsContenuStatique()
+    {
+        $nomsStatique = array();
+
+        $id = $this->connexionBD;
+        $requete = $id->prepare("SELECT nom
+                                 FROM   statiques");
+        
+        if (!$requete) 
+        {
+            throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
+        }
+        
+        $result = $requete->execute();
+
+        $requete->bindColumn('nom',$nom);
+
+        $i = 0;
+        while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
+        {
+            $nomsStatique[$i] = $nom; 
+            $i++;       
+        }
+
+        if (!$nom)
+        {
+            throw new Exception("Erreur d'extraction sur la table statiques " . $id->errorCode());
+        }
+
+        $requete->closeCursor();
+        $id=null;
+
+        return $nomsStatique;
+    }
+
+
     // Créer un contenu statique
     public function setContenuStatique($statut,$nom,$contenu)
     {
-        if (!((($statut == "actif") || ($statut == "inactif")) || ($statut == "detruit")) || ($statut == "")) {
+       if (!((($statut == "actif") || ($statut == "inactif")) || ($statut == "detruit")) || ($statut == "")) 
+        { 
             throw new Exception("Statut invalide");
         }
         else if ($nom == "") {
@@ -177,18 +216,14 @@ class Statiques
         
         $id = null;
 
-        if ($rep) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        $messageConfirmation = "Création du contenu réussi";
+        return $messageConfirmation; 
     }
 
-    // Changer le statut d'un contenu statique ou détruire une rangée
-    public function changeStatutStatique($idstatique,$statut)
+    // Changer le statut d'un contenu statique
+    public function changeStatutStatique($idStatique,$statut)
     {
-        if (!is_numeric($idstatique)) {
+        if (!is_numeric($idStatique)) {
             throw new Exception("Identifiant invalide");
         }
         else if (!((($statut == "actif") || ($statut == "inactif")) || ($statut == "detruit")) || ($statut == "")) {
@@ -198,10 +233,10 @@ class Statiques
         $id = $this->connexionBD;
         $requete = $id->prepare("UPDATE statiques
                                 SET statut = :statut 
-                                WHERE id_statique = :idstatique");
+                                WHERE id_statique = :idStatique");
 
         $requete->bindParam(':statut',$statut,PDO::PARAM_STR);
-        $requete->bindParam(':idstatique',$idstatique,PDO::PARAM_STR);
+        $requete->bindParam(':idStatique',$idStatique,PDO::PARAM_STR);
         
         $result = $requete->execute();
 
@@ -214,17 +249,14 @@ class Statiques
         
         $id = null;
 
-        if ($rep) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        $messageConfirmation = "Changement du statut réussi";
+        return $messageConfirmation;
+
     }
-    // Changer le statut d'un contenu statique ou détruire une rangée
-    public function updateContenuStatique($idstatique,$contenu)
+    // Changer le contenu
+    public function updateContenuStatique($idStatique,$contenu)
     {
-        if (!is_numeric($idstatique)) {
+        if (!is_numeric($idStatique)) {
             throw new Exception("Identifiant invalide");
         }
         else if ($contenu == "") {
@@ -235,10 +267,10 @@ class Statiques
         $id = $this->connexionBD;
         $requete = $id->prepare("UPDATE statiques
                                 SET contenu = :contenu 
-                                WHERE id_statique = :idstatique");
+                                WHERE id_statique = :idStatique");
 
         $requete->bindParam(':contenu',$contenu,PDO::PARAM_STR);
-        $requete->bindParam(':idstatique',$idstatique,PDO::PARAM_STR);
+        $requete->bindParam(':idStatique',$idStatique,PDO::PARAM_STR);
         
         $result = $requete->execute();
 
@@ -251,27 +283,10 @@ class Statiques
         
         $id = null;
 
-        if ($rep) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        $messageConfirmation = "Modification du contenu réussi";
+        return $messageConfirmation;
+
     }
 }
-//TESTS:
-//echo setContenuStatique('actif', 'test', 'ceci est un test') . "<br/>";
-//echo setContenuStatique('actifg', 'test', 'ceci est un test') . "<br/>"; 
-//echo setContenuStatique('actif', 'test', 'ceci est\'DROP TABLE statique\' un test') . "<br/>"; 
-//$contenuStatique = getContenuStatique(1);
-//echo $contenuStatique['contenu'] . "<br/>";
-//echo getContenuStatique('test') . "<br/>";
-//echo getContenuStatique('2') . "<br/>";
-//echo getidstatiqueByName('test') . "<br/>";
-//echo changeStatutStatique(1,'inactif') . "<br/>";
-//echo changeStatutStatique(2,'detruit') . "<br/>";
-//echo updateContenuStatique(3,'Encore un test') . "<br/>";
-//echo setContenuStatique('actif', 'test1', 'ceci est le test1') . "<br/>";
-//$test = getContenuStatique('test1');
-//echo $test['contenu'];
+
 ?>
