@@ -1,8 +1,8 @@
 ﻿<?php
 
 // temporaire
-$_GET["requetePage"] = "admin";
-$_GET['requete'] = "reservations.html";
+$_GET["requetePage"] = "client";
+$_GET["requete"] = "reserver.html";
 $_GET["id_reservation"] = '';
 $_GET["id_utilisateur"] = 1;
 $_GET["id_produit"] = 1;

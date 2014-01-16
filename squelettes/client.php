@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Site internet sur la pourvoirie de la canne à pêche">
     <meta name="author" content="Flora Kasyan, Michel Van Hoye, Mathieu De Grandpré et Louis Cyr">
-    <title>La cannne &agrave; p&ecirc;che accueil</title>
+    <title>La canne &agrave; p&ecirc;che accueil</title>
     <link rel="shortcut icon" href="./images/favicon.jpg">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -16,11 +16,11 @@
     <![endif]-->
 
     <!-- NOS CSS -->
+    <link href="./css/chalet.css" rel="stylesheet">
     <link href="./css/bootstrap.css" rel="stylesheet">
     <link href="./css/stylesheet.css" rel="stylesheet">
     <link href="./css/bouton.css" rel="stylesheet">
     <link href="./css/custom-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">
-    <link href="./css/chalet.css" rel="stylesheet">
 
     <!-- NOS JS -->
     <script src="./js/vendor/jquery-1.10.1.min.js"></script>
@@ -32,11 +32,11 @@
 
     <!-- TRAITEMENT SPÉCIFIQUE POUR LA RÉSERVATION -->    
     <?php
-      if ($_GET['requete'] == 'req_reserver')
+      if ($_GET['requete'] == 'reserver.html')
       {
     ?>
-        <script src="js/calendrierReservation.js"></script>
-        <script src="js/traitementCalendrierReservation.js"></script>
+        <script src=".js/calendrierReservation.js"></script>
+        <script src=".js/traitementCalendrierReservation.js"></script>
     <?php
       }    
     ?>

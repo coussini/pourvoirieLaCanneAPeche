@@ -50,8 +50,9 @@ class Controleur
     {
         try
         {
+
             $oReservations = new Reservations();
-            $reservations = $oReservations->extraireLesReservationPourCeProduit($_GET["id_produit"]);
+            $reservations = $oReservations->extraireLesReservationPourCeProduit(1);
             VueReservations::formulaire_chercher_dates_reservees($reservations);
         }
         catch(Exception $e)

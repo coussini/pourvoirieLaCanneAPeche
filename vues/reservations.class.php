@@ -56,12 +56,41 @@ class VueReservations
     // function qui retourne le formulaire reserver.html
     public static function formulaire_reserver($produit)
     {
+
+
         $form = '';
         $form .= '<div class="container main">';
         $form .= '<div class="row">';
+        $form .= '<h1>formulaire_reserver</h1>';
         $form .= '<h1>Réservation de chalet</h1>';
         $form .= '<p>Veuillez choisir vos dates.</p>';
         $form .= '<div class="col-lg-4">';
+        $form .= '<h2>La Bohème</h2>';
+        $form .= '<img class="img-responsive" src="./images/chaletLaBoheme.jpg" alt="Chalet la bohème">';
+        $form .= '<p>Le chalet la bohème est dans un cadre enchanteur. On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même. Lavantage du Lorem Ipsum sur un texte générique comme Du texte. Du texte. Du texte. est quil possède une distribution de lettres plus ou moins normale, et en tout cas comparable avec celle du français standard.</p>';
+        $form .= '</div>';
+        $form .= '<div class="col-lg-8">';
+        $form .= '<h2>Semaine de réservation pour votre chalet</h2>';
+        $form .= '<h4>Veuillez choisir la semaine de votre séjour</h4>';
+        $form .= '<div class="semaineChoisi"></div>';
+        $form .= '<h4>Vous avez choisi la semaine :</h4>';
+        $form .= '<h4><span id="semaine"></span> <span id="startDate"></span><span id="endDate"></strong></span></h4>';
+        $form .= '<br/><br/>';
+        $form .= '<button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteConnexion("confirmation.html")">RÉSERVER</button>';
+        $form .= '</div>';
+        $form .= '</div>';
+        $form .= '</div>';
+        echo $form;
+
+        /*
+
+        $form = '';
+        $form .= '<div class="container main">';
+        $form .= '<div class="row">';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '?requete=confirmation.html">';
+        $form .= '<div class="col-lg-4">';
+        $form .= '<h1>Réservation de chalet</h1>';
+        $form .= '<p>Veuillez choisir vos dates.</p>';
         $form .= '<h2>' . $produit[0]["nom"] . '</h2>';
         $form .= '<img class="img-responsive" src="' . $produit[0]["imageFacade"] . '" alt="image de façade">';
         $form .= '<p>' . $produit[0]["description"] .'</p>';
@@ -72,12 +101,22 @@ class VueReservations
         $form .= '<div class="semaineChoisi"></div>';
         $form .= '<h4>Vous avez choisi la semaine :</h4>';
         $form .= '<h4><span id="semaine"></span> <span id="startDate"></span><span id="endDate"></strong></span></h4>';
+
+        /*************************************************/
+        /* champs que l'on passe en paramètres et hidden */
+        /*************************************************/
+        /*
+        $form .= '<input type="hidden" name="id_produit" value="' . $_GET["id_produit"] . '>';
+        $form .= '<input type="hidden" name="id_utilisateur" value="' . $_GET["id_utilisateur"] . '>';
+
         $form .= '<br/><br/>';
-        $form .= '<button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteConnexion("confirmation.html")">RÉSERVER</button>';
+        $form .= '<input class="btn btn-custom-vert btn-lg" type="submit" value="RÉSERVER">';
         $form .= '</div><!--  fin  col-lg-12 -->';
+        $form .= '</form>';
         $form .= '</div><!-- /.row -->';
         $form .= '</div> <!-- /.container -->';
         echo $form;
+        */
 
         /*
         $form = '';
@@ -312,7 +351,6 @@ class VueReservations
     public static function formulaire_creerUneReservation($resultat)
     {
         $form = '';
-        $form .= '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>';
         $form .= '<form id="formulaireCreerUneReservation">';
         $form .= '<h2>Créer une réservation</h2>';
         $form .= '<p> resultat: ' . $resultat . '</p>';    
@@ -320,7 +358,6 @@ class VueReservations
         $form .= '<p>' . $_GET["erreur"] . '</p>';
         $form .= '</div>';
         $form .= '</form>';
-        $form .= '</body>';
         $form .= '</html>';
         echo $form;
     }
