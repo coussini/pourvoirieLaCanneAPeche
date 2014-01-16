@@ -17,19 +17,9 @@ font-family: arial;
 padding:15px;
 color:white;
 }
-
 .container
 {
 width:1024px;	
-}
-
-
-.container-main
-{
-margin-top:180px; 
-width:800px;
-margin-left: auto;
-margin-right:auto;	
 }
 
 
@@ -42,7 +32,7 @@ color:#63874C;
 
 .contenu-centre
 {
-margin-top: 100px;
+margin-top: 130px;
 }
 
 footer > p
@@ -75,13 +65,22 @@ padding:11px;
 
 div.modal-content
 {
-width:855px;	
+width:800px;	
 }
 
+html body
+{
+
+}
 
 section.contenu-centre div.row div.col-lg-12
 {
-padding:0px;	
+padding:0px;
+	
 }
 
+html body div#wrap div.navbar div.container div.row ul.nav
+{
+	
+}
 
