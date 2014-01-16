@@ -36,12 +36,6 @@ class Controleur
             case 'reservations.html':
                 self::req_reservations();
                 break;        
-            case 'req_extraireDesReservations':
-                self::req_extraireDesReservations();
-                break;        
-            case 'req_extraireUneReservation':
-                self::req_extraireUneReservation();
-                break;        
             case 'req_creerUneReservation':
                 self::req_creerUneReservation();
                 break;        
@@ -91,7 +85,7 @@ class Controleur
             $oReservations = new Reservations();
             $produit = $oReservations->extraireLeProduit($_GET["id_produit"]);
             $utilisateur = $oReservations->extraireUtilisateur($_GET["id_utilisateur"]);
-            VueReservations::formulaire_confirmation($produit,$utilisateur,($_GET["date_debut"],($_GET["date_fin"]);
+            VueReservations::formulaire_confirmation($produit,$utilisateur,$_GET["date_debut"],$_GET["date_fin"]);
         }
         catch(Exception $e)
         {
@@ -106,7 +100,7 @@ class Controleur
         try
         {
             $oReservations = new Reservations();
-            $reservations = $oReservations->extraireUneReservation($_GET["id_utilisateur"]);
+            $reservations = $oReservations->extraireLesReservationsUtilisateur($_GET["id_utilisateur"]);
             VueReservations::formulaire_historique($reservations);
         }
         catch(Exception $e)
@@ -115,31 +109,15 @@ class Controleur
             VueReservations::formulaire_erreur();
         }
     }
-
-    // traitement extraire des réservations
-    private static function req_extraireDesReservations()
+    
+    // extraire les données pour générer la page reservations.html
+    private static function req_reservations()
     {
         try
         {
             $oReservations = new Reservations();
-            $reservations = $oReservations->extraireDesReservations();
-            VueReservations::formulaire_extraireDesReservations($reservations);
-        }
-        catch(Exception $e)
-        {
-            $_GET['erreur']  = $e->getMessage();
-            VueReservations::formulaire_erreur();
-        }
-    }
-
-    // traitement extraire une réservation
-    private static function req_extraireUneReservation()
-    {
-        try
-        {
-            $oReservations = new Reservations();
-            $reservations = $oReservations->extraireUneReservation(($_GET["id_utilisateur"]);
-            VueReservations::formulaire_extraireUneReservation($reservations);
+            $reservations = $oReservations->extraireLesReservations();
+            VueReservations::formulaire_reservations($reservations);
         }
         catch(Exception $e)
         {

@@ -150,75 +150,9 @@ class Reservations
 
         return $utilisateur;
     }
-    
-    // function SQL qui permet de récupérer un commande d'un utilisateur
-    public function extraireDesReservations()
-    {
-        $reservations = array();
 
-        // cette requete est ce qu'on apelle un sub-select
-        // permet de récupérer les données d'une commande et le total des détails 
-        // pour permettre d'afficher sa valeur dans la liste des commandes passées 
-        $id = $this->connexionBD;
-        $requete = $id->prepare("SELECT id_reservation,
-                                         id_utilisateur,
-                                         id_produit,
-                                         date_debut,
-                                         date_fin,
-                                         nombre_de_semaine,
-                                         nom_carte,
-                                         numero_carte,
-                                         id_carte,
-                                         prix_a_la_reservation
-                                  FROM reservations"); 
-
-        if (!$requete) 
-        {
-            throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
-        }
-
-        $result = $requete->execute();
-
-        if (!$result) 
-        {
-            throw new Exception("Erreur d'extraction sur la table reservations " . $id->errorCode());
-        }
-
-        $requete->bindColumn('id_reservation',$id_reservation);
-        $requete->bindColumn('id_utilisateur',$id_utilisateur);
-        $requete->bindColumn('id_produit',$id_produit);
-        $requete->bindColumn('date_debut',$date_debut);
-        $requete->bindColumn('date_fin',$date_fin);
-        $requete->bindColumn('nombre_de_semaine',$nombre_de_semaine);
-        $requete->bindColumn('nom_carte',$nom_carte);
-        $requete->bindColumn('numero_carte',$numero_carte);
-        $requete->bindColumn('id_carte',$id_carte);
-        $requete->bindColumn('prix_a_la_reservation',$prix_a_la_reservation);
-     
-        $i = 0;
-        while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
-        {
-            $reservations[$i]["id_reservation"] = $id_reservation;
-            $reservations[$i]["id_utilisateur"] = $id_utilisateur;
-            $reservations[$i]["id_produit"] = $id_produit;
-            $reservations[$i]["date_debut"] = $date_debut;
-            $reservations[$i]["date_fin"] = $date_fin;
-            $reservations[$i]["nombre_de_semaine"] = $nombre_de_semaine;
-            $reservations[$i]["nom_carte"] = $nom_carte;
-            $reservations[$i]["numero_carte"] = $numero_carte;
-            $reservations[$i]["id_carte"] = $id_carte;
-            $reservations[$i]["prix_a_la_reservation"] = $prix_a_la_reservation;
-            $i++;
-        }
-
-        $requete->closeCursor();
-        $id = null;
-
-        return $reservations;
-    }
-
-    // function SQL qui permet de récupérer les détails d'une commande d'un utilisateur
-    public function extraireUneReservation($id_utilisateur)
+    // function SQL qui permet de récupérer les réservations d'un utilisateur
+    public function extraireLesReservationsUtilisateur($id_utilisateur)
     {
         if (!is_numeric($id_utilisateur))
         {
@@ -227,22 +161,21 @@ class Reservations
 
         $reservations = array();
 
-        // cette requete est ce qu'on apelle un sub-select
-        // permet de récupérer les données des détails d'une commande et la date de la commande 
-        // pour permettre d'afficher sa valeur en entete, dans les détails d'un commande 
         $id = $this->connexionBD;
-        $requete = $id->prepare("SELECT id_reservation,
-                                         id_utilisateur,
-                                         id_produit,
-                                         date_debut,
-                                         date_fin,
-                                         nombre_de_semaine
-                                         nom_carte,
-                                         numero_carte,
-                                         id_carte,
-                                         prix_a_la_reservation
-                                  FROM reservations
-                                  WHERE id_utilisateur = :id_utilisateur");
+        $requete = $id->prepare("SELECT RE.id_reservation,
+                                        RE.id_produit,
+                                        PR.nom,
+                                        PR.description, 
+                                        RE.date_debut,
+                                        RE.date_fin,
+                                        RE.numero_semaine,
+                                        RE.nom_carte,
+                                        RE.numero_carte,
+                                        RE.id_carte,
+                                        RE.prix_a_la_reservation
+                                  FROM reservations RE, produits PR
+                                  WHERE PR.id_produit = RE.id_produit
+                                  AND   RE.id_utilisateur = :id_utilisateur");
 
         if (!$requete) 
         {
@@ -259,11 +192,12 @@ class Reservations
         }
         
         $requete->bindColumn('id_reservation',$id_reservation);
-        $requete->bindColumn('id_utilisateur',$id_utilisateur);
         $requete->bindColumn('id_produit',$id_produit);
+        $requete->bindColumn('nom',$nom);
+        $requete->bindColumn('description',$description);
         $requete->bindColumn('date_debut',$date_debut);
         $requete->bindColumn('date_fin',$date_fin);
-        $requete->bindColumn('nombre_de_semaine',$nombre_de_semaine);
+        $requete->bindColumn('numero_semaine',$numero_semaine);
         $requete->bindColumn('nom_carte',$nom_carte);
         $requete->bindColumn('numero_carte',$numero_carte);
         $requete->bindColumn('id_carte',$id_carte);
@@ -273,11 +207,12 @@ class Reservations
         while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
         {
             $reservations[$i]["id_reservation"] = $id_reservation;
-            $reservations[$i]["id_utilisateur"] = $id_utilisateur;
             $reservations[$i]["id_produit"] = $id_produit;
+            $reservations[$i]["nom"] = $nom;
+            $reservations[$i]["description"] = $description;
             $reservations[$i]["date_debut"] = $date_debut;
             $reservations[$i]["date_fin"] = $date_fin;
-            $reservations[$i]["nombre_de_semaine"] = $nombre_de_semaine;
+            $reservations[$i]["numero_semaine"] = $numero_semaine;
             $reservations[$i]["nom_carte"] = $nom_carte;
             $reservations[$i]["numero_carte"] = $numero_carte;
             $reservations[$i]["id_carte"] = $id_carte;
@@ -291,6 +226,77 @@ class Reservations
         return $reservations;
     }
 
+
+    // function SQL qui permet de récupérer les réservations
+    public function extraireLesReservations()
+    {
+        $reservations = array();
+
+        $id = $this->connexionBD;
+        $requete = $id->prepare("SELECT RE.id_reservation,
+                                        RE.id_utilisateur,
+                                        RE.id_produit,
+                                        PR.nom,
+                                        PR.description, 
+                                        RE.date_debut,
+                                        RE.date_fin,
+                                        RE.numero_semaine,
+                                        RE.nom_carte,
+                                        RE.numero_carte,
+                                        RE.id_carte,
+                                        RE.prix_a_la_reservation
+                                  FROM reservations RE, produits PR
+                                  WHERE PR.id_produit = RE.id_produit");
+
+        if (!$requete) 
+        {
+            throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
+        }
+
+        $result = $requete->execute();
+
+        if (!$result) 
+        {
+            throw new Exception("Erreur d'extraction sur la table reservations " . $id->errorCode());
+        }
+        
+        $requete->bindColumn('id_reservation',$id_reservation);
+        $requete->bindColumn('id_utilisateur',$id_utilisateur);
+        $requete->bindColumn('id_produit',$id_produit);
+        $requete->bindColumn('nom',$nom);
+        $requete->bindColumn('description',$description);
+        $requete->bindColumn('date_debut',$date_debut);
+        $requete->bindColumn('date_fin',$date_fin);
+        $requete->bindColumn('numero_semaine',$numero_semaine);
+        $requete->bindColumn('nom_carte',$nom_carte);
+        $requete->bindColumn('numero_carte',$numero_carte);
+        $requete->bindColumn('id_carte',$id_carte);
+        $requete->bindColumn('prix_a_la_reservation',$prix_a_la_reservation);
+
+        $i = 0;
+        while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
+        {
+            $reservations[$i]["id_reservation"] = $id_reservation;
+            $reservations[$i]["id_utilisateur"] = $id_utilisateur;
+            $reservations[$i]["id_produit"] = $id_produit;
+            $reservations[$i]["nom"] = $nom;
+            $reservations[$i]["description"] = $description;
+            $reservations[$i]["date_debut"] = $date_debut;
+            $reservations[$i]["date_fin"] = $date_fin;
+            $reservations[$i]["numero_semaine"] = $numero_semaine;
+            $reservations[$i]["nom_carte"] = $nom_carte;
+            $reservations[$i]["numero_carte"] = $numero_carte;
+            $reservations[$i]["id_carte"] = $id_carte;
+            $reservations[$i]["prix_a_la_reservation"] = $prix_a_la_reservation;
+            $i++;
+        }
+
+        $requete->closeCursor();
+        $id = null;
+
+        return $reservations;
+    }
+    
     // function SQL qui permet de traiter une commande provenant du panier
     public function creerUneReservation($id_utilisateur,$id_produit,$date_debut,$date_fin,$nombre_de_semaine,$prix_a_la_reservation)
     {

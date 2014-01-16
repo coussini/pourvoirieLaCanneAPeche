@@ -208,6 +208,29 @@ class VueReservations
 
     public static function formulaire_historique($reservations)
     {
+
+        $form = '';
+        $form .= '<div class="container main">';
+        $form .= '<div class="row">';
+        $form .= '<div class="col-lg-12">';
+        $form .= '<h1>Historique de vos réservation</h1>';
+        $form .= '<h2>Détail sur vos réservation</h2>';
+
+        for ($i = 0; $i < count($reservations); $i++) 
+        {        
+            $form .= '<h4>' . $reservations[$i]["nom"] . ' du ' . $reservations[$i]["date_debut"] . ' au ' . $reservations[$i]["date_fin"] . '</h4>';
+            $form .= '<h4>Coût total de la réservation ' . $reservations[$i]["prix_a_la_reservation"] . '$</h4>';
+            $form .= '<p>' . $reservations[$i]["description"] . '</p>';
+            $form .= '<br/><br/>';
+        }
+
+        $form .= '<button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteConnexion("profil.html")">REVENIR AU PROFIL</button>';
+        $form .= '</div><!--  fin  col-lg-12 -->';
+        $form .= '</div><!-- /.row -->';
+        $form .= '</div> <!-- /.container -->';
+        echo $form;
+
+        /*
         $form = '';
         $form .= '<form id="formulaire_historique">';
         $form .= '<h2>formulaire_historique</h2>';
@@ -215,15 +238,14 @@ class VueReservations
         for ($i = 0; $i < count($reservations); $i++) 
         {
             $form .= '<p> id_reservation: ' . $reservations[$i]["id_reservation"] . '</p>';
-            $form .= '<p> id_utilisateur: ' . $reservations[$i]["id_utilisateur"] . '</p>';
             $form .= '<p> id_produit: ' . $reservations[$i]["id_produit"] . '</p>';
             $form .= '<p> date_debut: ' . $reservations[$i]["date_debut"] . '</p>';
             $form .= '<p> date_fin: ' . $reservations[$i]["date_fin"] . '</p>';
             $form .= '<p> numero_semaine: ' . $reservations[$i]["numero_semaine"] . '</p>';
-            $form .= '<p> nom_carte: ' . $nom_carte[$i]["nom_carte"] . '</p>';
-            $form .= '<p> numero_carte: ' . $numero_carte[$i]["numero_carte"] . '</p>';
-            $form .= '<p> id_carte: ' . $id_carte[$i]["id_carte"] . '</p>';
-            $form .= '<p> prix_a_la_reservation: ' . $prix_a_la_reservation[$i]["prix_a_la_reservation"] . '</p>';
+            $form .= '<p> nom_carte: ' . $reservations[$i]["nom_carte"] . '</p>';
+            $form .= '<p> numero_carte: ' . $reservations[$i]["numero_carte"] . '</p>';
+            $form .= '<p> id_carte: ' . $reservations[$i]["id_carte"] . '</p>';
+            $form .= '<p> prix_a_la_reservation: ' . $reservations[$i]["prix_a_la_reservation"] . '</p>';
 
         }
 
@@ -232,13 +254,58 @@ class VueReservations
         $form .= '</div>';
         $form .= '</form>';
         echo $form;
+        */
     }
 
-    // function qui retourne le formulaire "passer une commande" à panier.html dans le cas d'une réussite
-    public static function formulaire_extraireUneReservation($reservations)
+    public static function formulaire_reservations($reservations)
     {
+
         $form = '';
+        $form .= '<div class="container main">';
+        $form .= '<div class="row">';
+        $form .= '<div class="col-lg-12">';
+        $form .= '<h1>Détail sur toutes les réservation</h1>';
+
+        for ($i = 0; $i < count($reservations); $i++) 
+        {        
+            $form .= '<h2>Client: ' . $reservations[$i]["id_utilisateur"] . '</h2>';
+            $form .= '<h4>' . $reservations[$i]["nom"] . ' du ' . $reservations[$i]["date_debut"] . ' au ' . $reservations[$i]["date_fin"] . '</h4>';
+            $form .= '<h4>Coût total de la réservation ' . $reservations[$i]["prix_a_la_reservation"] . '$</h4>';
+            $form .= '<p>' . $reservations[$i]["description"] . '</p>';
+            $form .= '<br/><br/>';
+        }
+
+        $form .= '<button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteConnexion("profil.html")">REVENIR AU PROFIL</button>';
+        $form .= '</div><!--  fin  col-lg-12 -->';
+        $form .= '</div><!-- /.row -->';
+        $form .= '</div> <!-- /.container -->';
         echo $form;
+
+        /*
+        $form = '';
+        $form .= '<form id="formulaire_reservations">';
+        $form .= '<h2>formulaire_reservations</h2>';
+
+        for ($i = 0; $i < count($reservations); $i++) 
+        {
+            $form .= '<p> id_reservation: ' . $reservations[$i]["id_reservation"] . '</p>';
+            $form .= '<p> id_produit: ' . $reservations[$i]["id_produit"] . '</p>';
+            $form .= '<p> date_debut: ' . $reservations[$i]["date_debut"] . '</p>';
+            $form .= '<p> date_fin: ' . $reservations[$i]["date_fin"] . '</p>';
+            $form .= '<p> numero_semaine: ' . $reservations[$i]["numero_semaine"] . '</p>';
+            $form .= '<p> nom_carte: ' . $reservations[$i]["nom_carte"] . '</p>';
+            $form .= '<p> numero_carte: ' . $reservations[$i]["numero_carte"] . '</p>';
+            $form .= '<p> id_carte: ' . $reservations[$i]["id_carte"] . '</p>';
+            $form .= '<p> prix_a_la_reservation: ' . $reservations[$i]["prix_a_la_reservation"] . '</p>';
+
+        }
+
+        $form .= '<div class="erreur">';
+        $form .= '<p>' . $_GET["erreur"] . '</p>';
+        $form .= '</div>';
+        $form .= '</form>';
+        echo $form;
+        */
     }
 
     // function qui retourne le formulaire "visualiser une Commande" à panier.html

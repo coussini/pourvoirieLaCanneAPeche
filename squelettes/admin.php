@@ -20,6 +20,7 @@
     <link href="./css/stylesheet.css" rel="stylesheet">
     <link href="./css/bouton.css" rel="stylesheet">
     <link href="../css/custom-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+    <link href="./css/chalet.css" rel="stylesheet">
 
     <!-- NOS JS -->
     <script src="./js/vendor/jquery-1.10.1.min.js"></script>
@@ -47,51 +48,15 @@
             </ul>
         </div>
       </div>
-      <div class="container main">
-        <div class="row">
-    <!-- DÉBUT CONTENU DE LA PAGE -->
-
-
-<h1>Bienvenue dans la page d'administration</h1>
-La demande de tourisme accessible au Québec, dans sa large conception du tourisme pour tous, 
-est en pleine expansion. Plus de 800 000 personnes vivent avec une incapacits physique et cette 
-clientèle est en croissance, en raison du vieillissement de la population.
-
-Le Québec a beau être grand, il n’y a aucune raison pour limiter les déplacements des voyageurs 
-à mobilité réduite et les priver des splendides atouts naturels et culturels dont regorgent les 
-diverses régions de la province!La pourvoirie La Canne à Pêche offre un expériencee 
-100% accessible: Des chalets adaptés, ses circuits de randonnées accessibles en 
-fauteuil roulant, équipements adaptés et personnel formé.
-La demande de tourisme accessible au Québec, dans sa large conception du tourisme pour tous, 
-est en pleine expansion. Plus de 800 000 personnes vivent avec une incapacits physique et cette 
-clientèle est en croissance, en raison du vieillissement de la population.
-
-Le Québec a beau être grand, il n’y a aucune raison pour limiter les déplacements des voyageurs 
-à mobilité réduite et les priver des splendides atouts naturels et culturels dont regorgent les 
-diverses régions de la province!La pourvoirie La Canne à Pêche offre un expériencee 
-100% accessible: Des chalets adaptés, ses circuits de randonnées accessibles en 
-fauteuil roulant, équipements adaptés et personnel formé.
-
-
-
-
-
-
-    <!-- FIN CONTENU DE LA PAGE -->     
-      </div><!-- /.row -->
-    </div> <!-- /.container -->
-<!--      
+      
+ <!---------------------------- -->
+      <?php Controleur::gererRequetes(""); ?>
+    <!---------------------------- -->
+      <!-- PIED DE PAGE -->
     <div id="footer">
       <div class="container">
         <p class="text-muted">&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
       </div>
-    </div> -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src=".../js/vendor/jquery-1.10.1.min.js"></script>
-    <script src=".../js/vendor/bootstrap.min.js"></script>
+    </div>
   </body>
 </html>
