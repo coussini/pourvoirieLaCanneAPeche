@@ -32,7 +32,7 @@ class Controleur
         {
             $oStatiques = new Statiques();
 
-            $contenuStatique = $oStatiques->getContenuStatique(urldecode($_GET['nom']));
+            $contenuStatique = $oStatiques->getContenuStatique(urldecode($_GET["nomContenu"]));
      
             VueStatiques::afficherContenuStatique($contenuStatique);
         }
