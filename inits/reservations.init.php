@@ -29,9 +29,4 @@ if (empty($_GET["nombre_de_semaine"]))
 {
     $_GET["nombre_de_semaine"] = '';
 }
-
-if (empty($_GET["prix_a_la_reservation"]))
-{
-    $_GET["prix_a_la_reservation"] = '';
-}
 ?>

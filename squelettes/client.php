@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Site internet sur la pourvoirie de la canne à pêche">
     <meta name="author" content="Flora Kasyan, Michel Van Hoye, Mathieu De Grandpré et Louis Cyr">
-    <title>La canne &agrave; p&ecirc;che accueil</title>
+    <title>La cannne &agrave; p&ecirc;che accueil</title>
     <link rel="shortcut icon" href="./images/favicon.jpg">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -16,11 +16,10 @@
     <![endif]-->
 
     <!-- NOS CSS -->
-    <link href="./css/chalet.css" rel="stylesheet">
-    <link href="./css/bootstrap.css" rel="stylesheet">
-    <link href="./css/stylesheet.css" rel="stylesheet">
     <link href="./css/bouton.css" rel="stylesheet">
+    <link href="./css/bootstrap.css" rel="stylesheet">
     <link href="./css/custom-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+    <link href="./css/stylesheet.css" rel="stylesheet">
 
     <!-- NOS JS -->
     <script src="./js/vendor/jquery-1.10.1.min.js"></script>
@@ -32,11 +31,11 @@
 
     <!-- TRAITEMENT SPÉCIFIQUE POUR LA RÉSERVATION -->    
     <?php
-      if ($_GET['requete'] == 'reserver.html')
+      if ($_GET['requete'] == 'reserver_html')
       {
     ?>
-        <script src=".js/calendrierReservation.js"></script>
-        <script src=".js/traitementCalendrierReservation.js"></script>
+        <script src="js/calendrierReservation.js"></script>
+        <script src="js/traitementCalendrierReservation.js"></script>
     <?php
       }    
     ?>
@@ -46,21 +45,32 @@
   <body>
     <div id="wrap">
       <!-- Début du menu de navigation -->
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <ul class="nav navbar-nav ">
-              <li><a href="./index.html"><img src="./images/logo.png" alt="logo" class="img-responsive hidden-xs"></a></li>
-              <li class="active"><a href="./index.html"><img src="./images/accueil.png" alt="image accueil" class="img-responsive hidden-xs"><span class="titresMenu">ACCUEIL</span></a></li>
-              <li><a href="./html/chalets.html"><img src="./images/chalets.png" alt="image chalets" class="img-responsive hidden-xs"><span class="titresMenu">NOS CHALETS</span></a></li>
-              <li><a href="./html/infos.html"><img src="./images/info.png" alt="image infos" class="img-responsive hidden-xs"><span class="titresMenu">INFORMATIONS</span></a></li>
-              <li><a href="./html/contact.html"><img src="./images/contact.png" alt="image contact" class="img-responsive hidden-xs"><span class="titresMenu">CONTACT</span></a></li>
-              <li><img src="./images/connexion.png" alt="cadenas" class="img-responsive hidden-xs">
-                  <a href="./html/profil.html"><span class="titresLogin">PROFIL</span>
-                  <a href="./html/login.html"><span class="titresLogin">CONNEXION</span></a>
-                  <a href="#"><span class="titresLogin">DÉCONNEXION</span></a>
-              </li>
-            </ul>
+      <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a href="./index.html"><img src="./images/logo.png" alt="logo" class="img-responsive hidden-xs"></a>
+          </div>
+          <ul class="nav navbar-nav ">
+          <li class="active"><a href="./index.html"><img src="./images/accueil.png" alt="image accueil" class="img-responsive hidden-xs"><span class="titresMenu">ACCUEIL</span></a></li>
+          <li><a href="./html/chalets.html"><img src="./images/chalets.png" alt="image chalets" class="img-responsive hidden-xs"><span class="titresMenu">NOS CHALETS</span></a></li>
+          <li><a href="./html/infos.html"><img src="./images/info.png" alt="image infos" class="img-responsive hidden-xs"><span class="titresMenu">INFORMATIONS</span></a></li>
+          <li><a href="./html/contact.html"><img src="./images/contact.png" alt="image contact" class="img-responsive hidden-xs"><span class="titresMenu">CONTACT</span></a></li>
+          <li><img src="./images/connexion.png" alt="cadenas" class="img-responsive hidden-xs">
+          <a href="./html/profil.html"><span class="titresLogin">PROFIL</span>
+          <a href="./html/login.html"><span class="titresLogin">CONNEXION</span></a>
+          <a href="#"><span class="titresLogin">DÉCONNEXION</span></a>
+          </li>
+          </ul>
         </div>
       </div>
+    </div>
       
  <!---------------------------- -->
       <?php Controleur::gererRequetes(""); ?>

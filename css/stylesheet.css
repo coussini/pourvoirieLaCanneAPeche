@@ -25,6 +25,11 @@
   font-size: 16px;
 }
 
+.nav > li > a {
+  width: 150px;
+
+}
+
 .navbar-default .navbar-nav > li > a:hover {
   color: #FFFFFF; 
   text-decoration: underline;
@@ -39,29 +44,28 @@
 
 .titresMenu {
   position:relative;
-  top:-50px;
+  top:-35px;
   z-index:1000;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .titresLogin {
   position:relative;
-  top:-70px;
+  top: -70px;
   z-index:1000;
   font-size: 14px;
 }
 
 .navbar-default .navbar-nav .active a{
   background-color:#304716;
-  height: 154px;
   color: #FFFFFF;
+  height: 154px;
 }
 
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
   background-color:#304716;
-  height: 154px;
   color: #FFFFFF;
 }
 
@@ -79,10 +83,12 @@
   top:0px;
 }
 
+
 .titresLogin {
   font-size: 14px;
   line-height: 40px;
   top:0px;
+  width: auto;
 }
 
  .navbar-fixed-top {
@@ -99,6 +105,11 @@
   height: auto;
   background-color: #809060;
 }
+
+.nav > li > a {
+  width: auto;
+}
+
 
 }
 

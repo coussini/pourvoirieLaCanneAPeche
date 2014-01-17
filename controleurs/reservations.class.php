@@ -12,11 +12,11 @@ class Controleur
 
         if ($requeteAJAX == "")
         {
-            $requete = $_GET['requete'];
+            $requete = $_GET["requete"];
         }
         else
         {
-            $requete = $_GET['requeteAJAX'];
+            $requete = $_GET["requeteAJAX"];
         }
 
         switch ($requete) 
@@ -24,16 +24,16 @@ class Controleur
             case 'req_chercher_dates_reservees':
                 self::req_chercher_dates_reservees();
                 break;        
-            case 'reserver.html':
+            case 'reserver_html':
                 self::req_reserver();
                 break;        
-            case 'confirmation.html':
+            case 'confirmation_html':
                 self::req_confirmation();
                 break;        
-            case 'historique.html':
+            case 'historique_html':
                 self::req_historique();
                 break;        
-            case 'reservations.html':
+            case 'reservations_html':
                 self::req_reservations();
                 break;        
             case 'req_creerUneReservation':
@@ -52,12 +52,12 @@ class Controleur
         {
 
             $oReservations = new Reservations();
-            $reservations = $oReservations->extraireLesReservationPourCeProduit(1);
+            $reservations = $oReservations->extraireLesReservationPourCeProduit($_GET["id_produit"]);
             VueReservations::formulaire_chercher_dates_reservees($reservations);
         }
         catch(Exception $e)
         {
-            $_GET['erreur']  = $e->getMessage();
+            $_GET["erreur"]  = $e->getMessage();
             VueReservations::formulaire_erreur();
         }
     }
@@ -73,7 +73,7 @@ class Controleur
         }
         catch(Exception $e)
         {
-            $_GET['erreur']  = $e->getMessage();
+            $_GET["erreur"]  = $e->getMessage();
             VueReservations::formulaire_erreur();
         }
     }
@@ -90,7 +90,7 @@ class Controleur
         }
         catch(Exception $e)
         {
-            $_GET['erreur']  = $e->getMessage();
+            $_GET["erreur"]  = $e->getMessage();
             VueReservations::formulaire_erreur();
         }
     }
@@ -106,7 +106,7 @@ class Controleur
         }
         catch(Exception $e)
         {
-            $_GET['erreur']  = $e->getMessage();
+            $_GET["erreur"]  = $e->getMessage();
             VueReservations::formulaire_erreur();
         }
     }
@@ -122,7 +122,7 @@ class Controleur
         }
         catch(Exception $e)
         {
-            $_GET['erreur']  = $e->getMessage();
+            $_GET["erreur"]  = $e->getMessage();
             VueReservations::formulaire_erreur();
         }
     }
@@ -138,7 +138,7 @@ class Controleur
         }
         catch(Exception $e)
         {
-            $_GET['erreur']  = $e->getMessage();
+            $_GET["erreur"]  = $e->getMessage();
             VueReservations::formulaire_erreur();
         }
     }    

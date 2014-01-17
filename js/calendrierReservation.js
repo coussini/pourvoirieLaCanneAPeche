@@ -106,7 +106,8 @@ var CalendrierReservation = (function(win,doc,$)
 
                     for (var i = 0; i < dates.length; i++) 
                     {
-                        var dateFiltre = new Date(dates[i]);
+                        dateSepare=dates[i].split('-'); 
+                        var dateFiltre=new Date(dateSepare[0],dateSepare[1]-1,dateSepare[2]);
                         CalendrierReservation.elimineUneSemaineSelonLaDate(dateFiltre);
                         CalendrierReservation.preparerLeCalendrier();
                     }
