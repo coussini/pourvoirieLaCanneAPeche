@@ -56,5 +56,6 @@
         <p class="text-muted">&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
       </div>
     </div>
+    <script src="./js/jqueryStatique.js"></script>
   </body>
 </html>
