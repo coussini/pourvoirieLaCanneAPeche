@@ -17,7 +17,7 @@
 
     <!-- NOS CSS -->
     <link href="./css/bootstrap.css" rel="stylesheet">
-    <link href="../css/custom-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+    <link href="./css/custom-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet">
 
     <!-- NOS JS -->
@@ -26,7 +26,7 @@
     <script src="./js/jquery-ui-1.10.3.custom.js"></script>
     <script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script src="./js/vendor/bootstrap.min.js"></script>
-    <script type="text/JavaScript" language="JavaScript" src="js/javascript.js"></script> 
+    <script src="./js/javascript.js" type="text/JavaScript" ></script> 
 
     <!-- TRAITEMENT SPÉCIFIQUE POUR LA RÉSERVATION -->    
     <?php
