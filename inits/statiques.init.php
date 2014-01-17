@@ -11,6 +11,11 @@ if (empty($_POST["contenuStatique"]))
     $_POST["contenuStatique"] = '';
 }
 
+if (empty($_GET["nom"]))
+{
+    $_POST["nom"] = '';
+}
+
 if (empty($_GET["contenu"]))
 {
     $_GET["contenu"] = '';

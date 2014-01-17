@@ -80,7 +80,7 @@ require_once("./controleurs/statiques.class.php"); // CONTROLEUR DE TEST POUR LE
 
 $_GET["requetePage"] = "client";
 $_GET['requete'] = 'chercherContenuStatique'; 
-$_POST['nom'] = 'À propos'; 
+$_GET['nom'] = 'À propos'; 
 
 require_once("./squelettes/client.php");
 
