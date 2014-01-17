@@ -7,9 +7,20 @@ class VueStatiques
     {
         $form = '<div class="container main">';
         $form .= '<div class="row">';
-  
-        $form .= '<div>' . $contenuStatique['contenu'] . '</div>';
+        $form .= '<div><h3>' . $contenuStatique['nom'] . '</h3></div>';
+        $form .= '<div>' . $contenuStatique['contenu'] . '</div><br/>';
        
+        $form .= '</div><!-- /.row -->';
+        $form .= '</div> <!-- /.container -->';
+        echo $form;
+    }
+
+   // Afficher l'API Google Map   
+    public static function afficherMap()
+    {
+        $form = '<div class="container main">';
+        $form .= '<div class="row">';
+        $form .= '<div id="map-canvas"></div>';
         $form .= '</div><!-- /.row -->';
         $form .= '</div> <!-- /.container -->';
         echo $form;
@@ -22,7 +33,7 @@ class VueStatiques
         $form .= '<div class="row">';
         $form .= '<h3>Modification du contenu</h3>';
         $form .= '<fieldset>';
-        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] .'?formulaireModifierStatique" method="post">';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] .'?requete=elements_statique_html" method="post">';
         $form .= '<div class="form-group">'; 
         $form .= '<select id="selectNomContenu" name="nom">';
         $form .= '<option>-- Sélectionner un contenu à modifier --</option>';

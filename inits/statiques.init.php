@@ -11,17 +11,5 @@ if (empty($_POST["contenuStatique"]))
     $_POST["contenuStatique"] = '';
 }
 
-if (empty($_GET["nomContenu"]))
-{
-    $_GET["nomContenu"] = '';
-}
-
-if (empty($_GET["contenu"]))
-{
-    $_GET["contenu"] = '';
-}
-
-
-// ETC...
 
 ?>

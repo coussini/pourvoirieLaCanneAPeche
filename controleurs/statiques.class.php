@@ -7,12 +7,21 @@ class Controleur
     {
         switch ($_GET['requete']) 
         {
-            case 'chercherContenuStatique':
-                self::req_chercherContenuStatique();
+            // Pages statiques section client:
+            case 'accueil_html':
+                self::req_accueil();
                 break; 
-            case 'formulaireModifierStatique':
-                self::req_formulaireModifierStatique();
+            case 'informations_html':
+                self::req_informations();
                 break; 
+            case 'contact_html':
+                self::req_contact();
+                break;
+            // Page statique section admin:
+            case 'elements_statique_html':
+                self::req_elements_statique();
+                break; 
+            // Fonctions section admin
             case 'modifierContenuStatique':
                 self::req_modifierContenuStatique();
                 break;
@@ -20,19 +29,18 @@ class Controleur
                 self::req_creerContenuStatique();
                 break;
             default:
-                self::req_formulaireModifierStatique(); // Premier affichage
                 break; 
         }
     }
 
-    // Générer le contenu statique  
-    private static function req_chercherContenuStatique()
+    // Générer accueil.html
+    private static function req_accueil()
     {
         try
         {
             $oStatiques = new Statiques();
 
-            $contenuStatique = $oStatiques->getContenuStatique(urldecode($_GET["nomContenu"]));
+            $contenuStatique = $oStatiques->getContenuStatique('À propos');
      
             VueStatiques::afficherContenuStatique($contenuStatique);
         }
@@ -43,8 +51,63 @@ class Controleur
         }
     }
 
+    // Générer informations.html  
+    private static function req_informations()
+    {
+        try
+        {
+            $oStatiques = new Statiques();
+
+            $contenuStatique = $oStatiques->getContenuStatique('Informations');
+     
+            VueStatiques::afficherContenuStatique($contenuStatique);
+
+            $contenuStatique = $oStatiques->getContenuStatique('Activités');
+     
+            VueStatiques::afficherContenuStatique($contenuStatique);
+
+            $contenuStatique = $oStatiques->getContenuStatique('Pêche');
+     
+            VueStatiques::afficherContenuStatique($contenuStatique);
+
+            $contenuStatique = $oStatiques->getContenuStatique('Politique qualité');
+     
+            VueStatiques::afficherContenuStatique($contenuStatique);
+
+            $contenuStatique = $oStatiques->getContenuStatique('Politique environnementale');
+     
+            VueStatiques::afficherContenuStatique($contenuStatique);
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            VueStatiques::formulaire_erreur();
+        }
+    }
+
+    // Générer contact.html  
+    private static function req_contact()
+    {
+        try
+        {
+            $oStatiques = new Statiques();
+
+            $contenuStatique = $oStatiques->getContenuStatique('Contact');
+     
+            VueStatiques::afficherContenuStatique($contenuStatique);
+
+            VueStatiques::afficherMap();
+
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            VueStatiques::formulaire_erreur();
+        }
+    }
+
     // Générer le formulaire de modification du contenu statique 
-    private static function req_formulaireModifierStatique()
+    private static function req_elements_statique()
     {
         try
         {
@@ -91,7 +154,7 @@ class Controleur
             //$nomsStatique = $oStatiques->updateContenuStatique($idStatique,$_POST['contenuStatique']);  // Modifier contenu statique
             $oStatiques->updateContenuStatique($idStatique,$_POST['contenuStatique']);  // Modifier contenu statique
 
-            self::req_formulaireModifierStatique();
+            self::req_elements_statique();
             
         }
         catch(Exception $e)
@@ -127,7 +190,7 @@ class Controleur
             //$idStatique = $oStatiques->getidStatiqueByName($_POST['nom']); // Récupérer l'id d'un contenu par son nom
             //$nomsStatique = $oStatiques->updateContenuStatique($idStatique,$_POST['contenuStatique']);  // Modifier contenu statique
             $oStatiques->setContenuStatique('actif',$_POST['nom'],$_POST['contenu']);
-            self::req_formulaireModifierStatique();
+            self::req_elements_statique();
             
         }
         catch(Exception $e)
