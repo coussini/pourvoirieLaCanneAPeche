@@ -2,6 +2,19 @@
 
 class VueStatiques
 {
+   // Afficher le contenu statique   
+    public static function afficherContenuStatique($contenuStatique)
+    {
+        $form = '<div class="container main">';
+        $form .= '<div class="row">';
+  
+        $form .= '<div>' . $contenuStatique . '</div>';
+       
+        $form .= '</div><!-- /.row -->';
+        $form .= '</div> <!-- /.container -->';
+        echo $form;
+    }
+
    // Afficher le formulaire de sélection du contenu statique   
     public static function formulaire_SelectionStatique($nomsStatique)
     {

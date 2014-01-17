@@ -7,6 +7,9 @@ class Controleur
     {
         switch ($_GET['requete']) 
         {
+            case 'chercherContenuStatique':
+                self::req_chercherContenuStatique();
+                break; 
             case 'formulaireModifierStatique':
                 self::req_formulaireModifierStatique();
                 break; 
@@ -22,7 +25,25 @@ class Controleur
         }
     }
 
-    // Générer le formulaire   
+    // Générer le contenu statique  
+    private static function req_chercherContenuStatique()
+    {
+        try
+        {
+            $oStatiques = new Statiques();
+
+            $contenuStatique = $oStatiques->getContenuStatique($_POST['nom']);
+     
+            VueStatiques::afficherContenuStatique($contenuStatique);
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            VueStatiques::formulaire_erreur();
+        }
+    }
+
+    // Générer le formulaire de modification du contenu statique 
     private static function req_formulaireModifierStatique()
     {
         try
@@ -80,7 +101,7 @@ class Controleur
         }
     }
 
-    // Créer le formulaire de création du contenu statique   
+    // Générer le formulaire de création du contenu statique   
     private static function req_formulaireCreerStatique()
     {
         try

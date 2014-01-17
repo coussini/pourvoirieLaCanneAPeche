@@ -78,7 +78,8 @@ require_once("./controleurs/statiques.class.php"); // CONTROLEUR DE TEST POUR LE
 /* SQUELETTES DES PAGES */
 /************************/
 
-require_once("./squelettes/admin.php");
+//require_once("./squelettes/admin.php");
+require_once("./squelettes/client.php");
 
 
 /*if ($_GET["requetePage"] = "client")
