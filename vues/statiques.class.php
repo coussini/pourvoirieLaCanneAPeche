@@ -3,7 +3,7 @@
 class VueStatiques
 {
    // Afficher le formulaire de sélection du contenu statique   
-    public static function formulaire_SelectionStatique($nomsStatique,$nomSelectionne)
+    public static function formulaire_SelectionStatique($nomsStatique)
     {
         $form = '<div class="container main">';
         $form .= '<div class="row">';
@@ -16,7 +16,8 @@ class VueStatiques
         foreach ($nomsStatique as $value)
         {
             $form .= '<option value="' . $value . '">' . $value . '</option>';
-        }
+        };
+        $form .= '<option value="nouveauContenu">-- Créer un nouveau contenu --</option>';
         $form .= '</select>';
         $form .= '</div>';
         $form .= '</form>';
@@ -35,11 +36,38 @@ class VueStatiques
         $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] .'?requete=modifierContenuStatique" method="post">';
         $form .= '<div class="form-group">';
         $form .= '<label for="contenu" class="control-label">Modifications de: ' . $nomsStatique . '</label>';
-        $form .= '<textarea id="contenu" class="form-control" name="contenuStatique" rows="15">';
+        $form .= '<textarea id="contenu" class="form-control " name="contenuStatique">';
         $form .= $contenuStatique['contenu'];
         $form .= '</textarea></div>';
         $form .= '<input type="hidden" name="nom" value="' . $nomsStatique . '">';
         $form .= '<button id="" class="btn btn-custom-gris btn-lg" type="submit">Enregister les modifications</button><br/><br/>';
+        $form .= '</div>';
+        $form .= '</form>';
+        $form .= '</fieldset>';
+        $form .= '<div class="erreur">';
+        $form .= '<p>' . $_GET["erreur"] . '</p>';
+        $form .= '</div>';
+        $form .= '</div><!-- /.row -->';
+        $form .= '</div> <!-- /.container -->';
+        echo $form;
+    }
+
+    // Afficher le formulaire de modification du contenu statique   
+    public static function formulaire_formulaireCreerStatique()
+    {
+     //   $form = '<div class="container main">';
+     //   $form .= '<div class="row">';
+        $form = '<fieldset>';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] .'?requete=creerContenuStatique" method="post">';
+        $form .= '<div class="form-group">';
+        $form .= '<label for="contenu" class="control-label">Nom du contenu: </label>';
+        $form .= '<input type="text" class="form-control" name="nom" rows="15">';
+        $form .= '</textarea></div>';
+        $form .= '<div class="form-group">';
+        $form .= '<label for="contenu" class="control-label">Texte du contenu: </label>';
+        $form .= '<textarea id="contenu" class="form-control" name="contenu" size="55">';
+        $form .= '</textarea></div>';
+        $form .= '<button id="" class="btn btn-custom-gris btn-lg" type="submit">Enregister le contenu</button><br/><br/>';
         $form .= '</div>';
         $form .= '</form>';
         $form .= '</fieldset>';
