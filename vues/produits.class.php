@@ -24,7 +24,6 @@ class VueProduits
             $form .= '<p> description: ' . $produits[$i]["description"] . '</p>';
             $form .= '<p> nombre_de_chambre: ' . $produits[$i]["nombre_de_chambre"] . '</p>';
             $form .= '<p> nombre_de_salle_de_bain: ' . $produits[$i]["nombre_de_salle_de_bain"] . '</p>';
-            $form .= '<p> prix_par_jour: ' . $produits[$i]["prix_par_jour"] . '</p>';
             $form .= '<p> prix_par_semaine: ' . $produits[$i]["prix_par_semaine"] . '</p>';
         }
 
@@ -46,7 +45,7 @@ class VueProduits
         $form .= '<div class="col-lg-12">';
         $form .= '<img src="./images/carte2.jpg" alt="carte" border="0" usemap="#emplacement">';
         $form .= '<map name="emplacement">';
-        $form .= '<area shape="rect" data-toggle="modal" data-target="#chaletModal" coords="268,334,309,375" href="#">';
+        $form .= '<area shape="rect" value="'.$produits["id_produit"].'" coords="268,334,309,375" href="../afficher-chalet.html">';
         $form .= '</map>';
         $form .= '</div>';
         $form .= '</div>';
@@ -58,7 +57,7 @@ class VueProduits
 
     }
         public static function formulaire_selectionChalet($produits)
-        {
+    {
 
         $form = '';
         $form .= '<div class="container-main">';
@@ -68,7 +67,6 @@ class VueProduits
         $form .= '<img src="./images/chalet1.jpg" alt="chalet-accueil" class="img-thumbnail">';
         $form .= '<p>Magnifique chalet possédant une grande et large galerie, avec une vue magnifique sur le lac. La location du chalet peu se faire peu importe le mois durant l\'année. Construction de 2010</p>';
         $form .= '</div>';
-
         $form .= '<div class="col-lg-4">';
         $form .= '<h4><p class="img-thumbnail"> Options du chalet : </p></h4>';
         $form .= '<ul class="list-group">';
@@ -80,7 +78,6 @@ class VueProduits
         $form .= '<h4><p class="img-thumbnail"> Prix de location : </p></h4>';
         $form .= '<ul class="list-group">';
         $form .= '<li class="list-group-item"><span class="badge pull-right">899$</span>Par semaine:</li>';
-        $form .= '<li class="list-group-item"><span class="badge pull-right">150$</span>Par journée:</li>';
         $form .= '</ul>';
         $form .= '</div>';
         $form .= '</div>';
@@ -116,6 +113,77 @@ class VueProduits
 
         echo $form;
 
+    }
+
+//----------------------------------------------------------------------------------------------------------------------//
+    
+        public static function formulaire_editerChalet($produits)
+    {
+
+        $form .= '';
+        $form .= '<div class="container main">';
+        $form .= '<section class="contenu-centre">';  
+        $form .= '<div class="row">';  
+        $form .= '<div class="col-lg-4">';
+        $form .= '<h4><p class="img-thumbnail"> Le chalet 1 : </p></h4>';
+        $form .= '<img src="images/chalet1.jpg" alt="chalet-accueil" class="img-thumbnail">';    
+        $form .= '<ul class="pagination">';
+        $form .= '<li><a href="chalet1.html" id="chalet1">1</a></li>';
+        $form .= '<li><a href="chalet2.html" id="chalet2">2</a></li>';
+        $form .= '<li><a href="chalet3.html" id="chalet3">3</a></li>';
+        $form .= '<li><a href="#">4</a></li>';
+        $form .= '<li><a href="#">5</a></li>';
+        $form .= '<li><a href="#">6</a></li>';
+        $form .= '<li><a href="#">7</a></li>';
+        $form .= '<li><a href="#">8</a></li>';
+        $form .= '</ul>';
+        $form .= '<div class="form-group">';
+        $form .= '<label for="exampleInputFile">Modifier l\'image</label>';
+        $form .= '<input type="file" id="imageTelecharge">';
+        $form .= '</div>';
+        $form .= '<p>Description :<textarea rows="4" cols="50" id="description"></textarea></p>';
+        $form .= '</div>';
+        $form .= '<div class="col-lg-4">';
+        $form .= '<h4><p class="img-thumbnail">Options du chalet :</p></h4>';
+        $form .= '<div class="col-lg-12">';
+        $form .= '<ul class="list-group">';
+        $form .= '<li class="list-group-item"><label>Nombre de chambre :</label></li>';
+        $form .= '<li class="list-group-item"><label><input type="radio" name="chambre" checked = "checked" value="1"> 1 </label>';
+        $form .= '<label><input type="radio" name="chambre" value="2"> 2 </label>';
+        $form .= '<label><input type="radio" name="chambre" value="3"> 3 </label>';
+        $form .= '<label><input type="radio" name="chambre" value="4"> 4 </label>';
+        $form .= '<label><input type="radio" name="chambre" value="5"> 5 </label>';
+        $form .= '</li>';
+        $form .= '</ul>';
+        $form .= '<hr>';
+        $form .= '<ul class="list-group">';
+        $form .= '<li class="list-group-item"><label>Nombre de salle de bain :</label></li>';
+        $form .= '<li class="list-group-item"><label>';
+        $form .= '<input type="radio" checked = "checked" name="bain" value="1">1</label>';
+        $form .= '<label><input type="radio" name="bain" value="2">2</label>';
+        $form .= '</li>';
+        $form .= '</ul>';
+        $form .= '</div>';
+        $form .= '</div>';
+        $form .= '<div class="col-lg-3">';
+        $form .= '<h4><p class="img-thumbnail">Prix de location :</p></h4>';
+        $form .= '<ul class="list-group">';
+        $form .= '<li class="list-group-item"><label>Par semaine : <br><input type="text" id="prixLocation" value="000.00">$can</label></li>';
+        $form .= '</ul>';
+        $form .= '</div>';
+        $form .= '<div class="row">';
+        $form .= '<div class="col-lg-4 col-lg-offset-8">';
+        $form .= '<p><a class="btn btn-custom-gris btn-lg" href="#">Réinitialiser</a><a class="btn btn-custom-vert btn-lg" method="post" type="submit" href="#">Publier</a></p>';
+        $form .= '</div>';
+        $form .= '</div>';
+        $form .= '</div>';
+        $form .= '</section>';
+        $form .= '</div>';
+
+    echo $form;
+
+    }
+
 //----------------------------------------------------------------------------------------------------------------------//
 
             /*$form .= '<p> id_produit: ' . $produits[$i]["id_produit"] . '</p>';
@@ -139,10 +207,9 @@ class VueProduits
 		$form .= '</form>';
 		echo $form;
 		*/
-    }
-
 
 //----------------------------------------------------------------------------------------------------------------------------------//
+    
     public static function formulaire_modifierProduit($produits)
     {
 
@@ -153,13 +220,7 @@ class VueProduits
         for ($i = 0; $i < count($produits); $i++) 
         {
             
-
-            /*$form .= '<p>Le statut : <input type="text" name="nom" /></p>';
-            $form .= '<p>Image de la facade : <input type="file" name="facade" /></p>';
-            $form .= '<p>Image intérieur 1 : <input type="file" name="interieur1" /></p>';
-            $form .= '<p>Image intérieur 2 : <input type="file" name="interieur2" /></p>';
-            $form .= '<p>Image intérieur 3 : <input type="file" name="interieur3" /></p>';
-            /*$form .= '<p> statut: ' . $produits[$i]["statut"] . '</p>';
+            $form .= '<p> statut: ' . $produits[$i]["statut"] . '</p>';
             $form .= '<p> imageFacade: ' . $produits[$i]["imageFacade"] . '</p>';
             $form .= '<p> imageInterieur1: ' . $produits[$i]["imageInterieur1"] . '</p>';
             $form .= '<p> imageInterieur2: ' . $produits[$i]["imageInterieur2"] . '</p>';
@@ -169,8 +230,7 @@ class VueProduits
             $form .= '<p> description: ' . $produits[$i]["description"] . '</p>';
             $form .= '<p> nombre_de_chambre: ' . $produits[$i]["nombre_de_chambre"] . '</p>';
             $form .= '<p> nombre_de_salle_de_bain: ' . $produits[$i]["nombre_de_salle_de_bain"] . '</p>';
-            $form .= '<p> prix_par_jour: ' . $produits[$i]["prix_par_jour"] . '</p>';
-            $form .= '<p> prix_par_semaine: ' . $produits[$i]["prix_par_semaine"] . '</p>';*/
+            $form .= '<p> prix_par_semaine: ' . $produits[$i]["prix_par_semaine"] . '</p>';
         }
 
         $form .= '<div class="erreur">';
@@ -178,7 +238,7 @@ class VueProduits
         $form .= '</div>';
         $form .= '</form>';
         echo $form;
-        
+
     }
 
 //-----------------------------------------------------------------------------------------------------------------------------------//

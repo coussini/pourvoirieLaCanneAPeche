@@ -4,12 +4,6 @@ class Controleur
 {
     public static function gererRequetes()
     {
-		//$_GET['requete'] = 'req_selectTousProduits';
-		//$_GET['requete'] = 'req_selectUnProduit';
-		//$_GET['requete'] = 'req_creerUnProduit';
-        //$_GET['requete'] = 'req_modifierUnProduit';
-        $_GET['requete'] = 'req_selectionChalet';
-		
         switch ($_GET['requete']) 
         {
             case 'req_selectTousProduits':
@@ -27,6 +21,8 @@ class Controleur
             case 'req_selectionChalet':
                 self::req_selectionChalet();
                 break;
+            case 'req_editerChalet':
+                self::req_editerChalet();
             default:
                 // erreur
                 break;
@@ -73,13 +69,13 @@ class Controleur
 
 
 
-    // traitement extraire un produit
+    // traitement de séletion d'un chalet sur la carte
     private static function req_selectionChalet()
     {
         try
         {
             $oProduits = new Produits();
-            $Produits = $oProduits->selectUnProduit('1');
+            $Produits = $oProduits->selectUnProduit($_GET["id_produit"]);
             
             VueProduits::formulaire_selectionChalet($Produits);
         }
@@ -92,7 +88,26 @@ class Controleur
 
     }
 
+//----------------------------------------------------------------------------------------------------------//
 
+    // traitement d'édition d'un chalet
+    private static function req_editerChalet()
+    {
+        try
+        {
+            $oProduits = new Produits();
+            $Produits = $oProduits->selectUnProduit('1');
+            
+            VueProduits::formulaire_editerChalet($Produits);
+        }
+        
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            VueProduits::formulaire_erreur();
+        }
+
+    }
 
 //-------------------------------------------------------------------------------------------------------------------//
 
@@ -107,15 +122,16 @@ class Controleur
 			$_GET["imageFacade"],$_GET["imageInterieur1"],
 			$_GET["imageInterieur2"],$_GET["imageInterieur3"],$_GET["nom"],
 			$_GET["emplacement"],$_GET["description"],$_GET["nombre_de_chambre"],
-			$_GET["nombre_de_salle_de_bain"],$_GET["prix_par_jour"],$_GET["prix_par_semaine"]);
+			$_GET["nombre_de_salle_de_bain"],$_GET["prix_par_semaine"]);
             VueProduits::formulaire_creerUnProduit($resultat);
 
+            /*
             $resultat = $oProduits->creerUnProduit('actif',
             'facade','beau salon',
             'salle à manger','cuisine','Belle vue',
             'Chalet 1','Magnifique chalet rénové en 2010','2',
-            '1','125','799');
-            VueProduits::formulaire_creerUnProduit($resultat);
+            '1','799');
+            VueProduits::formulaire_creerUnProduit($resultat);*/
 
         }
 
@@ -147,7 +163,7 @@ class Controleur
             'facade','salon',
             'salle à manger','cuisine','Belle vue',
             'Chalet 1','Magnifique chalet rénové en 2010','2',
-            '1','125','799');
+            '1','799');
             VueProduits::formulaire_modifierUnProduit($resultat);
 
         }

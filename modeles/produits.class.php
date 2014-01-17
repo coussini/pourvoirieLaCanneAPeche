@@ -31,7 +31,6 @@ class Produits
     									description,
     									nombre_de_chambre,
     									nombre_de_salle_de_bain,
-    									prix_par_jour,
     									prix_par_semaine
                                  FROM produits");
         $requete->execute();
@@ -47,7 +46,6 @@ class Produits
         $requete->bindColumn('description',$description);
     	$requete->bindColumn('nombre_de_chambre',$nombre_de_chambre);
     	$requete->bindColumn('nombre_de_salle_de_bain',$nombre_de_salle_de_bain);
-    	$requete->bindColumn('prix_par_jour',$prix_par_jour);
     	$requete->bindColumn('prix_par_semaine',$prix_par_semaine);
     	
         $i = 0;
@@ -64,7 +62,6 @@ class Produits
     		$produits[$i]["description"] = $description;
     		$produits[$i]["nombre_de_chambre"] = $nombre_de_chambre;
     		$produits[$i]["nombre_de_salle_de_bain"] = $nombre_de_salle_de_bain;
-    		$produits[$i]["prix_par_jour"] = $prix_par_jour;
     		$produits[$i]["prix_par_semaine"] = $prix_par_semaine;
     		
             $i++;
@@ -95,7 +92,6 @@ class Produits
     									description,
     									nombre_de_chambre,
     									nombre_de_salle_de_bain,
-    									prix_par_jour,
     									prix_par_semaine
                                   FROM  produits
     							  WHERE id_produit = :id_produit");
@@ -115,7 +111,6 @@ class Produits
         $requete->bindColumn('description',$description);
     	$requete->bindColumn('nombre_de_chambre',$nombre_de_chambre);
     	$requete->bindColumn('nombre_de_salle_de_bain',$nombre_de_salle_de_bain);
-    	$requete->bindColumn('prix_par_jour',$prix_par_jour);
     	$requete->bindColumn('prix_par_semaine',$prix_par_semaine);
     	
         $i = 0;
@@ -132,7 +127,6 @@ class Produits
     		$produits[$i]["description"] = $description;
     		$produits[$i]["nombre_de_chambre"] = $nombre_de_chambre;
     		$produits[$i]["nombre_de_salle_de_bain"] = $nombre_de_salle_de_bain;
-    		$produits[$i]["prix_par_jour"] = $prix_par_jour;
     		$produits[$i]["prix_par_semaine"] = $prix_par_semaine;
     		
             $i++;
@@ -143,9 +137,79 @@ class Produits
 
         return $produits;
     }
+
+    //-------------------------------------------------------------------------------------------------------//
+
+        public function selectionChalet($id_produit)
+    {
+        $produits = array();
+        
+        $id = $this->connexionBD;
+
+        $requete = $id->prepare("SELECT id_produit,
+                                        statut,
+                                        imageFacade,
+                                        imageInterieur1,
+                                        imageInterieur2,
+                                        imageInterieur3,
+                                        nom,
+                                        emplacement,
+                                        description,
+                                        nombre_de_chambre,
+                                        nombre_de_salle_de_bain,
+                                        prix_par_semaine
+                                  FROM  produits
+                                  WHERE id_produit = :id_produit");
+                                  
+        $requete->bindParam(':id_produit',$id_produit,PDO::PARAM_INT);
+                                  
+        $requete->execute();
+        
+        $requete->bindColumn('id_produit',$id_produit);
+        $requete->bindColumn('statut',$statut);
+        $requete->bindColumn('imageFacade',$imageFacade);
+        $requete->bindColumn('imageInterieur1',$imageInterieur1);
+        $requete->bindColumn('imageInterieur2',$imageInterieur2);
+        $requete->bindColumn('imageInterieur3',$imageInterieur3);
+        $requete->bindColumn('nom',$nom);
+        $requete->bindColumn('emplacement',$emplacement);
+        $requete->bindColumn('description',$description);
+        $requete->bindColumn('nombre_de_chambre',$nombre_de_chambre);
+        $requete->bindColumn('nombre_de_salle_de_bain',$nombre_de_salle_de_bain);
+        $requete->bindColumn('prix_par_semaine',$prix_par_semaine);
+        
+        $i = 0;
+        while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
+        {
+            $produits[$i]["id_produit"] = $id_produit;
+            $produits[$i]["statut"] = $statut;
+            $produits[$i]["imageFacade"] = $imageFacade;
+            $produits[$i]["imageInterieur1"] = $imageInterieur1;
+            $produits[$i]["imageInterieur2"] = $imageInterieur2;
+            $produits[$i]["imageInterieur3"] = $imageInterieur3;
+            $produits[$i]["nom"] = $nom;
+            $produits[$i]["emplacement"] = $emplacement;
+            $produits[$i]["description"] = $description;
+            $produits[$i]["nombre_de_chambre"] = $nombre_de_chambre;
+            $produits[$i]["nombre_de_salle_de_bain"] = $nombre_de_salle_de_bain;
+            $produits[$i]["prix_par_semaine"] = $prix_par_semaine;
+            
+            $i++;
+        }
+
+        $requete->closeCursor();
+        $id=null;
+
+        return $produits;
+    }
+
+
+
     // -----------------------------------------------------------------------------------------------------//
 
-    public function creerUnProduit($id_produit,$statut,$imageFacade,$imageInterieur1,$imageInterieur2,$imageInterieur3,$nom,$emplacement,$description,$nombre_de_chambre,$nombre_de_salle_de_bain,$prix_par_jour,$prix_par_semaine)
+    public function creerUnProduit($statut,$imageFacade,$imageInterieur1,$imageInterieur2,
+                                    $imageInterieur3,$nom,$emplacement,$description,$nombre_de_chambre,
+                                    $nombre_de_salle_de_bain,$prix_par_semaine)
     {
 
         if ($statut == "")
@@ -198,11 +262,6 @@ class Produits
             throw new Exception("Nombre_de_salle_de_bain invalide");
         }
     	
-    	else if (!is_numeric($prix_par_jour))
-        {
-            throw new Exception("Prix_par_jour invalide");
-        }
-    	
     	else if (!is_numeric($prix_par_semaine))
         {
             throw new Exception("Prix_par_semaine invalide");
@@ -220,7 +279,6 @@ class Produits
         $description = htmlentities($description, ENT_QUOTES, "UTF-8");
     	$nombre_de_chambre = htmlentities($nombre_de_chambre, ENT_QUOTES, "UTF-8");
     	$nombre_de_salle_de_bain = htmlentities($nombre_de_salle_de_bain, ENT_QUOTES, "UTF-8");
-    	$prix_par_jour = htmlentities($prix_par_jour, ENT_QUOTES, "UTF-8");
     	$prix_par_semaine = htmlentities($prix_par_semaine, ENT_QUOTES, "UTF-8");
     	
         $id = $this->connexionBD;
@@ -237,7 +295,6 @@ class Produits
 							  description,
 							  nombre_de_chambre,
 							  nombre_de_salle_de_bain,
-							  prix_par_jour,
 							  prix_par_semaine
 							  )
 							  VALUES (
@@ -251,7 +308,6 @@ class Produits
 									  :description,
 									  :nombre_de_chambre,
 									  :nombre_de_salle_de_bain,
-									  :prix_par_jour, 
 									  :prix_par_semaine)");
 
         if (!$requete) 
@@ -270,7 +326,6 @@ class Produits
     	$requete->bindParam(':description',$description,PDO::PARAM_STR);
     	$requete->bindParam(':nombre_de_chambre',$nombre_de_chambre,PDO::PARAM_INT);
     	$requete->bindParam(':nombre_de_salle_de_bain',$nombre_de_salle_de_bain,PDO::PARAM_INT);
-    	$requete->bindParam(':prix_par_jour',$prix_par_jour,PDO::PARAM_INT);
     	$requete->bindParam(':prix_par_semaine',$prix_par_semaine,PDO::PARAM_INT);
 
         $result = $requete->execute();
@@ -345,11 +400,6 @@ class Produits
             throw new Exception("Nombre_de_salle_de_bain invalide");
         }
 
-        else if (!is_numeric($prix_par_jour))
-        {
-            throw new Exception("Prix_par_jour invalide");
-        }
-
         else if (!is_numeric($prix_par_semaine))
         {
             throw new Exception("Prix_par_semaine invalide");
@@ -368,7 +418,6 @@ class Produits
         $description = htmlentities($description, ENT_QUOTES, "UTF-8");
         $nombre_de_chambre = htmlentities($nombre_de_chambre, ENT_QUOTES, "UTF-8");
         $nombre_de_salle_de_bain = htmlentities($nombre_de_salle_de_bain, ENT_QUOTES, "UTF-8");
-        $prix_par_jour = htmlentities($prix_par_jour, ENT_QUOTES, "UTF-8");
         $prix_par_semaine = htmlentities($prix_par_semaine, ENT_QUOTES, "UTF-8");
 
         $id = $this->connexionBD;
@@ -384,7 +433,6 @@ class Produits
                                       description               = :description,
                                       nombre_de_chambre         = :nombre_de_chambre,
                                       nombre_de_salle_de_bain   = :nombre_de_salle_de_bain,
-                                      prix_par_jour             = :prix_par_jour,
                                       prix_par_semaine          = :prix_par_semaine
                                   WHERE id_produit              = 1");
 
@@ -399,7 +447,6 @@ class Produits
         $requete->bindParam(':description',$description,PDO::PARAM_STR);
         $requete->bindParam(':nombre_de_chambre',$nombre_de_chambre,PDO::PARAM_INT);
         $requete->bindParam(':nombre_de_salle_de_bain',$nombre_de_salle_de_bain,PDO::PARAM_INT);
-        $requete->bindParam(':prix_par_jour',$prix_par_jour,PDO::PARAM_INT);
         $requete->bindParam(':prix_par_semaine',$prix_par_semaine,PDO::PARAM_INT);
         
         $result = $requete->execute();
