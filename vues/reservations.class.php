@@ -61,11 +61,10 @@ class VueReservations
         for ($i = 0; $i < count($produit); $i++) 
         {
             $form .= '<div class="container main">';
-            $form .= '<form action="">';
+            $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '?requete=confirmation_html" method="get">';
             $form .= '<div class="row">';
-            $form .= '<h1>Réservation de chalet</h1>';
-            $form .= '<p>Veuillez choisir vos dates.</p>';
             $form .= '<div class="col-lg-4">';
+            $form .= '<h1>Réservation de chalet</h1>';
             $form .= '<h2>' . $produit[$i]["nom"] . '</h2>';
             $form .= '<img class="img-responsive" src="' . $produit[$i]["imageFacade"] . '" alt="image de façade">';
             $form .= '<p>' . $produit[$i]["description"] .'</p>';
@@ -77,7 +76,7 @@ class VueReservations
             $form .= '<h4>Vous avez choisi la semaine :</h4>';
             $form .= '<h4><span id="semaine"></span> <span id="startDate"></span><span id="endDate"></strong></span></h4>';
             $form .= '<br/><br/>';
-            $form .= '<button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteConnexion("confirmation.html")">RÉSERVER</button>';
+            $form .= '<button type="submit" class="btn btn-custom-vert btn-lg">RÉSERVER</button>';
             $form .= '</div><!--  fin  col-lg-12 -->';
             $form .= '</div><!-- /.row -->';
             $form .= '</form>';
@@ -119,16 +118,7 @@ class VueReservations
         $form .= '<img class="img-responsive" src="' . $produit[0]["imageFacade"] . '" alt="image de façade">';
         $form .= '<p>' . $produit[0]["description"] .'</p>';
         $form .= '<h4>VOS CHOIX DE DATES</h2>';
-        $form .= '<form role="form">';
-        $form .= '<div class="form-group">';
-        $form .= '<label for="dateDebut">DATE DE DÉBUT</label><br/>';
-        $form .= '<p>' . $dateDebut . '</p>';
-        $form .= '</div>';
-        $form .= '<div class="form-group">';
-        $form .= '<label for="dateFin">DATE DE FIN</label><br/>';
-        $form .= '<p>' . $dateFin . '</p>';
-        $form .= '</div>';
-        $form .= '</form>';
+        $form .= '<h4>DU ' . $dateDebut . ' AU ' . $dateFin . '</h4>';
         $form .= '</div><!--  fin -->';
         $form .= '<div class="col-lg-4">';
         $form .= '<h2>Vos coordonnées</h2>';
