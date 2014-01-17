@@ -6,6 +6,11 @@ class Controleur
     {
         switch ($_GET['requete']) 
         {
+
+            case 'chalets.html':
+                self::req_chalets();
+
+                break;
             case 'req_selectTousProduits':
                 self::req_selectTousProduits();
                 break;        
@@ -28,6 +33,29 @@ class Controleur
                 break;
         }
     }
+
+
+    // traitement extraire des produits
+    private static function req_chalets()
+    {
+        try
+        {
+            //$oProduits = new Produits();
+            //$Produits = $oProduits->selectTousProduits();
+            VueProduits::formulaire_chalets("");
+        }
+
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            VueProduits::formulaire_erreur();
+        }
+
+
+    }
+
+
+
     // traitement extraire des produits
     private static function req_selectTousProduits()
     {

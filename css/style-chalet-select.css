@@ -1,0 +1,423 @@
+/****************************************** Fichier stylesheet.css ******************************************/
+/*************************************************************************************************************/
+/*navigation*/
+.navbar-default .navbar-collapse,.navbar-form,.navbar-fixed-top {
+background-color:#809060;
+border-color:#809060;
+height:154px!important;
+}
+
+.navbar-default .navbar-nav > li {
+text-align:center;
+}
+
+.navbar-collapse {
+padding:0;
+}
+
+.navbar-default .navbar-nav > li > a {
+color:#FFF;
+}
+
+.nav > li > a {
+position:relative;
+display:block;
+padding:0;
+font-size:16px;
+}
+
+.nav > li > a {
+width:150px;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+color:#FFF;
+text-decoration:underline;
+}
+
+.navbar-nav {
+float:none;
+max-width:960px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.titresMenu {
+position:relative;
+top:-35px;
+z-index:1000;
+font-size:16px;
+}
+
+.titresLogin {
+position:relative;
+top:-70px;
+z-index:1000;
+font-size:14px;
+}
+
+.navbar-default .navbar-nav .active a {
+background-color:#304716;
+color:#FFF;
+height:154px;
+}
+
+.navbar-default .navbar-nav > .active > a,.navbar-default .navbar-nav > .active > a:hover,.navbar-default .navbar-nav > .active > a:focus {
+background-color:#304716;
+color:#FFF;
+}
+
+@media max-width 767px {
+.navbar-collapse,.navbar-nav {
+padding:0;
+margin:0;
+background-color:#304716;
+}
+
+.titresMenu {
+font-size:18px;
+line-height:40px;
+top:0;
+}
+
+.titresLogin {
+font-size:14px;
+line-height:40px;
+top:0;
+width:auto;
+}
+
+.navbar-fixed-top {
+background-color:#304716;
+height:60px;
+}
+
+.navbar-default .navbar-nav .active a {
+height:auto;
+background-color:#809060;
+}
+
+.navbar-default .navbar-nav .active a:hover {
+height:auto;
+background-color:#809060;
+}
+
+.nav > li > a {
+width:auto;
+}
+}
+
+/*------main---------------*/
+body {
+padding-top:180px;
+background-color:#e1e6cd;
+}
+
+.container {
+max-width:1000px;
+}
+
+.main {
+background-color:#e1e6cd;
+max-width:960px;
+height:100%;
+}
+
+/*------formulaires---------------*/
+/*------paragraph---------------*/
+/*------formulaire login---------------*/
+/*------footer---------------*/
+#footer {
+background-color:#809060;
+position:fixed;
+bottom:0;
+width:100%;
+height:60px;
+}
+
+.text-muted {
+margin-right:10px;
+color:#FFF;
+}
+
+#wrap > .container {
+padding:60px 15px 0;
+}
+
+.container .text-muted {
+margin:20px 0;
+}
+
+#footer > .container {
+padding-left:15px;
+padding-right:15px;
+}
+
+/****************************************** Fichier stylesheetclient.css Flora ******************************************/
+/************************************************************************************************************************/
+/*------main---------------*/
+.imgnature > img {
+width:100%;
+margin-left:10px;
+margin-right:10px;
+}
+
+.imgnature2 > img {
+width:100%;
+margin-left:20px;
+margin-right:10px;
+}
+
+a {
+color:#000;
+}
+
+a:hover {
+color:#000;
+}
+
+/*------formulaires---------------*/
+/*------paragraph---------------*/
+.para {
+/*background-color:#82A826;*/
+background-color:#556B2F;
+border-radius:15px;
+margin-left:20px;
+margin-bottom:20px;
+padding-bottom:20px;
+}
+
+.para > h3 {
+color:#686868;
+color:#FFF;
+}
+
+.para > p {
+color:#FFF;
+}
+
+/*------gros titres (headings)---------------*/
+.grostitres {
+clear:both;
+background-color:#6E6E6E;
+margin-top:20px;
+margin-bottom:20px;
+margin-left:-15px;
+margin-right:20px;
+padding-top:20px;
+padding-bottom:20px;
+}
+
+.grostitres > p {
+color:#FFF;
+font-size:20px;
+}
+
+/*------formulaire acceuil---------------*/
+.frm_general {
+height:100%;
+margin-left:20%;
+margin-right:20px;
+margin-bottom:0;
+padding-top:10px;
+padding-bottom:150px;
+background-color:rgba(255,255,255,0.8);
+}
+
+/*------formulaire login---------------*/
+.formlogin {
+margin-left:7%;
+margin-bottom:20px;
+margin-top:30px;
+padding-bottom:20px;
+}
+
+.formlogin2 {
+margin-left:0;
+margin-bottom:20px;
+margin-top:30px;
+padding-bottom:20px;
+}
+
+.message {
+padding-top:30px;
+}
+
+.message > p {
+background-color:#6E6E6E;
+color:#FFF;
+width:70%;
+padding-top:10px;
+padding-bottom:10px;
+padding-left:10px;
+}
+
+/*------boutons---------------*/
+.btn-primary {
+background-color:#82A826;
+border-color:#82A826;
+}
+
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,.open .dropdown-toggle.btn-primary {
+background-color:#82A826;
+border-color:#82A826;
+color:#FFF;
+}
+
+/*-----------------------*/
+.frm_profile {
+margin-left:25%;
+margin-right:50px;
+margin-bottom:0;
+padding-top:30px;
+padding-bottom:0;
+background-color:rgba(255,255,255,0.8);
+}
+
+.profile {
+margin-left:25%;
+margin-right:50px;
+margin-bottom:0;
+padding-top:30px;
+padding-bottom:50px;
+background-color:#6E6E6E;
+border-radius:15px;
+}
+
+.profile > p {
+margin-left:5px;
+color:#FFF;
+font-weight:700;
+}
+
+.frm_inscription {
+margin-left:25%;
+margin-right:20px;
+margin-bottom:0;
+padding-top:10px;
+padding-bottom:150px;
+background-color:rgba(255,255,255,0.8);
+}
+
+.frm_adresse {
+margin-left:25%;
+margin-right:20px;
+margin-bottom:0;
+padding-top:10px;
+padding-bottom:150px;
+background-color:rgba(255,255,255,0.8);
+}
+
+.adresse {
+background-color:#556B2F;
+border-radius:15px;
+margin-left:80px;
+margin-bottom:20px;
+padding-bottom:20px;
+padding-left:40px;
+}
+
+.adresse > h3 {
+color:#686868;
+color:#FFF;
+}
+
+.adresse > p {
+margin-left:0;
+display:block;
+color:#FFF;
+}
+
+.telephone {
+background-color:#6E6E6E;
+margin-top:30px;
+margin-bottom:30px;
+margin-left:5px;
+margin-right:60px;
+padding-top:20px;
+padding-bottom:10px;
+}
+
+.telephone >p {
+color:#FFF;
+font-size:20px;
+margin-left:20px;
+}
+
+.pwoublie {
+margin-left:100px;
+margin-top:20px;
+}
+
+/*footer navigation */
+@media max-width 1024px {
+.formulaire_inscription,.formulaire_login {
+margin-left:0;
+}
+}
+
+/****************************************** Fichier bouton.css ******************************************/
+/********************************************************************************************************/
+.btn-custom-vert.active {
+color:rgba(255,255,255,0.75);
+}
+
+.btn-custom-vert {
+color:#fff;
+text-shadow:0 -1px 0 rgba(0,0,0,0.25);
+background-color:#607935;
+background-image:0;
+background-image:0 to(#718e3f));
+background-image:0;
+background-image:0;
+background-image:linear-gradient(tobottom,#556b2f,#718e3f);
+background-repeat:repeat-x;
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff556b2f',endColorstr='#ff718e3f',GradientType=0);
+border-color:#718e3f #718e3f #475927;
+border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+background-color:#718e3f;
+/* Darken IE7 buttons by default so they stand out more given they won't have borders */
+filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.btn-custom-vert:hover,.btn-custom-vert:focus,.btn-custom-vert:active,.btn-custom-vert.active,.btn-custom-vert.disabled,.btn-custom-vert[disabled] {
+color:#fff;
+background-color:#718e3f;
+background-color:#637d37;
+}
+
+.btn-custom-vert:active,.btn-custom-vert.active {
+background-color:#556b2f;
+}
+
+.btn-custom-gris.active {
+color:rgba(255,255,255,0.75);
+}
+
+.btn-custom-gris {
+color:#fff;
+text-shadow:0 -1px 0 rgba(0,0,0,0.25);
+background-color:#747474;
+background-image:0;
+background-image:0 to(#848484));
+background-image:0;
+background-image:0;
+background-image:linear-gradient(tobottom,#6a6a6a,#848484);
+background-repeat:repeat-x;
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff6a6a6a',endColorstr='#ff848484',GradientType=0);
+border-color:#848484 #848484 #5d5d5d;
+border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+background-color:#848484;
+/* Darken IE7 buttons by default so they stand out more given they won't have borders */
+filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.btn-custom-gris:hover,.btn-custom-gris:focus,.btn-custom-gris:active,.btn-custom-gris.active,.btn-custom-gris.disabled,.btn-custom-gris[disabled] {
+color:#fff;
+background-color:#848484;
+background-color:#777;
+}
+
+.btn-custom-gris:active,.btn-custom-gris.active {
+background-color:#6a6a6a;
+}

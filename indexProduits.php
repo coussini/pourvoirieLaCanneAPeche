@@ -1,5 +1,10 @@
 <?php
 
+
+$_GET['requete'] = 'chalets.html';
+$_GET["id_produit"] = 1;
+$_GET["requetePage"] = "client";
+
 /*****************************************/
 /* CONNEXION DE LA BASE DE DONNÉE EN PDO */
 /*****************************************/

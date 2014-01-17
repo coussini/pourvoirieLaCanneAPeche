@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Site internet sur la pourvoirie de la canne à pêche">
+    <meta name="author" content="Flora Kasyan, Michel Van Hoye, Mathieu De Grandpré et Louis Cyr">
+    <title>La cannne &agrave; p&ecirc;che accueil</title>
+    <link rel="shortcut icon" href="./images/favicon.jpg">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- NOS CSS -->
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/stylesheet.css" rel="stylesheet">
+    <link href="./css/bouton.css" rel="stylesheet">
+    <link href="./css/custom-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+    <link href="./css/chalet.css" rel="stylesheet">
+
+    <!-- NOS JS -->
+    <script src="./js/vendor/jquery-1.10.1.min.js"></script>
+    <script src="./js/jquery-1.9.1.js"></script>
+    <script src="./js/jquery-ui-1.10.3.custom.js"></script>
+    <script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script src="./js/vendor/bootstrap.min.js"></script>
+    <script type="text/JavaScript" language="JavaScript" src="js/javascript.js"></script> 
+
+    <!-- TRAITEMENT SPÉCIFIQUE POUR LA RÉSERVATION -->    
+    
+  </head>
+
+  <body>
+    <div id="wrap">
+      <!-- Début du menu de navigation -->
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <ul class="nav navbar-nav ">
+              <li><a href="./index.html"><img src="./images/logo.png" alt="logo" class="img-responsive hidden-xs"></a></li>
+              <li class="active"><a href="./index.html"><img src="./images/accueil.png" alt="image accueil" class="img-responsive hidden-xs"><span class="titresMenu">ACCUEIL</span></a></li>
+              <li><a href="./html/chalets.html"><img src="./images/chalets.png" alt="image chalets" class="img-responsive hidden-xs"><span class="titresMenu">NOS CHALETS</span></a></li>
+              <li><a href="./html/infos.html"><img src="./images/info.png" alt="image infos" class="img-responsive hidden-xs"><span class="titresMenu">INFORMATIONS</span></a></li>
+              <li><a href="./html/contact.html"><img src="./images/contact.png" alt="image contact" class="img-responsive hidden-xs"><span class="titresMenu">CONTACT</span></a></li>
+              <li><img src="./images/connexion.png" alt="cadenas" class="img-responsive hidden-xs">
+                  <a href="./html/profil.html"><span class="titresLogin">PROFIL</span>
+                  <a href="./html/login.html"><span class="titresLogin">CONNEXION</span></a>
+                  <a href="#"><span class="titresLogin">DÉCONNEXION</span></a>
+              </li>
+            </ul>
+        </div>
+      </div>
+      
+
+      <div class="container-main"><div class="row"><div class="col-lg-4"><h4><p class="img-thumbnail"> Chalet 1 : </p></h4><img src="./images/chalet1.jpg" alt="chalet-accueil" class="img-thumbnail"><p>Magnifique chalet possédant une grande et large galerie, avec une vue magnifique sur le lac. La location du chalet peu se faire peu importe le mois durant l'année. Construction de 2010</p></div><div class="col-lg-4"><h4><p class="img-thumbnail"> Options du chalet : </p></h4><ul class="list-group"><li class="list-group-item"><span class="badge pull-right">2</span>Nombre de chambre:</li><li class="list-group-item"><span class="badge pull-right">2</span>Nombre de salle de bain:</li></ul></div><div class="col-lg-4"><h4><p class="img-thumbnail"> Prix de location : </p></h4><ul class="list-group"><li class="list-group-item"><span class="badge pull-right">899$</span>Par semaine:</li><li class="list-group-item"><span class="badge pull-right">150$</span>Par journée:</li></ul></div></div><div class="row"><div class="col-lg-4 col-lg-offset-8"><button type="button" class="btn btn-custom-gris btn-lg" data-dismiss="modal">Fermer</button><button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteConnexion("./reserver.html")">Réserver</button><br/><br/></div></div><div class="col-lg-12"><div class="panel-group" id="accordion"><div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">> Galerie photo</a></h4></div><div id="collapseOne" class="panel-collapse collapse"><div class="panel-body"><img src="./images/chalet1-photo1.jpg" alt="chalet-accueil" class="img-thumbnail"><img src="./images/chalet1-photo2.jpg" alt="chalet-accueil" class="img-thumbnail"><img src="./images/chalet1-photo3.jpg" alt="chalet-accueil" class="img-thumbnail"></div></div></div></div></div></div>
+      <!-- PIED DE PAGE -->
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted">&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
+      </div>
+    </div>
+  </body>
+</html>

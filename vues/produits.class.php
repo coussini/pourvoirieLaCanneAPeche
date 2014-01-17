@@ -35,7 +35,7 @@ class VueProduits
     }
 
     // function qui retourne le formulaire "passer une commande" à panier.html dans le cas d'une réussite
-    public static function formulaire_selectUnProduit($produits)
+    public static function formulaire_chalets($produits)
     {
 
 		$form = '';
@@ -45,7 +45,14 @@ class VueProduits
         $form .= '<div class="col-lg-12">';
         $form .= '<img src="./images/carte2.jpg" alt="carte" border="0" usemap="#emplacement">';
         $form .= '<map name="emplacement">';
-        $form .= '<area shape="rect" value="'.$produits["id_produit"].'" coords="268,334,309,375" href="../afficher-chalet.html">';
+        $form .= '<area shape="rect" coords="171,114,216,159" href="#" alt="chalet1">';
+        $form .= '<area shape="rect" coords="138,206,183,251" href="#" alt="chalet2">';
+        $form .= '<area shape="rect" coords="167,293,213,338" href="#" alt="chalet3">';
+        $form .= '<area shape="rect" coords="258,339,299,380" href="#" alt="chalet4" href="afficher-chalet.html">';
+        $form .= '<area shape="rect" coords="469,409,516,456" href="#" alt="chalet5">';
+        $form .= '<area shape="rect" coords="678,298,723,343" href="#" alt="chalet6">';
+        $form .= '<area shape="rect" coords="678,206,723,251" href="#" alt="chalet7">';
+        $form .= '<area shape="rect" coords="691,68,735,112"  href="#" alt="chalet8">';
         $form .= '</map>';
         $form .= '</div>';
         $form .= '</div>';
@@ -60,7 +67,7 @@ class VueProduits
     {
 
         $form = '';
-        $form .= '<div class="container-main">';
+        $form .= '<div class="container main">';
         $form .= '<div class="row">';
         $form .= '<div class="col-lg-4">';
         $form .= '<h4><p class="img-thumbnail"> Chalet 1 : </p></h4>';
@@ -81,14 +88,12 @@ class VueProduits
         $form .= '</ul>';
         $form .= '</div>';
         $form .= '</div>';
-
         $form .= '<div class="row">';
         $form .= '<div class="col-lg-4 col-lg-offset-8">';
         $form .= '<button type="button" class="btn btn-custom-gris btn-lg" data-dismiss="modal">Fermer</button>';
         $form .= '<button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteConnexion("./reserver.html")">Réserver</button><br/><br/>';
         $form .= '</div>';
         $form .= '</div>';
-
         $form .= '<div class="col-lg-12">';
         $form .= '<div class="panel-group" id="accordion">';
         $form .= '<div class="panel panel-default">';
