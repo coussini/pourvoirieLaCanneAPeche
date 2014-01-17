@@ -1,0 +1,850 @@
+/****************************************** Fichier style.css Louis ******************************************/
+/*************************************************************************************************************/
+body {
+font-family:Arial, Times, sans-serif;
+}
+
+main {
+width:1280px;
+margin-top:10px;
+margin-bottom:0;
+margin-left:auto;
+margin-right:auto;
+font-size:12px;
+background-color:#D8E1EA;
+/*****************************************/
+/* overflow:hidden;                      */
+/*                                       */
+/* TRÈS IMPORTANT POUR QUE LA COULEUR SE */
+/* DISTRIBUE ADÉQUATEMENT DANS LE        */
+/* MAIN                                  */
+/*****************************************/
+overflow:hidden;
+}
+
+main > header {
+padding-top:15px;
+}
+
+/* logo */
+main > header > .logo {
+margin-left:30px;
+float:left;
+}
+
+/* divers titres */
+h2,h3,h4 {
+margin-left:10px;
+}
+
+h2 {
+color:#29ABE2;
+}
+
+/* pour chacun des labels */
+label {
+font-weight:700;
+font-size:14px;
+}
+
+/* la fameuse image de couleur assortie à la page, pour l'attente AJAX */
+.imageAttente {
+margin-left:10px;
+display:none;
+}
+
+/* la définition du champ concernant les erreurs */
+.erreur {
+margin-left:10px;
+color:red;
+font-weight:700;
+}
+
+/* la définition du champ concernant le champ de confirmation de commande */
+.confirmation {
+margin-left:10px;
+color:green;
+font-weight:700;
+}
+
+/**************************/
+/* ELÉMENTS DE NAVIGATION */
+/**************************/
+li {
+min-width:150px;
+float:left;
+}
+
+li a {
+color:#FFF;
+}
+
+nav ul li a {
+display:block;
+padding-top:20px;
+padding-bottom:20px;
+padding-left:20px;
+text-decoration:none;
+}
+
+nav > ul {
+width:1030px;
+padding-left:30px;
+padding-right:30px;
+float:left;
+list-style:none;
+background:#29ABE2;
+}
+
+nav > ul > li {
+background:#29ABE2;
+border-left:10px solid #29ABE2;
+-webkit-transition:background 1s ease;
+transition:background 800ms ease;
+}
+
+nav > ul > li:hover {
+background:#1A8DBE;
+border-left:10px solid #FF0;
+-webkit-transition:background 1s ease;
+transition:all 800ms ease;
+}
+
+nav > ul > li > ul {
+display:none;
+}
+
+nav > ul > li:hover > ul {
+display:block;
+font-weight:400;
+padding:0;
+position:absolute;
+}
+
+nav > ul > li > ul > li {
+float:none;
+display:block;
+border-left:none;
+position:relative;
+background:#29ABE2;
+-webkit-transition:background 1s ease;
+transition:background 800ms ease;
+}
+
+nav > ul > li > ul > li:hover {
+background:#1A8DBE;
+-webkit-transition:background 1s ease;
+transition:background 800ms ease;
+}
+
+/**********************************/
+/* ÉLÉMENTS UTILISATEUR ET PANIER */
+/**********************************/
+#utilisateur {
+clear:both;
+float:left;
+margin-left:1000px;
+padding:0;
+}
+
+#partieUsager {
+float:left;
+margin-left:10px;
+margin-right:40px;
+}
+
+#partiePanier {
+float:left;
+}
+
+#usager {
+margin-left:30px;
+float:left;
+}
+
+#panier {
+float:left;
+}
+
+#visualiserListeCommande {
+clear:both;
+float:left;
+}
+
+#gestionPanier {
+clear:both;
+float:left;
+margin-left:10px;
+}
+
+/****************************************************/
+/* ZONE CONCERNANT LES ÉLÉMENTS DYNAMIQUE DES PAGES */
+/****************************************************/
+/* pour chacun des formulaires */
+.formulaire {
+clear:both;
+float:left;
+}
+
+/* enveloppe des éléments dynamiques la page index */
+#enveloppe > article {
+clear:both;
+float:left;
+width:1200px;
+margin-top:20px;
+margin-left:40px;
+margin-right:40px;
+padding-top:20px;
+background-color:#FFF;
+}
+
+/* enveloppe de la page gestionPanier */
+#enveloppePanier > article {
+clear:both;
+float:left;
+width:1200px;
+margin-top:20px;
+margin-left:40px;
+margin-right:40px;
+padding-top:20px;
+padding-bottom:20px;
+background-color:#FFF;
+}
+
+/* Éléments de navigation de pages et filtres */
+.navigationPage ul {
+margin-top:10px;
+margin-bottom:10px;
+padding-left:10px;
+float:left;
+list-style:none;
+}
+
+.navigationPage ul li {
+min-width:1px;
+float:left;
+}
+
+.navigationPage ul li a {
+display:block;
+padding-left:10px;
+font-size:14px;
+color:#000;
+}
+
+/* Éléments dynamiques sur la sélection par page */
+label#selPage {
+margin-left:30px;
+}
+
+.resultatPages {
+min-width:1px;
+float:left;
+}
+
+/* Définition des champs du catalogue par défaut */
+.nom {
+color:#29ABE2;
+font-weight:700;
+}
+
+.description {
+font-weight:700;
+}
+
+.prix-valeur {
+font-size:20px;
+font-weight:700;
+}
+
+.prix-unite {
+font-size:20px;
+font-weight:700;
+}
+
+.prixPanier {
+font-size:20px;
+font-weight:700;
+}
+
+.categorie {
+font-weight:700;
+}
+
+.selQuantite {
+font-size:18px;
+font-weight:700;
+}
+
+.quantite {
+font-size:20px;
+font-weight:700;
+}
+
+/*********************************/
+/* DÉFINITION POUR DES VIGNETTES */
+/*********************************/
+.vignette {
+float:left;
+width:280px;
+height:350px;
+padding-left:10px;
+padding-right:10px;
+padding-top:10px;
+padding-bottom:10px;
+}
+
+.vignette .image > img {
+height:80%;
+width:80%;
+}
+
+.vignette .prix-unite {
+margin-left:5px;
+}
+
+/******************************/
+/* DÉFINITION POUR DES LISTES */
+/******************************/
+.liste {
+float:left;
+width:1180px;
+height:150px;
+padding-left:10px;
+padding-right:10px;
+padding-top:10px;
+padding-bottom:10px;
+}
+
+.liste .nom {
+float:left;
+margin-top:105px;
+width:300px;
+}
+
+.liste .image > img {
+float:left;
+height:10%;
+width:10%;
+}
+
+.liste .description {
+float:left;
+margin-left:10px;
+margin-top:105px;
+width:430px;
+}
+
+.liste .prix-valeur {
+float:left;
+margin-top:98px;
+width:90px;
+}
+
+.liste .prix-unite {
+float:left;
+margin-top:98px;
+margin-left:5px;
+width:50px;
+}
+
+.liste .prixPanier {
+float:left;
+margin-top:98px;
+margin-left:5px;
+}
+
+.liste .categorie {
+float:left;
+margin-top:105px;
+margin-left:20px;
+width:150px;
+}
+
+.liste .selQuantite {
+float:left;
+margin-top:95px;
+margin-left:10px;
+}
+
+.liste .quantite {
+float:left;
+margin-top:98px;
+margin-left:5px;
+}
+
+.liste .btnAjouterPanier {
+margin-left:20px;
+}
+
+/**********************************/
+/* CONCERNE LA PAGE gestionPanier */
+/**********************************/
+.sousTotal {
+font-size:20px;
+font-weight:700;
+margin-top:10px;
+margin-left:428px;
+}
+
+.btnSuprimer {
+float:left;
+margin-top:98px;
+margin-left:5px;
+}
+
+/**************************************************/
+/* CONCERNE LA POSITION DES ÉLÉMENTS DANS LA PAGE */
+/**************************************************/
+.passerCommande,.continuerAMagasiner,.confirmerCommande,.retournerAuPanier,.viderPanier,.afficherNbPages,.emaCourriel,.txtAdresse,.listeCommande,.details {
+margin-left:10px;
+}
+
+.listeCommande {
+font-weight:700;
+}
+
+/****************/
+/* PIED DE PAGE */
+/****************/
+footer {
+clear:both;
+float:left;
+width:1180px;
+margin-top:15px;
+margin-bottom:15px;
+margin-left:40px;
+padding:10px;
+color:#FFF;
+background-color:#000;
+}
+
+/****************************************** Fichier stylesheet.css ******************************************/
+/*************************************************************************************************************/
+/*navigation*/
+.navbar-default .navbar-collapse,.navbar-form,.navbar-fixed-top {
+background-color:#809060;
+border-color:#809060;
+height:154px!important;
+}
+
+.navbar-default .navbar-nav > li {
+text-align:center;
+}
+
+.navbar-collapse {
+padding:0;
+}
+
+.navbar-default .navbar-nav > li > a {
+color:#FFF;
+}
+
+.nav > li > a {
+position:relative;
+display:block;
+padding:0;
+font-size:16px;
+}
+
+.nav > li > a {
+width:150px;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+color:#FFF;
+text-decoration:underline;
+}
+
+.navbar-nav {
+float:none;
+max-width:960px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.titresMenu {
+position:relative;
+top:-35px;
+z-index:1000;
+font-size:16px;
+}
+
+.titresLogin {
+position:relative;
+top:-70px;
+z-index:1000;
+font-size:14px;
+}
+
+.navbar-default .navbar-nav .active a {
+background-color:#304716;
+color:#FFF;
+height:154px;
+}
+
+.navbar-default .navbar-nav > .active > a,.navbar-default .navbar-nav > .active > a:hover,.navbar-default .navbar-nav > .active > a:focus {
+background-color:#304716;
+color:#FFF;
+}
+
+@media max-width 767px {
+.navbar-collapse,.navbar-nav {
+padding:0;
+margin:0;
+background-color:#304716;
+}
+
+.titresMenu {
+font-size:18px;
+line-height:40px;
+top:0;
+}
+
+.titresLogin {
+font-size:14px;
+line-height:40px;
+top:0;
+width:auto;
+}
+
+.navbar-fixed-top {
+background-color:#304716;
+height:60px;
+}
+
+.navbar-default .navbar-nav .active a {
+height:auto;
+background-color:#809060;
+}
+
+.navbar-default .navbar-nav .active a:hover {
+height:auto;
+background-color:#809060;
+}
+
+.nav > li > a {
+width:auto;
+}
+}
+
+/*------main---------------*/
+body {
+padding-top:180px;
+background-color:#e1e6cd;
+}
+
+.container {
+max-width:960px;
+}
+
+.main {
+background-color:#e1e6cd;
+max-width:960px;
+height:100%;
+}
+
+/*------formulaires---------------*/
+/*------paragraph---------------*/
+/*------formulaire login---------------*/
+/*------footer---------------*/
+#footer {
+background-color:#809060;
+position:fixed;
+bottom:0;
+width:100%;
+height:60px;
+}
+
+.text-muted {
+margin-right:10px;
+color:#FFF;
+}
+
+#wrap > .container {
+padding:60px 15px 0;
+}
+
+.container .text-muted {
+margin:20px 0;
+}
+
+#footer > .container {
+padding-left:15px;
+padding-right:15px;
+}
+
+/****************************************** Fichier stylesheetclient.css Flora ******************************************/
+/************************************************************************************************************************/
+/*------main---------------*/
+.row {
+background-image:url(../images/bg6.jpg);
+background-repeat:no-repeat;
+margin-top:0;
+}
+
+.imgnature > img {
+width:100%;
+margin-left:10px;
+margin-right:10px;
+}
+
+.imgnature2 > img {
+width:100%;
+margin-left:20px;
+margin-right:10px;
+}
+
+a {
+color:#000;
+}
+
+a:hover {
+color:#000;
+}
+
+/*------formulaires---------------*/
+/*------paragraph---------------*/
+.para {
+/*background-color:#82A826;*/
+background-color:#556B2F;
+border-radius:15px;
+margin-left:20px;
+margin-bottom:20px;
+padding-bottom:20px;
+}
+
+.para > h3 {
+color:#686868;
+color:#FFF;
+}
+
+.para > p {
+color:#FFF;
+}
+
+/*------gros titres (headings)---------------*/
+.grostitres {
+clear:both;
+background-color:#6E6E6E;
+margin-top:20px;
+margin-bottom:20px;
+margin-left:-15px;
+margin-right:20px;
+padding-top:20px;
+padding-bottom:20px;
+}
+
+.grostitres > p {
+color:#FFF;
+font-size:20px;
+}
+
+/*------formulaire acceuil---------------*/
+.frm_general {
+height:100%;
+margin-left:20%;
+margin-right:20px;
+margin-bottom:0;
+padding-top:10px;
+padding-bottom:150px;
+background-color:rgba(255,255,255,0.8);
+}
+
+/*------formulaire login---------------*/
+.formlogin {
+margin-left:7%;
+margin-bottom:20px;
+margin-top:30px;
+padding-bottom:20px;
+}
+
+.formlogin2 {
+margin-left:0;
+margin-bottom:20px;
+margin-top:30px;
+padding-bottom:20px;
+}
+
+.message {
+padding-top:30px;
+}
+
+.message > p {
+background-color:#6E6E6E;
+color:#FFF;
+width:70%;
+padding-top:10px;
+padding-bottom:10px;
+padding-left:10px;
+}
+
+/*------boutons---------------*/
+.btn-primary {
+background-color:#82A826;
+border-color:#82A826;
+}
+
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,.open .dropdown-toggle.btn-primary {
+background-color:#82A826;
+border-color:#82A826;
+color:#FFF;
+}
+
+/*-----------------------*/
+.frm_profile {
+margin-left:25%;
+margin-right:50px;
+margin-bottom:0;
+padding-top:30px;
+padding-bottom:0;
+background-color:rgba(255,255,255,0.8);
+}
+
+.profile {
+margin-left:25%;
+margin-right:50px;
+margin-bottom:0;
+padding-top:30px;
+padding-bottom:50px;
+background-color:#6E6E6E;
+border-radius:15px;
+}
+
+.profile > p {
+margin-left:5px;
+color:#FFF;
+font-weight:700;
+}
+
+.frm_inscription {
+margin-left:25%;
+margin-right:20px;
+margin-bottom:0;
+padding-top:10px;
+padding-bottom:150px;
+background-color:rgba(255,255,255,0.8);
+}
+
+.frm_adresse {
+margin-left:25%;
+margin-right:20px;
+margin-bottom:0;
+padding-top:10px;
+padding-bottom:150px;
+background-color:rgba(255,255,255,0.8);
+}
+
+.adresse {
+background-color:#556B2F;
+border-radius:15px;
+margin-left:80px;
+margin-bottom:20px;
+padding-bottom:20px;
+padding-left:40px;
+}
+
+.adresse > h3 {
+color:#686868;
+color:#FFF;
+}
+
+.adresse > p {
+margin-left:0;
+display:block;
+color:#FFF;
+}
+
+.telephone {
+background-color:#6E6E6E;
+margin-top:30px;
+margin-bottom:30px;
+margin-left:5px;
+margin-right:60px;
+padding-top:20px;
+padding-bottom:10px;
+}
+
+.telephone >p {
+color:#FFF;
+font-size:20px;
+margin-left:20px;
+}
+
+.pwoublie {
+margin-left:100px;
+margin-top:20px;
+}
+
+/*footer navigation */
+@media max-width 1024px {
+.formulaire_inscription,.formulaire_login {
+margin-left:0;
+}
+}
+
+/****************************************** Fichier bouton.css ******************************************/
+/********************************************************************************************************/
+.btn-custom-vert.active {
+color:rgba(255,255,255,0.75);
+}
+
+.btn-custom-vert {
+color:#fff;
+text-shadow:0 -1px 0 rgba(0,0,0,0.25);
+background-color:#607935;
+background-image:0;
+background-image:0 to(#718e3f));
+background-image:0;
+background-image:0;
+background-image:linear-gradient(tobottom,#556b2f,#718e3f);
+background-repeat:repeat-x;
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff556b2f',endColorstr='#ff718e3f',GradientType=0);
+border-color:#718e3f #718e3f #475927;
+border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+background-color:#718e3f;
+/* Darken IE7 buttons by default so they stand out more given they won't have borders */
+filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.btn-custom-vert:hover,.btn-custom-vert:focus,.btn-custom-vert:active,.btn-custom-vert.active,.btn-custom-vert.disabled,.btn-custom-vert[disabled] {
+color:#fff;
+background-color:#718e3f;
+background-color:#637d37;
+}
+
+.btn-custom-vert:active,.btn-custom-vert.active {
+background-color:#556b2f;
+}
+
+.btn-custom-gris.active {
+color:rgba(255,255,255,0.75);
+}
+
+.btn-custom-gris {
+color:#fff;
+text-shadow:0 -1px 0 rgba(0,0,0,0.25);
+background-color:#747474;
+background-image:0;
+background-image:0 to(#848484));
+background-image:0;
+background-image:0;
+background-image:linear-gradient(tobottom,#6a6a6a,#848484);
+background-repeat:repeat-x;
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff6a6a6a',endColorstr='#ff848484',GradientType=0);
+border-color:#848484 #848484 #5d5d5d;
+border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+background-color:#848484;
+/* Darken IE7 buttons by default so they stand out more given they won't have borders */
+filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.btn-custom-gris:hover,.btn-custom-gris:focus,.btn-custom-gris:active,.btn-custom-gris.active,.btn-custom-gris.disabled,.btn-custom-gris[disabled] {
+color:#fff;
+background-color:#848484;
+background-color:#777;
+}
+
+.btn-custom-gris:active,.btn-custom-gris.active {
+background-color:#6a6a6a;
+}
