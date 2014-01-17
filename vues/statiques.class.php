@@ -36,7 +36,7 @@ class VueStatiques
         $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] .'?requete=modifierContenuStatique" method="post">';
         $form .= '<div class="form-group">';
         $form .= '<label for="contenu" class="control-label">Modifications de: ' . $nomsStatique . '</label>';
-        $form .= '<textarea id="contenu" class="form-control " name="contenuStatique">';
+        $form .= '<textarea id="contenu" class="form-control " name="contenuStatique" rows="20" cols="100">';
         $form .= $contenuStatique['contenu'];
         $form .= '</textarea></div>';
         $form .= '<input type="hidden" name="nom" value="' . $nomsStatique . '">';
@@ -61,11 +61,11 @@ class VueStatiques
         $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] .'?requete=creerContenuStatique" method="post">';
         $form .= '<div class="form-group">';
         $form .= '<label for="contenu" class="control-label">Nom du contenu: </label>';
-        $form .= '<input type="text" class="form-control" name="nom" rows="15">';
+        $form .= '<input type="text" class="form-control" name="nom">';
         $form .= '</textarea></div>';
         $form .= '<div class="form-group">';
         $form .= '<label for="contenu" class="control-label">Texte du contenu: </label>';
-        $form .= '<textarea id="contenu" class="form-control" name="contenu" size="55">';
+        $form .= '<textarea id="contenu" class="form-control" name="contenu" rows="20" cols="100">';
         $form .= '</textarea></div>';
         $form .= '<button id="" class="btn btn-custom-gris btn-lg" type="submit">Enregister le contenu</button><br/><br/>';
         $form .= '</div>';
