@@ -1,14 +1,17 @@
 <?php
-
 class Controleur
 {
-
 	public static function gererRequetes()
 	{
-	
-		$_GET["courriel"] ='anne@yahoo.com';
+		//$_GET["courriel"] ='amay@gmail.com';
+		
+		//$_GET["nom"] ='Almass';
+		//$_GET["prenom"] ='Mayss';
+		//$_GET["courriel"] ='amayss@gmail.com';
+		//$_GET["mot_de_passe"] ='alma56mayss';
+		//$_GET["date_de_naissance"] = "1978-10-30";
 
-		$_GET['requete']='req_valideLogin';
+		//$_GET['requete']='req_ajoutUtilisateur';
 
 		switch ($_GET['requete']) 
 		{
@@ -28,19 +31,24 @@ class Controleur
 				self::req_ajoutUtilisateur();
 				break;	
 				
+			case 'req_oubliePass':
+				self::req_oubliePass();
+				break;	
+				
 			default:
 				// erreur
 				break;
 		}
 	}
 
+	//--------------------------------TESTS  LOGIN-----------------------------------------
+	//-------------------------------------------------------------------------------------
 	// traitement formulaire login
 	 private static function req_valideLogin()
 	{
 		try
 		{
-			//--------------------------------TESTS  LOGIN-----------------------------------------
-			//-------------------------------------------------------------------------------------
+			
 			$oUtilisateurs = new Utilisateurs();
 			
 			//$id_utilisateur = $oUtilisateurs->chercherIdUtilisateur($_GET["courriel"]);  a remetre
@@ -51,8 +59,7 @@ class Controleur
 				$utilisateur_present="false";
 			}else $utilisateur_present="true";
             VueUtilisateurs::formulaire_validLogin($utilisateur_present);
-			
-			
+				
 		}
 		catch(Exception $e)
 		{
@@ -70,15 +77,9 @@ class Controleur
 		try
 		{
 			$oUtilisateurs = new Utilisateurs();
-			//$id_utilisateur = $oUtilisateurs->chercherIdUtilisateur($_GET["courriel"]);  a rementre
-
-											//fonction extraireUtilisateur						
-			//$utilisateurs = $oUtilisateurs->extraireUtilisateur('anne@yahoo.com');
-
-			$utilisateurs = $oUtilisateurs->extraireUtilisateur($_GET["courriel"]);			
+			$utilisateurs = $oUtilisateurs->extraireUtilisateur($_GET["courriel"]);//fonction extraireUtilisateur		
             VueUtilisateurs::formulaire_extraireUtilisateur($utilisateurs);
 		}
-			
 			
 		catch(Exception $e)
 		{
@@ -90,18 +91,14 @@ class Controleur
 	
 	//-------------------------------------ETAPE 3 TEST MAJ UTILISATEUR--------------------------------
 	//-------------------------------------------------------------------------------------------------
-	// extraire les information sur utilisateur
+	
+	// MAJ les information sur utilisateur
 	 private static function req_majUtilisateur()
 	{
 		try
 		{
-			//$oUtilisateurs = new Utilisateurs();
-			//$id_utilisateur = $oUtilisateurs->chercherIdUtilisateur($_GET["courriel"]);  a rementre
-											//fonction majUtilisateur						
-			//$utilisateurs = $oUtilisateurs->majUtilisateur('toto@gmail.com');
-			
-			//$utilisateurs = $oUtilisateurs->majUtilisateur('toto@gmail.com');
-			
+			$oUtilisateurs = new Utilisateurs();								
+			$utilisateurs = $oUtilisateurs->majUtilisateur($_GET["courriel"]); //fonction majUtilisateur
             VueUtilisateurs::formulaire_majUtilisateur();
 		}
 				
@@ -114,20 +111,23 @@ class Controleur
 	} 
 
 	//-------------------------------------ETAPE 4 TEST CREER NOUVEAU UTILISATEUR--------------------------------
-	//-------------------------------------------------------------------------------------------------
-	// extraire les information sur utilisateur
+	//----------------------------------------------------------------------------------------------------------
+	// ajouter les information sur utilisateur
 	 private static function req_ajoutUtilisateur()
 	{
 		try
 		{
-			//$oUtilisateurs = new Utilisateurs();
-			//$id_utilisateur = $oUtilisateurs->chercherIdUtilisateur($_GET["courriel"]);  a rementre
-											//fonction majUtilisateur						
-			//$utilisateurs = $oUtilisateurs->majUtilisateur('toto@gmail.com');
-			
-			//$utilisateursnew = $oUtilisateurs->ajoutUtilisateur($_GET["nom"],$_GET["prenom"],$_GET["courriel"],$_GET["mot_de_passe"],$_GET["date_de_naissance"]);
-			
-            VueUtilisateurs::formulaire_ajoutUtilisateur();
+			 if($_GET['action'] == 'inscrire')
+			 {
+				$oUtilisateurs = new Utilisateurs();
+				var_dump($_POST);
+				$utilisateursnew = $oUtilisateurs->ajoutUtilisateur($_POST["nom"],$_POST["prenom"],$_POST["courriel"], $_POST["mot_de_passe"],$_POST["date_de_naissance"]);
+				//TODO : Qu'est-ce que fais apres...
+			 }
+			 else
+			 {
+				VueUtilisateurs::formulaire_ajoutUtilisateur();
+			 }
 		}
 				
 		catch(Exception $e)
@@ -138,7 +138,26 @@ class Controleur
 		}	
 	} 
 	
+	//-------------------------------------ETAPE 5 TEST MOT DE PASS OUBLIÉ-------------------------------------
+	//----------------------------------------------------------------------------------------------------------
+	// extraire les information sur utilisateur
 	
+	 private static function req_oubliePass()
+	{
+		try
+		{
+			$oUtilisateurs = new Utilisateurs();						
+			$utilisateurs = $oUtilisateurs->chercherUtilisateur($_GET["courriel"]);
+            VueUtilisateurs::formulaire_oubliePass($utilisateurs);
+		}
+				
+		catch(Exception $e)
+		{
+			$_GET['erreur']  = $e->getMessage();
+			VueUtilisateurs::formulaire_erreur();
+			
+		}	
+	} 
 	
 }
 

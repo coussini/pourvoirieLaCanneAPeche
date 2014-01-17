@@ -54,7 +54,6 @@ class Utilisateurs
 		return $idUtilisateur;
 	}
 
-
 	//----------------------------------------------------------------------------------------------------------------------
 	//----------------------------------------------------------------------------------------------------------------------
 	
@@ -62,8 +61,7 @@ class Utilisateurs
 	// function SQL qui permet de récupérer les  données d'un utilisateur
 	public function extraireUtilisateur($courriel)
 	{
-	
-		 if ((!$courriel) || $courriel == "")
+		 if ($courriel == "")
         {
             throw new Exception("Identifiant utilisateur invalide");
         }
@@ -120,6 +118,7 @@ class Utilisateurs
 	
 	//----------------------------------------------------------------------------------------------------------------------
 	//----------------------------------------------------------------------------------------------------------------------
+	
 	// function SQL qui permet de mettre a jour des détails d'un utilisateur
 	public function majUtilisateur($nom,$prenom,$courriel,$mot_de_passe,$mot_de_passe2,$date_de_naissance)
 	{
@@ -166,14 +165,14 @@ class Utilisateurs
             throw new Exception("Votre mot de passe et la confirmation de votre mot de passe ne correspondent pas.");
         }
 		
-		else if ((!$date_de_naissance) || $date_de_naissance == "") // VALIDATION date de naissance
+		/*else if ((!$date_de_naissance) || $date_de_naissance == "") // VALIDATION date de naissance
         {
             throw new Exception("SVP indiquez votre date de naissance année-mois-jour.");
         }
         else if (!preg_match("/[^(19|20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/",$date_de_naissance)) // expression régulière date naissance
         {
             throw new Exception("SVP entrez une valeur numerique.");
-        }
+        }*/
 		
 		// FIN CONDITIONS--------------------------------------
 		// ---------------------------------------------------
@@ -222,16 +221,21 @@ class Utilisateurs
 
 	//----------------------------------------------------------------------------------------------------------------------
 	//----------------------------------------------------------------------------------------------------------------------
-	// function SQL qui permet de inserer nouveaux donnés sur l'utilisateur
+	
+	// function SQL qui permet de inserer nouveau utilisateur dans la base de donnes
+	// verification des erreurs dans formulaire
 	 public function ajoutUtilisateur($nom,$prenom,$courriel,$mot_de_passe,$date_de_naissance)
 	{
+		//die("ici");
+		
 		// CONDITIONS -----------------------------------------
 		// ---------------------------------------------------
 		if ((!$nom) || $nom == "") // VALIDATION DU NOM
         {
             throw new Exception("SVP entrez votre nom.");
         }
-        else if (!preg_match("/^([A-ZÉÈÏÔ][a-zéèïô]+)([ -][A-ZÉÈÏÔ][a-zéèïô]+)*$/",$nom)) // expression régulière  nom
+        //else if (!preg_match("/^([A-ZÉÈÏÔ][a-zéèïô]+)([ -][A-ZÉÈÏÔ][a-zéèïô]+)*$/",$nom)) // expression régulière  nom
+		else if (!preg_match("/^[a-z ,.'-]+$/i",$nom)) // expression régulière  nom
         {
             throw new Exception("Caractères autorisés : a-z, é, è, ô, -");
         }
@@ -239,7 +243,7 @@ class Utilisateurs
         {
             throw new Exception("SVP entrez votre prénom.");
         }
-        else if (!preg_match("/^([A-ZÉÈÏÔ][a-zéèïô]+)([ -][A-ZÉÈÏÔ][a-zéèïô]+)*$/",$prenom)) // expression régulière  prenom
+        else if (!preg_match("/^[a-z ,.'-]+$/i",$prenom)) // expression régulière  prenom
         {
             throw new Exception("Caractères autorisés : a-z, é, è, ô, -");
         }
@@ -255,27 +259,34 @@ class Utilisateurs
         {
             throw new Exception("SVP entrez votre mot de passe.");
         }
-        else if ($mot_de_passe < 6) // expression régulière  mot de passe
+        else if (strlen($mot_de_passe) < 6) // expression régulière  mot de passe
         {
             throw new Exception("Mot de passe doit contenir au moins 6 characters.");
         }
-		else if ((!$mot_de_passe2) || $mot_de_passe2 == "") 	// VALIDATION DU MOT DE PASSE 2
+		/*else if ((!$mot_de_passe2) || $mot_de_passe2 == "") 	// VALIDATION DU MOT DE PASSE 2
         {
             throw new Exception("SVP confirmer le mot de passe.");
         }
         else if ($mot_de_passe != $mot_de_passe2) // expression régulière  mot de passe 2
         {
             throw new Exception("Votre mot de passe et la confirmation de votre mot de passe ne correspondent pas.");
-        }
+        } */
 		
 		else if ((!$date_de_naissance) || $date_de_naissance == "") // VALIDATION date de naissance
         {
             throw new Exception("SVP indiquez votre date de naissance année-mois-jour.");
         }
-        else if (!preg_match("/[^(19|20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/",$date_de_naissance)) // expression régulière date naissance
+		/*else if (!is_numeric ($date_de_naissance)) 
         {
             throw new Exception("SVP entrez une valeur numerique.");
-        }
+        }*/
+		//else if (!preg_match("/^(19|20)\d\d \-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/",$date_de_naissance)) // expression régulière date naissance
+		//else if (!preg_match("/^(19|20)\d\d([-])(0?[1-9]|1[012])\2(0?[1-9]|[12][0-9]|3[01])$/",$date_de_naissance)) // expression régulière date naissance
+		//else if (!preg_match("/^[0-9]{4}([-])(0?[1-9]|1[012])\2(0?[1-9]|[12][0-9]|3[01])$/",$date_de_naissance)) // expression régulière date naissance
+		//else if (!preg_match("/^([0-9]{4}-[0-9]{2}-[0-9]{2})$/",$date_de_naissance)) // expression régulière date naissance
+        //{
+        //    throw new Exception("SVP respectez le format.");
+        //}
 		
 		// FIN CONDITIONS--------------------------------------
 		// ---------------------------------------------------
@@ -285,23 +296,23 @@ class Utilisateurs
 		$prenom = htmlentities($prenom, ENT_QUOTES, "UTF-8");
 		$courriel = htmlentities($courriel, ENT_QUOTES, "UTF-8");
 		$mot_de_passe = htmlentities($mot_de_passe, ENT_QUOTES, "UTF-8");
-		$mot_de_passe2 = htmlentities($mot_de_passe2, ENT_QUOTES, "UTF-8");
+		//$mot_de_passe2 = htmlentities($mot_de_passe2, ENT_QUOTES, "UTF-8");
 		$date_de_naissance = htmlentities($date_de_naissance,ENT_QUOTES, "UTF-8");
 		
         $id = $this->connexionBD;
 
 		$requete = $id->prepare("INSERT INTO utilisateurs 
 											(nom,
-											 prenom,
-											 courriel,
-											 mot_de_passe,
-											 date_de_naissance)
+											prenom,
+											courriel,
+											mot_de_passe,
+											date_de_naissance)
 									VALUES 	(:nom,
-											 :prenom,
-											 :courriel,
-											 :mot_de_passe,
-											 :date_de_naissance)");
-								 				
+											:prenom,
+											:courriel,
+											:mot_de_passe,
+											:date_de_naissance)");
+							 				
 		 if (!$requete) 
 		{
 			throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
@@ -311,7 +322,7 @@ class Utilisateurs
 		$requete->bindParam(':prenom',$prenom,PDO::PARAM_STR);
 		$requete->bindParam(':courriel',$courriel,PDO::PARAM_STR);
 		$requete->bindParam(':mot_de_passe',$mot_de_passe,PDO::PARAM_STR);
-		$requete->bindParam(':date_de_naissance',$date_de_naissance,PDO::PARAM_INT);
+		$requete->bindParam(':date_de_naissance',$date_de_naissance,PDO::PARAM_STR);
 		
 		$result =$requete->execute();
 		
