@@ -78,11 +78,14 @@ require_once("./controleurs/statiques.class.php"); // CONTROLEUR DE TEST POUR LE
 /* SQUELETTES DES PAGES */
 /************************/
 
-//require_once("./squelettes/admin.php");
+$_GET["requetePage"] = "client";
+$_GET['requete'] = 'chercherContenuStatique'; 
+$_POST['nom'] = 'À propos'; 
+
 require_once("./squelettes/client.php");
 
 
-/*if ($_GET["requetePage"] = "client")
+if ($_GET["requetePage"] = "client")
 {
 	// pages pour les statiques normaux du site
 	require_once("./squelettes/client.php");
@@ -91,6 +94,6 @@ else
 {
 	// pages pour les administrateurs du site
 	require_once("./squelettes/admin.php");
-} */
+} 
 
 ?>
