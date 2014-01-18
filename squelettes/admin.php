@@ -33,9 +33,6 @@
     <div id="wrap">
       <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
-
-
-
           <ul class="nav navbar-nav ">
             <li class="active"><a href="./index.html"><span class="titresMenuAdmin">SECTION ADMINISTRATION</span></a></li>
             <li><a href="./html/chalets.html"><span class="titresMenuAdmin">ÉLÉMENTS STATIQUES</span></a></li>
