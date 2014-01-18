@@ -19,7 +19,7 @@
     <link href="./css/bootstrap.css" rel="stylesheet">
     <link href="./css/custom-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet">
-    <link href="./css/style-chalet-select.css" rel="stylesheet">
+
 
     <!-- NOS JS -->
     <script src="./js/vendor/jquery-1.10.1.min.js"></script>
@@ -28,39 +28,22 @@
     <script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script src="./js/vendor/bootstrap.min.js"></script>
     <script src="./js/javascript.js" type="text/JavaScript" ></script> 
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-    <script>
-      var map;
-      function initialize() {
-        var mapOptions = {
-        zoom: 19,
-        center: new google.maps.LatLng(40.738905,-73.989143),
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        map = new google.maps.Map(document.getElementById('map-canvas'),
-          mapOptions);
-      }
-
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-
-
-    <!-- TRAITEMENT SPÉCIFIQUE POUR LA RÉSERVATION -->    
     <?php
       if ($_GET['requete'] == 'reserver_html')
       {
     ?>
-        <script src="js/calendrierReservation.js"></script>
-        <script src="js/traitementCalendrierReservation.js"></script>
+        <!-- TRAITEMENT SPÉCIFIQUE POUR LA RÉSERVATION -->    
+        <script src="./js/calendrierReservation.js"></script>
+        <script src="./js/traitementCalendrierReservation.js"></script>
     <?php
       }    
     ?>
-
   </head>
-
   <body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
     <div id="wrap">
-      <!-- Début du menu de navigation -->
       <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
@@ -74,28 +57,23 @@
             <a href="./index.html"><img src="./images/logo.png" alt="logo" class="img-responsive hidden-xs"></a>
           </div>
           <ul class="nav navbar-nav ">
-          <li class="active"><a href="./index.html"><img src="./images/accueil.png" alt="image accueil" class="img-responsive hidden-xs"><span class="titresMenu">ACCUEIL</span></a></li>
-          <li><a href="./html/chalets.html"><img src="./images/chalets.png" alt="image chalets" class="img-responsive hidden-xs"><span class="titresMenu">NOS CHALETS</span></a></li>
-          <li><a href="./html/infos.html"><img src="./images/info.png" alt="image infos" class="img-responsive hidden-xs"><span class="titresMenu">INFORMATIONS</span></a></li>
-          <li><a href="./html/contact.html"><img src="./images/contact.png" alt="image contact" class="img-responsive hidden-xs"><span class="titresMenu">CONTACT</span></a></li>
-          <li><img src="./images/connexion.png" alt="cadenas" class="img-responsive hidden-xs">
-          <a href="./html/profil.html"><span class="titresLogin">PROFIL</span>
-          <a href="./html/login.html"><span class="titresLogin">CONNEXION</span></a>
-          <a href="#"><span class="titresLogin">DÉCONNEXION</span></a>
-          </li>
+            <li class="active"><a href="./index.html"><img src="./images/accueil.png" alt="image accueil" class="img-responsive hidden-xs"><span class="titresMenu">ACCUEIL</span></a></li>
+            <li><a href="./html/chalets.html"><img src="./images/chalets.png" alt="image chalets" class="img-responsive hidden-xs"><span class="titresMenu">NOS CHALETS</span></a></li>
+            <li><a href="./html/infos.html"><img src="./images/info.png" alt="image infos" class="img-responsive hidden-xs"><span class="titresMenu">INFORMATIONS</span></a></li>
+            <li><a href="./html/contact.html"><img src="./images/contact.png" alt="image contact" class="img-responsive hidden-xs"><span class="titresMenu">CONTACT</span></a></li>
+            <li><img src="./images/connexion.png" alt="cadenas" class="img-responsive hidden-xs">
+            <a href="./html/profil.html"><span class="titresLogin">PROFIL</span>
+            <a href="./html/login.html"><span class="titresLogin">CONNEXION</span></a>
+            <a href="#"><span class="titresLogin">DÉCONNEXION</span></a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
-      
-
-      <?php Controleur::gererRequetes(""); ?>
-
-      <!-- PIED DE PAGE -->
-    <div id="footer">
-      <div class="container">
-        <p class="text-muted">&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
-      </div>
-    </div>
-  </body>
+    <?php Controleur::gererRequetes(""); ?>
+     <footer>
+        <br/>
+        <p>&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
+    </footer>
+    /</body>
 </html>

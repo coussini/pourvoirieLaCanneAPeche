@@ -29,33 +29,31 @@
     <script type="text/JavaScript" language="JavaScript" src="js/javascript.js"></script> 
 
   </head>
-
   <body>
     <div id="wrap">
-      <!-- Début du menu de navigation -->
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <ul class="nav navbar-nav ">
-              <li><a href="./index.html"><span class="titresMenu">SECTION ADMINISTRATION</span></a></li>
-              <li><a href="./html/about.html"><span class="titresMenu">ÉLÉMENTS STATIQUES</span></a></li>
-              <li><a href="./html/clients.html"><span class="titresMenu">CLIENTS</span></a></li>
-              <li><a href="./html/reservations.html"><span class="titresMenu">RÉSERVATIONS</span></a></li>
-              <li><a href="./html/chalet1.html"><span class="titresMenu">PRODUITS</span></a></li>
-              <li><img src="../images/connexion.png" alt="cadenas" class="img-responsive hidden-xs">
-              <a href="../index.html"><span class="titresLogin">DECONNEXION</span></a>
-              </li>
-            </ul>
+      <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+
+
+
+          <ul class="nav navbar-nav ">
+            <li class="active"><a href="./index.html"><span class="titresMenuAdmin">SECTION ADMINISTRATION</span></a></li>
+            <li><a href="./html/chalets.html"><span class="titresMenuAdmin">ÉLÉMENTS STATIQUES</span></a></li>
+            <li><a href="./html/infos.html"><span class="titresMenuAdmin">CLIENTS</span></a></li>
+            <li><a href="./html/contact.html"><span class="titresMenuAdmin">RÉSERVATIONS</span></a></li>
+            <li><img src="./images/connexion.png" alt="cadenas" class="img-responsive hidden-xs">
+            <a href="./html/profil.html"><span class="titresLogin">PRODUITS</span>
+            <a href="#"><span class="titresLogin">DÉCONNEXION</span></a>
+            </li>
+          </ul>
         </div>
       </div>
-      
- <!---------------------------- -->
-      <?php Controleur::gererRequetes(""); ?>
-    <!---------------------------- -->
-      <!-- PIED DE PAGE -->
-    <div id="footer">
-      <div class="container">
-        <p class="text-muted">&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
-      </div>
     </div>
+    <?php Controleur::gererRequetes(""); ?>
+     <footer>
+        <br/>
+        <p>&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
+    </footer>
     <script src="./js/jqueryStatique.js"></script>
   </body>
 </html>

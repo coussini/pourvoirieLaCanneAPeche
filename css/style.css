@@ -49,6 +49,13 @@ z-index:1000;
 font-size:16px;
 }
 
+.titresMenuAdmin {
+position:relative;
+top:50px;
+z-index:1000;
+font-size:16px;
+}
+
 .titresLogin {
 position:relative;
 top:-70px;
@@ -107,51 +114,6 @@ width:auto;
 }
 }
 
-/*------main---------------*/
-body {
-padding-top:180px;
-background-color:#e1e6cd;
-}
-
-.container {
-max-width:960px;
-}
-
-.main {
-background-color:#e1e6cd;
-max-width:960px;
-height:100%;
-}
-
-/*------formulaires---------------*/
-/*------paragraph---------------*/
-/*------formulaire login---------------*/
-/*------footer---------------*/
-#footer {
-background-color:#809060;
-position:fixed;
-bottom:0;
-width:100%;
-height:60px;
-}
-
-.text-muted {
-margin-right:10px;
-color:#FFF;
-}
-
-#wrap > .container {
-padding:60px 15px 0;
-}
-
-.container .text-muted {
-margin:20px 0;
-}
-
-#footer > .container {
-padding-left:15px;
-padding-right:15px;
-}
 
 /****************************************** Fichier stylesheetclient.css Flora ******************************************/
 /************************************************************************************************************************/
@@ -420,4 +382,54 @@ background-color:#777;
 
 .btn-custom-gris:active,.btn-custom-gris.active {
 background-color:#6a6a6a;
+}
+
+/*------main---------------*/
+/*------formulaires---------------*/
+/*------paragraph---------------*/
+/*------formulaire login---------------*/
+/*------footer---------------*/
+
+#wrap > .container {
+padding:60px 15px 0;
+}
+
+.container .text-muted {
+margin:20px 0;
+}
+
+#footer > .container {
+padding-left:15px;
+padding-right:15px;
+}
+
+
+.container 
+{
+    max-width:960px;
+    padding-bottom: 60px;
+}
+
+.main 
+{
+    background-color:#e1e6cd;
+    max-width:960px;
+    height:100%;
+}
+
+body 
+{
+    padding-top:180px;
+    background-color:#e1e6cd;
+}
+
+footer 
+{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height:60px;
+    background-color:#809060;
+    color: white;
+    text-align: center;
 }

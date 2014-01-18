@@ -9,60 +9,17 @@ class Reservations
 		$this->connexionBD = $oConnexionPDO->rConnexion;
     }
     
-    // function SQL qui permet de récupérer les données du produit
-    // nécessaire à une réservation
-    public function extraireLeProduit($id_produit)
-    {
-        $produit = array();
-
-        $id = $this->connexionBD;
-        $requete = $id->prepare("SELECT nom,
-                                        imageFacade,
-                                        description
-                                 FROM   produits
-                                 WHERE  id_produit = :id_produit
-                                 AND    statut     = 'actif'"); 
-        
-        if (!$requete) 
-        {
-            throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
-        }
-
-        $requete->bindParam(':id_produit',$id_produit,PDO::PARAM_INT);
-
-        $result = $requete->execute();
-
-        if (!$result) 
-        {
-            throw new Exception("Erreur d'extraction sur la table produits " . $id->errorCode());
-        }
-
-        $requete->bindColumn('nom',$nom);
-        $requete->bindColumn('imageFacade',$imageFacade);
-        $requete->bindColumn('description',$description);
-     
-        $i = 0;
-        while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
-        {
-            $produit[$i]["id_produit"] = $id_produit;
-            $produit[$i]["nom"] = $nom;
-            $produit[$i]["imageFacade"] = $imageFacade;
-            $produit[$i]["description"] = $description;
-            $i++;
-        }
-
-        $requete->closeCursor();
-        $id = null;
-
-        return $produit;
-    }
-    
     // function SQL qui permet de récupérer toutes les réservation
     // faite sur ce produit
     // et la date de début doit être plus grande que la date du jour
     // car on ne prend pas les vieilles réservations en compte
     public function extraireLesReservationPourCeProduit($id_produit)
     {
+        if (!is_numeric($id_produit))
+        {
+            throw new Exception("Identifiant produit invalide");
+        }
+
         $reservations = array();
 
         $id = $this->connexionBD;
@@ -73,16 +30,16 @@ class Reservations
 
         if (!$requete) 
         {
-            throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
+            throw new Exception("Erreur de syntaxte SQL (extraireLesReservationPourCeProduit CODE D'ERREUR : " . $id->errorCode() . ")");
         }
 
         $requete->bindParam(':id_produit',$id_produit,PDO::PARAM_INT);
 
-        $result = $requete->execute();
+        $resultat = $requete->execute();
 
-        if (!$result) 
+        if (!$resultat) 
         {
-            throw new Exception("Erreur d'extraction sur la table reservations " . $id->errorCode());
+            throw new Exception("Erreur d'extraction sur la table reservations (extraireLesReservationPourCeProduit CODE D'ERREUR : " . $id->errorCode() . ")");
         }
 
         $requete->bindColumn('date_debut',$date_debut);
@@ -100,10 +57,71 @@ class Reservations
         return $reservations;
     }
     
+    // function SQL qui permet de récupérer les données du produit
+    // nécessaire à une réservation
+    public function extraireLeProduit($id_produit)
+    {
+        if (!is_numeric($id_produit))
+        {
+            throw new Exception("Identifiant produit invalide");
+        }
+
+        $produit = array();
+
+        $id = $this->connexionBD;
+        $requete = $id->prepare("SELECT nom,
+                                        imageFacade,
+                                        description,
+                                        prix_par_semaine                                        
+                                 FROM   produits
+                                 WHERE  id_produit = :id_produit
+                                 AND    statut     = 'actif'"); 
+        
+        if (!$requete) 
+        {
+            throw new Exception("Erreur de syntaxte SQL (extraireLeProduit CODE D'ERREUR : " . $id->errorCode() . ")");
+        }
+
+        $requete->bindParam(':id_produit',$id_produit,PDO::PARAM_INT);
+
+        $resultat = $requete->execute();
+
+        if (!$resultat) 
+        {
+            throw new Exception("Erreur d'extraction sur la table produits (extraireLeProduit CODE D'ERREUR : " . $id->errorCode() . ")");
+        }
+
+        $requete->bindColumn('nom',$nom);
+        $requete->bindColumn('imageFacade',$imageFacade);
+        $requete->bindColumn('description',$description);
+        $requete->bindColumn('prix_par_semaine',$prix_par_semaine);
+     
+        $resultat = $requete->fetchColumn(PDO::FETCH_BOUND);
+
+        if ($requete->rowCount() > 0)
+        {
+            $produit["id_produit"] = $id_produit;
+            $produit["nom"] = $nom;
+            $produit["imageFacade"] = $imageFacade;
+            $produit["description"] = $description;
+            $produit["prix_par_semaine"] = $prix_par_semaine;
+        }
+
+        $requete->closeCursor();
+        $id = null;
+
+        return $produit;
+    }
+    
     // function SQL qui permet de récupérer les données de l'utilisateur
     // nécessaire pour valider les coordonnées lors d'une confirmation
     public function extraireUtilisateur($id_utilisateur)
     {
+        if (!is_numeric($id_utilisateur))
+        {
+            throw new Exception("Identifiant utilisateur invalide");
+        }
+
         $utilisateur = array();
 
         $id = $this->connexionBD;
@@ -117,16 +135,16 @@ class Reservations
         
         if (!$requete) 
         {
-            throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
+            throw new Exception("Erreur de syntaxte SQL (extraireUtilisateur CODE D'ERREUR : " . $id->errorCode() . ")");
         }
 
         $requete->bindParam(':id_utilisateur',$id_utilisateur,PDO::PARAM_INT);
 
-        $result = $requete->execute();
+        $resultat = $requete->execute();
 
-        if (!$result) 
+        if (!$resultat) 
         {
-            throw new Exception("Erreur d'extraction sur la table utilisateurs " . $id->errorCode());
+            throw new Exception("Erreur d'extraction sur la table utilisateurs (extraireUtilisateur CODE D'ERREUR : " . $id->errorCode() . ")");
         }
 
         $requete->bindColumn('nom',$nom);
@@ -134,15 +152,15 @@ class Reservations
         $requete->bindColumn('courriel',$courriel);
         $requete->bindColumn('date_de_naissance',$date_de_naissance);
      
-        $i = 0;
-        while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
+        $resultat = $requete->fetchColumn(PDO::FETCH_BOUND);
+
+        if ($requete->rowCount() > 0)
         {
-            $utilisateur[$i]["id_utilisateur"] = $id_utilisateur;
-            $utilisateur[$i]["nom"] = $nom;
-            $utilisateur[$i]["prenom"] = $prenom;
-            $utilisateur[$i]["courriel"] = $courriel;
-            $utilisateur[$i]["date_de_naissance"] = $date_de_naissance;
-            $i++;
+            $utilisateur["id_utilisateur"] = $id_utilisateur;
+            $utilisateur["nom"] = $nom;
+            $utilisateur["prenom"] = $prenom;
+            $utilisateur["courriel"] = $courriel;
+            $utilisateur["date_de_naissance"] = $date_de_naissance;
         }
 
         $requete->closeCursor();
@@ -179,7 +197,7 @@ class Reservations
 
         if (!$requete) 
         {
-            throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
+            throw new Exception("Erreur de syntaxte SQL (extraireLesReservationsUtilisateur CODE D'ERREUR : " . $id->errorCode() . ")");
         }
 
         $requete->bindParam(':id_utilisateur',$id_utilisateur,PDO::PARAM_INT);
@@ -188,7 +206,7 @@ class Reservations
 
         if (!$result) 
         {
-            throw new Exception("Erreur d'extraction sur la table reservations " . $id->errorCode());
+            throw new Exception("Erreur d'extraction sur la table reservations (extraireLesReservationsUtilisateur CODE D'ERREUR : " . $id->errorCode());
         }
         
         $requete->bindColumn('id_reservation',$id_reservation);
@@ -235,8 +253,9 @@ class Reservations
         $id = $this->connexionBD;
         $requete = $id->prepare("SELECT RE.id_reservation,
                                         RE.id_utilisateur,
-                                        RE.id_produit,
+                                        UT.courriel,
                                         PR.nom,
+                                        RE.id_produit,
                                         PR.description, 
                                         RE.date_debut,
                                         RE.date_fin,
@@ -245,24 +264,26 @@ class Reservations
                                         RE.numero_carte,
                                         RE.id_carte,
                                         RE.prix_a_la_reservation
-                                  FROM reservations RE, produits PR
-                                  WHERE PR.id_produit = RE.id_produit");
+                                  FROM reservations RE, produits PR, utilisateurs UT
+                                  WHERE PR.id_produit = RE.id_produit
+                                  AND   RE.id_utilisateur = UT.id_utilisateur");
 
         if (!$requete) 
         {
-            throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
+            throw new Exception("Erreur de syntaxte SQL (extraireLesReservations CODE D'ERREUR : " . $id->errorCode() . ")");
         }
 
         $result = $requete->execute();
 
         if (!$result) 
         {
-            throw new Exception("Erreur d'extraction sur la table reservations " . $id->errorCode());
+            throw new Exception("Erreur d'extraction sur la table reservations (extraireLesReservations CODE D'ERREUR : " . $id->errorCode() . ")");
         }
         
         $requete->bindColumn('id_reservation',$id_reservation);
         $requete->bindColumn('id_utilisateur',$id_utilisateur);
         $requete->bindColumn('id_produit',$id_produit);
+        $requete->bindColumn('courriel',$courriel);
         $requete->bindColumn('nom',$nom);
         $requete->bindColumn('description',$description);
         $requete->bindColumn('date_debut',$date_debut);
@@ -279,6 +300,7 @@ class Reservations
             $reservations[$i]["id_reservation"] = $id_reservation;
             $reservations[$i]["id_utilisateur"] = $id_utilisateur;
             $reservations[$i]["id_produit"] = $id_produit;
+            $reservations[$i]["courriel"] = $courriel;
             $reservations[$i]["nom"] = $nom;
             $reservations[$i]["description"] = $description;
             $reservations[$i]["date_debut"] = $date_debut;
@@ -298,7 +320,7 @@ class Reservations
     }
     
     // function SQL qui permet de traiter une commande provenant du panier
-    public function creerUneReservation($id_utilisateur,$id_produit,$date_debut,$date_fin,$nombre_de_semaine,$prix_a_la_reservation)
+    public function creerUneReservation($id_utilisateur,$id_produit,$date_debut,$date_fin,$numero_semaine,$nom_carte,$numero_carte,$id_carte,$prix_a_la_reservation)
     {
         if (!is_numeric($id_utilisateur))
         {
@@ -310,19 +332,31 @@ class Reservations
         }
         else if ($date_debut == "")
         {
-            throw new Exception("date_debut invalide");
+            throw new Exception("date de début invalide");
         }
         else if ($date_fin == "")
         {
-            throw new Exception("date_fin invalide");
+            throw new Exception("date de fin invalide");
         }
-        else if ($nombre_de_semaine == "")
+        else if (!is_numeric($numero_semaine))
         {
-            throw new Exception("nombre_de_semaine invalide");
+            throw new Exception("numero de semaine invalide");
         }
-        else if ($prix_a_la_reservation == "")
+        else if ($nom_carte == "" || ($nom_carte != "Mastercard" && $nom_carte != "Visa" && $nom_carte != "American Express"))
         {
-            throw new Exception("prix_a_la_reservation invalide");
+            throw new Exception("nom de la carte invalide " . $nom_carte);
+        }
+        else if (!is_numeric($numero_carte) || strlen($numero_carte) != 16)
+        {
+            throw new Exception("numero de la carte invalide");
+        }
+        else if (!is_numeric($id_carte) || strlen($id_carte) != 3)
+        {
+            throw new Exception("id de la carte invalide");
+        }
+        else if (!is_numeric($prix_a_la_reservation))
+        {
+            throw new Exception("prix à la réservation invalide");
         }
 
         // enlever ou convertir les caractères spéciaux
@@ -330,7 +364,10 @@ class Reservations
         $id_produit = htmlentities($id_produit, ENT_QUOTES, "UTF-8");
         $date_debut = htmlentities($date_debut, ENT_QUOTES, "UTF-8");
         $date_fin = htmlentities($date_fin, ENT_QUOTES, "UTF-8");
-        $nombre_de_semaine = htmlentities($nombre_de_semaine, ENT_QUOTES, "UTF-8");
+        $numero_semaine = htmlentities($numero_semaine, ENT_QUOTES, "UTF-8");
+        $nom_carte = htmlentities($nom_carte, ENT_QUOTES, "UTF-8");
+        $numero_carte = htmlentities($numero_carte, ENT_QUOTES, "UTF-8");
+        $id_carte = htmlentities($id_carte, ENT_QUOTES, "UTF-8");
         $prix_a_la_reservation = htmlentities($prix_a_la_reservation, ENT_QUOTES, "UTF-8");
 
         $id = $this->connexionBD;
@@ -339,105 +376,41 @@ class Reservations
                                   id_produit,
                                   date_debut,
                                   date_fin,
-                                  nombre_de_semaine,
+                                  numero_semaine,
+                                  nom_carte,
+                                  numero_carte,
+                                  id_carte,
                                   prix_a_la_reservation)
                                   VALUES (:id_utilisateur, 
                                           :id_produit, 
                                           :date_debut, 
                                           :date_fin, 
-                                          :nombre_de_semaine,
+                                          :numero_semaine,
+                                          :nom_carte,
+                                          :numero_carte,
+                                          :id_carte,
                                           :prix_a_la_reservation)");
 
         if (!$requete) 
         {
-            throw new Exception("Erreur de syntaxte SQL" . $id->errorCode());
+            throw new Exception("Erreur de syntaxte SQL (creerUneReservation CODE D'ERREUR : " . $id->errorCode() . ")");
         }
-        
+
         $requete->bindParam(':id_utilisateur',$id_utilisateur,PDO::PARAM_INT);
         $requete->bindParam(':id_produit',$id_produit,PDO::PARAM_INT);
-        $requete->bindParam(':date_debut',$date_debut,PDO::PARAM_INT);
-        $requete->bindParam(':date_fin',$date_fin,PDO::PARAM_INT);
-        $requete->bindParam(':nombre_de_semaine',$nombre_de_semaine,PDO::PARAM_INT);
-        $requete->bindParam(':prix_a_la_reservation',$prix_a_la_reservation,PDO::PARAM_INT);
-
-        $result = $requete->execute();
-
-        if (!$result) 
-        {
-            throw new Exception("Erreur d'insertion sur la table reservations " . $id->errorCode());
-        }
-        
-        $requete->closeCursor();
-        
-        $id = null;
-
-        // retourne true si tout s'est bien passé
-        return true;
-    }
-
-    // function SQL qui permet de traiter une commande provenant du panier
-    public function modifierUneReservation($id_reservation,$id_utilisateur,$id_produit,$date_debut,$date_fin,$nombre_de_semaine,$prix_a_la_reservation)
-    {
-        if (!is_numeric($id_reservation))
-        {
-            throw new Exception("Identifiant reservation invalide");
-        }
-        else if (!is_numeric($id_utilisateur))
-        {
-            throw new Exception("Identifiant utilisateur invalide");
-        }
-        else if (!is_numeric($id_produit))
-        {
-            throw new Exception("Identifiant produit invalide");
-        }
-        else if ($date_debut == "")
-        {
-            throw new Exception("date_debut invalide");
-        }
-        else if ($date_fin == "")
-        {
-            throw new Exception("date_fin invalide");
-        }
-        else if ($nombre_de_semaine == "")
-        {
-            throw new Exception("nombre_de_semaine invalide");
-        }
-        else if ($prix_a_la_reservation == "")
-        {
-            throw new Exception("prix_a_la_reservation invalide");
-        }
-
-        // enlever ou convertir les caractères spéciaux
-        $id_reservation = htmlentities($id_reservation, ENT_QUOTES, "UTF-8");
-        $id_utilisateur = htmlentities($id_utilisateur, ENT_QUOTES, "UTF-8");
-        $id_produit = htmlentities($id_produit, ENT_QUOTES, "UTF-8");
-        $date_debut = htmlentities($date_debut, ENT_QUOTES, "UTF-8");
-        $date_fin = htmlentities($date_fin, ENT_QUOTES, "UTF-8");
-        $nombre_de_semaine = htmlentities($nombre_de_semaine, ENT_QUOTES, "UTF-8");
-        $prix_a_la_reservation = htmlentities($prix_a_la_reservation, ENT_QUOTES, "UTF-8");
-
-        $id = $this->connexionBD;
-        $requete = $id->prepare("UPDATE reservations 
-                                  SET id_Utilisateur         = :id_utilisateur,
-                                      id_produit             = :id_produit,
-                                      date_debut             = :date_debut,
-                                      date_fin               = :date_fin,
-                                      nombre_de_semaine      = :nombre_de_semaine
-                                      prix_a_la_reservation  = :prix_a_la_reservation
-                                  WHERE id_reservation       = :id_reservation");
-
-        $requete->bindParam(':id_reservation',$id_reservation,PDO::PARAM_INT);
-        $requete->bindParam(':id_utilisateur',$id_utilisateur,PDO::PARAM_INT);
-        $requete->bindParam(':id_produit',$id_produit,PDO::PARAM_STR);
+        $requete->bindParam(':date_debut',$date_debut,PDO::PARAM_STR);
         $requete->bindParam(':date_fin',$date_fin,PDO::PARAM_STR);
-        $requete->bindParam(':nombre_de_semaine',$nombre_de_semaine,PDO::PARAM_INT);
+        $requete->bindParam(':numero_semaine',$numero_semaine,PDO::PARAM_INT);
+        $requete->bindParam(':nom_carte',$nom_carte,PDO::PARAM_STR);
+        $requete->bindParam(':numero_carte',$numero_carte,PDO::PARAM_INT);
+        $requete->bindParam(':id_carte',$id_carte,PDO::PARAM_INT);
         $requete->bindParam(':prix_a_la_reservation',$prix_a_la_reservation,PDO::PARAM_INT);
-        
+
         $result = $requete->execute();
 
         if (!$result) 
         {
-            throw new Exception("Erreur de mise à jour sur la table reservations " . $id->errorCode());
+            throw new Exception("Erreur d'insertion sur la table reservations (creerUneReservation CODE D'ERREUR : " . $id->errorCode() . ")");
         }
         
         $requete->closeCursor();

@@ -2,48 +2,14 @@
 
 class Controleur
 {
-    public static function gererRequetes($requeteAJAX)
+    public static function gererRequetes($sss)
     {
-
-        // si le champ requete dédié au appel AJAX est vide, on
-        // on prend le get de la requete normale
-        // sinon on traite la requete AJAX tel quel
-        //
-        $requete = "";
-
-        if ($requeteAJAX == "")
-        {
-            $requete = $_GET["requete"];
-        }
-        else
-        {
-            $requete = $_GET["requeteAJAX"];
-        }
-
-        switch ($requete) 
-        {
-            case 'req_chercher_dates_reservees':
-                self::req_chercher_dates_reservees();
-                break;        
-            case 'reserver_html':
-                self::req_reserver();
-                break;        
-            case 'confirmation_html':
-                self::req_confirmation();
-                break;        
-            case 'creer_une_reservation':
-                self::req_creerUneReservation();
-                break;        
-            case 'historique_html':
-                self::req_historique();
-                break;        
-            case 'reservations_html':
-                self::req_reservations();
-                break;        
-            default:
-                echo "veuillez inscrire une requête avec le mot ?requete=...";
-                break;
-        }
+        //self::req_chercher_dates_reservees();
+        //self::req_reserver();
+        //self::req_confirmation();
+        //self::req_historique();
+        //self::req_reservations();
+        self::req_creerUneReservation();
     }
 
     // extraire les données pour générer le calendrier de réservation
@@ -51,6 +17,14 @@ class Controleur
     {
         try
         {
+            //$_GET["id_produit"] = "";
+            //$_GET["id_produit"] = "abc";
+            //$_GET["id_produit"] = 999;
+            //if (empty($reservations))
+            //{
+            //    throw new Exception("Il n'y a pas de réservation pour cet id produit");
+            //}
+            $_GET["id_produit"] = 2;
             $oReservations = new Reservations();
             $reservations = $oReservations->extraireLesReservationPourCeProduit($_GET["id_produit"]);
             VueReservations::formulaire_chercher_dates_reservees($reservations);
@@ -67,6 +41,14 @@ class Controleur
     {
         try
         {
+            //$_GET["id_produit"] = "";
+            //$_GET["id_produit"] = "abc";
+            //$_GET["id_produit"] = 999;
+            //if (empty($produit))
+            //{
+            //    throw new Exception("Il n'y a pas de produits pour cet id produit");
+            //}
+            $_GET["id_produit"] = 2;
             $oReservations = new Reservations();
             $produit = $oReservations->extraireLeProduit($_GET["id_produit"]);
             $_GET["requete"] = 'confirmation_html';
@@ -85,6 +67,17 @@ class Controleur
     {
         try
         {
+            /* UTILISATEUR */
+            //$_GET["id_utilisateur"] = "";
+            //$_GET["id_utilisateur"] = "abc";
+            //$_GET["id_utilisateur"] = 999;
+            //if (empty($utilisateur))
+            //{
+            //    throw new Exception("Il n'y a pas d'utilisateur pour cet id utilisateur");
+            //}
+            $_GET["id_utilisateur"] = 1;
+            
+            $_GET["id_produit"] = 2; // les tests sur les produits ont été fait par req_reserver
             $oReservations = new Reservations();
             $produit = $oReservations->extraireLeProduit($_GET["id_produit"]); // les tests ont été fait par req_reserver
             $utilisateur = $oReservations->extraireUtilisateur($_GET["id_utilisateur"]);
@@ -104,6 +97,15 @@ class Controleur
     {
         try
         {
+            /* UTILISATEUR */
+            //$_GET["id_utilisateur"] = "";
+            //$_GET["id_utilisateur"] = "abc";
+            //$_GET["id_utilisateur"] = 999;
+            //if (empty($reservations))
+            //{
+            //    throw new Exception("Il n'y a pas de réservations pour cet id utilisateur");
+            //}
+            $_GET["id_utilisateur"] = 2;
             $oReservations = new Reservations();
             $reservations = $oReservations->extraireLesReservationsUtilisateur($_GET["id_utilisateur"]);
             $_GET["requete"] = 'historique_html';
@@ -135,31 +137,63 @@ class Controleur
         }
     }
 
-    // traitement de confirmation d'une réservation
+    // traitement de confirmation d'un courriel dans le but d'y extraire les commandes
     private static function req_creerUneReservation()
     {
         try
         {
+            //$_GET["id_utilisateur"] = "";
+            //$_GET["id_utilisateur"] = "abc";
+            //$_GET["id_utilisateur"] = 999;
+            $_GET["id_utilisateur"] = 1;
+            //$_GET["id_produit"] = "";
+            //$_GET["id_produit"] = "abc";
+            //$_GET["id_produit"] = 999;
+            $_GET["id_produit"] = 1;
+            //$_GET["date_debut"] = '';
+            $_GET["date_debut"] = '2014-02-02';
+            //$_GET["date_fin"] = '';
+            $_GET["date_fin"] = '2014-02-14';
+            //$_GET["numero_semaine"] = '';
+            //$_GET["numero_semaine"] = 'a';
+            $_GET["numero_semaine"] = 23;
+            //$_GET["nom_carte"] = '';
+            //$_GET["nom_carte"] = 'ded';
+            //$_GET["nom_carte"] = 'visa';
+            $_GET["nom_carte"] = 'Mastercard';
+            //$_GET["numero_carte"] = '';
+            //$_GET["numero_carte"] = 'abc';
+            //$_GET["numero_carte"] = '123abc1111111111';
+            //$_GET["numero_carte"] = '111122223333444';
+            $_GET["numero_carte"] = '1111222233335555';
+            //$_GET["id_carte"] = '';
+            //$_GET["id_carte"] = 'av';
+            //$_GET["id_carte"] = '1av';
+            //$_GET["id_carte"] = '1';
+            $_GET["id_carte"] = '123';
+            //$_GET["prix_a_la_reservation"] = '';
+            //$_GET["prix_a_la_reservation"] = 'ab';
+            //$_GET["prix_a_la_reservation"] = '23.44';
+            $_GET["prix_a_la_reservation"] = 23.44;
+
             $oReservations = new Reservations();    
             $resultat = $oReservations->creerUneReservation($_GET["id_utilisateur"],$_GET["id_produit"],$_GET["date_debut"],$_GET["date_fin"],$_GET["numero_semaine"],$_GET["nom_carte"],$_GET["numero_carte"],$_GET["id_carte"],$_GET["prix_a_la_reservation"]);
             if ($resultat)
             {
                 $produit = $oReservations->extraireLeProduit($_GET["id_produit"]); // les tests ont été fait par req_reserver
                 $utilisateur = $oReservations->extraireUtilisateur($_GET["id_utilisateur"]);
-                $_GET["requete"] = 'creer_une_reservation';
+                $_GET["requete"] = 'confirmation_html';
                 $_GET["message_confirmation"]  = "merci d'avoir effectué votre réservation";
-                VueReservations::formulaire_creerUneReservation($produit,$utilisateur,$_GET["date_debut"],$_GET["date_fin"],$_GET["numero_semaine"],$_GET["nom_carte"],$_GET["numero_carte"],$_GET["id_carte"],$_GET["prix_a_la_reservation"]);
+                VueReservations::formulaire_confirmation($produit,$utilisateur,$_GET["date_debut"],$_GET["date_fin"],$_GET["numero_semaine"]);
             }
         }
         catch(Exception $e)
         {
-            $oReservations = new Reservations();    
-            $produit = $oReservations->extraireLeProduit($_GET["id_produit"]); // les tests ont été fait par req_reserver
-            $utilisateur = $oReservations->extraireUtilisateur($_GET["id_utilisateur"]);
             $_GET["erreur"]  = $e->getMessage();
-            $_GET["requete"] = 'creer_une_reservation';
-            VueReservations::formulaire_creerUneReservation($produit,$utilisateur,$_GET["date_debut"],$_GET["date_fin"],$_GET["numero_semaine"],$_GET["nom_carte"],$_GET["numero_carte"],$_GET["id_carte"],$_GET["prix_a_la_reservation"]);
+            $_GET["requete"] = 'confirmation_html';
+            VueReservations::formulaire_confirmation("","","","","");
         }
     }    
 }
+
 ?>

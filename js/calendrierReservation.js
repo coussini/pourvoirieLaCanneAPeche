@@ -25,6 +25,9 @@ var CalendrierReservation = (function(win,doc,$)
         //
         initialisation: function() 
         {
+            $(".msg_choix").hide();
+            $(".btn_reserver").hide();
+
             $.datepicker.regional['fr'] = 
             {
                 closeText: 'Fermer',
@@ -39,7 +42,7 @@ var CalendrierReservation = (function(win,doc,$)
                 dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
                 dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
                 weekHeader: 'Sm',
-                dateFormat: 'dd/mm/yy',
+                dateFormat: 'yy-mm-dd',
                 firstDay: 0,
                 isRTL: false,
                 showMonthAfterYear: false,
@@ -90,7 +93,7 @@ var CalendrierReservation = (function(win,doc,$)
         // de sélectionner des dates déjà réservées
         elimineSemainesReservees: function() 
         {
-            var source = "indexTestsReservations.php";
+            var source = "indexReservations.php";
             var requete = "?requeteAJAX=req_chercher_dates_reservees";
             var url = source + requete;
             var xhr = new XMLHttpRequest();
@@ -124,6 +127,8 @@ var CalendrierReservation = (function(win,doc,$)
             {
                 onSelect: function(dateText, inst) 
                 { 
+                    $(".msg_choix").show();
+                    $(".btn_reserver").show();
                     var date = $(this).datepicker('getDate');
                     startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
                     endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 6);
@@ -131,6 +136,9 @@ var CalendrierReservation = (function(win,doc,$)
                     $('#semaine').text("(" + $.datepicker.iso8601Week(startDate) + ") du ");
                     $('#startDate').text($.datepicker.formatDate( dateFormat, startDate, inst.settings ) + " au ");
                     $('#endDate').text($.datepicker.formatDate( dateFormat, endDate, inst.settings ));
+                    $('#numero_semaine').val($.datepicker.iso8601Week(startDate));
+                    $('#date_debut').val($.datepicker.formatDate( dateFormat, startDate, inst.settings ));
+                    $('#date_fin').val($.datepicker.formatDate( dateFormat, endDate, inst.settings ));
                     
                     CalendrierReservation.selectionneSemaineActive();
                 },

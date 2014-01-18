@@ -7,14 +7,16 @@ class VueReservations
     public static function formulaire_erreur()
     {
         $form = '';
+        $form .= '<div class="container">';
         $form .= '<form id="formulaire_erreur">';
-        $form .= '<h2>formulaire_erreur</h2>';
-        $form .= '<div class="erreur">';
-        $form .= '<p>' . $_GET["erreur"] . '</p>';
+        $form .= '<div class="row">';
+        $form .= '<div class="col-lg-12">';
+        $form .= '<h1>Formulaire d\'erreur pour les tests</h1>';
+        $form .= '<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">&nbsp</span>' . $_GET["erreur"] . '</div>';            
         $form .= '</div>';
+        $form .= '</div> <!-- /.row -->';
         $form .= '</form>';
-        $form .= '</body>';
-        $form .= '</html>';
+        $form .= '</div> <!-- /.container -->';
         echo $form;
     }
 
@@ -32,290 +34,291 @@ class VueReservations
             $form .= $date[0];
         }
         echo json_encode($form);
-        
-        /*
-        $form = '';
-        $form .= '<form id="formulaire_chercher_dates_reservees">';
-        $form .= '<h2>formulaire_chercher_dates_reservees</h2>';
-        $form .= '<h2>produit' . $_GET["id_produit"] . '</h2>';
-
-        for ($i = 0; $i < count($reservations); $i++) 
-        {
-            $form .= '<h2>les plages de date réservées</h2>';
-            $form .= '<p> date_debut: ' . $reservations[$i]["date_debut"] . '</p>';
-        }
-
-        $form .= '<div class="erreur">';
-        $form .= '<p>' . $_GET["erreur"] . '</p>';
-        $form .= '</div>';
-        $form .= '</form>';
-        echo $form;
-        */
-        
     }
 
     // function qui retourne le formulaire reserver.html
     public static function formulaire_reserver($produit)
     {
         $form = '';
-        for ($i = 0; $i < count($produit); $i++) 
+        $form .= '<div class="container">';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="get">';
+        $form .= '<div class="row">';
+
+        if ($_GET["erreur"] == "")
         {
-            $form .= '<div class="container main">';
-            $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '?requete=confirmation_html" method="get">';
-            $form .= '<div class="row">';
             $form .= '<div class="col-lg-4">';
-            $form .= '<h1>Réservation de chalet</h1>';
-            $form .= '<h2>' . $produit[$i]["nom"] . '</h2>';
-            $form .= '<img class="img-responsive" src="' . $produit[$i]["imageFacade"] . '" alt="image de façade">';
-            $form .= '<p>' . $produit[$i]["description"] .'</p>';
-            $form .= '</div>';
+            $form .= '<h2>Réservation</h2>';
+            $form .= '<h2>' . $produit["nom"] . '</h2>';
+            $form .= '<img class="img-responsive" src="' . $produit["imageFacade"] . '" alt="image de façade">';
+            $form .= '<h5>' . $produit["description"] .'</h5>';
+            $form .= '<h4> Prix par semaine : ' . $produit["prix_par_semaine"] .'$</h4>';
+            $form .= '</div> <!-- /.col-lg-4 -->';
             $form .= '<div class="col-lg-8">';
             $form .= '<h2>Semaine de réservation pour votre chalet</h2>';
             $form .= '<h4>Veuillez choisir la semaine de votre séjour</h4>';
             $form .= '<div class="semaineChoisi"></div>';
-            $form .= '<h4>Vous avez choisi la semaine :</h4>';
+            $form .= '<h4 class="msg_choix">Vous avez choisi la semaine :</h4>';
+            $form .= '<input type="hidden" id="numero_semaine" name="numero_semaine" value="">';
+            $form .= '<input type="hidden" id="date_debut" name="date_debut" value="">';
+            $form .= '<input type="hidden" id="date_fin" name="date_fin" value="">';
+            $form .= '<input type="hidden" id="prix_par_semaine" name="prix_par_semaine" value="' . $produit["prix_par_semaine"] . '">';
             $form .= '<h4><span id="semaine"></span> <span id="startDate"></span><span id="endDate"></strong></span></h4>';
             $form .= '<br/><br/>';
-            $form .= '<button type="submit" class="btn btn-custom-vert btn-lg">RÉSERVER</button>';
-            $form .= '</div><!--  fin  col-lg-12 -->';
-            $form .= '</div><!-- /.row -->';
-            $form .= '</form>';
-            $form .= '</div> <!-- /.container -->';
+            $form .= '<button type="submit" class="btn btn-custom-vert btn-lg btn_reserver">RÉSERVER</button>';
+            $form .= '</div> <!-- /.col-lg-8 -->';
         }
-        echo $form;
-
-        /*
-        $form = '';
-        $form .= '<form id="formulaire_reserver">';
-        $form .= '<h2>formulaire_reserver</h2>';
-
-        for ($i = 0; $i < count($produit); $i++) 
+        else
         {
-            $form .= '<p> id_produit: ' . $produit[$i]["id_produit"] . '</p>';
-            $form .= '<p> nom: ' . $produit[$i]["nom"] . '</p>';
-            $form .= '<p> imageFacade: ' . $produit[$i]["imageFacade"] . '</p>';
-            $form .= '<p> description: ' . $produit[$i]["description"] . '</p>';
+            $form .= '<div class="col-lg-12">';
+            $form .= '<h1>Erreur sur le formulaire réserver</h1>';
+            $form .= '<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">&nbsp</span>' . $_GET["erreur"] . '</div>';            
+            $form .= '</div> <!-- /.col-lg-12 -->';
         }
 
-        $form .= '<div class="erreur">';
-        $form .= '<p>' . $_GET["erreur"] . '</p>';
-        $form .= '</div>';
+        $form .= '<input type="hidden" name="requete" value="' . $_GET["requete"] . '">';
+        $form .= '</div> <!-- /.row -->';
         $form .= '</form>';
+        $form .= '</div> <!-- /.container -->';
+
         echo $form;
-        */
     }
 
 
     // function qui retourne le formulaire confirmation.html
-    public static function formulaire_confirmation($produit,$utilisateur,$dateDebut,$dateFin)
+    public static function formulaire_confirmation($produit,$utilisateur,$dateDebut,$dateFin,$numero_semaine)
     {
         $form = '';
-        $form .= '<div class="container main">';
+        $form .= '<div class="container">';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="get">';
+        $form .= '<div class="row">';
+
+        if ($_GET["erreur"] == "")
+        {
+            $form .= '<div class="col-lg-4">';
+            $form .= '<h2>Vos choix</h2>';
+            $form .= '<h2>' . $produit["nom"] . '</h2>';
+            $form .= '<img class="img-responsive" src="' . $produit["imageFacade"] . '" alt="image de façade">';
+            $form .= '<h5>' . $produit["description"] .'</h5>';
+            $form .= '<h4> Prix par semaine:' . $produit["prix_par_semaine"] .'$</h4>';
+            $form .= '<h4>Vos choix de dates:</h4>';
+            $form .= '<h4>DU ' . $dateDebut . ' AU ' . $dateFin . '</h4>';
+            $form .= '</div> <!-- /.col-lg-4 -->';
+            $form .= '<div class="col-lg-4">';
+            $form .= '<h2>Vos coordonnées</h2>';
+            $form .= '<p class="help-block">Veuillez vérifier vos coordonnées afin que nous puissions vous envoyez une confirmation de paiement</p>';
+            $form .= '<label>NOM</label><br/>';
+            $form .= '<input type="text" name="nom" value="' . $utilisateur["nom"] . '" readonly><br/>';
+            $form .= '<label>PRENOM</label><br/>';
+            $form .= '<input type="text" name="prenom" value="' . $utilisateur["prenom"] . '" readonly><br/>';
+            $form .= '<label>ADRESSE COURRIEL</label><br/>';
+            $form .= '<input type="text" name="courriel" value="' . $utilisateur["courriel"] . '" readonly><br/>';
+            $form .= '<label>DATE DE NAISSANCE</label><br/>';
+            $form .= '<input type="text" name="date_de_naissance" value="' . $utilisateur["date_de_naissance"] . '" readonly>';
+            $form .= '</div> <!-- /.col-lg-4 -->';
+            $form .= '<div class="col-lg-4">';
+            $form .= '<h2>Carte de crédit</h2>';
+            $form .= '<label>Carte de crédit</label><br/>';
+            $form .= '<select name="nom_carte" size="1" >';
+            $form .= '<option value="Mastercard">Mastercard</option>';
+            $form .= '<option value="Visa">Visa</option>';
+            $form .= '<option value="American Express">American Express</option>';
+            $form .= '</select><br/><br/><!-- fin de la sélection de province -->';
+            $form .= '<label>Numéro de votre carte</label>';
+            $form .= '<input type="text" name="numero_carte" placeholder="numéro de carte" required/><br/>';
+            $form .= '<label>Id au verso de votre carte</label>';
+            $form .= '<input type="text" name="id_carte" placeholder="ID" required/><br/>';
+            $form .= '<input type="hidden" id="numero_semaine" name="numero_semaine" value="' . $numero_semaine . '">';
+            $form .= '<input type="hidden" id="date_debut" name="date_debut" value="' . $dateDebut .'">';
+            $form .= '<input type="hidden" id="date_fin" name="date_fin" value="' . $dateFin .'">';
+            $form .= '<input type="hidden" id="prix_par_semaine" name="prix_a_la_reservation" value="' . $produit["prix_par_semaine"] . '">';
+            $form .= '<br/><br/>';
+            $form .= '<button type="submit" class="btn btn-custom-vert btn-lg">CONFIRMER</button><br/><br/>';
+            $form .= '<button type="button" class="btn btn-custom-gris btn-lg">&laquo; ÉTAPE PRÉCÉDENTE</button>';
+            $form .= '</div> <!-- /.col-lg-4 -->';
+        }
+        else
+        {
+            $form .= '<div class="col-lg-12">';
+            $form .= '<h1>Erreur sur le formulaire confirmation</h1>';
+            $form .= '<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">&nbsp</span>' . $_GET["erreur"] . '</div>';            
+            $form .= '</div>';
+        }
+
+        $form .= '<input type="hidden" name="requete" value="' . $_GET["requete"] . '">';
+        $form .= '</div> <!-- /.row -->';
+        $form .= '</form>';
+        $form .= '</div> <!-- /.container -->';
+
+        echo $form;
+    }
+
+    // function qui retourne le formulaire lors d'une création d'une réservation
+    public static function formulaire_creerUneReservation($produit,$utilisateur,$dateDebut,$dateFin,$numero_semaine,$nom_carte,$numero_carte,$id_carte,$prix_a_la_reservation)
+    {
+        $form = '';
+        $form .= '<div class="container">';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="get">';
         $form .= '<div class="row">';
         $form .= '<div class="col-lg-4">';
-        $form .= '<h2>Détail de vos choix</h2>';
-        $form .= '<h4>' . $produit[0]["nom"] . '</h4>';
-        $form .= '<img class="img-responsive" src="' . $produit[0]["imageFacade"] . '" alt="image de façade">';
-        $form .= '<p>' . $produit[0]["description"] .'</p>';
-        $form .= '<h4>VOS CHOIX DE DATES</h2>';
+        $form .= '<h2>Vos choix</h2>';
+        $form .= '<h2>' . $produit["nom"] . '</h2>';
+        $form .= '<img class="img-responsive" src="' . $produit["imageFacade"] . '" alt="image de façade">';
+        $form .= '<h5>' . $produit["description"] .'</h5>';
+        $form .= '<h4> Prix par semaine:' . $produit["prix_par_semaine"] .'$</h4>';
+        $form .= '<h4>Vos choix de dates:</h4>';
         $form .= '<h4>DU ' . $dateDebut . ' AU ' . $dateFin . '</h4>';
-        $form .= '</div><!--  fin -->';
+        $form .= '</div> <!-- /.col-lg-4 -->';
         $form .= '<div class="col-lg-4">';
         $form .= '<h2>Vos coordonnées</h2>';
         $form .= '<p class="help-block">Veuillez vérifier vos coordonnées afin que nous puissions vous envoyez une confirmation de paiement</p>';
-        $form .= '<form role="form">';
-        $form .= '<div class="form-group">';
-        $form .= '<label for="exampleInputEmail1">NOM</label>';
-        $form .= '<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Lepage">';
-        $form .= '</div>';
-        $form .= '<div class="form-group">';
-        $form .= '<label for="exampleInputPassword1">PRÉNOM</label>';
-        $form .= '<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Marie">';
-        $form .= '</div>';
-        $form .= '<div class="form-group">';
-        $form .= '<label for="exampleInputPassword1">ADRESSE COURRIEL</label>';
-        $form .= '<input type="password" class="form-control" id="exampleInputPassword1" placeholder="mariel@gmail.com">';
-        $form .= '</div>';
-        $form .= '<div class="form-group">';
-        $form .= '<label for="exampleInputPassword1">DATE DE NAISSANCE (jj-mm-aaaa)</label>';
-        $form .= '<input type="password" class="form-control" id="exampleInputPassword1" placeholder="10-30-56">';
-        $form .= '</div>';
-        $form .= '</form>';
-        $form .= '</div>';
+        $form .= '<label>NOM</label><br/>';
+        $form .= '<input type="text" name="nom" value="' . $utilisateur["nom"] . '" readonly><br/>';
+        $form .= '<label>PRENOM</label><br/>';
+        $form .= '<input type="text" name="prenom" value="' . $utilisateur["prenom"] . '" readonly><br/>';
+        $form .= '<label>ADRESSE COURRIEL</label><br/>';
+        $form .= '<input type="text" name="courriel" value="' . $utilisateur["courriel"] . '" readonly><br/>';
+        $form .= '<label>DATE DE NAISSANCE</label><br/>';
+        $form .= '<input type="text" name="date_de_naissance" value="' . $utilisateur["date_de_naissance"] . '" readonly>';
+        $form .= '</div> <!-- /.col-lg-4 -->';
         $form .= '<div class="col-lg-4">';
         $form .= '<h2>Carte de crédit</h2>';
-        $form .= '<form role="form">';
-        $form .= '<div class="libelle">';
-        $form .= '<label for="selCarte">Carte de crédit</label>';
-        $form .= '</div>';
-        $form .= '<select name="selCarte" size="1" >';
-        $form .= '<option value="MC">Mastercard</option>';
-        $form .= '<option value="VS">Visa</option>';
-        $form .= '<option value="AX">American Express</option>';
-        $form .= '</select><br/><br/><!-- fin de la sélection de province -->';
-        $form .= '<div class="libelle">';
-        $form .= '<label for="selCarte">Numéro de votre carte</label>';
-        $form .= '</div>';
-        $form .= '<input type="text" name="txtNumCarte" pattern="^[a-zA-Z\-\,\s\u00C0-\u00FF]{1,}$" placeholder="numéro de carte" required/><br/>';
-        $form .= '<div class="libelle">';
-        $form .= '<label for="selIdCarte">Id au verso de votre carte</label>';
-        $form .= '</div>';
-        $form .= '<input type="text" name="txtIdCarte" pattern="^[a-zA-Z\-\,\s\u00C0-\u00FF]{1,}$" placeholder="ID" required/><br/>';
-        $form .= '</form>';
+        $form .= '<label>Carte de crédit</label><br/>';
+        $form .= '<select name="nom_carte" size="1">';
+        if ($nom_carte == "Mastercard")
+        {
+            $form .= '<option value="Mastercard" selected>Mastercard</option>';
+            $form .= '<option value="Visa">Visa</option>';
+            $form .= '<option value="American Express">American Express</option>';
+        }
+        else if ($nom_carte == "Visa")
+        {
+            $form .= '<option value="Mastercard">Mastercard</option>';
+            $form .= '<option value="Visa" selected>Visa</option>';
+            $form .= '<option value="American Express">American Express</option>';
+        }
+        else
+        {
+            $form .= '<option value="Mastercard">Mastercard</option>';
+            $form .= '<option value="Visa">Visa</option>';
+            $form .= '<option value="American Express" selected>American Express</option>';
+        }
+        $form .= '</select><br/><br/>';
+        $form .= '<label>Numéro de votre carte</label>';
+        $form .= '<input type="text" name="numero_carte" placeholder="numéro de carte" value="' . $numero_carte . '" required/><br/>';
+        $form .= '<label>Id au verso de votre carte</label>';
+        $form .= '<input type="text" name="id_carte" placeholder="ID" value="' . $id_carte . '" required/><br/>';
+        $form .= '<input type="hidden" id="numero_semaine" name="numero_semaine" value="' . $numero_semaine . '">';
+        $form .= '<input type="hidden" id="date_debut" name="date_debut" value="' . $dateDebut .'">';
+        $form .= '<input type="hidden" id="date_fin" name="date_fin" value="' . $dateFin .'">';
+        $form .= '<input type="hidden" id="prix_par_semaine" name="prix_a_la_reservation" value="' . $produit["prix_par_semaine"] . '">';
+        $form .= '<br/>';
+
+        if (empty($_GET["message_confirmation"]))
+        {
+            $form .= '<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">&nbsp</span>' . $_GET["erreur"] . '</div>';            
+            $form .= '<button type="submit" class="btn btn-custom-vert btn-lg">CONFIRMER</button><br/><br/>';
+            $form .= '<button type="button" class="btn btn-custom-gris btn-lg">&laquo; ÉTAPE PRÉCÉDENTE</button>';
+        }
+        else
+        {
+            $form .= '<button type="button" class="btn btn-custom-gris btn-lg">&laquo; QUITTER</button>';
+        }
+        
         $form .= '<br/><br/>';
-        $form .= '<button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteConnexion("chalets.html")">CONFIRMER</button><br/><br/>';
-        $form .= '<button type="button" class="btn btn-custom-gris btn-lg" onclick="traiteConnexion("reserver.html")">&laquo; ÉTAPE PRÉCÉDENTE</button>';
-        $form .= '</div> <!--  fin -->';
+        $form .= '</div> <!-- /.col-lg-4 -->';
+        $form .= '<input type="hidden" name="requete" value="' . $_GET["requete"] . '">';
         $form .= '</div> <!-- /.row -->';
-        $form .= '</div> <!-- /.container -->';
-        echo $form;
-
-        /*
-        $form = '';
-        $form .= '<form id="formulaire_confirmation">';
-        $form .= '<h2>formulaire_confirmation</h2>';
-
-        for ($i = 0; $i < count($produit); $i++) 
-        {
-            $form .= '<p> id_produit: ' . $produit[$i]["id_produit"] . '</p>';
-            $form .= '<p> nom: ' . $produit[$i]["nom"] . '</p>';
-            $form .= '<p> imageFacade: ' . $produit[$i]["imageFacade"] . '</p>';
-            $form .= '<p> description: ' . $produit[$i]["description"] . '</p>';
-        }
-
-        for ($i = 0; $i < count($utilisateur); $i++) 
-        {
-            $form .= '<p> id_utilisateur: ' . $utilisateur[$i]["id_utilisateur"] . '</p>';
-            $form .= '<p> nom: ' . $utilisateur[$i]["nom"] . '</p>';
-            $form .= '<p> prenom: ' . $utilisateur[$i]["prenom"] . '</p>';
-            $form .= '<p> courriel: ' . $utilisateur[$i]["courriel"] . '</p>';
-            $form .= '<p> date_de_naissance: ' . $utilisateur[$i]["date_de_naissance"] . '</p>';
-        }
-
-        $form .= '<div class="erreur">';
-        $form .= '<p>' . $_GET["erreur"] . '</p>';
-        $form .= '</div>';
         $form .= '</form>';
+        
+        if (!empty($_GET["message_confirmation"]))
+        {
+            $form .= '<div class="alert alert-info"><span class="glyphicon glyphicon-ok">&nbsp</span>' . $_GET["message_confirmation"] . '</div>';     
+        }
+        
+        $form .= '</div> <!-- /.container -->';
+
         echo $form;
-        */
     }
 
+    // function qui retourne le formulaire historique.html
     public static function formulaire_historique($reservations)
     {
 
         $form = '';
-        $form .= '<div class="container main">';
+        $form .= '<div class="container">';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="get">';
         $form .= '<div class="row">';
-        $form .= '<div class="col-lg-12">';
-        $form .= '<h1>Historique de vos réservation</h1>';
-        $form .= '<h2>Détail sur vos réservation</h2>';
 
-        for ($i = 0; $i < count($reservations); $i++) 
-        {        
-            $form .= '<h4>' . $reservations[$i]["nom"] . ' du ' . $reservations[$i]["date_debut"] . ' au ' . $reservations[$i]["date_fin"] . '</h4>';
-            $form .= '<h4>Coût total de la réservation ' . $reservations[$i]["prix_a_la_reservation"] . '$</h4>';
-            $form .= '<p>' . $reservations[$i]["description"] . '</p>';
-            $form .= '<br/><br/>';
-        }
-
-        $form .= '<button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteConnexion("profil.html")">REVENIR AU PROFIL</button>';
-        $form .= '</div><!--  fin  col-lg-12 -->';
-        $form .= '</div><!-- /.row -->';
-        $form .= '</div> <!-- /.container -->';
-        echo $form;
-
-        /*
-        $form = '';
-        $form .= '<form id="formulaire_historique">';
-        $form .= '<h2>formulaire_historique</h2>';
-
-        for ($i = 0; $i < count($reservations); $i++) 
+        if ($_GET["erreur"] == "")
         {
-            $form .= '<p> id_reservation: ' . $reservations[$i]["id_reservation"] . '</p>';
-            $form .= '<p> id_produit: ' . $reservations[$i]["id_produit"] . '</p>';
-            $form .= '<p> date_debut: ' . $reservations[$i]["date_debut"] . '</p>';
-            $form .= '<p> date_fin: ' . $reservations[$i]["date_fin"] . '</p>';
-            $form .= '<p> numero_semaine: ' . $reservations[$i]["numero_semaine"] . '</p>';
-            $form .= '<p> nom_carte: ' . $reservations[$i]["nom_carte"] . '</p>';
-            $form .= '<p> numero_carte: ' . $reservations[$i]["numero_carte"] . '</p>';
-            $form .= '<p> id_carte: ' . $reservations[$i]["id_carte"] . '</p>';
-            $form .= '<p> prix_a_la_reservation: ' . $reservations[$i]["prix_a_la_reservation"] . '</p>';
+            $form .= '<div class="col-lg-12">';
+            $form .= '<h1>Historique de vos réservation</h1>';
+            $form .= '<h2>Détail sur vos réservation</h2>';
 
+            for ($i = 0; $i < count($reservations); $i++) 
+            {        
+                $form .= '<h4>' . $reservations[$i]["nom"] . ' du ' . $reservations[$i]["date_debut"] . ' au ' . $reservations[$i]["date_fin"] . '</h4>';
+                $form .= '<h4>Coût total de la réservation ' . $reservations[$i]["prix_a_la_reservation"] . '$</h4>';
+                $form .= '<p>' . $reservations[$i]["description"] . '</p>';
+                $form .= '<br/><br/>';
+            }
+
+            $form .= '</div><!--  fin  col-lg-12 -->';
+        }
+        else
+        {
+            $form .= '<div class="col-lg-12">';
+            $form .= '<h1>Historique de vos réservation</h1>';
+            $form .= '<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">&nbsp</span>' . $_GET["erreur"] . '</div>';            
+            $form .= '</div>';
         }
 
-        $form .= '<div class="erreur">';
-        $form .= '<p>' . $_GET["erreur"] . '</p>';
-        $form .= '</div>';
+        $form .= '<input type="hidden" name="requete" value="' . $_GET["requete"] . '">';
+        $form .= '</div> <!-- /.row -->';
         $form .= '</form>';
+        $form .= '</div> <!-- /.container -->';
+
         echo $form;
-        */
     }
 
+    // function qui retourne le formulaire reservations.html
     public static function formulaire_reservations($reservations)
     {
 
         $form = '';
-        $form .= '<div class="container main">';
+        $form .= '<div class="container">';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="get">';
         $form .= '<div class="row">';
-        $form .= '<div class="col-lg-12">';
-        $form .= '<h1>Détail sur toutes les réservation</h1>';
 
-        for ($i = 0; $i < count($reservations); $i++) 
-        {        
-            $form .= '<h2>Client: ' . $reservations[$i]["id_utilisateur"] . '</h2>';
-            $form .= '<h4>' . $reservations[$i]["nom"] . ' du ' . $reservations[$i]["date_debut"] . ' au ' . $reservations[$i]["date_fin"] . '</h4>';
-            $form .= '<h4>Coût total de la réservation ' . $reservations[$i]["prix_a_la_reservation"] . '$</h4>';
-            $form .= '<p>' . $reservations[$i]["description"] . '</p>';
-            $form .= '<br/><br/>';
-        }
-
-        $form .= '<button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteConnexion("profil.html")">REVENIR AU PROFIL</button>';
-        $form .= '</div><!--  fin  col-lg-12 -->';
-        $form .= '</div><!-- /.row -->';
-        $form .= '</div> <!-- /.container -->';
-        echo $form;
-
-        /*
-        $form = '';
-        $form .= '<form id="formulaire_reservations">';
-        $form .= '<h2>formulaire_reservations</h2>';
-
-        for ($i = 0; $i < count($reservations); $i++) 
+        if ($_GET["erreur"] == "")
         {
-            $form .= '<p> id_reservation: ' . $reservations[$i]["id_reservation"] . '</p>';
-            $form .= '<p> id_produit: ' . $reservations[$i]["id_produit"] . '</p>';
-            $form .= '<p> date_debut: ' . $reservations[$i]["date_debut"] . '</p>';
-            $form .= '<p> date_fin: ' . $reservations[$i]["date_fin"] . '</p>';
-            $form .= '<p> numero_semaine: ' . $reservations[$i]["numero_semaine"] . '</p>';
-            $form .= '<p> nom_carte: ' . $reservations[$i]["nom_carte"] . '</p>';
-            $form .= '<p> numero_carte: ' . $reservations[$i]["numero_carte"] . '</p>';
-            $form .= '<p> id_carte: ' . $reservations[$i]["id_carte"] . '</p>';
-            $form .= '<p> prix_a_la_reservation: ' . $reservations[$i]["prix_a_la_reservation"] . '</p>';
+            $form .= '<div class="col-lg-12">';
+            $form .= '<h1>Détail sur toutes les réservations</h1>';
 
+            for ($i = 0; $i < count($reservations); $i++) 
+            {        
+                $form .= '<h4>' . $reservations[$i]["nom"] . ' du ' . $reservations[$i]["date_debut"] . ' au ' . $reservations[$i]["date_fin"] . '</h4>';
+                $form .= '<h4>Courriel du client : ' . $reservations[$i]["courriel"] . '</h4>';
+                $form .= '<h4>Coût total de la réservation ' . $reservations[$i]["prix_a_la_reservation"] . '$</h4>';
+                $form .= '<p>' . $reservations[$i]["description"] . '</p>';
+                $form .= '<br/><br/>';
+            }
+
+            $form .= '</div><!--  fin  col-lg-12 -->';
+        }
+        else
+        {
+            $form .= '<div class="col-lg-12">';
+            $form .= '<h1>Détail sur toutes les réservations</h1>';
+            $form .= '<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">&nbsp</span>' . $_GET["erreur"] . '</div>';            
+            $form .= '</div>';
         }
 
-        $form .= '<div class="erreur">';
-        $form .= '<p>' . $_GET["erreur"] . '</p>';
-        $form .= '</div>';
+        $form .= '<input type="hidden" name="requete" value="' . $_GET["requete"] . '">';
+        $form .= '</div> <!-- /.row -->';
         $form .= '</form>';
-        echo $form;
-        */
-    }
+        $form .= '</div> <!-- /.container -->';
 
-    // function qui retourne le formulaire "visualiser une Commande" à panier.html
-    public static function formulaire_creerUneReservation($resultat)
-    {
-        $form = '';
-        $form .= '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>';
-        $form .= '<form id="formulaireCreerUneReservation">';
-        $form .= '<h2>Créer une réservation</h2>';
-        $form .= '<p> resultat: ' . $resultat . '</p>';    
-        $form .= '<div class="erreur">';
-        $form .= '<p>' . $_GET["erreur"] . '</p>';
-        $form .= '</div>';
-        $form .= '</form>';
-        $form .= '</body>';
-        $form .= '</html>';
         echo $form;
     }
 }

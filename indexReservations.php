@@ -1,14 +1,8 @@
 <?php
 
-// temporaire
-$_GET["requetePage"] = "client";
-$_GET["id_reservation"] = "";
+$_GET["requetePage"] = "admin";
 $_GET["id_utilisateur"] = 1;
-$_GET["id_produit"] = 2;
-$_GET["date_debut"] = "2014-01-19";
-$_GET["date_fin"] = "2014-01-25";
-$_GET["nombre_de_semaine"] = "";
-$_GET["prix_a_la_reservation"] = "";
+$_GET["id_produit"] = 1;
 
 /*****************************************/
 /* CONNEXION DE LA BASE DE DONNÉE EN PDO */
@@ -34,10 +28,8 @@ require_once("./vues/reservations.class.php");
 /**************/
 /* CONTROLEUR */
 /**************/
-/*****************************/
-/* il n'y a qu'un controleur */
-/*****************************/
-require_once("./controleurs/reservations.class.php"); // CONTROLEUR DE TEST POUR LES RÉSERVATIONS
+//require_once("./controleurs/reservations.class.test.php"); // CONTROLEUR DE TEST POUR LES RÉSERVATIONS
+require_once("./controleurs/reservations.class.php");
 
 /************************/
 /* SQUELETTES DES PAGES */
