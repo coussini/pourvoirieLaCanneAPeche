@@ -1,9 +1,5 @@
 <?php
 
-$_GET["requetePage"] = "admin";
-$_GET["id_utilisateur"] = 1;
-$_GET["id_produit"] = 1;
-
 /*****************************************/
 /* CONNEXION DE LA BASE DE DONNÉE EN PDO */
 /*****************************************/
@@ -49,6 +45,6 @@ if ($_GET["requeteAJAX"] == "")
 }
 else
 {
-    Controleur::gererRequetes($_GET["requeteAJAX"]);
+    Controleur::gererRequetes($_GET["requeteAJAX"],$_GET["id_produit"]);
 }
 ?>

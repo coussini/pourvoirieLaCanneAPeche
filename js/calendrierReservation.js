@@ -91,10 +91,10 @@ var CalendrierReservation = (function(win,doc,$)
         // Permet d'éliminer du calendrier toutes les semaines réservées
         // pour ce produit, question de ne pas permettre
         // de sélectionner des dates déjà réservées
-        elimineSemainesReservees: function() 
+        elimineSemainesReservees: function(parametreProduit) 
         {
             var source = "indexReservations.php";
-            var requete = "?requeteAJAX=req_chercher_dates_reservees";
+            var requete = "?requeteAJAX=req_chercher_dates_reservees&" + parametreProduit;
             var url = source + requete;
             var xhr = new XMLHttpRequest();
             

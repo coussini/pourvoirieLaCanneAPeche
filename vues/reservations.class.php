@@ -41,7 +41,7 @@ class VueReservations
     {
         $form = '';
         $form .= '<div class="container">';
-        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="get">';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="GET">';
         $form .= '<div class="row">';
 
         if ($_GET["erreur"] == "")
@@ -58,10 +58,15 @@ class VueReservations
             $form .= '<h4>Veuillez choisir la semaine de votre séjour</h4>';
             $form .= '<div class="semaineChoisi"></div>';
             $form .= '<h4 class="msg_choix">Vous avez choisi la semaine :</h4>';
+            $form .= '<input type="hidden" name="requetePage" value="' . $_GET["requetePage"] . '">';
+            $form .= '<input type="hidden" name="id_utilisateur" value="' . $_GET["id_utilisateur"] . '">';
+            $form .= '<input type="hidden" name="id_produit" value="' . $_GET["id_produit"] . '">';
+            // les champs numero_semaine, date_debut et date_fin ont été manipulé dans calendrierReservation.js(preparerLeCalendrier)
+            // elle proviennent des champs id="semaine", id="startDate" et id="endDate"
             $form .= '<input type="hidden" id="numero_semaine" name="numero_semaine" value="">';
             $form .= '<input type="hidden" id="date_debut" name="date_debut" value="">';
             $form .= '<input type="hidden" id="date_fin" name="date_fin" value="">';
-            $form .= '<input type="hidden" id="prix_par_semaine" name="prix_par_semaine" value="' . $produit["prix_par_semaine"] . '">';
+            $form .= '<input type="hidden" name="prix_par_semaine" value="' . $produit["prix_par_semaine"] . '">';
             $form .= '<h4><span id="semaine"></span> <span id="startDate"></span><span id="endDate"></strong></span></h4>';
             $form .= '<br/><br/>';
             $form .= '<button type="submit" class="btn btn-custom-vert btn-lg btn_reserver">RÉSERVER</button>';
@@ -89,11 +94,11 @@ class VueReservations
     {
         $form = '';
         $form .= '<div class="container">';
-        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="get">';
-        $form .= '<div class="row">';
 
         if ($_GET["erreur"] == "")
         {
+            $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
+            $form .= '<div class="row">';
             $form .= '<div class="col-lg-4">';
             $form .= '<h2>Vos choix</h2>';
             $form .= '<h2>' . $produit["nom"] . '</h2>';
@@ -127,10 +132,13 @@ class VueReservations
             $form .= '<input type="text" name="numero_carte" placeholder="numéro de carte" required/><br/>';
             $form .= '<label>Id au verso de votre carte</label>';
             $form .= '<input type="text" name="id_carte" placeholder="ID" required/><br/>';
-            $form .= '<input type="hidden" id="numero_semaine" name="numero_semaine" value="' . $numero_semaine . '">';
-            $form .= '<input type="hidden" id="date_debut" name="date_debut" value="' . $dateDebut .'">';
-            $form .= '<input type="hidden" id="date_fin" name="date_fin" value="' . $dateFin .'">';
-            $form .= '<input type="hidden" id="prix_par_semaine" name="prix_a_la_reservation" value="' . $produit["prix_par_semaine"] . '">';
+            $form .= '<input type="hidden" name="requetePage" value="' . $_GET["requetePage"] . '">';
+            $form .= '<input type="hidden" name="id_utilisateur" value="' . $_GET["id_utilisateur"] . '">';
+            $form .= '<input type="hidden" name="id_produit" value="' . $_GET["id_produit"] . '">';
+            $form .= '<input type="hidden" name="numero_semaine" value="' . $numero_semaine . '">';
+            $form .= '<input type="hidden" name="date_debut" value="' . $dateDebut .'">';
+            $form .= '<input type="hidden" name="date_fin" value="' . $dateFin .'">';
+            $form .= '<input type="hidden" name="prix_a_la_reservation" value="' . $produit["prix_par_semaine"] . '">';
             $form .= '<br/><br/>';
             $form .= '<button type="submit" class="btn btn-custom-vert btn-lg">CONFIRMER</button><br/><br/>';
             $form .= '<button type="button" class="btn btn-custom-gris btn-lg">&laquo; ÉTAPE PRÉCÉDENTE</button>';
@@ -138,6 +146,8 @@ class VueReservations
         }
         else
         {
+            $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="GET">';
+            $form .= '<div class="row">';
             $form .= '<div class="col-lg-12">';
             $form .= '<h1>Erreur sur le formulaire confirmation</h1>';
             $form .= '<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">&nbsp</span>' . $_GET["erreur"] . '</div>';            
@@ -157,7 +167,7 @@ class VueReservations
     {
         $form = '';
         $form .= '<div class="container">';
-        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="get">';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
         $form .= '<div class="row">';
         $form .= '<div class="col-lg-4">';
         $form .= '<h2>Vos choix</h2>';
@@ -206,7 +216,10 @@ class VueReservations
         $form .= '<label>Numéro de votre carte</label>';
         $form .= '<input type="text" name="numero_carte" placeholder="numéro de carte" value="' . $numero_carte . '" required/><br/>';
         $form .= '<label>Id au verso de votre carte</label>';
-        $form .= '<input type="text" name="id_carte" placeholder="ID" value="' . $id_carte . '" required/><br/>';
+        $form .= '<input type="text" name="id_carte" placeholder="ID" value="' . $_GET["id_carte"] . '" required/><br/>';
+        $form .= '<input type="hidden" name="requetePage" value="' . $_GET["requetePage"] . '">';
+        $form .= '<input type="hidden" name="id_utilisateur" value="' . $_GET["id_utilisateur"] . '">';
+        $form .= '<input type="hidden" name="id_produit" value="' . $_GET["id_produit"] . '">';
         $form .= '<input type="hidden" id="numero_semaine" name="numero_semaine" value="' . $numero_semaine . '">';
         $form .= '<input type="hidden" id="date_debut" name="date_debut" value="' . $dateDebut .'">';
         $form .= '<input type="hidden" id="date_fin" name="date_fin" value="' . $dateFin .'">';
@@ -246,7 +259,7 @@ class VueReservations
 
         $form = '';
         $form .= '<div class="container">';
-        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="get">';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="GET">';
         $form .= '<div class="row">';
 
         if ($_GET["erreur"] == "")
@@ -287,7 +300,7 @@ class VueReservations
 
         $form = '';
         $form .= '<div class="container">';
-        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="get">';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="GET">';
         $form .= '<div class="row">';
 
         if ($_GET["erreur"] == "")

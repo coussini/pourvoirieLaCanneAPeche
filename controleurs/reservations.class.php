@@ -2,7 +2,7 @@
 
 class Controleur
 {
-    public static function gererRequetes($requeteAJAX)
+    public static function gererRequetes($requeteAJAX,$id_produit)
     {
 
         // si le champ requete dédié au appel AJAX est vide, on
@@ -23,7 +23,7 @@ class Controleur
         switch ($requete) 
         {
             case 'req_chercher_dates_reservees':
-                self::req_chercher_dates_reservees();
+                self::req_chercher_dates_reservees($id_produit);
                 break;        
             case 'reserver_html':
                 self::req_reserver();
@@ -47,12 +47,12 @@ class Controleur
     }
 
     // extraire les données pour générer le calendrier de réservation
-    private static function req_chercher_dates_reservees()
+    private static function req_chercher_dates_reservees($id_produit)
     {
         try
         {
             $oReservations = new Reservations();
-            $reservations = $oReservations->extraireLesReservationPourCeProduit($_GET["id_produit"]);
+            $reservations = $oReservations->extraireLesReservationPourCeProduit($id_produit);
             VueReservations::formulaire_chercher_dates_reservees($reservations);
         }
         catch(Exception $e)

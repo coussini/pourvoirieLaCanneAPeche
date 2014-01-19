@@ -70,7 +70,7 @@
         </div>
       </div>
     </div>
-    <?php Controleur::gererRequetes(""); ?>
+    <?php Controleur::gererRequetes("",""); ?>
      <footer>
         <p>&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
     </footer>
