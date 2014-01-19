@@ -47,9 +47,8 @@
       </div>
     </div>
     <?php Controleur::gererRequetes(""); ?>
-     <footer>
-        <br/>
-        <p>&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
+    <footer>
+      <p>&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
     </footer>
     <script src="./js/jqueryStatique.js"></script>
   </body>

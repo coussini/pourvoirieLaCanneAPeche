@@ -72,7 +72,6 @@
     </div>
     <?php Controleur::gererRequetes(""); ?>
      <footer>
-        <br/>
         <p>&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
     </footer>
   </body>
