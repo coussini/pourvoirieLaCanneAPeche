@@ -61,7 +61,7 @@
             <li><a href="./index.php?requete=chalets_html"><img src="./images/chalets.png" alt="image chalets" class="img-responsive hidden-xs"><span class="titresMenu">NOS CHALETS</span></a></li>
             <li><a href="./index.php?requete=informations_html"><img src="./images/info.png" alt="image infos" class="img-responsive hidden-xs"><span class="titresMenu">INFORMATIONS</span></a></li>
             <li><a href="./index.php?requete=contact_html"><img src="./images/contact.png" alt="image contact" class="img-responsive hidden-xs"><span class="titresMenu">CONTACT</span></a></li>
-            <li><img src="./images/connexion.png" alt="cadenas" class="img-responsive hidden-xs">
+            <li><!-- <img src="./images/connexion.png" alt="cadenas" class="img-responsive hidden-xs"> -->
             <a href="./html/profil.html"><span class="titresLogin">PROFIL</span>
             <a href="./html/login.html"><span class="titresLogin">CONNEXION</span></a>
             <a href="#"><span class="titresLogin">DÉCONNEXION</span></a>
