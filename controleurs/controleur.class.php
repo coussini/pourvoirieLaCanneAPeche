@@ -81,24 +81,23 @@ class Controleur
             case 'creerContenuStatique':  
                 self::req_creerContenuStatique();
                 break;
-			case 'req_valideLogin':
-				self::req_valideLogin();
+			case 'req_loginUtilisateur':
+				self::req_loginUtilisateur();
 				break;
-				
 			case 'req_extraireUtilisateur':
 				self::req_extraireUtilisateur();
 				break;	
-				
 			case 'req_majUtilisateur':
 				self::req_majUtilisateur();
 				break;
-
 			case 'req_ajoutUtilisateur':
 				self::req_ajoutUtilisateur();
 				break;	
-				
-			case 'req_oubliePass':
-				self::req_oubliePass();
+            case 'req_oubliePass':
+                self::req_oubliePass();
+                break;  
+			case 'req_messageOubliePass':
+				self::req_messageOubliePass();
 				break;	
             default:
                 self::req_accueil();
@@ -559,6 +558,22 @@ class Controleur
             VueStatiques::formulaire_erreur();
         }
     }
+    // traitement formulaire login
+     private static function req_loginUtilisateur()
+    {
+        try
+        {
+            $oUtilisateurs = new Utilisateurs();
+            VueUtilisateurs::formulaire_loginUtilisateur();
+                
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            VueUtilisateurs::formulaire_erreur();
+        }
+    } 
+
 	// traitement formulaire login
 	 private static function req_valideLogin()
 	{
@@ -567,14 +582,13 @@ class Controleur
 			
 			$oUtilisateurs = new Utilisateurs();
 			
-			//$id_utilisateur = $oUtilisateurs->chercherIdUtilisateur($_GET["courriel"]);  a remetre
-			
-											//fonction chercherIdUtilisateur
-			$id_utilisateur = $oUtilisateurs->chercherUtilisateur("toto@gmail.com");
-			if($id_utilisateur==0){
-				$utilisateur_present="false";
-			}else $utilisateur_present="true";
-            VueUtilisateurs::formulaire_validLogin($utilisateur_present);
+			$utilisateurs = $oUtilisateurs->chercherUtilisateur($_POST['courriel']);
+            // TODO METTRE ENCRYPTION DU MOT DE PASSE
+            // PENSER À UNE VARIABLE DE SESSION OU WEBSTORAGE
+            if ($utilisateurs["mot_de_passe"] != $_POST['mot_de_passe'])
+            {
+                VueUtilisateurs::formulaire_validLogin($utilisateurs);
+            }
 				
 		}
 		catch(Exception $e)
@@ -653,18 +667,37 @@ class Controleur
 			
 		}	
 	} 
+    
+    //-------------------------------------ETAPE 5 TEST MOT DE PASS OUBLIÉ-------------------------------------
+    //----------------------------------------------------------------------------------------------------------
+    // extraire les information sur utilisateur
+    
+     private static function req_oubliePass()
+    {
+        try
+        {
+            $oUtilisateurs = new Utilisateurs();                        
+            VueUtilisateurs::formulaire_oubliePass();
+        }
+                
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            VueUtilisateurs::formulaire_erreur();
+            
+        }   
+    } 
 	
 	//-------------------------------------ETAPE 5 TEST MOT DE PASS OUBLIÉ-------------------------------------
 	//----------------------------------------------------------------------------------------------------------
 	// extraire les information sur utilisateur
 	
-	 private static function req_oubliePass()
+	 private static function req_messageOubliePass()
 	{
 		try
 		{
 			$oUtilisateurs = new Utilisateurs();						
-			$utilisateurs = $oUtilisateurs->chercherUtilisateur($_GET["courriel"]);
-            VueUtilisateurs::formulaire_oubliePass($utilisateurs);
+            VueUtilisateurs::formulaire_messageOubliePass();
 		}
 				
 		catch(Exception $e)

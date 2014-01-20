@@ -150,7 +150,7 @@ class VueReservations
             $form .= '<div class="row">';
             $form .= '<div class="col-lg-12">';
             $form .= '<h1>Erreur sur le formulaire confirmation</h1>';
-            $form .= '<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">&nbsp</span>' . $_GET["erreur"] . '</div>';            
+            $form .= '<div class="alert alert-da nger"><span class="glyphicon glyphicon-warning-sign">&nbsp</span>' . $_GET["erreur"] . '</div>';            
             $form .= '</div>';
         }
 

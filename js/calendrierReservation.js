@@ -93,7 +93,7 @@ var CalendrierReservation = (function(win,doc,$)
         // de sélectionner des dates déjà réservées
         elimineSemainesReservees: function(parametreProduit) 
         {
-            var source = "indexReservations.php";
+            var source = "index.php";
             var requete = "?requeteAJAX=req_chercher_dates_reservees&" + parametreProduit;
             var url = source + requete;
             var xhr = new XMLHttpRequest();

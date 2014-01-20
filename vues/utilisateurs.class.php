@@ -5,7 +5,7 @@ class VueUtilisateurs
 	//----------------------------------------------------------------------------------------------------------------------
 	
 	// function qui retourne le formulaire "login"
-    public static function formulaire_validLogin()
+    public static function formulaire_loginUtilisateur()
     {
 		$form = '';
 
@@ -16,19 +16,81 @@ class VueUtilisateurs
 		$form .= '<p>ÊTES VOUS DEJA INSCRIT? NON? INCRIVEZ-VOUS!</p>';
 		$form .= '</div>';
 		$form .= '<div class="formlogin col-md-5"><!--formulaire login -->';
-		$form .= '<form role="form">';
+		
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
 		$form .= '<div class="form-group">';
 		$form .= '<label for="exampleInputEmail1">ADRESSE COURRIEL</label>';
-		$form .= '<input type="email" class="form-control" id="exampleInputEmail1" placeholder="nom@domain.com">';
+		$form .= '<input type="email" class="form-control" name="courriel" id="courriel" placeholder="nom@domain.com" required>';
 		$form .= '</div>';
 		$form .= '<div class="form-group">';
 		$form .= '<label for="exampleInputPassword1">MOT DE PASSE</label>';
-		$form .= '<input type="password" class="form-control" id="exampleInputPassword1" placeholder="*******">';
+		$form .= '<input type="password" class="form-control" name="mot_de_passe" id="mot_de_passe" placeholder="*******" required>';
 		$form .='</div>';
-		$form .= '<a href="nouveaupass.html">MOT DE PASSE OUBLIÉ?</a>';                            
-		$form .='<button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteSiAdmin("connectionok.html")">CONNECTER</button>';                              
+		$form .= '<a href="./index.php?requete=req_oubliePass">MOT DE PASSE OUBLIÉ?</a>'; 
+        $form .= '<input type="hidden" name="requete" value="req_valideLogin">';
+		$form .='<button type="submit" class="btn btn-custom-vert btn-lg">CONNECTER</button>';                              
 		$form .='<br>';
 		$form .='</form>';
+
+		$form .='</div><!--fin formulaire login -->';
+		$form .='<div class="formlogin2 col-md-6">';
+		$form .='<p>NOUVEL UTILISATEUR?</p>';                   
+		$form .= '<button type="button" class="btn btn-custom-gris btn-lg" onclick="traiteConnexion("inscription.html")">SINSCRIRE</button>';
+		$form .= '<div class="telephone">';
+		$form .= ' <p>869.458.1273</p>';
+		$form .= '</div>';
+		$form .= '</div><!--formlogin col-md-6-->';
+		$form .='</div><!-- /.frm_general -->';              
+		$form .= '</div><!-- /.row -->';
+		$form .= '</div> <!-- /.container -->';
+
+		echo $form;
+
+      } 
+	//----------------------------------------------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------------------------------------
+	
+	// function qui retourne le formulaire "login"
+    public static function formulaire_validLogin($utilisateurs)
+    {
+		$form = '';
+
+		$form .= '<div class="container">';
+		$form .= '<div class="row">';
+		$form .= '<div class="col-md-8 frm_general">';       
+		$form .= '<div class="col-md-8 grostitres">';
+		$form .= '<p>ÊTES VOUS DEJA INSCRIT? NON? INCRIVEZ-VOUS!</p>';
+		$form .= '</div>';
+		$form .= '<div class="formlogin col-md-5"><!--formulaire login -->';
+		
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
+		$form .= '<div class="form-group">';
+		$form .= '<label for="courriel">ADRESSE COURRIEL</label>';
+		$form .= '<input type="email" class="form-control" name="courriel" id="courriel" placeholder="nom@domain.com" required>';
+		$form .= '</div>';
+		$form .= '<div class="form-group">';
+		$form .= '<label for="mot_de_passe">MOT DE PASSE</label>';
+		$form .= '<input type="password" class="form-control" name="mot_de_passe" id="mot_de_passe" placeholder="*******" required>';
+		$form .='</div>';
+		$form .= '<a href="./index.php?requete=req_oubliePass">MOT DE PASSE OUBLIÉ?</a>'; 
+        if ($utilisateurs["mot_de_passe"] != $_POST['mot_de_passe'])
+        {
+        	$form .= '<input type="hidden" name="requete" value="req_valideLogin">';
+    	}
+    	else
+    	{
+        	$form .= '<input type="hidden" name="requete" value="">';
+    	}
+		$form .='<button type="submit" class="btn btn-custom-vert btn-lg">CONNECTER</button>';                              
+        $form .= '<br/><br/>';
+        
+        if ($utilisateurs["mot_de_passe"] != $_POST['mot_de_passe'])
+        {
+	        $form .= '<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">&nbsp</span>Erreur de mot de passe</div>';            
+        }
+
+		$form .='</form>';
+
 		$form .='</div><!--fin formulaire login -->';
 		$form .='<div class="formlogin2 col-md-6">';
 		$form .='<p>NOUVEL UTILISATEUR?</p>';                   
@@ -49,7 +111,7 @@ class VueUtilisateurs
     //----------------------------------------------------------------------------------------------------------------------
     
      // function qui retourne le formulaire "de mot de passe oublié"
-    public static function formulaire_oubliePass($utilisateurs)
+    public static function formulaire_oubliePass()
     {
        $form = '';
 
@@ -60,14 +122,50 @@ class VueUtilisateurs
         $form .= '<p>NOUVEAU MOT DE PASSE VOUS SERA ENVOYÉ PAR COURRIEL</p>';
         $form .= '</div>';
         $form .= '<div class="col-md-6 pwoublie"><!--formulaire login -->';
-        $form .= '<form role="form">';
+        
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="GET">';
         $form .= '<div class="form-group">';
         $form .= '<label for="courriel">ADRESSE COURRIEL</label>';
-        $form .= '<input type="email" class="form-control" id="courriel" placeholder="Votre courriel">';
-        $form .= '</div>';                
-        $form .= '<button type="button" class="btn btn-custom-gris btn-lg" onclick="traiteConnexion("../index.html")">ENVOYER</button>';
+        $form .= '<input type="email" class="form-control" id="courriel" name="courriel" placeholder="Votre courriel" required>';
+        $form .= '</div>';  
+        $form .= '<input type="hidden" name="requete" value="req_messageOubliePass">';
+        $form .= '<button type="submit" class="btn btn-custom-gris btn-lg">ENVOYER</button>';
         $form .= '<br>';
         $form .= '</form>';
+        
+        $form .= '</div><!--formlogin col-md-6 pwoublie-->';
+        $form .='</div><!-- /.frm_general -->';              
+        $form .= '</div><!-- /.row -->';
+        $form .= '</div> <!-- /.container -->';
+
+        echo $form;
+
+      } 
+    
+     // function qui retourne le formulaire "de mot de passe oublié"
+    public static function formulaire_messageOubliePass()
+    {
+       $form = '';
+
+        $form .= '<div class="container">';
+        $form .= '<div class="row">';
+        $form .= '<div class="col-md-8 frm_general">';       
+        $form .= '<div class="col-md-8 grostitres">';
+        $form .= '<p>NOUVEAU MOT DE PASSE VOUS SERA ENVOYÉ PAR COURRIEL</p>';
+        $form .= '</div>';
+        $form .= '<div class="col-md-6 pwoublie"><!--formulaire login -->';
+        
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="GET">';
+        $form .= '<div class="form-group">';
+        $form .= '<label for="courriel">ADRESSE COURRIEL</label>';
+        $form .= '<input type="email" class="form-control" id="courriel" name="courriel" value="'. $_GET['courriel'] .'" placeholder="Votre courriel">';
+        $form .= '</div>';  
+        $form .= '<input type="hidden" name="requete" value="req_messageOubliePass">';
+        $form .= '<button type="button" class="btn btn-custom-gris btn-lg" onclick="traiteConnexion("../index.html")">ENVOYER</button>';
+        $form .= '<br/><br/>';
+        $form .= '<div class="alert alert-info"><span class="glyphicon glyphicon-ok">&nbsp</span>Votre nouveau mot de passe à été envoyé à votre courriel</div>';     
+        $form .= '</form>';
+        
         $form .= '</div><!--formlogin col-md-6 pwoublie-->';
         $form .='</div><!-- /.frm_general -->';              
         $form .= '</div><!-- /.row -->';

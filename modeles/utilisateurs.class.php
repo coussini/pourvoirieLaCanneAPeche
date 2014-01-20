@@ -17,6 +17,8 @@ class Utilisateurs
 	// RETOURNE 0 si le courriel n'est pas trouvé
 	public function chercherUtilisateur($courriel)
 	{
+
+        $utilisateurs = array();
 		
 		if ($courriel == "")
 		{
@@ -28,7 +30,8 @@ class Utilisateurs
 
 		$id = $this->connexionBD;
 		
-		$requete = $id->prepare("SELECT id_utilisateur 
+		$requete = $id->prepare("SELECT id_utilisateur,
+										mot_de_passe 
 										 FROM utilisateurs 
 										 WHERE courriel = :courriel 
 										 AND statut= 'actif'");
@@ -40,18 +43,20 @@ class Utilisateurs
 		$requete->bindParam(':courriel',$courriel,PDO::PARAM_STR);
 		$requete->execute();
 		$requete->bindColumn('id_utilisateur',$id_utilisateur);
+		$requete->bindColumn('mot_de_passe',$mot_de_passe);
 		
-		$idUtilisateur = 0; // on met par défaut à zéro
+         $resultat = $requete->fetchColumn(PDO::FETCH_BOUND);
 
-		while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
-		{
-			$idUtilisateur = $id_utilisateur;        
-		}
+        if ($requete->rowCount() > 0)
+        {
+            $utilisateurs["id_utilisateur"] = $id_utilisateur;
+            $utilisateurs["mot_de_passe"] = $mot_de_passe;
+        }
 
 		$requete->closeCursor();
 		$id=null;
 
-		return $idUtilisateur;
+		return $utilisateurs;
 	}
 
 	//----------------------------------------------------------------------------------------------------------------------
