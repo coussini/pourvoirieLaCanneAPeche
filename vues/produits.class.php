@@ -122,20 +122,23 @@ class VueProduits
 
 //----------------------------------------------------------------------------------------------------------------------//
     
-        public static function formulaire_editerChalet($produits)
+        public static function formulaire_editerChalet()
     {
 
-        $form .= '';
+        $form = '';
         $form .= '<div class="container main">';
-        $form .= '<section class="contenu-centre">';  
-        $form .= '<div class="row">';  
+        $form .= '<section class="contenu-centre">';
+        $form .= '<div class="row">';
+        $form .= '<div class="col-lg-12">';
+        $form .= '<h4>PANNEAU D\'ÉDITION :</h4>';
+        $form .= '</div>';
         $form .= '<div class="col-lg-4">';
         $form .= '<h4><p class="img-thumbnail"> Le chalet 1 : </p></h4>';
-        $form .= '<img src="images/chalet1.jpg" alt="chalet-accueil" class="img-thumbnail">';    
+        $form .= '<img src="./images/chalet1.jpg" alt="chalet-accueil" class="img-thumbnail">';
         $form .= '<ul class="pagination">';
-        $form .= '<li><a href="chalet1.html" id="chalet1">1</a></li>';
-        $form .= '<li><a href="chalet2.html" id="chalet2">2</a></li>';
-        $form .= '<li><a href="chalet3.html" id="chalet3">3</a></li>';
+        $form .= '<li><a href="chalet1.html">1</a></li>';
+        $form .= '<li><a href="chalet2.html">2</a></li>';
+        $form .= '<li><a href="chalet3.html">3</a></li>';
         $form .= '<li><a href="#">4</a></li>';
         $form .= '<li><a href="#">5</a></li>';
         $form .= '<li><a href="#">6</a></li>';
@@ -144,28 +147,28 @@ class VueProduits
         $form .= '</ul>';
         $form .= '<div class="form-group">';
         $form .= '<label for="exampleInputFile">Modifier l\'image</label>';
-        $form .= '<input type="file" id="imageTelecharge">';
+        $form .= '<input type="file" id="exampleInputFile">';
         $form .= '</div>';
-        $form .= '<p>Description :<textarea rows="4" cols="50" id="description"></textarea></p>';
+        $form .= '<p>Description :<textarea rows="4" cols="50"></textarea></p>';
         $form .= '</div>';
         $form .= '<div class="col-lg-4">';
         $form .= '<h4><p class="img-thumbnail">Options du chalet :</p></h4>';
         $form .= '<div class="col-lg-12">';
         $form .= '<ul class="list-group">';
         $form .= '<li class="list-group-item"><label>Nombre de chambre :</label></li>';
-        $form .= '<li class="list-group-item"><label><input type="radio" name="chambre" checked = "checked" value="1"> 1 </label>';
-        $form .= '<label><input type="radio" name="chambre" value="2"> 2 </label>';
-        $form .= '<label><input type="radio" name="chambre" value="3"> 3 </label>';
-        $form .= '<label><input type="radio" name="chambre" value="4"> 4 </label>';
-        $form .= '<label><input type="radio" name="chambre" value="5"> 5 </label>';
+        $form .= '<li class="list-group-item"><label><input type="radio" name="lit" checked = "checked"> 1 </label>';
+        $form .= '<label><input type="radio" name="lit"> 2 </label>';
+        $form .= '<label><input type="radio" name="lit"> 3 </label>';
+        $form .= '<label><input type="radio" name="lit"> 4 </label>';
+        $form .= '<label><input type="radio" name="lit"> 5 </label>';
         $form .= '</li>';
         $form .= '</ul>';
         $form .= '<hr>';
         $form .= '<ul class="list-group">';
         $form .= '<li class="list-group-item"><label>Nombre de salle de bain :</label></li>';
         $form .= '<li class="list-group-item"><label>';
-        $form .= '<input type="radio" checked = "checked" name="bain" value="1">1</label>';
-        $form .= '<label><input type="radio" name="bain" value="2">2</label>';
+        $form .= '<input type="radio" checked = "checked" name="bain">1</label>';
+        $form .= '<label><input type="radio" name="bain">2</label>';
         $form .= '</li>';
         $form .= '</ul>';
         $form .= '</div>';
@@ -173,19 +176,19 @@ class VueProduits
         $form .= '<div class="col-lg-3">';
         $form .= '<h4><p class="img-thumbnail">Prix de location :</p></h4>';
         $form .= '<ul class="list-group">';
-        $form .= '<li class="list-group-item"><label>Par semaine : <br><input type="text" id="prixLocation" value="000.00">$can</label></li>';
+        $form .= '<li class="list-group-item"><label>Par semaine : <br><input type="text" value="000.00">$</label></li>';
         $form .= '</ul>';
         $form .= '</div>';
         $form .= '<div class="row">';
         $form .= '<div class="col-lg-4 col-lg-offset-8">';
-        $form .= '<p><a class="btn btn-custom-gris btn-lg" href="#">Réinitialiser</a><a class="btn btn-custom-vert btn-lg" method="post" type="submit" href="#">Publier</a></p>';
+        $form .= '<p><a class="btn btn-custom-gris btn-lg" href="#">Réinitialiser</a><a class="btn btn-custom-vert btn-lg" href="#">Publier</a></p>';
         $form .= '</div>';
         $form .= '</div>';
         $form .= '</div>';
         $form .= '</section>';
         $form .= '</div>';
 
-    echo $form;
+        echo $form;
 
     }
 

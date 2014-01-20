@@ -310,10 +310,10 @@ class Controleur
     {
         try
         {
-            $oProduits = new Produits();
-            $Produits = $oProduits->selectUnProduit('1');
-            
-            VueProduits::formulaire_editerChalet($Produits);
+            //$oProduits = new Produits();
+            //$Produits = $oProduits->selectUnProduit('1');
+            //VueProduits::formulaire_editerChalet($Produits);
+            VueProduits::formulaire_editerChalet();
         }
         
         catch(Exception $e)
