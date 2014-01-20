@@ -647,19 +647,11 @@ class Controleur
 	{
 		try
 		{
-			 if($_GET['action'] == 'inscrire')
-			 {
-				$oUtilisateurs = new Utilisateurs();
-				var_dump($_POST);
-				$utilisateursnew = $oUtilisateurs->ajoutUtilisateur($_POST["nom"],$_POST["prenom"],$_POST["courriel"], $_POST["mot_de_passe"],$_POST["date_de_naissance"]);
-				//TODO : Qu'est-ce que fais apres...
-			 }
-			 else
-			 {
-				VueUtilisateurs::formulaire_ajoutUtilisateur();
-			 }
-		}
-				
+			//$oUtilisateurs = new Utilisateurs();
+			//$utilisateursnew = $oUtilisateurs->ajoutUtilisateur($_POST["nom"],$_POST["prenom"],$_POST["courriel"], $_POST["mot_de_passe"],$_POST["date_de_naissance"]);
+			//TODO : Qu'est-ce que fais apres...
+            VueUtilisateurs::formulaire_ajoutUtilisateur();
+        }
 		catch(Exception $e)
 		{
 			$_GET['erreur']  = $e->getMessage();

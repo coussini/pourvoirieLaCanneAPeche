@@ -34,8 +34,9 @@ class VueUtilisateurs
 
 		$form .='</div><!--fin formulaire login -->';
 		$form .='<div class="formlogin2 col-md-6">';
-		$form .='<p>NOUVEL UTILISATEUR?</p>';                   
-		$form .= '<button type="button" class="btn btn-custom-gris btn-lg" onclick="traiteConnexion("inscription.html")">SINSCRIRE</button>';
+		$form .='<p>NOUVEL UTILISATEUR?</p>';        
+		$form .= '<a class="btn btn-custom-gris btn-lg" href="./index.php?requete=req_ajoutUtilisateur">S\'INSCRIRE</a>'; 		           
+		//$form .= '<button type="button" class="btn btn-custom-gris btn-lg" onclick="traiteConnexion("inscription.html")">SINSCRIRE</button>';
 		$form .= '<div class="telephone">';
 		$form .= ' <p>869.458.1273</p>';
 		$form .= '</div>';
@@ -93,8 +94,11 @@ class VueUtilisateurs
 
 		$form .='</div><!--fin formulaire login -->';
 		$form .='<div class="formlogin2 col-md-6">';
-		$form .='<p>NOUVEL UTILISATEUR?</p>';                   
-		$form .= '<button type="button" class="btn btn-custom-gris btn-lg" onclick="traiteConnexion("inscription.html")">SINSCRIRE</button>';
+		$form .='<p>NOUVEL UTILISATEUR?</p>';     
+
+		$form .= '<a href="./index.php?requete=req_ajoutUtilisateur">S\'INSCRIRE</a>'; 
+		//$form .= '<button type="button" class="btn btn-custom-gris btn-lg" onclick="traiteConnexion("inscription.html")">SINSCRIRE</button>';
+
 		$form .= '<div class="telephone">';
 		$form .= ' <p>869.458.1273</p>';
 		$form .= '</div>';
@@ -189,33 +193,32 @@ class VueUtilisateurs
 		$form .= '<p>BIENVENU '. $utilisateurs["prenom"] .'</p>';
 		$form .= '</div>';
 		$form .= '<div class="formlogin col-md-10"><!--formulaire-->';
-		$form .= '<form role="form">';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="GET">';
 		$form .= '<div class="form-group">';
 		$form .= '<label for="nom">NOM</label>';
-		$form .= '<input type="text" class="form-control" name="nom" id="nom" value="'. $utilisateurs["nom"] .'">';
+		$form .= '<input type="text" class="form-control" name="nom" id="nom" value="'. $utilisateurs["nom"] .'" required>';
 		$form .= '</div>';
 		$form .= '<div class="form-group">' ;
 		$form .= '<label for="prenom">PRÉNOM</label>';
-		$form .= '<input type="text" class="form-control" name="prenom" id="prenom" value="'. $utilisateurs["prenom"] .'">';
+		$form .= '<input type="text" class="form-control" name="prenom" id="prenom" value="'. $utilisateurs["prenom"] .'" required>';
 		$form .= '</div>';
 		$form .= '<div class="form-group">';
 		$form .= '<label for="courriel">ADRESSE COURRIEL</label>';
-		$form .= '<input type="email" class="form-control" name="courriel" id="courriel" value="'. $utilisateurs["courriel"] .'">';
+		$form .= '<input type="email" class="form-control" name="courriel" id="courriel" value="'. $utilisateurs["courriel"] .'" required>';
 		$form .= '</div>';
 		$form .= '<div class="form-group">';
 		$form .= '<label for="mot_de_passe">MOT DE PASSE (6 caractères minimum)</label>';
-		$form .= '<input type="password" class="form-control" name="mot_de_passe" id="mot_de_passe" value="'.$utilisateurs["mot_de_passe"] .'">';
+		$form .= '<input type="password" class="form-control" name="mot_de_passe" id="mot_de_passe" value="'.$utilisateurs["mot_de_passe"] .'" required>';
 		$form .= '</div>';
 		$form .= '<div class="form-group">';
-		$form .= '<label for="mot_de_passse2">CONFIRMER MOT DE PASSE</label>';
-		$form .= '<input type="password" class="form-control" name="mot_de_passe2" id="mot_de_passe2" value="'.$utilisateurs["mot_de_passe"] .'">';
+		$form .= '<label for="mot_de_passe2">CONFIRMER MOT DE PASSE</label>';
+		$form .= '<input type="password" class="form-control" name="mot_de_passe2" id="mot_de_passe2" value="'.$utilisateurs["mot_de_passe"] .'" required>';
 		$form .= '</div>';
 		$form .= '<div class="form-group">';
 		$form .= '<label for="date_de_naissance">DATE DE NAISSANCE (aaaa-mm-jj)</label>';
-		$form .= '<input type="text" class="form-control" name="date_de_naissance" id="date_de_naissance" value="'.$utilisateurs["date_de_naissance"] .'">';
+		$form .= '<input type="text" class="form-control" name="date_de_naissance" id="date_de_naissance" value="'.$utilisateurs["date_de_naissance"] .'" required>';
 		$form .= '</div>';
-		$form .= '<button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteConnexion("confirmation.html")">MODIFIER</button>';
-		$form .= '<button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteConnexion("confirmation.html")">RÉSERVER</button>';   
+		$form .= '<button type="submit" class="btn btn-custom-vert btn-lg">MODIFIER</button>';	
 		$form .= '<br>';
 		$form .= '</form>';
 		$form .= '</div><!--fin formulaire-->';
@@ -260,17 +263,17 @@ class VueUtilisateurs
 		$form .= '<input type="password" class="form-control" name="mot_de_passe" id="mot_de_passe" placeholder="mot de passe". required>';
 		$form .= '</div>';
 		$form .= '<div class="form-group">';
-		$form .= '<label for="mot_de_passse2">CONFIRMER MOT DE PASSE</label>';
+		$form .= '<label for="mot_de_passe2">CONFIRMER MOT DE PASSE</label>';
 		$form .= '<input type="password" class="form-control" name="mot_de_passe2" id="mot_de_passe2" placeholder="mot de passe". required>';
 		$form .= '</div>';
 		$form .= '<div class="form-group">';
 		$form .= '<label for="date_de_naissance">DATE DE NAISSANCE(aaaa-mm-jj)</label>';
 		$form .= '<input type="text" class="form-control" name="date_de_naissance" id="date_de_naissance" placeholder="1956-07-30". required>';
 		$form .= '</div>';
-		$form .= '<button type="submit" class="btn btn-custom-vert btn-lg"> SINSCRIRE</button>';	
+		$form .= '<button type="submit" class="btn btn-custom-vert btn-lg">S\'INSCRIRE</button>';	
 		$form .= '<br>';
 		$form .= '</form>';
-		
+
 		$form .= '</div><!--fin formulaire-->';
 		$form .= '</div><!-- /.frm_general -->';		
 		$form .= '</div><!-- /.row -->';
@@ -287,6 +290,7 @@ class VueUtilisateurs
     // function qui retourne le formulaires "info MIS A JOUR utilisateur" inscription.html
     public static function formulaire_majUtilisateur()
      {
+     	var_dump("ici");
         $form = '';
      
 		$form .= '<div class="container">';
@@ -296,33 +300,32 @@ class VueUtilisateurs
 		$form .= '<p>BIENVENU</p>';
 		$form .= '</div>';
 		$form .= '<div class="formlogin col-md-10"><!--formulaire-->';
-		$form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] .'?requete=req_majUtilisateur&action=inscrire" method="post">';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
 		$form .= '<div class="form-group">';
 		$form .= '<label for="nom">NOM</label>';
-		$form .= '<input type="text" class="form-control" name="nom" id="nom" placeholder="votre nom">';
+		$form .= '<input type="text" class="form-control" name="nom" id="nom" placeholder="votre nom" required>';
 		$form .= '</div>';
 		$form .= '<div class="form-group">' ;
 		$form .= '<label for="prenom">PRÉNOM</label>';
-		$form .= '<input type="text" class="form-control" name="prenom" id="prenom" placeholder="votre prénom">';
+		$form .= '<input type="text" class="form-control" name="prenom" id="prenom" placeholder="votre prénom" required>';
 		$form .= '</div>';
 		$form .= '<div class="form-group">';
 		$form .= '<label for="courriel">ADRESSE COURRIEL</label>';
-		$form .= '<input type="email" class="form-control" name="courriel" id="courriel" placeholder="nom@domain.com">';
+		$form .= '<input type="email" class="form-control" name="courriel" id="courriel" placeholder="nom@domain.com" required>';
 		$form .= '</div>';
 		$form .= '<div class="form-group">';
 		$form .= '<label for="mot_de_passe">MOT DE PASSE (6 caractères minimum)</label>';
-		$form .= '<input type="password" class="form-control" name="mot_de_passe" id="mot_de_passe" placeholder="mot de passe">';
+		$form .= '<input type="password" class="form-control" name="mot_de_passe" id="mot_de_passe" placeholder="mot de passe" required>';
 		$form .= '</div>';
 		$form .= '<div class="form-group">';
 		$form .= '<label for="mot_de_passse2">CONFIRMER MOT DE PASSE</label>';
-		$form .= '<input type="password" class="form-control" name="mot_de_passe2" id="mot_de_passe2" placeholder="mot de passe">';
+		$form .= '<input type="password" class="form-control" name="mot_de_passe2" id="mot_de_passe2" placeholder="mot de passe" required>';
 		$form .= '</div>';
 		$form .= '<div class="form-group">';
 		$form .= '<label for="date_de_naissance">DATE DE NAISSANCE (aaaa-mm-jj)</label>';
-		$form .= '<input type="text" class="form-control" name="date_de_naissance" id="date_de_naissance" placeholder="1956-10-30">';
+		$form .= '<input type="text" class="form-control" name="date_de_naissance" id="date_de_naissance" placeholder="1956-10-30" required>';
 		$form .= '</div>';
-		$form .= '<button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteConnexion("confirmation.html")">MODIFIER</button>';
-		$form .= '<button type="button" class="btn btn-custom-vert btn-lg">RÉSERVER</button>';   
+		$form .= '<button type="submit" class="btn btn-custom-vert btn-lg">MODIFIER</button>';	
 		$form .= '<br>';
 		$form .= '</form>';
 		$form .= '</div><!--fin formulaire-->';
