@@ -25,7 +25,9 @@
     <script src="./js/jquery-1.9.1.js"></script>
     <script src="./js/jquery-ui-1.10.3.custom.js"></script>
     <script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    <script src="./js/vendor/bootstrap.min.js"></script>
+    <script src="./js/vendor/bootstrap.min.js"></script>jquery.js
+    <script src="./js/jquery.js"></script>
+
 </script>
 
   </head>
