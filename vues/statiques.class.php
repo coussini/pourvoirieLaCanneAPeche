@@ -5,7 +5,7 @@ class VueStatiques
    // Afficher le contenu statique   
     public static function afficherContenuStatique($contenuStatique)
     {
-        $form = '<div class="container main">';
+        $form = '<div class="container">';
         $form .= '<div class="row">';
         $form .= '<div><h3>' . $contenuStatique['nom'] . '</h3></div>';
         $form .= '<div>' . $contenuStatique['contenu'] . '</div><br/>';
@@ -60,7 +60,7 @@ class VueStatiques
         $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] .'?requete=modifierContenuStatique" method="post">';
         $form .= '<div class="form-group">';
         $form .= '<label for="contenu" class="control-label">Modifications de: ' . $nomsStatique . '</label>';
-        $form .= '<textarea id="contenu" class="form-control " name="contenuStatique" rows="20" cols="100">';
+        $form .= '<textarea id="contenu" class="form-control " name="contenu" rows="20" cols="100">';
         $form .= $contenuStatique['contenu'];
         $form .= '</textarea></div>';
         $form .= '<input type="hidden" name="nom" value="' . $nomsStatique . '">';
@@ -86,7 +86,7 @@ class VueStatiques
         $form .= '<div class="form-group">';
         $form .= '<label for="contenu" class="control-label">Nom du contenu: </label>';
         $form .= '<input type="text" class="form-control" name="nom">';
-        $form .= '</textarea></div>';
+        $form .= '</div>';
         $form .= '<div class="form-group">';
         $form .= '<label for="contenu" class="control-label">Texte du contenu: </label>';
         $form .= '<textarea id="contenu" class="form-control" name="contenu" rows="20" cols="100">';

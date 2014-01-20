@@ -26,7 +26,13 @@
     <script src="./js/jquery-ui-1.10.3.custom.js"></script>
     <script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script src="./js/vendor/bootstrap.min.js"></script>
-    <script type="text/JavaScript" language="JavaScript" src="js/javascript.js"></script> 
+    <script>$(document).ready(function()
+{
+    // Attache évènement au select dans la page admin - contenu statique
+  $( "#selectNomContenu" ).change(function() {this.form.submit();});
+});
+
+</script>
 
   </head>
   <body>
@@ -46,10 +52,9 @@
         </div>
       </div>
     </div>
-    <?php Controleur::gererRequetes("",""); ?>
     <footer>
       <p>&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
     </footer>
-    <script src="./js/jqueryStatique.js"></script>
+
   </body>
 </html>

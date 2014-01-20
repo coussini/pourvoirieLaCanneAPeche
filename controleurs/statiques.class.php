@@ -132,7 +132,7 @@ class Controleur
             else // Si select = contenu 
             {
                 $contenuStatique = $oStatiques->getContenuStatique($_POST['nom']);
-                VueStatiques::formulaire_SelectionStatique($nomsStatique,$_POST['nom']); // Param: Tous les noms, option sélectionnée
+                VueStatiques::formulaire_SelectionStatique($nomsStatique); // Param: Tous les noms, option sélectionnée
                 VueStatiques::formulaire_ModifierStatique($_POST['nom'],$contenuStatique);
             }
             }
@@ -151,10 +151,11 @@ class Controleur
         {
             $oStatiques = new Statiques();
             $idStatique = $oStatiques->getidStatiqueByName($_POST['nom']); // Récupérer l'id d'un contenu par son nom
-            //$nomsStatique = $oStatiques->updateContenuStatique($idStatique,$_POST['contenuStatique']);  // Modifier contenu statique
-            $oStatiques->updateContenuStatique($idStatique,$_POST['contenuStatique']);  // Modifier contenu statique
-
-            self::req_elements_statique();
+            $oStatiques->updateContenuStatique($idStatique,$_POST['contenu']);  // Modifier contenu statique
+            $nomsStatique = $oStatiques->getNomsContenuStatique();
+            $contenuStatique = $oStatiques->getContenuStatique($_POST['nom']);
+            VueStatiques::formulaire_SelectionStatique($nomsStatique); // Param: Tous les noms, option sélectionnée
+            VueStatiques::formulaire_ModifierStatique($_POST['nom'],$contenuStatique);
             
         }
         catch(Exception $e)
@@ -187,10 +188,11 @@ class Controleur
         try
         {
             $oStatiques = new Statiques();
-            //$idStatique = $oStatiques->getidStatiqueByName($_POST['nom']); // Récupérer l'id d'un contenu par son nom
-            //$nomsStatique = $oStatiques->updateContenuStatique($idStatique,$_POST['contenuStatique']);  // Modifier contenu statique
             $oStatiques->setContenuStatique('actif',$_POST['nom'],$_POST['contenu']);
-            self::req_elements_statique();
+            $nomsStatique = $oStatiques->getNomsContenuStatique();
+            $contenuStatique = $oStatiques->getContenuStatique($nomsStatique[0]);
+            VueStatiques::formulaire_SelectionStatique($nomsStatique); // Param: Tous les noms, option sélectionnée
+            VueStatiques::formulaire_ModifierStatique($nomsStatique[0],$contenuStatique);
             
         }
         catch(Exception $e)

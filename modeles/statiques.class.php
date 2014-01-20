@@ -48,7 +48,7 @@ class Statiques
 
         if ((!$statut) || (!$nom) || (!$contenu))
         {
-            throw new Exception("Erreur d'extraction sur la table statiques " . $id->errorCode());
+            throw new Exception("Erreur d'extraction du contenu sur la table statiques " . $id->errorCode());
         }
 
         $requete->closeCursor();
@@ -95,7 +95,7 @@ class Statiques
 
         if ((!$statut) || (!$nom) || (!$contenu))
         {
-            throw new Exception("Erreur d'extraction sur la table statiques " . $id->errorCode());
+            throw new Exception("Erreur d'extraction du contenu par id sur la table statiques " . $id->errorCode());
         }
 
         $requete->closeCursor();
@@ -124,7 +124,7 @@ class Statiques
 
         if (!$result) 
         {
-            throw new Exception("Erreur d'extraction sur la table statiques " . $id->errorCode());
+            throw new Exception("Erreur d'extraction de l'id sur la table statiques " . $id->errorCode());
         }
         
         $requete->bindColumn('id_statique',$idStatique);
@@ -163,7 +163,7 @@ class Statiques
 
         if (!$nom)
         {
-            throw new Exception("Erreur d'extraction sur la table statiques " . $id->errorCode());
+            throw new Exception("Erreur d'extraction des noms sur la table statiques " . $id->errorCode());
         }
 
         $requete->closeCursor();
@@ -209,7 +209,7 @@ class Statiques
 
         if (!$result) 
         {
-            throw new Exception("Erreur d'insertion sur la table statiques " . $id->errorCode());
+            throw new Exception("Erreur de création d'un contenu sur la table statiques " . $id->errorCode());
         }
         
         $requete->closeCursor();
@@ -276,7 +276,7 @@ class Statiques
 
         if (!$result) 
         {
-            throw new Exception("Erreur de mise à jour sur la table statiques " . $id->errorCode());
+            throw new Exception("Erreur de mise à jour d'un contenu sur la table statiques " . $id->errorCode());
         }
         
         $requete->closeCursor();

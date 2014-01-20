@@ -80,13 +80,17 @@ require_once("./controleurs/statiques.class.php"); // CONTROLEUR DE TEST POUR LE
 
 //$_GET['requete'] = 'accueil_html';
 //$_GET['requete'] = 'informations_html';
-$_GET['requete'] = 'contact_html';
+//$_GET['requete'] = 'elements_statique_html';
 
-require_once("./squelettes/client.php");
-
-//$_GET['requete'] = 'elements_statique_html';  
-//require_once("./squelettes/admin.php");
-
-
+if ($_GET["requetePage"] = "client")
+{
+        // pages pour les produits normaux du site
+        require_once("./squelettes/client.php");
+}
+else
+{
+        // pages pour les administrateurs du site
+        require_once("./squelettes/admin.php");
+} 
 
 ?>
