@@ -1,38 +1,54 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <title>RÉSERVATIONS</title>
-    <link rel="shortcut icon" href="./images/favicon.jpg">
+<?php
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+/*****************************************/
+/* CONNEXION DE LA BASE DE DONNÉE EN PDO */
+/*****************************************/
+require_once("./includes/connexionPDO.class.php");
 
-    <!-- NOS CSS -->
-  </head>
-  <body>
-    <!--[if lt IE 7]>
-        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-    <![endif]-->
+/******************/
+/* INITIALISATION */
+/******************/
+require_once("./inits/maitre.init.php");
+require_once("./inits/utilisateurs.init.php");
+require_once("./inits/produits.init.php");
+require_once("./inits/statiques.init.php");
+require_once("./inits/reservations.init.php");
 
-    <form method="GET" action="indexReservations.php">
-      ID_Utilisateur : <input type="text" name="id_utilisateur"/><br/>
-      ID_produit : <input type="text" name="id_produit"/><br/>
-      <legend><b>Client ou Admin</b></legend>
-      <select name="requetePage" size="1">
-        <option value="client" >Page des clients</option>
-        <option value="admin" >Page administration</option>
-      </select>
-      <legend><b>Afficher page</b></legend>
-      <select name="requete" size="1">
-        <option value="reserver_html" >Réserver</option>
-        <option value="historique_html" >Historique du client</option>
-        <option value="reservations_html" >Historique de tout les clients</option>
-      </select>
-      <input type="submit" value="AFFICHER"/>
-    </form>        
-  </body>
-</html>
+/**********/
+/* MODELE */
+/**********/
+require_once("./modeles/utilisateurs.class.php");
+require_once("./modeles/produits.class.php");
+require_once("./modeles/reservations.class.php");
+require_once("./modeles/statiques.class.php");
+
+/*******/
+/* VUE */
+/*******/
+require_once("./vues/utilisateurs.class.php");
+require_once("./vues/produits.class.php");
+require_once("./vues/reservations.class.php");
+require_once("./vues/statiques.class.php");
+
+/**************/
+/* CONTROLEUR */
+/**************/
+/*****************************/
+/* il n'y a qu'un controleur */
+/*****************************/
+require_once("./controleurs/controleur.class.php"); // CECI EST LE CONTROLEUR FINAL
+
+/************************/
+/* SQUELETTES DES PAGES */
+/************************/
+if ($_GET["requeteAJAX"] == "")
+{
+    // pages pour les reservations normaux du site
+    require_once("./squelettes/client.php");
+}
+else
+{
+    Controleur::gererRequetes($_GET["requeteAJAX"],$_GET["id_produit"]);
+}
+
+?>

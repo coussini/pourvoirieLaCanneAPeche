@@ -40,7 +40,7 @@ class Controleur
             case 'reservations_html':
                 self::req_reservations();
                 break;  
-            case 'chalets_html':
+            case 'chalets.html':
                 self::req_chalets();
                 break;
             case 'req_selectTousProduits':
@@ -101,7 +101,7 @@ class Controleur
 				self::req_oubliePass();
 				break;	
             default:
-                self::req_accueil();
+                echo "TOTO accueil.php";
                 break;
         }
     }

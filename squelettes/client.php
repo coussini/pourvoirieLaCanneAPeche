@@ -54,13 +54,13 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a href="./index.html"><img src="./images/logo.png" alt="logo" class="img-responsive hidden-xs"></a>
+            <a href="./index.php"><img src="./images/logo.png" alt="logo" class="img-responsive hidden-xs"></a>
           </div>
           <ul class="nav navbar-nav ">
-            <li class="active"><a href="./index.html"><img src="./images/accueil.png" alt="image accueil" class="img-responsive hidden-xs"><span class="titresMenu">ACCUEIL</span></a></li>
-            <li><a href="./html/chalets.html"><img src="./images/chalets.png" alt="image chalets" class="img-responsive hidden-xs"><span class="titresMenu">NOS CHALETS</span></a></li>
-            <li><a href="./html/infos.html"><img src="./images/info.png" alt="image infos" class="img-responsive hidden-xs"><span class="titresMenu">INFORMATIONS</span></a></li>
-            <li><a href="./html/contact.html"><img src="./images/contact.png" alt="image contact" class="img-responsive hidden-xs"><span class="titresMenu">CONTACT</span></a></li>
+            <li class="active"><a href="./index.php"><img src="./images/accueil.png" alt="image accueil" class="img-responsive hidden-xs"><span class="titresMenu">ACCUEIL</span></a></li>
+            <li><a href="./index.php?requete=chalets_html"><img src="./images/chalets.png" alt="image chalets" class="img-responsive hidden-xs"><span class="titresMenu">NOS CHALETS</span></a></li>
+            <li><a href="./index.php?requete=informations_html"><img src="./images/info.png" alt="image infos" class="img-responsive hidden-xs"><span class="titresMenu">INFORMATIONS</span></a></li>
+            <li><a href="./index.php?requete=contact_html"><img src="./images/contact.png" alt="image contact" class="img-responsive hidden-xs"><span class="titresMenu">CONTACT</span></a></li>
             <li><img src="./images/connexion.png" alt="cadenas" class="img-responsive hidden-xs">
             <a href="./html/profil.html"><span class="titresLogin">PROFIL</span>
             <a href="./html/login.html"><span class="titresLogin">CONNEXION</span></a>

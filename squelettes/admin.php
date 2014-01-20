@@ -40,10 +40,10 @@
       <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <ul class="nav navbar-nav ">
-            <li class="active"><a href="./index.html"><span class="titresMenuAdmin">SECTION ADMINISTRATION</span></a></li>
-            <li><a href="./html/chalets.html"><span class="titresMenuAdmin">ÉLÉMENTS STATIQUES</span></a></li>
-            <li><a href="./html/infos.html"><span class="titresMenuAdmin">CLIENTS</span></a></li>
-            <li><a href="./html/contact.html"><span class="titresMenuAdmin">RÉSERVATIONS</span></a></li>
+            <li class="active"><span class="titresMenuAdmin">SECTION ADMINISTRATION</span></li>
+            <li><a href="./admin.php?requete=elements_statique_html"><span class="titresMenuAdmin">ÉLÉMENTS STATIQUES</span></a></li>
+            <li><a href="./admin.php?requete=elements_statique_html"><span class="titresMenuAdmin">CLIENTS</span></a></li>
+            <li><a href="./admin.php?requete=reservations_html"><span class="titresMenuAdmin">RÉSERVATIONS</span></a></li>
             <li><img src="./images/connexion.png" alt="cadenas" class="img-responsive hidden-xs">
             <a href="./html/profil.html"><span class="titresLogin">PRODUITS</span>
             <a href="#"><span class="titresLogin">DÉCONNEXION</span></a>

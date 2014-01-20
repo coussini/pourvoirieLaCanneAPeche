@@ -1,6 +1,6 @@
 <?php
 	define("HOST","localhost");
-	define("USER","root");
-    define("PASS","chezmoi");
-	define("BASE","canneapeche");
+	define("USER","e1296028");
+    define("PASS","CoussiniChatchat1");
+	define("BASE","e1296028");
 ?>
