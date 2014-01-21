@@ -131,13 +131,18 @@ margin-left:20px;
 margin-right:10px;
 }
 
+.nav > img:hover
+{
+background-color: #304716;    
+}
+
+
 a {
 color:#000;
 }
 
 a:hover {
 color:#000;
-background-color:#304716;
 }
 
 /*------formulaires---------------*/
