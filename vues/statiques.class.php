@@ -18,7 +18,7 @@ class VueStatiques
    // Afficher la banniere accueil   
     public static function afficherBanniereAccueil()
     {
-        $form = '<div class="container banner">';
+        $form = '<div class="container banniere">';
         $form .= '<div class="row">';
 
         $form .= '<object width="800" height="250"><param name="movie" value="./images/banniere.swf"><embed src="./images/banniere.swf" width="800" height="250"></embed></object>';
