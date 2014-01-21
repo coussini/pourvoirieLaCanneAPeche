@@ -36,7 +36,6 @@ class VueUtilisateurs
 		$form .='<div class="formlogin2 col-md-6">';
 		$form .='<p>NOUVEL UTILISATEUR?</p>';        
 		$form .= '<a class="btn btn-custom-gris btn-lg" href="./index.php?requete=req_ajoutUtilisateur">S\'INSCRIRE</a>'; 		           
-		//$form .= '<button type="button" class="btn btn-custom-gris btn-lg" onclick="traiteConnexion("inscription.html")">SINSCRIRE</button>';
 		$form .= '<div class="telephone">';
 		$form .= ' <p>869.458.1273</p>';
 		$form .= '</div>';

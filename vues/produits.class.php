@@ -68,30 +68,31 @@ class VueProduits
 
         $form = '';
         $form .= '<div class="container main">';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="GET">';
         $form .= '<div class="row">';
         $form .= '<div class="col-lg-4">';
-        $form .= '<h4><p class="img-thumbnail"> Chalet 1 : </p></h4>';
+        $form .= '<h4><p class="img-thumbnail">' . $produits[0]["nom"] . '</p></h4>';
         $form .= '<img src="' . $produits[0]["imageFacade"] . '" alt="chalet-accueil" class="img-thumbnail">';
         $form .= '<p>Magnifique chalet possédant une grande et large galerie, avec une vue magnifique sur le lac. La location du chalet peu se faire peu importe le mois durant l\'année. Construction de 2010</p>';
         $form .= '</div>';
         $form .= '<div class="col-lg-4">';
         $form .= '<h4><p class="img-thumbnail"> Options du chalet : </p></h4>';
         $form .= '<ul class="list-group">';
-        $form .= '<li class="list-group-item"><span class="badge pull-right">2</span>Nombre de chambre:</li>';
-        $form .= '<li class="list-group-item"><span class="badge pull-right">2</span>Nombre de salle de bain:</li>';
+        $form .= '<li class="list-group-item"><span class="badge pull-right">' . $produits[0]["nombre_de_chambre"] . '</span>Nombre de chambre:</li>';
+        $form .= '<li class="list-group-item"><span class="badge pull-right">' . $produits[0]["nombre_de_salle_de_bain"] . '</span>Nombre de salle de bain:</li>';
         $form .= '</ul>';
         $form .= '</div>';
         $form .= '<div class="col-lg-4">';
         $form .= '<h4><p class="img-thumbnail"> Prix de location : </p></h4>';
         $form .= '<ul class="list-group">';
-        $form .= '<li class="list-group-item"><span class="badge pull-right">899$</span>Par semaine:</li>';
+        $form .= '<li class="list-group-item"><span class="badge pull-right">' . $produits[0]["prix_par_semaine"] . '$</span>Par semaine:</li>';
         $form .= '</ul>';
         $form .= '</div>';
         $form .= '</div>';
         $form .= '<div class="row">';
         $form .= '<div class="col-lg-4 col-lg-offset-8">';
-        $form .= '<button type="button" class="btn btn-custom-gris btn-lg" data-dismiss="modal">Fermer</button>';
-        $form .= '<button type="button" class="btn btn-custom-vert btn-lg" onclick="traiteConnexion("./reserver.html")">Réserver</button><br/><br/>';
+        $form .= '<a class="btn btn-custom-gris btn-lg" href="./index.php?requete=chalets_html">Fermer</a>';                  
+        $form .= '<button type="submit" class="btn btn-custom-vert btn-lg">Réserver</button><br/><br/>';
         $form .= '</div>';
         $form .= '</div>';
         $form .= '<div class="col-lg-12">';
@@ -114,6 +115,11 @@ class VueProduits
         $form .= '</div>'; 
         $form .= '</div>';
         $form .= '</div>';
+        $form .= '<input type="hidden" name="requete" value="reserver_html">';
+        $form .= '<input type="hidden" name="id_produit" value="' . $produits[0]["id_produit"] . '">';
+        // TODO ATTENTION LA VALEUR DOIT ÊTRE VALRIABLE
+        $form .= '<input type="hidden" name="id_utilisateur" value="1">';
+        $form .= '</form>';
         $form .= '</div>';
 
         echo $form;

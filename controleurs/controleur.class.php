@@ -206,7 +206,7 @@ class Controleur
                 $produit = $oReservations->extraireLeProduit($_GET["id_produit"]); // les tests ont été fait par req_reserver
                 $utilisateur = $oReservations->extraireUtilisateur($_GET["id_utilisateur"]);
                 $_GET["requete"] = 'creer_une_reservation';
-                $_GET["message_confirmation"]  = "merci d'avoir effectué votre réservation";
+                $_GET["message_confirmation"]  = "merci d'avoir effectué votre réservation, vous recevrez un courriel concernant cette réservation";
                 VueReservations::formulaire_creerUneReservation($produit,$utilisateur,$_GET["date_debut"],$_GET["date_fin"],$_GET["numero_semaine"],$_GET["nom_carte"],$_GET["numero_carte"],$_GET["id_carte"],$_GET["prix_a_la_reservation"]);
             }
         }
