@@ -131,9 +131,9 @@ margin-left:20px;
 margin-right:10px;
 }
 
-.nav > img:hover
+.img-responsive.hidden-xs:hover
 {
-background-color: #304716;    
+background-color:#304716;  
 }
 
 
