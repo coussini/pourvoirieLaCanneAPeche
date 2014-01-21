@@ -217,7 +217,9 @@ class VueUtilisateurs
 		$form .= '<label for="date_de_naissance">DATE DE NAISSANCE (aaaa-mm-jj)</label>';
 		$form .= '<input type="text" class="form-control" name="date_de_naissance" id="date_de_naissance" value="'.$utilisateurs["date_de_naissance"] .'" required>';
 		$form .= '</div>';
-		$form .= '<button type="submit" class="btn btn-custom-vert btn-lg">MODIFIER</button>';	
+        $form .= '<button type="submit" class="btn btn-custom-vert btn-lg">MODIFIER</button>'; 
+        $form .= '<br/><br/>';
+        $form .= '<a class="btn btn-custom-gris btn-lg" href="./index.php?requete=historique_html&id_utilisateur=1">VOIR VOS RÉSERVATIONS</a>';                  
 		$form .= '<br>';
 		$form .= '</form>';
 		$form .= '</div><!--fin formulaire-->';

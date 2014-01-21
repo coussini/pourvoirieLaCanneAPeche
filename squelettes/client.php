@@ -54,7 +54,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a href="./index.php?requete=reserver_html&id_utilisateur=1&id_produit=1"><img src="./images/logo.png" alt="logo" class="img-responsive hidden-xs"></a>
+            <a href="./index.php"><img src="./images/logo.png" alt="logo" class="img-responsive hidden-xs"></a>
           </div>
           <ul class="nav navbar-nav ">
             <li class="active"><a href="./index.php"><img src="./images/accueil.png" alt="image accueil" class="img-responsive hidden-xs"><span class="titresMenu">ACCUEIL</span></a></li>

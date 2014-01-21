@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 class Reservations
 {
     private $connexionBD;
@@ -83,7 +83,7 @@ class Reservations
         }
 
         $requete->bindParam(':id_produit',$id_produit,PDO::PARAM_INT);
- 
+
         $resultat = $requete->execute();
 
         if (!$resultat) 
