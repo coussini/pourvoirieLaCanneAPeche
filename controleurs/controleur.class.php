@@ -398,6 +398,8 @@ class Controleur
             $oStatiques = new Statiques();
 
             $contenuStatique = $oStatiques->getContenuStatique('À propos');
+
+            VueStatiques::afficherBanniereAccueil();
      
             VueStatiques::afficherContenuStatique($contenuStatique);
         }
