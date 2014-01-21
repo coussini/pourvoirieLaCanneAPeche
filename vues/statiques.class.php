@@ -15,6 +15,19 @@ class VueStatiques
         echo $form;
     }
 
+   // Afficher la banniere accueil   
+    public static function afficherBanniereAccueil()
+    {
+        $form = '<div class="container banner">';
+        $form .= '<div class="row">';
+
+        $form .= '<object width="800" height="250"><param name="movie" value="./images/banniere.swf"><embed src="./images/banniere.swf" width="800" height="250"></embed></object>';
+
+        $form .= '</div><!-- /.row -->';
+        $form .= '</div> <!-- /.container -->';
+        echo $form;
+    }
+
    // Afficher l'API Google Map   
     public static function afficherMap()
     {

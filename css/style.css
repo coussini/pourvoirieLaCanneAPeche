@@ -426,7 +426,7 @@ padding-right:15px;
 
 body 
 {
-    padding-top:150px;
+    padding-top:170px;
     background-color:#e1e6cd;
 }
 
@@ -440,4 +440,11 @@ footer
     background-color:#809060;
     color: white;
     text-align: center;
+}
+
+.banniere {
+width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  float: none;
 }
