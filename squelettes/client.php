@@ -64,7 +64,7 @@
             <li><!-- <img src="./images/connexion.png" alt="cadenas" class="img-responsive hidden-xs"> -->
             <a href="./index.php?requete=req_extraireUtilisateur&courriel=coussini@gmail.com"><span class="titresLogin">PROFIL</span>
             <a href="./index.php?requete=req_loginUtilisateur"><span class="titresLogin">CONNEXION</span></a>
-            <a href="#"><span class="titresLogin">DÉCONNEXION</span></a>
+            <a href="./index.php"><span class="titresLogin">DÉCONNEXION</span></a>
             <a href="./index.php?requete=req_ajoutUtilisateur"><span class="titresLogin">S'INSCRIRE</span></a>
             </li>
           </ul>
