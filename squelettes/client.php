@@ -62,7 +62,7 @@
             <li><a href="./index.php?requete=informations_html"><img src="./images/info.png" alt="image infos" class="img-responsive hidden-xs"><span class="titresMenu">INFORMATIONS</span></a></li>
             <li><a href="./index.php?requete=contact_html"><img src="./images/contact.png" alt="image contact" class="img-responsive hidden-xs"><span class="titresMenu">CONTACT</span></a></li>
             <li>
-              <a href="./index.php?requete=req_extraireUtilisateur&courriel=coussini@gmail.com"><span class="titresLogin">PROFIL</span>
+              <a href="./index.php?requete=req_extraireUtilisateur&courriel=coussini@gmail.com"><span class="titresLogin">PROFIL</span></a>
               <a href="./index.php?requete=req_loginUtilisateur"><span class="titresLogin">CONNEXION</span></a>
               <a href="./index.php"><span class="titresLogin">DÉCONNEXION</span></a>
               <a href="./index.php?requete=req_ajoutUtilisateur"><span class="titresLogin">S'INSCRIRE</span></a>
