@@ -22,18 +22,18 @@ class VueMaitre
 
     // fonction qui retourne le menu principal
     // Gère les bouton actif et non actif
-    public static function formulaire_menu_principal($indicateurAccueil,$indicateurChalets,$indicateurInformations,$indicateurContact)
+    public static function formulaire_menu_principal($accueil,$chalets,$informations,$contact)
     {
         $form = '';
         $form .= '<ul class="nav navbar-nav ">';
-        $form .= '<li class="' . $indicateurAccueil . '"><a href="./index.php"><img src="./images/accueil.png" alt="image accueil" class="img-responsive hidden-xs"><span class="titresMenu">ACCUEIL</span></a></li>';
-        $form .= '<li class="' . $indicateurChalets . '"><a href="./index.php?requete=chalets_html"><img src="./images/chalets.png" alt="image chalets" class="img-responsive hidden-xs"><span class="titresMenu">NOS CHALETS</span></a></li>';
-        $form .= '<li class="' . $indicateurInformations . '"><a href="./index.php?requete=informations_html"><img src="./images/info.png" alt="image infos" class="img-responsive hidden-xs"><span class="titresMenu">INFORMATIONS</span></a></li>';
-        $form .= '<li class="' . $indicateurContact . '"><a href="./index.php?requete=contact_html"><img src="./images/contact.png" alt="image contact" class="img-responsive hidden-xs"><span class="titresMenu">CONTACT</span></a></li>';
+        $form .= '<li class="' . $accueil . '"><a href="./index.php"><img src="./images/accueil.png" alt="image accueil" class="img-responsive hidden-xs"><span class="titresMenu">ACCUEIL</span></a></li>';
+        $form .= '<li class="' . $chalets . '"><a href="./index.php?requete=chalets_html"><img src="./images/chalets.png" alt="image chalets" class="img-responsive hidden-xs"><span class="titresMenu">NOS CHALETS</span></a></li>';
+        $form .= '<li class="' . $informations . '"><a href="./index.php?requete=informations_html"><img src="./images/info.png" alt="image infos" class="img-responsive hidden-xs"><span class="titresMenu">INFORMATIONS</span></a></li>';
+        $form .= '<li class="' . $contact . '"><a href="./index.php?requete=contact_html"><img src="./images/contact.png" alt="image contact" class="img-responsive hidden-xs"><span class="titresMenu">CONTACT</span></a></li>';
         $form .= '<li>';
-        $form .= '<a href="./index.php?requete=req_extraireUtilisateur&courriel=coussini@gmail.com"><span class="titresLogin">PROFIL</span></a>';
+        //$form .= '<a href="./index.php?requete=req_extraireUtilisateur&courriel=coussini@gmail.com"><span class="titresLogin">PROFIL</span></a>';
         $form .= '<a href="./index.php?requete=req_loginUtilisateur"><span class="titresLogin">CONNEXION</span></a>';
-        $form .= '<a href="./index.php"><span class="titresLogin">DÉCONNEXION</span></a>';
+        //$form .= '<a href="./index.php"><span class="titresLogin">DÉCONNEXION</span></a>';
         $form .= '<a href="./index.php?requete=req_ajoutUtilisateur"><span class="titresLogin">S\'INSCRIRE</span></a>';
         $form .= '</li>';
         $form .= '</ul>';

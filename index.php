@@ -25,6 +25,7 @@ require_once("./modeles/statiques.class.php");
 /*******/
 /* VUE */
 /*******/
+require_once("./vues/maitre.class.php");
 require_once("./vues/utilisateurs.class.php");
 require_once("./vues/produits.class.php");
 require_once("./vues/reservations.class.php");
@@ -36,7 +37,7 @@ require_once("./vues/statiques.class.php");
 /*****************************/
 /* il n'y a qu'un controleur */
 /*****************************/
-require_once("./controleurs/controleur.class.php"); // CECI EST LE CONTROLEUR FINAL
+require_once("./controleurs/controleur.class.php");
 
 /************************/
 /* SQUELETTES DES PAGES */
@@ -48,7 +49,7 @@ if ($_GET["requeteAJAX"] == "")
 }
 else
 {
-    Controleur::gererRequetes($_GET["requeteAJAX"],$_GET["id_produit"]);
+    Controleur::gererAjax($_GET["requeteAJAX"],$_GET["id_produit"]);
 }
 
 ?>

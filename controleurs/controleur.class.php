@@ -101,6 +101,10 @@ class Controleur
         }
     }
 
+    //////////////////////////////////////////////////////////////////////
+    // AJAX //////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////
+    //                  
     // gestion des requête AJAX
     // la requête AJAX permet de trouver, grâce à l'id_produit, les dates réservé pour ce dernier
     // afin de préparer, par la suite, les dates de non disponibilité pour le calendrier via jquery
@@ -124,15 +128,19 @@ class Controleur
         }
     }
 
+    //////////////////////////////////////////////////////////////////////
+    // MENU PRINCIPAL ////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////
+    //
     // gestion du menu principal
     public static function gererMenuPrincipal()
     {
         $requete = $_GET["requete"];
 
-        $indicateurAccueil = ""; 
-        $indicateurChalets = "";
-        $indicateurInformations = "";
-        $indicateurContact = "";
+        $accueil = ""; 
+        $chalets = "";
+        $informations = "";
+        $contact = "";
 
         switch ($requete) 
         {
@@ -140,27 +148,27 @@ class Controleur
             // PRODUIT ////////////////
             ///////////////////////////
             case 'chalets_html':
-                $indicateurChalets = "active";
-                VueMaitre::formulaire_menu_principal($indicateurAccueil,$indicateurChalets,$indicateurInformations,$indicateurContact);
+                $chalets = "active";
+                VueMaitre::formulaire_menu_principal($accueil,$chalets,$informations,$contact);
                 break;
             ///////////////////////////
             // STATIQUE ///////////////
             ///////////////////////////
             case 'accueil_html':
-                $indicateurAccueil = "active";
-                VueMaitre::formulaire_menu_principal($indicateurAccueil,$indicateurChalets,$indicateurInformations,$indicateurContact);
+                $accueil = "active";
+                VueMaitre::formulaire_menu_principal($accueil,$chalets,$informations,$contact);
                 break; 
             case 'informations_html':
-                $indicateurInformations = "active";
-                VueMaitre::formulaire_menu_principal($indicateurAccueil,$indicateurChalets,$indicateurInformations,$indicateurContact);
+                $informations = "active";
+                VueMaitre::formulaire_menu_principal($accueil,$chalets,$informations,$contact);
                 break; 
             case 'contact_html':
-                $indicateurContact = "active";
-                VueMaitre::formulaire_menu_principal($indicateurAccueil,$indicateurChalets,$indicateurInformations,$indicateurContact);
+                $contact = "active";
+                VueMaitre::formulaire_menu_principal($accueil,$chalets,$informations,$contact);
                 break;
             default:
-                $indicateurAccueil = "active";
-                VueMaitre::formulaire_menu_principal($indicateurAccueil,$indicateurChalets,$indicateurInformations,$indicateurContact);
+                $accueil = "active";
+                VueMaitre::formulaire_menu_principal($accueil,$chalets,$informations,$contact);
                 break; 
         }
     } 
