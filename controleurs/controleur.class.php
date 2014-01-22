@@ -2,24 +2,10 @@
 
 class Controleur
 {
-    public static function gererRequetes($requeteAJAX,$id_produit)
+    // gestion des principales requêtes
+    public static function gererRequetes()
     {
-
-        // si le champ requete dédié au appel AJAX est vide, on
-        // on prend le get de la requete normale
-        // sinon on traite la requete AJAX et l'id produit afin de
-        // préparer les dates de non disponibilité pour le calendrier
-        //
-        $requete = "";
-
-        if ($requeteAJAX == "")
-        {
-            $requete = $_GET["requete"];
-        }
-        else
-        {
-            $requete = $_GET["requeteAJAX"];
-        }
+        $requete = $_GET["requete"];
 
         switch ($requete) 
         {
@@ -71,9 +57,6 @@ class Controleur
             ///////////////////////////
             // RÉSERVATION ////////////
             ///////////////////////////
-            case 'req_chercher_dates_reservees':
-                self::req_chercher_dates_reservees($id_produit);
-                break;        
             case 'reserver_html':
                 self::req_reserver();
                 break;        
@@ -118,32 +101,67 @@ class Controleur
         }
     }
 
-
-    // traitement de la page active
-    private static function req_pageActive($pageActive)
+    // gestion des requête AJAX
+    // la requête AJAX permet de trouver, grâce à l'id_produit, les dates réservé pour ce dernier
+    // afin de préparer, par la suite, les dates de non disponibilité pour le calendrier via jquery
+    public static function gererAjax($requeteAJAX,$id_produit)
     {
-        $_GET["indicateurAccueil"] = ""; 
-        $_GET["indicateurChalets"] = "";
-        $_GET["indicateurInformations"] = "";
-        $_GET["indicateurContact"] = "";
-        
-        switch ($pageActive) 
+        try
         {
-            case 'indicateurAccueil':
-                $_GET["indicateurAccueil"] = "active";
+            if ($_GET["requeteAJAX"] == "req_chercher_dates_reservees")
+            {
+                self::req_chercher_dates_reservees($id_produit);
+            }
+            else
+            {
+                throw new Exception("requete AJAX invalide");
+            }
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            VueMaitre::formulaire_erreur();
+        }
+    }
+
+    // gestion du menu principal
+    public static function gererMenuPrincipal()
+    {
+        $requete = $_GET["requete"];
+
+        $indicateurAccueil = ""; 
+        $indicateurChalets = "";
+        $indicateurInformations = "";
+        $indicateurContact = "";
+
+        switch ($requete) 
+        {
+            ///////////////////////////
+            // PRODUIT ////////////////
+            ///////////////////////////
+            case 'chalets_html':
+                $indicateurChalets = "active";
+                VueMaitre::formulaire_menu_principal($indicateurAccueil,$indicateurChalets,$indicateurInformations,$indicateurContact);
                 break;
-            case 'indicateurChalets':
-                $_GET["indicateurChalets"] = "active";
-                break;  
-            case 'indicateurInformations':
-                $_GET["indicateurInformations"] = "active";
+            ///////////////////////////
+            // STATIQUE ///////////////
+            ///////////////////////////
+            case 'accueil_html':
+                $indicateurAccueil = "active";
+                VueMaitre::formulaire_menu_principal($indicateurAccueil,$indicateurChalets,$indicateurInformations,$indicateurContact);
+                break; 
+            case 'informations_html':
+                $indicateurInformations = "active";
+                VueMaitre::formulaire_menu_principal($indicateurAccueil,$indicateurChalets,$indicateurInformations,$indicateurContact);
+                break; 
+            case 'contact_html':
+                $indicateurContact = "active";
+                VueMaitre::formulaire_menu_principal($indicateurAccueil,$indicateurChalets,$indicateurInformations,$indicateurContact);
                 break;
-            case 'indicateurContact':
-                $_GET["indicateurContact"] = "active";
-                break;  
             default:
-                $_GET["indicateurAccueil"] = "active"; // ceci est le défaut
-                break;
+                $indicateurAccueil = "active";
+                VueMaitre::formulaire_menu_principal($indicateurAccueil,$indicateurChalets,$indicateurInformations,$indicateurContact);
+                break; 
         }
     } 
 
@@ -162,7 +180,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueUtilisateurs::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     } 
 
@@ -183,7 +201,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueUtilisateurs::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     } 
 
@@ -199,7 +217,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueUtilisateurs::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }   
     }
     
@@ -215,7 +233,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueUtilisateurs::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }   
     } 
 
@@ -232,7 +250,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueUtilisateurs::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }   
     } 
     
@@ -247,7 +265,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueUtilisateurs::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }   
     } 
     
@@ -262,7 +280,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueUtilisateurs::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }   
     } 
 
@@ -273,8 +291,6 @@ class Controleur
     // traitement extraire des produits
     private static function req_chalets()
     {
-        self::req_pageActive("indicateurChalets");
-
         try
         {
             //$oProduits = new Produits();
@@ -284,7 +300,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueProduits::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     }
 
@@ -301,7 +317,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueProduits::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     }
 
@@ -317,7 +333,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueProduits::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     }
 
@@ -333,7 +349,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueProduits::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     }
 
@@ -350,7 +366,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueProduits::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     }
 
@@ -377,7 +393,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueProduits::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     }   
 
@@ -403,7 +419,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueProduits::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     }
 
@@ -423,7 +439,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET["erreur"]  = $e->getMessage();
-            VueReservations::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     }
     
@@ -534,8 +550,6 @@ class Controleur
     // Générer accueil.html
     private static function req_accueil()
     {
-        self::req_pageActive("indicateurAccueil");
-        
         try
         {
             $oStatiques = new Statiques();
@@ -546,15 +560,13 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueStatiques::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     }
 
     // Générer informations.html  
     private static function req_informations()
     {
-        self::req_pageActive("indicateurInformations");
-
         try
         {
             $oStatiques = new Statiques();
@@ -572,15 +584,13 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueStatiques::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     }
 
     // Générer contact.html  
     private static function req_contact()
     {
-        self::req_pageActive("indicateurContact");
-        
         try
         {
             $oStatiques = new Statiques();
@@ -591,7 +601,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueStatiques::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     }
 
@@ -626,7 +636,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueStatiques::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     }
 
@@ -646,7 +656,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueStatiques::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     }
 
@@ -663,7 +673,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueStatiques::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     }
 
@@ -682,7 +692,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
-            VueStatiques::formulaire_erreur();
+            VueMaitre::formulaire_erreur();
         }
     }
 }

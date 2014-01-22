@@ -32,7 +32,7 @@
       if ($_GET['requete'] == 'reserver_html')
       {
     ?>
-        <!-- TRAITEMENT SPÉCIFIQUE POUR LA RÉSERVATION -->    
+        <!-- TRAITEMENT SPÉCIFIQUE POUR LA RÉSERVATION (AJAX et plus encore) -->    
         <script src="./js/calendrierReservation.js"></script>
         <script src="./js/traitementCalendrierReservation.js"></script>
     <?php
@@ -56,22 +56,11 @@
             </button>
             <a href="./index.php"><img src="./images/logo.png" alt="logo" class="img-responsive hidden-xs"></a>
           </div>
-          <ul class="nav navbar-nav ">
-            <li class="active"><a href="./index.php"><img src="./images/accueil.png" alt="image accueil" class="img-responsive hidden-xs"><span class="titresMenu">ACCUEIL</span></a></li>
-            <li><a href="./index.php?requete=chalets_html"><img src="./images/chalets.png" alt="image chalets" class="img-responsive hidden-xs"><span class="titresMenu">NOS CHALETS</span></a></li>
-            <li><a href="./index.php?requete=informations_html"><img src="./images/info.png" alt="image infos" class="img-responsive hidden-xs"><span class="titresMenu">INFORMATIONS</span></a></li>
-            <li><a href="./index.php?requete=contact_html"><img src="./images/contact.png" alt="image contact" class="img-responsive hidden-xs"><span class="titresMenu">CONTACT</span></a></li>
-            <li>
-              <a href="./index.php?requete=req_extraireUtilisateur&courriel=coussini@gmail.com"><span class="titresLogin">PROFIL</span></a>
-              <a href="./index.php?requete=req_loginUtilisateur"><span class="titresLogin">CONNEXION</span></a>
-              <a href="./index.php"><span class="titresLogin">DÉCONNEXION</span></a>
-              <a href="./index.php?requete=req_ajoutUtilisateur"><span class="titresLogin">S'INSCRIRE</span></a>
-            </li>
-          </ul>
+    <?php Controleur::gererMenuPrincipal(); ?>
         </div>
       </div>
     </div>
-    <?php Controleur::gererRequetes("",""); ?>
+    <?php Controleur::gererRequetes(); ?>
      <footer>
         <p>&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>
     </footer>
