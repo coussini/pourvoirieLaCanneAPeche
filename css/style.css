@@ -427,6 +427,7 @@ padding-right:15px;
 body 
 {
     padding-top:170px;
+    padding-bottom: 100px;
     background-color:#e1e6cd;
 }
 
@@ -447,4 +448,8 @@ width: 800px;
   margin-left: auto;
   margin-right: auto;
   float: none;
+}
+
+.container-menu {
+    padding: 0px;
 }
