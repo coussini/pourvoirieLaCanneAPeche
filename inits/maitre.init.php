@@ -40,4 +40,8 @@ $_GET["erreur"] = '';
 // pour le message de confirmation de la commande
 $_GET["confirmation"] = '';
 
+$_GET["indicateurAccueil"] = 'active'; // par défaut la page active
+$_GET["indicateurChalets"] = '';
+$_GET["indicateurInformations"] = '';
+$_GET["indicateurContact"] = '';
 ?>

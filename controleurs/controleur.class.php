@@ -117,6 +117,36 @@ class Controleur
                 break;
         }
     }
+
+
+    // traitement de la page active
+    private static function req_pageActive($pageActive)
+    {
+        $_GET["indicateurAccueil"] = ""; 
+        $_GET["indicateurChalets"] = "";
+        $_GET["indicateurInformations"] = "";
+        $_GET["indicateurContact"] = "";
+        
+        switch ($pageActive) 
+        {
+            case 'indicateurAccueil':
+                $_GET["indicateurAccueil"] = "active";
+                break;
+            case 'indicateurChalets':
+                $_GET["indicateurChalets"] = "active";
+                break;  
+            case 'indicateurInformations':
+                $_GET["indicateurInformations"] = "active";
+                break;
+            case 'indicateurContact':
+                $_GET["indicateurContact"] = "active";
+                break;  
+            default:
+                $_GET["indicateurAccueil"] = "active"; // ceci est le défaut
+                break;
+        }
+    } 
+
     /////////////////////////////////////////////////////////////////////////
     // UTILISATEUR //////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////
@@ -243,6 +273,8 @@ class Controleur
     // traitement extraire des produits
     private static function req_chalets()
     {
+        self::req_pageActive("indicateurChalets");
+
         try
         {
             //$oProduits = new Produits();
@@ -502,6 +534,8 @@ class Controleur
     // Générer accueil.html
     private static function req_accueil()
     {
+        self::req_pageActive("indicateurAccueil");
+        
         try
         {
             $oStatiques = new Statiques();
@@ -519,6 +553,8 @@ class Controleur
     // Générer informations.html  
     private static function req_informations()
     {
+        self::req_pageActive("indicateurInformations");
+
         try
         {
             $oStatiques = new Statiques();
@@ -543,6 +579,8 @@ class Controleur
     // Générer contact.html  
     private static function req_contact()
     {
+        self::req_pageActive("indicateurContact");
+        
         try
         {
             $oStatiques = new Statiques();
