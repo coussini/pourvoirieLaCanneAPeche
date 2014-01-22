@@ -45,9 +45,9 @@ class VueProduits
         $form .= '<div class="col-lg-12">';
         $form .= '<img src="./images/carte2.jpg" alt="carte" border="0" usemap="#emplacement">';
         $form .= '<map name="emplacement">';
-        $form .= '<a class="monPopover" data-toggle="popover" data-placement="top" data-trigger="hover" data-title="Design" data-content="test">';
+        //$form .= '<a class="monPopover" data-toggle="popover" data-placement="top" data-trigger="hover" data-title="Design" data-content="test">';
         $form .= '<area shape="rect" coords="171,114,216,159" href="./index.php?requete=req_selectionChalet&id_produit=1" alt="chalet1">';
-        $form .= '</a>';
+        //$form .= '</a>';
         $form .= '<area shape="rect" coords="138,206,183,251" href="./index.php?requete=req_selectionChalet&id_produit=2" alt="chalet2">';
         $form .= '<area shape="rect" coords="167,293,213,338" href="./index.php?requete=req_selectionChalet&id_produit=3" alt="chalet3">';
         $form .= '<area shape="rect" coords="258,339,299,380" href="./index.php?requete=req_selectionChalet&id_produit=1" alt="chalet4">';
