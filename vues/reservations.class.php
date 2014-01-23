@@ -247,8 +247,8 @@ class VueReservations
 
         if ($_GET["erreur"] == "")
         {
-            $form .= '<div class="col-lg-12">';
-            $form .= '<h1>Historique de vos réservation</h1>';
+            $form .= '<div class="col-lg-12 col-sm-12 col-lg-12 grostitres">';
+            $form .= '<p>Historique de vos réservation</p>';
             $form .= '<h2>Détail sur vos réservation</h2>';
 
             for ($i = 0; $i < count($reservations); $i++) 
