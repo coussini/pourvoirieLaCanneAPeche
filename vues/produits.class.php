@@ -70,6 +70,14 @@ class VueProduits
         $form .= '<div class="container main">';
         $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="GET">';
         $form .= '<div class="row">';
+
+        if (empty($_SESSION["courriel"]))
+        {
+            $form .= '<div class="col-md-12 grostitres">';
+            $form .= '<p>POUR RÉSERVER INCRIVEZ-VOUS!</p>';
+            $form .= '</div>';
+        }
+
         $form .= '<div class="col-lg-4">';
         $form .= '<h4><p class="img-thumbnail">' . $produits[0]["nom"] . '</p></h4>';
         $form .= '<img src="' . $produits[0]["imageFacade"] . '" alt="chalet-accueil" class="img-thumbnail">';
@@ -91,8 +99,12 @@ class VueProduits
         $form .= '</div>';
         $form .= '<div class="row">';
         $form .= '<div class="col-lg-4 col-lg-offset-8">';
-        $form .= '<a class="btn btn-custom-gris btn-lg" href="./index.php?requete=chalets_html">Fermer</a>';                  
-        $form .= '<button type="submit" class="btn btn-custom-vert btn-lg">Réserver</button><br/><br/>';
+        $form .= '<a class="btn btn-custom-gris btn-lg" href="./index.php?requete=chalets_html">Fermer</a>';  
+
+        if (!empty($_SESSION["courriel"]))
+        {
+            $form .= '<button type="submit" class="btn btn-custom-vert btn-lg">Réserver</button><br/><br/>';
+        }
         $form .= '</div>';
         $form .= '</div>';
         $form .= '<div class="col-lg-12">';

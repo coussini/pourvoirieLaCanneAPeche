@@ -454,3 +454,21 @@ width: 800px;
     padding-left: 0px;
     padding-right: 0px;
 }
+
+.etape-reservation-en-cours 
+{
+    background-color:#304716;
+    color: white;
+}
+
+.etape-reservation 
+{
+    background-color:#809060;
+    color: white;
+}
+
+.badge 
+{
+  padding: 10px;
+  margin-right: 5px;
+}

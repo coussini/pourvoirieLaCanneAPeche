@@ -30,6 +30,8 @@ class VueReservations
         if ($_GET["erreur"] == "")
         {
             $form .= '<div class="col-lg-4">';
+            $form .= '<span class="etape-reservation-en-cours badge pull-left">1</span>';
+            $form .= '<span class="etape-reservation badge pull-left">2</span>';
             $form .= '<h2>Réservation</h2>';
             $form .= '<h2>' . $produit["nom"] . '</h2>';
             $form .= '<img class="img-responsive" src="' . $produit["imageFacade"] . '" alt="image de façade">';
@@ -95,13 +97,13 @@ class VueReservations
             $form .= '<h2>Vos coordonnées</h2>';
             $form .= '<p class="help-block">Veuillez vérifier vos coordonnées afin que nous puissions vous envoyez une confirmation de paiement</p>';
             $form .= '<label>NOM</label><br/>';
-            $form .= '<input type="text" name="nom" value="' . $utilisateur["nom"] . '" readonly><br/>';
+            $form .= '<p>' . $utilisateur["nom"] . '</p><br/>';
             $form .= '<label>PRENOM</label><br/>';
-            $form .= '<input type="text" name="prenom" value="' . $utilisateur["prenom"] . '" readonly><br/>';
+            $form .= '<p>' . $utilisateur["prenom"] . '</p><br/>';
             $form .= '<label>ADRESSE COURRIEL</label><br/>';
-            $form .= '<input type="text" name="courriel" value="' . $utilisateur["courriel"] . '" readonly><br/>';
+            $form .= '<p>' . $utilisateur["courriel"] . '</p><br/>';
             $form .= '<label>DATE DE NAISSANCE</label><br/>';
-            $form .= '<input type="text" name="date_de_naissance" value="' . $utilisateur["date_de_naissance"] . '" readonly>';
+            $form .= '<p>' . $utilisateur["date_de_naissance"] . '</p><br/>';
             $form .= '</div> <!-- /.col-lg-4 -->';
             $form .= '<div class="col-lg-4">';
             $form .= '<h2>Carte de crédit</h2>';
@@ -165,13 +167,13 @@ class VueReservations
         $form .= '<h2>Vos coordonnées</h2>';
         $form .= '<p class="help-block">Veuillez vérifier vos coordonnées afin que nous puissions vous envoyez une confirmation de paiement</p>';
         $form .= '<label>NOM</label><br/>';
-        $form .= '<input type="text" name="nom" value="' . $utilisateur["nom"] . '" readonly><br/>';
+        $form .= '<p>' . $utilisateur["nom"] . '</p><br/>';
         $form .= '<label>PRENOM</label><br/>';
-        $form .= '<input type="text" name="prenom" value="' . $utilisateur["prenom"] . '" readonly><br/>';
+        $form .= '<p>' . $utilisateur["prenom"] . '</p><br/>';
         $form .= '<label>ADRESSE COURRIEL</label><br/>';
-        $form .= '<input type="text" name="courriel" value="' . $utilisateur["courriel"] . '" readonly><br/>';
+        $form .= '<p>' . $utilisateur["courriel"] . '</p><br/>';
         $form .= '<label>DATE DE NAISSANCE</label><br/>';
-        $form .= '<input type="text" name="date_de_naissance" value="' . $utilisateur["date_de_naissance"] . '" readonly>';
+        $form .= '<p>' . $utilisateur["date_de_naissance"] . '</p><br/>';
         $form .= '</div> <!-- /.col-lg-4 -->';
         $form .= '<div class="col-lg-4">';
         $form .= '<h2>Carte de crédit</h2>';
@@ -244,12 +246,14 @@ class VueReservations
         $form .= '<div class="container">';
         $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="GET">';
         $form .= '<div class="row">';
+        $form .= '<div class="col-lg-8 grostitres">';
+        $form .= '<p>HISTORIQUE DE VOS RÉSERVATION</p>';
+        $form .= '</div>';
+        $form .= '<div class="col-lg-8">';
 
         if ($_GET["erreur"] == "")
         {
-            $form .= '<div class="col-lg-12 col-sm-12 col-lg-12 grostitres">';
-            $form .= '<p>Historique de vos réservation</p>';
-            $form .= '<h2>Détail sur vos réservation</h2>';
+            $form .= '<h3>Détail sur vos réservation</h3><br/>';
 
             for ($i = 0; $i < count($reservations); $i++) 
             {        
@@ -259,14 +263,12 @@ class VueReservations
                 $form .= '<br/><br/>';
             }
 
-            $form .= '</div><!--  fin  col-lg-12 -->';
+            $form .= '</div><!--  fin  col-lg-8 -->';
         }
         else
         {
-            $form .= '<div class="col-lg-12">';
-            $form .= '<h1>Historique de vos réservation</h1>';
             $form .= '<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">&nbsp</span>' . $_GET["erreur"] . '</div>';            
-            $form .= '</div>';
+            $form .= '</div><!--  fin  col-lg-8 -->';
         }
 
         $form .= '<input type="hidden" name="requete" value="' . $_GET["requete"] . '">';
