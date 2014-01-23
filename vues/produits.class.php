@@ -37,23 +37,24 @@ class VueProduits
     // function qui retourne le formulaire "passer une commande" à panier.html dans le cas d'une réussite
     public static function formulaire_chalets($produits)
     {
-
-		$form = '';
+        $form = '';
         $form .= '<div class="container main">';
         $form .= '<section class="contenu-centre">';
         $form .= '<div class="row">';
-        $form .= '<div class="col-lg-12">';
-        $form .= '<img src="./images/carte2.jpg" alt="carte" border="0" usemap="#emplacement">';
-        $form .= '<map name="emplacement">';
-        $form .= '<area shape="rect" coords="171,114,216,159" href="./index.php?requete=selectionChalet_html&id_produit=1" alt="chalet1">';
-        $form .= '<area shape="rect" coords="138,206,183,251" href="./index.php?requete=selectionChalet_html&id_produit=2" alt="chalet2">';
-        $form .= '<area shape="rect" coords="167,293,213,338" href="./index.php?requete=selectionChalet_html&id_produit=3" alt="chalet3">';
-        $form .= '<area shape="rect" coords="258,339,299,380" href="./index.php?requete=selectionChalet_html&id_produit=1" alt="chalet4">';
-        $form .= '<area shape="rect" coords="469,409,516,456" href="./index.php?requete=selectionChalet_html&id_produit=2" alt="chalet5">';
-        $form .= '<area shape="rect" coords="678,298,723,343" href="./index.php?requete=selectionChalet_html&id_produit=3" alt="chalet6">';
-        $form .= '<area shape="rect" coords="678,206,723,251" href="./index.php?requete=selectionChalet_html&id_produit=1" alt="chalet7">';
-        $form .= '<area shape="rect" coords="691,68,735,112"  href="./index.php?requete=selectionChalet_html&id_produit=2" alt="chalet8">';
-        $form .= '</map>';
+        $form .= '<div class="carte">';
+        $form .= '<a href="./index.php?requete=selectionChalet_html&id_produit=1">';
+        $form .= '<img id="chalet1" src="./images/symbol-chalet.png" width="60" height="60" /></a>';
+        $form .= '<a href="./index.php?requete=selectionChalet_html&id_produit=2">';
+        $form .= '<img id="chalet2" src="./images/symbol-chalet.png" width="60" height="60" /></a>';
+        $form .= '<a href="./index.php?requete=selectionChalet_html&id_produit=3">';
+        $form .= '<img id="chalet3" src="./images/symbol-chalet.png" width="60" height="60" /></a>';
+        $form .= '<div id="pop1" class="popover-chalet hidden"><div class="nom-chalet">'. $produits[0]["nom"] .'</div>';
+        $form .= '<div class="vue-exterieur"><img src="' . $produits[0]["imageFacade"] . '" width="400" height="200" alt=""/></div></div>';
+        $form .= '<div id="pop2" class="popover-chalet hidden"><div class="nom-chalet">'. $produits[1]["nom"] .'</div>';
+        $form .= '<div class="vue-exterieur"><img src="' . $produits[1]["imageFacade"] . '" width="400" height="200" alt=""/></div></div>';
+        $form .= '<div id="pop3" class="popover-chalet hidden"><div class="nom-chalet">'. $produits[2]["nom"] .'</div>';
+        $form .= '<div class="vue-exterieur"><img src="' . $produits[2]["imageFacade"] . '" width="400" height="200" alt=""/></div></div>';
+        $form .= '</a>';
         $form .= '</div>';
         $form .= '</div>';
         $form .= '</section>';

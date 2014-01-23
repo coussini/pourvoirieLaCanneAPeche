@@ -472,3 +472,72 @@ width: 800px;
   padding: 10px;
   margin-right: 5px;
 }
+
+.carte {
+    width: 960px;
+    height: 620px;
+    background-image:url('../images/carte2.jpg');
+}
+
+#chalet1 {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    left: 165px;
+    top: 117px;
+}
+
+#chalet2 {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    left: 70px;
+    top: 200px;
+}
+
+#chalet3 {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    left: 30px;
+    top: 285px;
+}
+
+.popover-chalet
+{
+    position: relative;
+    background-color: #FFFFFF;
+    width: 420px;
+    height: 250px;
+    left: 240px;
+    top: 0px;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;
+    -webkit-box-shadow: 0px 6px 14px 0px rgba(55, 50, 50, 0.24);
+    -moz-box-shadow:    0px 6px 14px 0px rgba(55, 50, 50, 0.24);
+    box-shadow:         0px 6px 14px 0px rgba(55, 50, 50, 0.24);
+}
+
+.nom-chalet
+{
+    height:30px;    
+    font-family:arial;
+    font-size:20px;
+    text-align:center;
+    background-color:#809060;
+    color:white;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;*/
+}
+
+.vue-exterieur
+{
+   padding:10px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
