@@ -54,7 +54,7 @@ class VueStatiques
         {
             $form .= '<option value="' . $value . '">' . $value . '</option>';
         };
-        $form .= '<option value="nouveauContenu">-- Créer un nouveau contenu --</option>';
+        //$form .= '<option value="nouveauContenu">-- Créer un nouveau contenu --</option>';
         $form .= '</select>';
         $form .= '</div>';
         $form .= '</form>';

@@ -262,7 +262,7 @@ class Statiques
         else if ($contenu == "") {
             throw new Exception("Contenu invalide");
         }
-        $contenu = htmlentities($contenu, ENT_QUOTES, "UTF-8");
+        //$contenu = htmlentities($contenu, ENT_QUOTES, "UTF-8");
 
         $id = $this->connexionBD;
         $requete = $id->prepare("UPDATE statiques
