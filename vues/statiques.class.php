@@ -7,9 +7,9 @@ class VueStatiques
     {
         $form = '<div class="container">';
         $form .= '<div class="row">';
-        $form .= '<div class="col-6 col-sm-6 col-lg-4 grostitres"><p>' . $contenuStatique['nom'] . '</p></div>';
-        $form .= '<div class="col-6 col-sm-6 col-lg-6 para"><p>' . $contenuStatique['contenu'] . '</p></div><br/>';
-       
+        $form .= '<div class="col-sm-5 col-lg-5 grostitres"><p>' . $contenuStatique['nom'] . '</p></div>';
+        $form .= '<div class="col-sm-1 col-lg-1"></div>';
+        $form .= '<div class="col-sm-6 col-lg-6 para"><p>' . $contenuStatique['contenu'] . '</p></div><br/>';
         $form .= '</div><!-- /.row -->';
         $form .= '</div> <!-- /.container -->';
         echo $form;
