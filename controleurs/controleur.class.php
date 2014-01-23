@@ -39,8 +39,8 @@ class Controleur
             case 'validerNouveaupass':
                 self::req_validerNouveaupass();
                 break;  
-            case 'req_majUtilisateur':
-                self::req_majUtilisateur();
+            case 'profilModif_html':
+                self::req_profilModif_html();
                 break;
             ///////////////////////////
             // PRODUIT ////////////////
@@ -51,6 +51,9 @@ class Controleur
             case 'selectionChalet_html':
                 self::req_selectionChalet_html();
                 break;
+            case 'editerChalet_html':
+                self::req_editerChalet_html();
+                break;  
             case 'req_selectTousProduits':
                 self::req_selectTousProduits();
                 break;        
@@ -63,9 +66,6 @@ class Controleur
             case 'req_modifierUnProduit':
                 self::req_modifierUnProduit();
                 break;
-            case 'req_editerChalet':
-                self::req_editerChalet();
-                break;  
             ///////////////////////////
             // RÉSERVATION ////////////
             ///////////////////////////
@@ -356,14 +356,14 @@ class Controleur
         }   
     } 
     
-    // MAJ les information sur utilisateur
-    private static function req_majUtilisateur()
+    // afficher formulaire profilModif.html
+    private static function req_profilModif_html()
     {
         try
         {
             $oUtilisateurs = new Utilisateurs();                                
             $utilisateurs = $oUtilisateurs->majUtilisateur($_GET["courriel"]); //fonction majUtilisateur
-            VueUtilisateurs::formulaire_majUtilisateur();
+            VueUtilisateurs::formulaire_profilModif_html();
         }
         catch(Exception $e)
         {
@@ -412,6 +412,23 @@ class Controleur
         }
     }
 
+    // afficher formulaire selectionChalet.html
+    private static function req_editerChalet_html()
+    {
+        try
+        {
+            //$oProduits = new Produits();
+            //$Produits = $oProduits->selectUnProduit('1');
+            //VueProduits::formulaire_editerChalet($Produits);
+            VueProduits::formulaire_editerChalet();
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            VueMaitre::formulaire_erreur();
+        }
+    }
+
     // traitement extraire des produits
     private static function req_selectTousProduits()
     {
@@ -437,23 +454,6 @@ class Controleur
             $oProduits = new Produits();
             $Produits = $oProduits->selectUnProduit('1');
             VueProduits::formulaire_selectUnProduit($Produits);
-        }
-        catch(Exception $e)
-        {
-            $_GET['erreur']  = $e->getMessage();
-            VueMaitre::formulaire_erreur();
-        }
-    }
-
-    // traitement d'édition d'un chalet
-    private static function req_editerChalet()
-    {
-        try
-        {
-            //$oProduits = new Produits();
-            //$Produits = $oProduits->selectUnProduit('1');
-            //VueProduits::formulaire_editerChalet($Produits);
-            VueProduits::formulaire_editerChalet();
         }
         catch(Exception $e)
         {

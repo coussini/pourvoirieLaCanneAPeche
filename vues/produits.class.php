@@ -31,6 +31,7 @@ class VueProduits
         $form .= '<p>' . $_GET["erreur"] . '</p>';
         $form .= '</div>';
         $form .= '</form>';
+
         echo $form;
     }
 
@@ -59,12 +60,11 @@ class VueProduits
         $form .= '</div>';
         $form .= '</section>';
         $form .= '</div>';
+
         echo $form;
-
-        //------------------------------------------------------------------------------------------------------------//
-
     }
-        public static function formulaire_selectionChalet($produits)
+    
+    public static function formulaire_selectionChalet($produits)
     {
 
         $form = '';
@@ -106,6 +106,7 @@ class VueProduits
         {
             $form .= '<button type="submit" class="btn btn-custom-vert btn-lg">Réserver</button><br/><br/>';
         }
+
         $form .= '</div>';
         $form .= '</div>';
         $form .= '<div class="col-lg-12">';
@@ -136,47 +137,57 @@ class VueProduits
         $form .= '</div>';
 
         echo $form;
-
     }
 
 //----------------------------------------------------------------------------------------------------------------------//
     
-        public static function formulaire_editerChalet()
+    public static function formulaire_editerChalet()
     {
-
         $form = '';
-        $form .= '<div class="container main">';
-        $form .= '<section class="contenu-centre">';
+
+        $form .= '<div class="container">';
         $form .= '<div class="row">';
         $form .= '<div class="col-lg-12">';
-        $form .= '<h4>PANNEAU D\'ÉDITION :</h4>';
+        $form .= '<h4><p class="img-thumbnail">Page administration des chalets :</p></h4>';
         $form .= '</div>';
+        $form .= '</div>';
+        $form .= '<div class="row">';
         $form .= '<div class="col-lg-4">';
-        $form .= '<h4><p class="img-thumbnail"> Le chalet 1 : </p></h4>';
-        $form .= '<img src="./images/chalet1.jpg" alt="chalet-accueil" class="img-thumbnail">';
-        $form .= '<ul class="pagination">';
-        $form .= '<li><a href="chalet1.html">1</a></li>';
-        $form .= '<li><a href="chalet2.html">2</a></li>';
-        $form .= '<li><a href="chalet3.html">3</a></li>';
-        $form .= '<li><a href="#">4</a></li>';
-        $form .= '<li><a href="#">5</a></li>';
-        $form .= '<li><a href="#">6</a></li>';
-        $form .= '<li><a href="#">7</a></li>';
-        $form .= '<li><a href="#">8</a></li>';
-        $form .= '</ul>';
-        $form .= '<div class="form-group">';
-        $form .= '<label for="exampleInputFile">Modifier l\'image</label>';
-        $form .= '<input type="file" id="exampleInputFile">';
+        $form .= '<h4><p>Sélectionnez le chalet à modifier</p></h4>';
         $form .= '</div>';
-        $form .= '<p>Description :<textarea rows="4" cols="50"></textarea></p>';
+        $form .= '</div>';
+        $form .= '<div class="row">';
+        $form .= '<div class="col-lg-12">';
+        $form .= '<select class="selectpicker" data-selected-text-format="count>2">';
+        $form .= '<option>Chalet 1: La détente </option>';
+        $form .= '<option>Chalet 2: Le relax </option>';
+        $form .= '<option>Chalet 3:  Le paisible </option>';
+        $form .= '<option>Chalet 4: L\'harmonie </option>';
+        $form .= '<option>Chalet 5: La tranquilité </option>';
+        $form .= '<option>Chalet 6: Le souvenir </option>';
+        $form .= '<option>Chalet 7: L\'ensoleillé </option>';
+        $form .= '<option>Chalet 8: La dépourvue </option>';
+        $form .= '</select>';
+        $form .= '</div>';
+        $form .= '</div>';
+        $form .= '<div class="row">';
+        $form .= '<div class="col-lg-4">';
+        $form .= '<h4><p class="img-thumbnail">Chalet 1 :</p></h4>';
+        $form .= '<img src="./images/chalet1.jpg" alt="photo exterieur chalet" class="img-thumbnail">';
+        $form .= '<div class="form-group">';
+        $form .= '<p><h4>URL de l\'image à modifier :<input type"text"></h4></p>';
+        $form .= '<p><h6>(Uniquement images au format jpg,gif ou png)</h6></p>';
+        $form .= '<p><h4><p>Description :</h4>';
+        $form .= '<textarea cols="50" rows="4" style="width: 356px; height: 104px;"></textarea>';
+        $form .= '</div>';
         $form .= '</div>';
         $form .= '<div class="col-lg-4">';
         $form .= '<h4><p class="img-thumbnail">Options du chalet :</p></h4>';
-        $form .= '<div class="col-lg-12">';
         $form .= '<ul class="list-group">';
-        $form .= '<li class="list-group-item"><label>Nombre de chambre :</label></li>';
-        $form .= '<li class="list-group-item"><label><input type="radio" name="lit" checked = "checked"> 1 </label>';
-        $form .= '<label><input type="radio" name="lit"> 2 </label>';
+        $form .= '<li class="list-group-item"><label>Nombre de chambre:</label></li>';
+        $form .= '<li class="list-group-item">';
+        $form .= '<label><input type="radio" name="lit" checked="checked"> 1 </label>';
+        $form .= ' <label><input type="radio" name="lit"> 2 </label>';
         $form .= '<label><input type="radio" name="lit"> 3 </label>';
         $form .= '<label><input type="radio" name="lit"> 4 </label>';
         $form .= '<label><input type="radio" name="lit"> 5 </label>';
@@ -184,27 +195,27 @@ class VueProduits
         $form .= '</ul>';
         $form .= '<hr>';
         $form .= '<ul class="list-group">';
-        $form .= '<li class="list-group-item"><label>Nombre de salle de bain :</label></li>';
-        $form .= '<li class="list-group-item"><label>';
-        $form .= '<input type="radio" checked = "checked" name="bain">1</label>';
+        $form .= '<li class="list-group-item">';
+        $form .= '<label>Nombre de salle de bain:</label>';
+        $form .= '</li>';
+        $form .= '<li class="list-group-item">';
+        $form .= '<label><input type="radio" checked="checked" name="bain">1</label>';
         $form .= '<label><input type="radio" name="bain">2</label>';
         $form .= '</li>';
         $form .= '</ul>';
         $form .= '</div>';
-        $form .= '</div>';
-        $form .= '<div class="col-lg-3">';
-        $form .= '<h4><p class="img-thumbnail">Prix de location :</p></h4>';
+        $form .= '<div class="col-lg-4">';
         $form .= '<ul class="list-group">';
-        $form .= '<li class="list-group-item"><label>Par semaine : <br><input type="text" value="000.00">$</label></li>';
+        $form .= '<h4><p class="img-thumbnail">Prix de location :</p></h4>';
+        $form .= '<li class="list-group-item"><label><input type="text" name="prix"> $can /semaine</label></li>';
         $form .= '</ul>';
         $form .= '</div>';
-        $form .= '<div class="row">';
-        $form .= '<div class="col-lg-4 col-lg-offset-8">';
-        $form .= '<p><a class="btn btn-custom-gris btn-lg" href="#">Réinitialiser</a><a class="btn btn-custom-vert btn-lg" href="#">Publier</a></p>';
+        $form .= '<div class="col-lg-12">';
+        $form .= '<p><a class="btn btn-custom-gris btn-lg" href="#">Réinitialiser</a>';
+        $form .= '<a class="btn btn-custom-vert btn-lg" href="#">Publier</a>';
+        $form .= '</p>';
         $form .= '</div>';
         $form .= '</div>';
-        $form .= '</div>';
-        $form .= '</section>';
         $form .= '</div>';
 
         echo $form;
@@ -234,8 +245,6 @@ class VueProduits
                 $form .= '</form>';
                 echo $form;
                 */
-
-//----------------------------------------------------------------------------------------------------------------------------------//
     
     public static function formulaire_modifierProduit($produits)
     {

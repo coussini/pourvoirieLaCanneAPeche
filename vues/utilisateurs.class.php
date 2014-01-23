@@ -222,7 +222,7 @@ class VueUtilisateurs
     } 
 
     // fonction qui retourne le formulaires "info MIS A JOUR utilisateur" inscription.html
-    public static function formulaire_majUtilisateur()
+    public static function formulaire_profilModif_html()
     {
         $form = '';
      

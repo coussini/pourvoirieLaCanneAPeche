@@ -91,6 +91,8 @@ var CalendrierReservation = (function(win,doc,$)
         // Permet d'éliminer du calendrier toutes les semaines réservées
         // pour ce produit, question de ne pas permettre
         // de sélectionner des dates déjà réservées
+        // fait appel au serveur PHP pour retouner des date de non disponibilité
+        // concernant le calendrier jQuery
         elimineSemainesReservees: function(parametreProduit) 
         {
             var source = "index.php";
