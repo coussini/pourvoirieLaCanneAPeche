@@ -56,10 +56,6 @@
             </button>
             <a href="./index.php"><img src="./images/logo.png" alt="logo" class="img-responsive hidden-xs"></a>
           </div>
-    <?php Controleur::gererMenuPrincipal(); ?>
-        </div>
-      </div>
-    </div>
     <?php Controleur::gererRequetes(); ?>
      <footer>
         <p>&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>

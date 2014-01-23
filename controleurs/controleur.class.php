@@ -12,18 +12,27 @@ class Controleur
             ///////////////////////////
             // UTILISATEUR ////////////
             ///////////////////////////
-            case 'req_loginUtilisateur':
-                self::req_loginUtilisateur();
+            case 'login_html':
+                self::req_login_html();
                 break;
-            case 'req_extraireUtilisateur':
-                self::req_extraireUtilisateur();
+            case 'validerLogin':
+                self::req_validerLogin();
+                break;
+            case 'inscription_html':
+                self::req_inscription_html();
+                break;  
+            case 'validerInscription':
+                self::req_validerInscription();
+                break;  
+            case 'profil_html':
+                self::req_profil_html();
+                break;  
+            case 'deconnexion':
+                self::req_deconnexion();
                 break;  
             case 'req_majUtilisateur':
                 self::req_majUtilisateur();
                 break;
-            case 'req_ajoutUtilisateur':
-                self::req_ajoutUtilisateur();
-                break;  
             case 'req_oubliePass':
                 self::req_oubliePass();
                 break;  
@@ -133,7 +142,7 @@ class Controleur
     //////////////////////////////////////////////////////////////////////
     //
     // gestion du menu principal
-    public static function gererMenuPrincipal()
+    private static function gererMenuPrincipal()
     {
         $requete = $_GET["requete"];
 
@@ -177,50 +186,123 @@ class Controleur
     // UTILISATEUR //////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////
 
-    // traitement formulaire login
-    private static function req_loginUtilisateur()
+    // afficher formulaire login.html
+    private static function req_login_html()
     {
         try
         {
-            $oUtilisateurs = new Utilisateurs();
-            VueUtilisateurs::formulaire_loginUtilisateur();
+            $message_erreur_login  = "";
+            $prochaineRequete = 'validerLogin';
+            self::gererMenuPrincipal();
+            VueUtilisateurs::formulaire_login_html($prochaineRequete,$message_erreur_login);
         }
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
+            self::gererMenuPrincipal();
             VueMaitre::formulaire_erreur();
         }
     } 
 
-    // traitement formulaire login
-    private static function req_valideLogin()
+    // valider le formulaire login.html
+    private static function req_validerLogin()
     {       
         try
         {
+            $message_erreur_login  = "";
             $oUtilisateurs = new Utilisateurs();
             $utilisateurs = $oUtilisateurs->chercherUtilisateur($_POST['courriel']);
-            // TODO METTRE ENCRYPTION DU MOT DE PASSE
-            // PENSER À UNE VARIABLE DE SESSION OU WEBSTORAGE
+
             if ($utilisateurs["mot_de_passe"] != $_POST['mot_de_passe'])
             {
-                VueUtilisateurs::formulaire_validLogin($utilisateurs);
+                $message_erreur_login  = "Veuillez inscrire un courriel et un mot de passe valide pour vous connecter";
+                $prochaineRequete = 'validerLogin';
+                self::gererMenuPrincipal();
+                VueUtilisateurs::formulaire_login_html($prochaineRequete,$message_erreur_login);
             }
+            else
+            {
+                // utilisateur connecté
+                $_SESSION["courriel"] = $_POST['courriel'];
+                self::req_accueil();
+            }
+
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            self::gererMenuPrincipal();
+            VueMaitre::formulaire_erreur();
+        }
+    } 
+
+    // afficher formulaire inscription.html
+    private static function req_inscription_html()
+    {
+
+
+
+//////////////// TODO VALIDER QUE L'UTILISATEUR N'EST PAS DÉJÀ LÀ
+
+        try
+        {
+            $message_erreur_login  = "";
+            $prochaineRequete = 'validerInscription';
+            self::gererMenuPrincipal();
+            VueUtilisateurs::formulaire_inscription_html($prochaineRequete,$message_erreur_login);
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            self::gererMenuPrincipal();
+            VueMaitre::formulaire_erreur();
+        }
+    } 
+
+    // valider le formulaire inscription.html
+    private static function req_validerInscription()
+    {    
+        try
+        {
+            $message_erreur_login  = "";
+            $oUtilisateurs = new Utilisateurs();
+            $oUtilisateurs->ajoutUtilisateur($_POST["nom"],$_POST["prenom"],$_POST["courriel"],$_POST["mot_de_passe"],$_POST["mot_de_passe2"],$_POST["date_de_naissance"]);
+            // utilisateur connecté
+            $_SESSION["courriel"] = $_POST['courriel'];
+            self::req_accueil();
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            self::gererMenuPrincipal();
+            VueMaitre::formulaire_erreur();
+        }
+    } 
+
+    // extraire les information sur utilisateur connecté et afficher le tout dans profil.html
+    private static function req_profil_html()
+    {
+        try
+        {
+            $oUtilisateurs = new Utilisateurs();
+            $utilisateurs = $oUtilisateurs->extraireUtilisateur($_SESSION["courriel"]);      
+            self::gererMenuPrincipal();
+            VueUtilisateurs::formulaire_profil_html($utilisateurs);
         }
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
             VueMaitre::formulaire_erreur();
-        }
-    } 
+        }   
+    }
 
-    // extraire les information sur utilisateur
-    private static function req_extraireUtilisateur()
+    // déconnexion d'un utilisateur
+    private static function req_deconnexion()
     {
         try
         {
-            $oUtilisateurs = new Utilisateurs();
-            $utilisateurs = $oUtilisateurs->extraireUtilisateur($_GET["courriel"]);//fonction extraireUtilisateur       
-            VueUtilisateurs::formulaire_extraireUtilisateur($utilisateurs);
+            $_SESSION["courriel"] = "";
+            self::req_accueil();
         }
         catch(Exception $e)
         {
@@ -237,23 +319,6 @@ class Controleur
             $oUtilisateurs = new Utilisateurs();                                
             $utilisateurs = $oUtilisateurs->majUtilisateur($_GET["courriel"]); //fonction majUtilisateur
             VueUtilisateurs::formulaire_majUtilisateur();
-        }
-        catch(Exception $e)
-        {
-            $_GET['erreur']  = $e->getMessage();
-            VueMaitre::formulaire_erreur();
-        }   
-    } 
-
-    // ajouter les information sur utilisateur
-    private static function req_ajoutUtilisateur()
-    {
-        try
-        {
-            //$oUtilisateurs = new Utilisateurs();
-            //$utilisateursnew = $oUtilisateurs->ajoutUtilisateur($_POST["nom"],$_POST["prenom"],$_POST["courriel"], $_POST["mot_de_passe"],$_POST["date_de_naissance"]);
-            //TODO : Qu'est-ce que fais apres...
-            VueUtilisateurs::formulaire_ajoutUtilisateur();
         }
         catch(Exception $e)
         {
@@ -562,11 +627,13 @@ class Controleur
         {
             $oStatiques = new Statiques();
             $contenuStatique = $oStatiques->getContenuStatique('À propos');
+            self::gererMenuPrincipal();
             VueStatiques::afficherBanniereAccueil();
             VueStatiques::afficherContenuStatique($contenuStatique);
         }
         catch(Exception $e)
         {
+            self::gererMenuPrincipal();
             $_GET['erreur']  = $e->getMessage();
             VueMaitre::formulaire_erreur();
         }
