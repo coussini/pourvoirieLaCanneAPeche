@@ -30,6 +30,9 @@ class Controleur
             case 'profil_html':
                 self::req_profil_html();
                 break;  
+            case 'validerProfil':
+                self::req_validerProfil();
+                break;
             case 'deconnexion':
                 self::req_deconnexion();
                 break;  
@@ -39,9 +42,6 @@ class Controleur
             case 'validerNouveaupass':
                 self::req_validerNouveaupass();
                 break;  
-            case 'profilModif_html':
-                self::req_profilModif_html();
-                break;
             ///////////////////////////
             // PRODUIT ////////////////
             ///////////////////////////
@@ -278,7 +278,7 @@ class Controleur
             $oUtilisateurs->ajoutUtilisateur($_POST["nom"],$_POST["prenom"],$_POST["courriel"],$_POST["mot_de_passe"],$_POST["mot_de_passe2"],$_POST["date_de_naissance"]);
             // utilisateur connecté
             $_SESSION["courriel"] = $_POST['courriel'];
-            self::req_accueil();
+            self::req_profil_html();
         }
         catch(Exception $e)
         {
@@ -294,7 +294,8 @@ class Controleur
         try
         {
             $oUtilisateurs = new Utilisateurs();
-            $utilisateurs = $oUtilisateurs->extraireUtilisateur($_SESSION["courriel"]);      
+            $utilisateurs = $oUtilisateurs->extraireUtilisateur($_SESSION["courriel"]);   
+            $prochaineRequete = 'validerProfil';
             self::gererMenuPrincipal();
             VueUtilisateurs::formulaire_profil_html($utilisateurs);
         }
@@ -305,6 +306,24 @@ class Controleur
             VueMaitre::formulaire_erreur();
         }   
     }
+    
+    // valider le formulaire profil.html
+    private static function validerProfil()
+    {
+        try
+        {
+            $oUtilisateurs = new Utilisateurs();                                
+            $oUtilisateurs->majUtilisateur($_POST["nom"],$_POST["prenom"],$_POST["courriel"],$_POST["mot_de_passe"],$_POST["mot_de_passe2"],$_POST["date_de_naissance"]);
+            self::gererMenuPrincipal();
+            VueUtilisateurs::formulaire_profilModif_html();
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            self::gererMenuPrincipal();
+            VueMaitre::formulaire_erreur();
+        }   
+    } 
 
     // déconnexion d'un utilisateur
     private static function req_deconnexion()
@@ -352,22 +371,6 @@ class Controleur
         {
             $_GET['erreur']  = $e->getMessage();
             self::gererMenuPrincipal();
-            VueMaitre::formulaire_erreur();
-        }   
-    } 
-    
-    // afficher formulaire profilModif.html
-    private static function req_profilModif_html()
-    {
-        try
-        {
-            $oUtilisateurs = new Utilisateurs();                                
-            $utilisateurs = $oUtilisateurs->majUtilisateur($_GET["courriel"]); //fonction majUtilisateur
-            VueUtilisateurs::formulaire_profilModif_html();
-        }
-        catch(Exception $e)
-        {
-            $_GET['erreur']  = $e->getMessage();
             VueMaitre::formulaire_erreur();
         }   
     } 

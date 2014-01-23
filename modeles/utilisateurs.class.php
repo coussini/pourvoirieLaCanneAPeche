@@ -186,52 +186,23 @@ class Utilisateurs
     // function SQL qui permet de mettre a jour des détails d'un utilisateur
     public function majUtilisateur($nom,$prenom,$courriel,$mot_de_passe,$mot_de_passe2,$date_de_naissance)
     {
-        if ($nom == "") // VALIDATION DU NOM
-        {
-            throw new Exception("SVP entrez votre nom.");
-        }
-        else if (!preg_match("/^([A-ZÉÈÏÔ][a-zéèïô]+)([ -][A-ZÉÈÏÔ][a-zéèïô]+)*$/",$nom)) // expression régulière  nom
-        {
-            throw new Exception("Caractères autorisés : a-z, é, è, ô, -");
-        }
-        else if ($prenom == "") // VALIDATION DU PRENOM
-        {
-            throw new Exception("SVP entrez votre prénom.");
-        }
-        else if (!preg_match("/^([A-ZÉÈÏÔ][a-zéèïô]+)([ -][A-ZÉÈÏÔ][a-zéèïô]+)*$/",$prenom)) // expression régulière  prenom
-        {
-            throw new Exception("Caractères autorisés : a-z, é, è, ô, -");
-        }
-        else if ($courriel == "") // VALIDATION DU COURRIEL
-        {
-            throw new Exception("SVP entrez votre courriel.");
-        }
-        else if ($mot_de_passe == "")   // VALIDATION DU MOT DE PASSE
-        {
-            throw new Exception("SVP entrez votre mot de passe.");
-        }
-        else if (strlen($mot_de_passe) < 6) 
+        if (strlen($mot_de_passe) < 6) 
         {
             throw new Exception("Mot de passe doit contenir au moins 6 characters.");
-        }
-        else if ($mot_de_passe2 == "")     // VALIDATION DU MOT DE PASSE 2
-        {
-            throw new Exception("SVP confirmer le mot de passe.");
         }
         else if ($mot_de_passe != $mot_de_passe2) // expression régulière  mot de passe 2
         {
             throw new Exception("Votre mot de passe et la confirmation de votre mot de passe ne correspondent pas.");
         }
         
-         // enlever ou convertir les caractères spéciaux
+        // enlever ou convertir les caractères spéciaux
         $nom = htmlentities($nom, ENT_QUOTES, "UTF-8");
         $prenom = htmlentities($prenom, ENT_QUOTES, "UTF-8");
         $courriel = htmlentities($courriel, ENT_QUOTES, "UTF-8");
         $mot_de_passe = htmlentities($mot_de_passe, ENT_QUOTES, "UTF-8");
         $date_de_naissance = htmlentities($date_de_naissance,ENT_QUOTES, "UTF-8");
-        
-        
-         $id = $this->connexionBD;
+
+        $id = $this->connexionBD;
          
         // pour permettre d'afficher les valuers dans un formulaire
         $requete = $id->prepare("UPDATE utilisateurs
@@ -239,9 +210,9 @@ class Utilisateurs
                                         prenom = :prenom,
                                         courriel = :courriel,
                                         mot_de_passe= :mot_de_passe,
-                                        date_de_naissance= :date_de_naissance,
+                                        date_de_naissance= :date_de_naissance
                                   WHERE courriel = :courriel
-                                   AND  statut  = 'actif'");
+                                    AND statut  = 'actif'");
                            
         $requete->bindParam(':nom',$nom,PDO::PARAM_STR);
         $requete->bindParam(':prenom',$prenom,PDO::PARAM_STR);
@@ -263,5 +234,4 @@ class Utilisateurs
         return true;
     }
 }
-
 ?>
