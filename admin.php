@@ -37,7 +37,7 @@ require_once("./vues/statiques.class.php");
 /*****************************/
 /* il n'y a qu'un controleur */
 /*****************************/
-require_once("./controleurs/controleur.class.php"); // CECI EST LE CONTROLEUR FINAL
+require_once("./controleurs/controleur.class.php");
 
 /************************/
 /* SQUELETTES DES PAGES */

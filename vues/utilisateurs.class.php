@@ -15,7 +15,7 @@ class VueUtilisateurs
         $form .= '<p>CONFIRMATION</p>';
         $form .= '</div>';
         $form .= '<div class="formlogin col-md-5"><!--formulaire login -->';
-        $form .= '<form role="form" action="./admin.php" method="POST">';
+        $form .= '<form role="form" action="./admin.php?requete=elements_statique_html" method="POST">';
         $form .='<button type="submit" class="btn btn-custom-vert btn-lg">CONFIRMER</button>';                              
         $form .='<br>';
         $form .='</form>';

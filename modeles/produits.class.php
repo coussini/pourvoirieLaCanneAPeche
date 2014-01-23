@@ -2,7 +2,6 @@
 // public function SQL qui permet de vérifier si un utilisateur (son courriel) est présent
 // RETOURNE 0 si le courriel n'est pas trouvé
 
-
 class Produits
 {
     private $connexionBD;
@@ -73,17 +72,6 @@ class Produits
         return $produits;
     }
 
-    //--------------------------------------------------------------------------------------------------------------------------------------------------------//
-
-
-    public function req_chalets()
-    {
-
-
-    }
-
-    // -----------------------------------------------------------------------------------------------------//
-
     public function selectUnProduit($id_produit)
     {
         $produits = array();
@@ -122,23 +110,37 @@ class Produits
     	$requete->bindColumn('nombre_de_salle_de_bain',$nombre_de_salle_de_bain);
     	$requete->bindColumn('prix_par_semaine',$prix_par_semaine);
     	
-        $i = 0;
-        while ($resultat = $requete->fetch(PDO::FETCH_BOUND))
+        $resultat = $requete->fetchColumn(PDO::FETCH_BOUND);
+
+        if ($requete->rowCount() > 0)
         {
-            $produits[$i]["id_produit"] = $id_produit;
-            $produits[$i]["statut"] = $statut;
-    		$produits[$i]["imageFacade"] = $imageFacade;
-    		$produits[$i]["imageInterieur1"] = $imageInterieur1;
-    		$produits[$i]["imageInterieur2"] = $imageInterieur2;
-    		$produits[$i]["imageInterieur3"] = $imageInterieur3;
-            $produits[$i]["nom"] = $nom;
-    		$produits[$i]["emplacement"] = $emplacement;
-    		$produits[$i]["description"] = $description;
-    		$produits[$i]["nombre_de_chambre"] = $nombre_de_chambre;
-    		$produits[$i]["nombre_de_salle_de_bain"] = $nombre_de_salle_de_bain;
-    		$produits[$i]["prix_par_semaine"] = $prix_par_semaine;
-    		
-            $i++;
+            $produits["id_produit"] = $id_produit;
+            $produits["statut"] = $statut;
+            $produits["imageFacade"] = $imageFacade;
+            $produits["imageInterieur1"] = $imageInterieur1;
+            $produits["imageInterieur2"] = $imageInterieur2;
+            $produits["imageInterieur3"] = $imageInterieur3;
+            $produits["nom"] = $nom;
+            $produits["emplacement"] = $emplacement;
+            $produits["description"] = $description;
+            $produits["nombre_de_chambre"] = $nombre_de_chambre;
+            $produits["nombre_de_salle_de_bain"] = $nombre_de_salle_de_bain;
+            $produits["prix_par_semaine"] = $prix_par_semaine;
+        }
+        else
+        {
+            $produits["id_produit"] = "";
+            $produits["statut"] = "";
+            $produits["imageFacade"] = "";
+            $produits["imageInterieur1"] = "";
+            $produits["imageInterieur2"] = "";
+            $produits["imageInterieur3"] = "";
+            $produits["nom"] = "";
+            $produits["emplacement"] = "";
+            $produits["description"] = "";
+            $produits["nombre_de_chambre"] = "";
+            $produits["nombre_de_salle_de_bain"] = "";
+            $produits["prix_par_semaine"] = "";
         }
 
         $requete->closeCursor();

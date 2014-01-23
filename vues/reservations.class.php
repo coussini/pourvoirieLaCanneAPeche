@@ -245,34 +245,33 @@ class VueReservations
     // function qui retourne le formulaire historique.html
     public static function formulaire_historique($reservations)
     {
-
         $form = '';
         $form .= '<div class="container">';
         $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="GET">';
+        $form .= '<h2>HISTORIQUE DE VOS RÉSERVATION</h2>';
         $form .= '<div class="row">';
-        $form .= '<div class="col-lg-8 grostitres">';
-        $form .= '<p>HISTORIQUE DE VOS RÉSERVATION</p>';
-        $form .= '</div>';
-        $form .= '<div class="col-lg-8">';
 
         if ($_GET["erreur"] == "")
         {
-            $form .= '<h3>Détail sur vos réservation</h3><br/>';
+            $form .= '<div class="col-lg-12">';
+            $form .= '<h2>Détails sur vos réservations</h2>';
 
             for ($i = 0; $i < count($reservations); $i++) 
-            {        
-                $form .= '<h4>' . $reservations[$i]["nom"] . ' du ' . $reservations[$i]["date_debut"] . ' au ' . $reservations[$i]["date_fin"] . '</h4>';
+            {       
+                $form .= '<div class="col-lg-12 grostitres"><p>' . $reservations[$i]["nom"] . ' du ' . $reservations[$i]["date_debut"] . ' au ' . $reservations[$i]["date_fin"] . '</p></div>';
                 $form .= '<h4>Coût total de la réservation ' . $reservations[$i]["prix_a_la_reservation"] . '$</h4>';
                 $form .= '<p>' . $reservations[$i]["description"] . '</p>';
                 $form .= '<br/><br/>';
             }
 
-            $form .= '</div><!--  fin  col-lg-8 -->';
+            $form .= '</div><!--  fin  col-lg-12 -->';
         }
         else
         {
+            $form .= '<div class="col-lg-12">';
+            $form .= '<h1>Détails sur vos réservations</h1>';
             $form .= '<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">&nbsp</span>' . $_GET["erreur"] . '</div>';            
-            $form .= '</div><!--  fin  col-lg-8 -->';
+            $form .= '</div>';
         }
 
         $form .= '<input type="hidden" name="requete" value="' . $_GET["requete"] . '">';
@@ -295,11 +294,11 @@ class VueReservations
         if ($_GET["erreur"] == "")
         {
             $form .= '<div class="col-lg-12">';
-            $form .= '<h1>Détail sur toutes les réservations</h1>';
+            $form .= '<h2>Détail sur toutes les réservations</h2>';
 
             for ($i = 0; $i < count($reservations); $i++) 
-            {        
-                $form .= '<h4>' . $reservations[$i]["nom"] . ' du ' . $reservations[$i]["date_debut"] . ' au ' . $reservations[$i]["date_fin"] . '</h4>';
+            {       
+                $form .= '<div class="col-lg-12 grostitres"><p>' . $reservations[$i]["nom"] . ' du ' . $reservations[$i]["date_debut"] . ' au ' . $reservations[$i]["date_fin"] . '</p></div>';
                 $form .= '<h4>Courriel du client : ' . $reservations[$i]["courriel"] . '</h4>';
                 $form .= '<h4>Coût total de la réservation ' . $reservations[$i]["prix_a_la_reservation"] . '$</h4>';
                 $form .= '<p>' . $reservations[$i]["description"] . '</p>';

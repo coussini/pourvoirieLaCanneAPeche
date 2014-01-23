@@ -35,17 +35,6 @@
     <div id="wrap">
       <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
-          <ul class="nav navbar-nav ">
-            <li class="active"><span class="titresMenuAdmin">SECTION <br/>ADMINISTRATION</span></li> 
-            <li><a href="./admin.php?requete=elements_statique_html"><span class="titresMenuAdmin">ÉLÉMENTS STATIQUES</span></a></li>
-            <li><a href="./admin.php?requete=req_ajoutUtilisateur"><span class="titresMenuAdmin">CLIENTS</span></a></li>
-            <li><a href="./admin.php?requete=reservations_html"><span class="titresMenuAdmin">RÉSERVATIONS</span></a></li>
-            <li><a href="./admin.php?requete=req_editerChalet"><span class="titresMenuAdmin">PRODUITS</span></a></li>
-            <li><a href="./index.php"><span class="titresMenuAdmin">DÉCONNEXION</span></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
     <?php Controleur::gererRequetes(); ?>    
     <footer>
       <p>&copy; Pourvoirie La Canne à Pêche. Tous droits réservés.</p>

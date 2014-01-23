@@ -35,7 +35,7 @@ class VueProduits
         echo $form;
     }
 
-    // function qui retourne le formulaire "passer une commande" à panier.html dans le cas d'une réussite
+    // fonction qui retourne une carte des chalets afin de les sélectionner
     public static function formulaire_chalets($produits)
     {
         $form = '';
@@ -64,6 +64,7 @@ class VueProduits
         echo $form;
     }
     
+    // fonction qui retourne un chalet sélectionné sur la carte de la pourvoirie
     public static function formulaire_selectionChalet($produits)
     {
 
@@ -75,26 +76,26 @@ class VueProduits
         if (empty($_SESSION["courriel"]))
         {
             $form .= '<div class="col-md-12 grostitres">';
-            $form .= '<p>POUR RÉSERVER INCRIVEZ-VOUS!</p>';
+            $form .= '<p>POUR RÉSERVER CONNECTEZ-VOUS!</p>';
             $form .= '</div>';
         }
 
         $form .= '<div class="col-lg-4">';
-        $form .= '<h4><p class="img-thumbnail">' . $produits[0]["nom"] . '</p></h4>';
-        $form .= '<img src="' . $produits[0]["imageFacade"] . '" alt="chalet-accueil" class="img-thumbnail">';
+        $form .= '<h4><p class="img-thumbnail">' . $produits["nom"] . '</p></h4>';
+        $form .= '<img src="' . $produits["imageFacade"] . '" alt="chalet-accueil" class="img-thumbnail">';
         $form .= '<p>Magnifique chalet possédant une grande et large galerie, avec une vue magnifique sur le lac. La location du chalet peu se faire peu importe le mois durant l\'année. Construction de 2010</p>';
         $form .= '</div>';
         $form .= '<div class="col-lg-4">';
         $form .= '<h4><p class="img-thumbnail"> Options du chalet : </p></h4>';
         $form .= '<ul class="list-group">';
-        $form .= '<li class="list-group-item"><span class="badge pull-right">' . $produits[0]["nombre_de_chambre"] . '</span>Nombre de chambre:</li>';
-        $form .= '<li class="list-group-item"><span class="badge pull-right">' . $produits[0]["nombre_de_salle_de_bain"] . '</span>Nombre de salle de bain:</li>';
+        $form .= '<li class="list-group-item"><span class="badge pull-right">' . $produits["nombre_de_chambre"] . '</span>Nombre de chambre:</li>';
+        $form .= '<li class="list-group-item"><span class="badge pull-right">' . $produits["nombre_de_salle_de_bain"] . '</span>Nombre de salle de bain:</li>';
         $form .= '</ul>';
         $form .= '</div>';
         $form .= '<div class="col-lg-4">';
         $form .= '<h4><p class="img-thumbnail"> Prix de location : </p></h4>';
         $form .= '<ul class="list-group">';
-        $form .= '<li class="list-group-item"><span class="badge pull-right">' . $produits[0]["prix_par_semaine"] . '$</span>Par semaine:</li>';
+        $form .= '<li class="list-group-item"><span class="badge pull-right">' . $produits["prix_par_semaine"] . '$</span>Par semaine:</li>';
         $form .= '</ul>';
         $form .= '</div>';
         $form .= '</div>';
@@ -121,17 +122,16 @@ class VueProduits
         $form .= '</div>';
         $form .= '<div id="collapseOne" class="panel-collapse collapse">';
         $form .= '<div class="panel-body">';
-        $form .= '<img src="' . $produits[0]["imageInterieur1"] . '" alt="chalet-accueil" class="img-thumbnail">';
-        $form .= '<img src="' . $produits[0]["imageInterieur2"] . '" alt="chalet-accueil" class="img-thumbnail">';
-        $form .= '<img src="' . $produits[0]["imageInterieur3"] . '" alt="chalet-accueil" class="img-thumbnail">';
+        $form .= '<img src="' . $produits["imageInterieur1"] . '" alt="chalet-accueil" class="img-thumbnail">';
+        $form .= '<img src="' . $produits["imageInterieur2"] . '" alt="chalet-accueil" class="img-thumbnail">';
+        $form .= '<img src="' . $produits["imageInterieur3"] . '" alt="chalet-accueil" class="img-thumbnail">';
         $form .= '</div>';
         $form .= '</div>';
         $form .= '</div>'; 
         $form .= '</div>';
         $form .= '</div>';
         $form .= '<input type="hidden" name="requete" value="reserver_html">';
-        $form .= '<input type="hidden" name="id_produit" value="' . $produits[0]["id_produit"] . '">';
-        // TODO ATTENTION LA VALEUR DOIT ÊTRE VALRIABLE
+        $form .= '<input type="hidden" name="id_produit" value="' . $produits["id_produit"] . '">';
         $form .= '<input type="hidden" name="id_utilisateur" value="1">';
         $form .= '</form>';
         $form .= '</div>';
@@ -139,9 +139,8 @@ class VueProduits
         echo $form;
     }
 
-//----------------------------------------------------------------------------------------------------------------------//
-    
-    public static function formulaire_editerChalet()
+    // fonction qui retourne un chalet dans le but de le modifier (section administrateur)
+    public static function formulaire_editerChalet($tousProduits,$Produits)
     {
         $form = '';
 
@@ -159,33 +158,28 @@ class VueProduits
         $form .= '<div class="row">';
         $form .= '<div class="col-lg-12">';
         $form .= '<select class="selectpicker" data-selected-text-format="count>2">';
-        $form .= '<option>Chalet 1: La détente </option>';
-        $form .= '<option>Chalet 2: Le relax </option>';
-        $form .= '<option>Chalet 3:  Le paisible </option>';
-        $form .= '<option>Chalet 4: L\'harmonie </option>';
-        $form .= '<option>Chalet 5: La tranquilité </option>';
-        $form .= '<option>Chalet 6: Le souvenir </option>';
-        $form .= '<option>Chalet 7: L\'ensoleillé </option>';
-        $form .= '<option>Chalet 8: La dépourvue </option>';
+        for ($i = 0; $i < count($tousProduits); $i++) 
+        {
+            $form .= '<option>' . $tousProduits[$i]["nom"] . '</option>';
+        }
         $form .= '</select>';
         $form .= '</div>';
         $form .= '</div>';
         $form .= '<div class="row">';
         $form .= '<div class="col-lg-4">';
-        $form .= '<h4><p class="img-thumbnail">Chalet 1 :</p></h4>';
-        $form .= '<img src="./images/chalet1.jpg" alt="photo exterieur chalet" class="img-thumbnail">';
+        $form .= '<h4><p class="img-thumbnail">' . $Produits["emplacement"] . '</p></h4>';
+        $form .= '<img src="' . $Produits["imageFacade"] . '" alt="photo exterieur chalet" class="img-thumbnail">';
         $form .= '<div class="form-group">';
-        $form .= '<p><h4>URL de l\'image à modifier :<input type"text"></h4></p>';
+        $form .= '<p><h4>URL de l\'image à modifier :<input type="text" value="' . $Produits["imageFacade"] . '"></h4></p>';
         $form .= '<p><h6>(Uniquement images au format jpg,gif ou png)</h6></p>';
         $form .= '<p><h4><p>Description :</h4>';
-        $form .= '<textarea cols="50" rows="4" style="width: 356px; height: 104px;"></textarea>';
+        $form .= '<textarea cols="45" rows="4">' . $Produits["description"] . '</textarea>';
         $form .= '</div>';
         $form .= '</div>';
         $form .= '<div class="col-lg-4">';
         $form .= '<h4><p class="img-thumbnail">Options du chalet :</p></h4>';
         $form .= '<ul class="list-group">';
         $form .= '<li class="list-group-item"><label>Nombre de chambre:</label></li>';
-        $form .= '<li class="list-group-item">';
         $form .= '<label><input type="radio" name="lit" checked="checked"> 1 </label>';
         $form .= ' <label><input type="radio" name="lit"> 2 </label>';
         $form .= '<label><input type="radio" name="lit"> 3 </label>';
@@ -210,10 +204,12 @@ class VueProduits
         $form .= '<li class="list-group-item"><label><input type="text" name="prix"> $can /semaine</label></li>';
         $form .= '</ul>';
         $form .= '</div>';
+        $form .= '<div class="row">';
         $form .= '<div class="col-lg-12">';
         $form .= '<p><a class="btn btn-custom-gris btn-lg" href="#">Réinitialiser</a>';
         $form .= '<a class="btn btn-custom-vert btn-lg" href="#">Publier</a>';
         $form .= '</p>';
+        $form .= '</div>';
         $form .= '</div>';
         $form .= '</div>';
         $form .= '</div>';

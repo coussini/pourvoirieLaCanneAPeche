@@ -54,6 +54,8 @@ class Controleur
             case 'editerChalet_html':
                 self::req_editerChalet_html();
                 break;  
+
+
             case 'req_selectTousProduits':
                 self::req_selectTousProduits();
                 break;        
@@ -144,7 +146,7 @@ class Controleur
     // MENU PRINCIPAL ////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
     //
-    // gestion du menu principal
+    // gestion du menu principal du client
     private static function gererMenuPrincipal()
     {
         $requete = $_GET["requete"];
@@ -420,14 +422,16 @@ class Controleur
     {
         try
         {
-            //$oProduits = new Produits();
-            //$Produits = $oProduits->selectUnProduit('1');
-            //VueProduits::formulaire_editerChalet($Produits);
-            VueProduits::formulaire_editerChalet();
+            $oProduits = new Produits();
+            $tousProduits = $oProduits->selectTousProduits();
+            $Produits = $oProduits->selectUnProduit($tousProduits[0]["id_produit"]);
+            VueMaitre::formulaire_menu_principal_admin();
+            VueProduits::formulaire_editerChalet($tousProduits,$Produits);
         }
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
+            VueMaitre::formulaire_menu_principal_admin();
             VueMaitre::formulaire_erreur();
         }
     }
@@ -509,11 +513,13 @@ class Controleur
             'salle à manger','cuisine','Belle vue',
             'Chalet 1','Magnifique chalet rénové en 2010','2',
             '1','799');
+            VueMaitre::formulaire_menu_principal_admin();
             VueProduits::formulaire_modifierUnProduit($resultat);
         }
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
+            VueMaitre::formulaire_menu_principal_admin();
             VueMaitre::formulaire_erreur();
         }
     }
@@ -607,14 +613,14 @@ class Controleur
             $oReservations = new Reservations();
             $reservations = $oReservations->extraireLesReservations();
             $_GET["requete"] = 'reservations_html';
-            self::gererMenuPrincipal();
+            VueMaitre::formulaire_menu_principal_admin();
             VueReservations::formulaire_reservations($reservations);
         }
         catch(Exception $e)
         {
             $_GET["erreur"]  = $e->getMessage();
             $_GET["requete"] = 'reservations_html';
-            self::gererMenuPrincipal();
+            VueMaitre::formulaire_menu_principal_admin();
             VueReservations::formulaire_reservations("");
         }
     }
@@ -729,21 +735,16 @@ class Controleur
             if ($_POST['nom'] == "")  // Si premier affichage de la page
             {
                 $contenuStatique = $oStatiques->getContenuStatique($nomsStatique[0]);
+                VueMaitre::formulaire_menu_principal_admin();
                 VueStatiques::formulaire_SelectionStatique($nomsStatique); 
                 VueStatiques::formulaire_ModifierStatique($nomsStatique[0],$contenuStatique);
             } 
             else // Si contenu sélectionné
             {
-                if ($_POST['nom'] == 'nouveauContenu') // Si select = nouveau contenu
-                {
-                    self::req_formulaireCreerStatique();
-                }
-                else // Si select = contenu 
-                {
-                    $contenuStatique = $oStatiques->getContenuStatique($_POST['nom']);
-                    VueStatiques::formulaire_SelectionStatique($nomsStatique); // Param: Tous les noms, option sélectionnée
-                    VueStatiques::formulaire_ModifierStatique($_POST['nom'],$contenuStatique);
-                }
+                $contenuStatique = $oStatiques->getContenuStatique($_POST['nom']);
+                VueMaitre::formulaire_menu_principal_admin();
+                VueStatiques::formulaire_SelectionStatique($nomsStatique); // Param: Tous les noms, option sélectionnée
+                VueStatiques::formulaire_ModifierStatique($_POST['nom'],$contenuStatique);
             }
         }
         catch(Exception $e)
@@ -763,6 +764,7 @@ class Controleur
             $oStatiques->updateContenuStatique($idStatique,$_POST['contenu']);  // Modifier contenu statique
             $nomsStatique = $oStatiques->getNomsContenuStatique();
             $contenuStatique = $oStatiques->getContenuStatique($_POST['nom']);
+            VueMaitre::formulaire_menu_principal_admin();
             VueStatiques::formulaire_SelectionStatique($nomsStatique); // Param: Tous les noms, option sélectionnée
             VueStatiques::formulaire_ModifierStatique($_POST['nom'],$contenuStatique);
         }
@@ -780,6 +782,7 @@ class Controleur
         {
             $oStatiques = new Statiques();
             $nomsStatique = $oStatiques->getNomsContenuStatique();    // Récupère tous les noms
+            VueMaitre::formulaire_menu_principal_admin();
             VueStatiques::formulaire_SelectionStatique($nomsStatique); 
             VueStatiques::formulaire_formulaireCreerStatique();
         }
@@ -799,6 +802,7 @@ class Controleur
             $oStatiques->setContenuStatique('actif',$_POST['nom'],$_POST['contenu']);
             $nomsStatique = $oStatiques->getNomsContenuStatique();
             $contenuStatique = $oStatiques->getContenuStatique($nomsStatique[0]);
+            VueMaitre::formulaire_menu_principal_admin();
             VueStatiques::formulaire_SelectionStatique($nomsStatique); // Param: Tous les noms, option sélectionnée
             VueStatiques::formulaire_ModifierStatique($nomsStatique[0],$contenuStatique);
         }
