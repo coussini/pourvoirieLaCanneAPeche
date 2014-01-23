@@ -29,10 +29,12 @@ class VueReservations
 
         if ($_GET["erreur"] == "")
         {
-            $form .= '<div class="col-lg-4">';
-            $form .= '<span class="etape-reservation-en-cours badge pull-left">1</span>';
-            $form .= '<span class="etape-reservation badge pull-left">2</span>';
+            $form .= '<div class="col-lg-12">';
+            $form .= '<span class="etape-reservation-en-cours badge-reservation badge pull-left">1</span>';
+            $form .= '<span class="etape-reservation badge-reservation badge pull-left">2</span>';
             $form .= '</div>';
+            $form .= '</div> <!-- /.row -->';
+            $form .= '<div class="row">';
             $form .= '<div class="col-lg-4">';
             $form .= '<h2>Réservation</h2>';
             $form .= '<h2>' . $produit["nom"] . '</h2>';

@@ -214,26 +214,26 @@ class VueProduits
 //----------------------------------------------------------------------------------------------------------------------//
 
             /*$form .= '<p> id_produit: ' . $produits[$i]["id_produit"] . '</p>';
-			$form .= '<p> statut: ' . $produits[$i]["statut"] . '</p>';
-			$form .= '<p> imageFacade: ' . $produits[$i]["imageFacade"] . '</p>';
-			$form .= '<p> imageInterieur1: ' . $produits[$i]["imageInterieur1"] . '</p>';
-			$form .= '<p> imageInterieur2: ' . $produits[$i]["imageInterieur2"] . '</p>';
-			$form .= '<p> imageInterieur3: ' . $produits[$i]["imageInterieur3"] . '</p>';
-			$form .= '<p> nom: ' . $produits[$i]["nom"] . '</p>';
-			$form .= '<p> emplacement: ' . $produits[$i]["emplacement"] . '</p>';
-			$form .= '<p> description: ' . $produits[$i]["description"] . '</p>';
-			$form .= '<p> nombre_de_chambre: ' . $produits[$i]["nombre_de_chambre"] . '</p>';
-			$form .= '<p> nombre_de_salle_de_bain: ' . $produits[$i]["nombre_de_salle_de_bain"] . '</p>';
-			$form .= '<p> prix_par_jour: ' . $produits[$i]["prix_par_jour"] . '</p>';
-			$form .= '<p> prix_par_semaine: ' . $produits[$i]["prix_par_semaine"] . '</p>';
-		}
+                        $form .= '<p> statut: ' . $produits[$i]["statut"] . '</p>';
+                        $form .= '<p> imageFacade: ' . $produits[$i]["imageFacade"] . '</p>';
+                        $form .= '<p> imageInterieur1: ' . $produits[$i]["imageInterieur1"] . '</p>';
+                        $form .= '<p> imageInterieur2: ' . $produits[$i]["imageInterieur2"] . '</p>';
+                        $form .= '<p> imageInterieur3: ' . $produits[$i]["imageInterieur3"] . '</p>';
+                        $form .= '<p> nom: ' . $produits[$i]["nom"] . '</p>';
+                        $form .= '<p> emplacement: ' . $produits[$i]["emplacement"] . '</p>';
+                        $form .= '<p> description: ' . $produits[$i]["description"] . '</p>';
+                        $form .= '<p> nombre_de_chambre: ' . $produits[$i]["nombre_de_chambre"] . '</p>';
+                        $form .= '<p> nombre_de_salle_de_bain: ' . $produits[$i]["nombre_de_salle_de_bain"] . '</p>';
+                        $form .= '<p> prix_par_jour: ' . $produits[$i]["prix_par_jour"] . '</p>';
+                        $form .= '<p> prix_par_semaine: ' . $produits[$i]["prix_par_semaine"] . '</p>';
+                }
 
-		$form .= '<div class="erreur">';
-		$form .= '<p>' . $_GET["erreur"] . '</p>';
-		$form .= '</div>';
-		$form .= '</form>';
-		echo $form;
-		*/
+                $form .= '<div class="erreur">';
+                $form .= '<p>' . $_GET["erreur"] . '</p>';
+                $form .= '</div>';
+                $form .= '</form>';
+                echo $form;
+                */
 
 //----------------------------------------------------------------------------------------------------------------------------------//
     
