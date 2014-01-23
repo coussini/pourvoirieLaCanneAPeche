@@ -145,6 +145,7 @@ class VueProduits
         $form = '';
 
         $form .= '<div class="container">';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
         $form .= '<div class="row">';
         $form .= '<div class="col-lg-12">';
         $form .= '<h4><p class="img-thumbnail">Page administration des chalets :</p></h4>';
@@ -170,7 +171,7 @@ class VueProduits
         $form .= '<h4><p class="img-thumbnail">' . $Produits["emplacement"] . '</p></h4>';
         $form .= '<img src="' . $Produits["imageFacade"] . '" alt="photo exterieur chalet" class="img-thumbnail">';
         $form .= '<div class="form-group">';
-        $form .= '<p><h4>URL de l\'image à modifier :<input type="text" value="' . $Produits["imageFacade"] . '"></h4></p>';
+        $form .= '<p><h4>URL de l\'image à modifier: <input type="text" value="' . $Produits["imageFacade"] . '"></h4></p>';
         $form .= '<p><h6>(Uniquement images au format jpg,gif ou png)</h6></p>';
         $form .= '<p><h4><p>Description :</h4>';
         $form .= '<textarea cols="45" rows="4">' . $Produits["description"] . '</textarea>';
@@ -178,15 +179,16 @@ class VueProduits
         $form .= '</div>';
         $form .= '<div class="col-lg-6">';
         $form .= '<h4><p class="img-thumbnail">Options du chalet :</p></h4>';
-        $form .= '<li class="list-group-item"><label>Nombre de chambre:<input size="3" type="text" name="nombre_de_chambre" value="' . $Produits["nombre_de_chambre"] . '"></label></li>';
+        $form .= '<li class="list-group-item"><label>Nombre de chambre: <input size="3" type="number" min="1" max="5" name="nombre_de_chambre" value="' . $Produits["nombre_de_chambre"] . '"></label></li>';
         $form .= '<hr>';
-        $form .= '<li class="list-group-item"><label>Nombre de salle de bain:<input size="3" type="text" name="nombre_de_salle_de_bain" value="' . $Produits["nombre_de_salle_de_bain"] . '"></label></li>';
+        $form .= '<li class="list-group-item"><label>Nombre de salle de bain: <input size="3" type="number" min="1" max="3" name="nombre_de_salle_de_bain" value="' . $Produits["nombre_de_salle_de_bain"] . '"></label></li>';
         $form .= '<hr>';
-        $form .= '<li class="list-group-item"><label>Prix par semaine:<input size="10" type="text" name="prix_par_semaine" value="' . $Produits["prix_par_semaine"] . '"></label> $can</li>';
+        $form .= '<li class="list-group-item"><label>Prix par semaine: <input size="10" type="text" name="prix_par_semaine" value="' . $Produits["prix_par_semaine"] . '"></label> $can</li>';
         $form .= '<br/>';
-        $form .= '<a class="btn btn-custom-vert btn-lg" href="#">Publier</a>';
+        $form .= '<button type="submit" class="btn btn-custom-vert btn-lg">MODIFIER</button><br/><br/>';
         $form .= '</div>';
         $form .= '</div>';
+        $form .= '</form>';
         $form .= '</div>';
 
         echo $form;

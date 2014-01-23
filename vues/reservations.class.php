@@ -29,12 +29,6 @@ class VueReservations
 
         if ($_GET["erreur"] == "")
         {
-            $form .= '<div class="col-lg-12">';
-            $form .= '<span class="etape-reservation-en-cours badge-reservation badge pull-left">1</span>';
-            $form .= '<span class="etape-reservation badge-reservation badge pull-left">2</span>';
-            $form .= '</div>';
-            $form .= '</div> <!-- /.row -->';
-            $form .= '<div class="row">';
             $form .= '<div class="col-lg-4">';
             $form .= '<h2>Réservation</h2>';
             $form .= '<h2>' . $produit["nom"] . '</h2>';
@@ -130,7 +124,7 @@ class VueReservations
             $form .= '<input type="hidden" name="prix_a_la_reservation" value="' . $produit["prix_par_semaine"] . '">';
             $form .= '<br/><br/>';
             $form .= '<button type="submit" class="btn btn-custom-vert btn-lg">CONFIRMER</button><br/><br/>';
-            $form .= '<button type="button" class="btn btn-custom-gris btn-lg">&laquo; ÉTAPE PRÉCÉDENTE</button>';
+            $form .= '<a class="btn btn-custom-gris btn-lg" href="./index.php?requete=reserver_html&id_produit=' . $_GET["id_produit"] . '&id_utilisateur=' . $_GET["id_utilisateur"] . '">&laquo; ÉTAPE PRÉCÉDENTE</a>';                  
             $form .= '</div> <!-- /.col-lg-4 -->';
         }
         else
