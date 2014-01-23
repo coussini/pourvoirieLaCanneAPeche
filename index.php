@@ -1,5 +1,8 @@
 <?php
 
+// On débute une session
+session_start();
+
 /*****************************************/
 /* CONNEXION DE LA BASE DE DONNÉE EN PDO */
 /*****************************************/
