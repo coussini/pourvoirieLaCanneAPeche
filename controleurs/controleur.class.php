@@ -2,6 +2,9 @@
 
 class Controleur
 {
+    
+// TODO LES MENU NE SONT PAS ÉGAUX EN HAUT QUAND ON NAVIGUE.... VOIR INFORMATIONS VERSUS ACCUEIL...
+
     // gestion des principales requêtes
     public static function gererRequetes()
     {
@@ -30,15 +33,15 @@ class Controleur
             case 'deconnexion':
                 self::req_deconnexion();
                 break;  
+            case 'nouveaupass_html':
+                self::req_nouveaupass_html();
+                break;  
+            case 'validerNouveaupass':
+                self::req_validerNouveaupass();
+                break;  
             case 'req_majUtilisateur':
                 self::req_majUtilisateur();
                 break;
-            case 'req_oubliePass':
-                self::req_oubliePass();
-                break;  
-            case 'req_messageOubliePass':
-                self::req_messageOubliePass();
-                break;  
             ///////////////////////////
             // PRODUIT ////////////////
             ///////////////////////////
@@ -209,24 +212,31 @@ class Controleur
     {       
         try
         {
-            $message_erreur_login  = "";
-            $oUtilisateurs = new Utilisateurs();
-            $utilisateurs = $oUtilisateurs->chercherUtilisateur($_POST['courriel']);
-
-            if ($utilisateurs["mot_de_passe"] != $_POST['mot_de_passe'])
+            if ($_POST['courriel'] == "admin@admin.com" && $_POST['mot_de_passe'] == "admin")
             {
-                $message_erreur_login  = "Veuillez inscrire un courriel et un mot de passe valide pour vous connecter";
-                $prochaineRequete = 'validerLogin';
                 self::gererMenuPrincipal();
-                VueUtilisateurs::formulaire_login_html($prochaineRequete,$message_erreur_login);
+                VueUtilisateurs::formulaire_se_diriger_vers_admin();
             }
             else
             {
-                // utilisateur connecté
-                $_SESSION["courriel"] = $_POST['courriel'];
-                self::req_accueil();
-            }
+                $message_erreur_login  = "";
+                $oUtilisateurs = new Utilisateurs();
+                $utilisateurs = $oUtilisateurs->chercherUtilisateur($_POST['courriel']);
 
+                if ($utilisateurs["mot_de_passe"] != $_POST['mot_de_passe'])
+                {
+                    $message_erreur_login  = "Veuillez inscrire un courriel et un mot de passe valide pour vous connecter";
+                    $prochaineRequete = 'validerLogin';
+                    self::gererMenuPrincipal();
+                    VueUtilisateurs::formulaire_login_html($prochaineRequete,$message_erreur_login);
+                }
+                else
+                {
+                    // utilisateur connecté
+                    $_SESSION["courriel"] = $_POST['courriel'];
+                    self::req_accueil();
+                }
+            }
         }
         catch(Exception $e)
         {
@@ -240,9 +250,8 @@ class Controleur
     private static function req_inscription_html()
     {
 
-
-
 //////////////// TODO VALIDER QUE L'UTILISATEUR N'EST PAS DÉJÀ LÀ
+//////////////// TODO AFFICHER LES ERREUR VIA LE FORMULAIRE ET NON MESSAGE ERREUR
 
         try
         {
@@ -292,6 +301,7 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
+            self::gererMenuPrincipal();
             VueMaitre::formulaire_erreur();
         }   
     }
@@ -307,9 +317,44 @@ class Controleur
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
+            self::gererMenuPrincipal();
             VueMaitre::formulaire_erreur();
         }   
     }
+    
+    // afficher formulaire nouveaupass.html
+    private static function req_nouveaupass_html()
+    {
+        try
+        {
+            self::gererMenuPrincipal();
+            $prochaineRequete = 'validerNouveaupass';
+            VueUtilisateurs::formulaire_nouveaupass_html($prochaineRequete,"");
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            self::gererMenuPrincipal();
+            VueMaitre::formulaire_erreur();
+        }   
+    } 
+    
+    // valider le formulaire nouveaupass.html
+    private static function req_validerNouveaupass()
+    {
+        try
+        {
+            self::gererMenuPrincipal();
+            $prochaineRequete = 'accueil_html'; 
+            VueUtilisateurs::formulaire_nouveaupass_html($prochaineRequete,"Votre nouveau mot de passe à été envoyé à votre courriel");
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            self::gererMenuPrincipal();
+            VueMaitre::formulaire_erreur();
+        }   
+    } 
     
     // MAJ les information sur utilisateur
     private static function req_majUtilisateur()
@@ -319,36 +364,6 @@ class Controleur
             $oUtilisateurs = new Utilisateurs();                                
             $utilisateurs = $oUtilisateurs->majUtilisateur($_GET["courriel"]); //fonction majUtilisateur
             VueUtilisateurs::formulaire_majUtilisateur();
-        }
-        catch(Exception $e)
-        {
-            $_GET['erreur']  = $e->getMessage();
-            VueMaitre::formulaire_erreur();
-        }   
-    } 
-    
-    // extraire les information sur utilisateur
-    private static function req_oubliePass()
-    {
-        try
-        {
-            $oUtilisateurs = new Utilisateurs();                        
-            VueUtilisateurs::formulaire_oubliePass();
-        }
-        catch(Exception $e)
-        {
-            $_GET['erreur']  = $e->getMessage();
-            VueMaitre::formulaire_erreur();
-        }   
-    } 
-    
-    // extraire les information sur utilisateur
-    private static function req_messageOubliePass()
-    {
-        try
-        {
-            $oUtilisateurs = new Utilisateurs();                        
-            VueUtilisateurs::formulaire_messageOubliePass();
         }
         catch(Exception $e)
         {
@@ -368,11 +383,13 @@ class Controleur
         {
             //$oProduits = new Produits();
             //$Produits = $oProduits->selectTousProduits();
+            self::gererMenuPrincipal();
             VueProduits::formulaire_chalets("");
         }
         catch(Exception $e)
         {
             $_GET['erreur']  = $e->getMessage();
+            self::gererMenuPrincipal();
             VueMaitre::formulaire_erreur();
         }
     }
@@ -524,12 +541,14 @@ class Controleur
             $oReservations = new Reservations();
             $produit = $oReservations->extraireLeProduit($_GET["id_produit"]);
             $_GET["requete"] = 'confirmation_html';
+            self::gererMenuPrincipal();
             VueReservations::formulaire_reserver($produit);
         }
         catch(Exception $e)
         {
             $_GET["erreur"]  = $e->getMessage();
             $_GET["requete"] = 'reserver_html';
+            self::gererMenuPrincipal();
             VueReservations::formulaire_reserver("");
         }
     }
@@ -543,12 +562,14 @@ class Controleur
             $produit = $oReservations->extraireLeProduit($_GET["id_produit"]); // les tests ont été fait par req_reserver
             $utilisateur = $oReservations->extraireUtilisateur($_GET["id_utilisateur"]);
             $_GET["requete"] = 'creer_une_reservation';
+            self::gererMenuPrincipal();
             VueReservations::formulaire_confirmation($produit,$utilisateur,$_GET["date_debut"],$_GET["date_fin"],$_GET["numero_semaine"]);
         }
         catch(Exception $e)
         {
             $_GET["erreur"]  = $e->getMessage();
             $_GET["requete"] = 'confirmation_html';
+            self::gererMenuPrincipal();
             VueReservations::formulaire_confirmation("","","","","");
         }
     }
@@ -561,12 +582,14 @@ class Controleur
             $oReservations = new Reservations();
             $reservations = $oReservations->extraireLesReservationsUtilisateur($_GET["id_utilisateur"]);
             $_GET["requete"] = 'historique_html';
+            self::gererMenuPrincipal();
             VueReservations::formulaire_historique($reservations);
         }
         catch(Exception $e)
         {
             $_GET["erreur"]  = $e->getMessage();
             $_GET["requete"] = 'historique_html';
+            self::gererMenuPrincipal();
             VueReservations::formulaire_historique("");
         }
     }
@@ -579,12 +602,14 @@ class Controleur
             $oReservations = new Reservations();
             $reservations = $oReservations->extraireLesReservations();
             $_GET["requete"] = 'reservations_html';
+            self::gererMenuPrincipal();
             VueReservations::formulaire_reservations($reservations);
         }
         catch(Exception $e)
         {
             $_GET["erreur"]  = $e->getMessage();
             $_GET["requete"] = 'reservations_html';
+            self::gererMenuPrincipal();
             VueReservations::formulaire_reservations("");
         }
     }
@@ -602,6 +627,7 @@ class Controleur
                 $utilisateur = $oReservations->extraireUtilisateur($_GET["id_utilisateur"]);
                 $_GET["requete"] = 'creer_une_reservation';
                 $_GET["message_confirmation"]  = "merci d'avoir effectué votre réservation";
+                self::gererMenuPrincipal();
                 VueReservations::formulaire_creerUneReservation($produit,$utilisateur,$_GET["date_debut"],$_GET["date_fin"],$_GET["numero_semaine"],$_GET["nom_carte"],$_GET["numero_carte"],$_GET["id_carte"],$_GET["prix_a_la_reservation"]);
             }
         }
@@ -612,6 +638,7 @@ class Controleur
             $utilisateur = $oReservations->extraireUtilisateur($_GET["id_utilisateur"]);
             $_GET["erreur"]  = $e->getMessage();
             $_GET["requete"] = 'creer_une_reservation';
+            self::gererMenuPrincipal();
             VueReservations::formulaire_creerUneReservation($produit,$utilisateur,$_GET["date_debut"],$_GET["date_fin"],$_GET["numero_semaine"],$_GET["nom_carte"],$_GET["numero_carte"],$_GET["id_carte"],$_GET["prix_a_la_reservation"]);
         }
     }
@@ -645,19 +672,23 @@ class Controleur
         try
         {
             $oStatiques = new Statiques();
-            $contenuStatique = $oStatiques->getContenuStatique('Informations');
-            VueStatiques::afficherContenuStatique($contenuStatique);
-            $contenuStatique = $oStatiques->getContenuStatique('Activités');
-            VueStatiques::afficherContenuStatique($contenuStatique);
-            $contenuStatique = $oStatiques->getContenuStatique('Pêche');
-            VueStatiques::afficherContenuStatique($contenuStatique);
-            $contenuStatique = $oStatiques->getContenuStatique('Politique qualité');
-            VueStatiques::afficherContenuStatique($contenuStatique);
-            $contenuStatique = $oStatiques->getContenuStatique('Politique environnementale');
-            VueStatiques::afficherContenuStatique($contenuStatique);
+
+            $contenuStatiqueInformations = $oStatiques->getContenuStatique('Informations');
+            $contenuStatiqueActivités = $oStatiques->getContenuStatique('Activités');
+            $contenuStatiquePeche = $oStatiques->getContenuStatique('Pêche');
+            $contenuStatiquePolitiqueQ = $oStatiques->getContenuStatique('Politique qualité');
+            $contenuStatiquePolitiqueE = $oStatiques->getContenuStatique('Politique environnementale');
+
+            self::gererMenuPrincipal();
+            VueStatiques::afficherContenuStatique($contenuStatiqueInformations);
+            VueStatiques::afficherContenuStatique($contenuStatiqueActivités);
+            VueStatiques::afficherContenuStatique($contenuStatiquePeche);
+            VueStatiques::afficherContenuStatique($contenuStatiquePolitiqueQ);
+            VueStatiques::afficherContenuStatique($contenuStatiquePolitiqueE);
         }
         catch(Exception $e)
         {
+            self::gererMenuPrincipal();
             $_GET['erreur']  = $e->getMessage();
             VueMaitre::formulaire_erreur();
         }
@@ -670,11 +701,13 @@ class Controleur
         {
             $oStatiques = new Statiques();
             $contenuStatique = $oStatiques->getContenuStatique('Contact');
+            self::gererMenuPrincipal();
             VueStatiques::afficherContenuStatique($contenuStatique);
             VueStatiques::afficherMap();
         }
         catch(Exception $e)
         {
+            self::gererMenuPrincipal();
             $_GET['erreur']  = $e->getMessage();
             VueMaitre::formulaire_erreur();
         }

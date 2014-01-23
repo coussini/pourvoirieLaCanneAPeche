@@ -25,6 +25,7 @@ require_once("./modeles/statiques.class.php");
 /*******/
 /* VUE */
 /*******/
+require_once("./vues/maitre.class.php");
 require_once("./vues/utilisateurs.class.php");
 require_once("./vues/produits.class.php");
 require_once("./vues/reservations.class.php");
@@ -41,7 +42,6 @@ require_once("./controleurs/controleur.class.php"); // CECI EST LE CONTROLEUR FI
 /************************/
 /* SQUELETTES DES PAGES */
 /************************/
-// pages pour les administrateurs du site
 require_once("./squelettes/admin.php");
 
 ?>

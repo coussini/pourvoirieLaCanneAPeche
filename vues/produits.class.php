@@ -269,19 +269,6 @@ class VueProduits
         $form .= '</form>';
         echo $form;
     }
-
-    public static function formulaire_erreur()
-    {
-        $form = '';
-        $form .= '<form id="formulaire_erreur">';
-        $form .= '<h2>formulaire_erreur</h2>';
-        $form .= '<div class="erreur">';
-        $form .= '<p>' . $_GET["erreur"] . '</p>';
-        $form .= '</div>';
-        $form .= '</form>';
-        echo $form;
-    }
-
 }
 
 ?>
