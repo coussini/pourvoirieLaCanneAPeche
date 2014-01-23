@@ -3,23 +3,6 @@
 
 class VueReservations
 {
-    // function qui retourne les erreurs seulement
-    public static function formulaire_erreur()
-    {
-        $form = '';
-        $form .= '<div class="container">';
-        $form .= '<form id="formulaire_erreur">';
-        $form .= '<div class="row">';
-        $form .= '<div class="col-lg-12">';
-        $form .= '<h1>Formulaire d\'erreur pour les tests</h1>';
-        $form .= '<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">&nbsp</span>' . $_GET["erreur"] . '</div>';            
-        $form .= '</div>';
-        $form .= '</div> <!-- /.row -->';
-        $form .= '</form>';
-        $form .= '</div> <!-- /.container -->';
-        echo $form;
-    }
-
     // function qui retourne les plages de dates réservées pour un produit
     public static function formulaire_chercher_dates_reservees($reservations)
     {

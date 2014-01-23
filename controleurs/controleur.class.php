@@ -48,6 +48,9 @@ class Controleur
             case 'chalets_html':
                 self::req_chalets();
                 break;
+            case 'selectionChalet_html':
+                self::req_selectionChalet_html();
+                break;
             case 'req_selectTousProduits':
                 self::req_selectTousProduits();
                 break;        
@@ -59,9 +62,6 @@ class Controleur
                 break;        
             case 'req_modifierUnProduit':
                 self::req_modifierUnProduit();
-                break;
-            case 'req_selectionChalet':
-                self::req_selectionChalet();
                 break;
             case 'req_editerChalet':
                 self::req_editerChalet();
@@ -376,15 +376,31 @@ class Controleur
     // PRODUIT //////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////
 
-    // traitement extraire des produits
+    // afficher formulaire chalets.html
     private static function req_chalets()
     {
         try
         {
-            //$oProduits = new Produits();
-            //$Produits = $oProduits->selectTousProduits();
             self::gererMenuPrincipal();
             VueProduits::formulaire_chalets("");
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            self::gererMenuPrincipal();
+            VueMaitre::formulaire_erreur();
+        }
+    }
+
+    // afficher formulaire selectionChalet.html
+    private static function req_selectionChalet_html()
+    {
+        try
+        {
+            $oProduits = new Produits();
+            $Produits = $oProduits->selectUnProduit($_GET["id_produit"]);
+            self::gererMenuPrincipal();
+            VueProduits::formulaire_selectionChalet($Produits);
         }
         catch(Exception $e)
         {
@@ -419,22 +435,6 @@ class Controleur
             $oProduits = new Produits();
             $Produits = $oProduits->selectUnProduit('1');
             VueProduits::formulaire_selectUnProduit($Produits);
-        }
-        catch(Exception $e)
-        {
-            $_GET['erreur']  = $e->getMessage();
-            VueMaitre::formulaire_erreur();
-        }
-    }
-
-    // traitement de séletion d'un chalet sur la carte
-    private static function req_selectionChalet()
-    {
-        try
-        {
-            $oProduits = new Produits();
-            $Produits = $oProduits->selectUnProduit($_GET["id_produit"]);
-            VueProduits::formulaire_selectionChalet($Produits);
         }
         catch(Exception $e)
         {
