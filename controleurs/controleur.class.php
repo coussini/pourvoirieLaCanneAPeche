@@ -382,7 +382,9 @@ class Controleur
         try
         {
             self::gererMenuPrincipal();
-            VueProduits::formulaire_chalets("");
+            $oProduits = new Produits();
+            $Produits = $oProduits->selectTousProduits();
+            VueProduits::formulaire_chalets($Produits);
         }
         catch(Exception $e)
         {
