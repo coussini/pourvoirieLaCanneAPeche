@@ -54,6 +54,9 @@ class Controleur
             case 'editerChalet_html':
                 self::req_editerChalet_html();
                 break;  
+            case 'validerEditerChalet':
+                self::req_validerEditerChalet();
+                break;  
 
 
             case 'req_selectTousProduits':
@@ -431,8 +434,16 @@ class Controleur
             $oProduits = new Produits();
             $tousProduits = $oProduits->selectTousProduits();
             $Produits = $oProduits->selectUnProduit($tousProduits[0]["id_produit"]);
+            $prochaineRequete = 'validerEditerChalet';
             VueMaitre::formulaire_menu_principal_admin();
-            VueProduits::formulaire_editerChalet($tousProduits,$Produits);
+            $message = "";
+            if ($_SESSION["message"] != "")
+            {
+                $message = $_SESSION["message"];
+                $_SESSION["message"] = "";
+            } 
+
+            VueProduits::formulaire_editerChalet($tousProduits,$Produits,$message);
         }
         catch(Exception $e)
         {
@@ -441,6 +452,26 @@ class Controleur
             VueMaitre::formulaire_erreur();
         }
     }
+    
+    // valider le formulaire selectionChalet.html
+    private static function req_validerEditerChalet()
+    {
+        try
+        {
+            $oProduits = new Produits(); 
+            $oProduits->modifierUnProduit("actif",$_GET["imageFacade"],$_GET["imageInterieur1"],$_GET["imageInterieur2"],
+            $_GET["imageInterieur3"],$_GET["nom"],$_GET["emplacement"],$_GET["description"],$_GET["nombre_de_chambre"],
+            $_GET["nombre_de_salle_de_bain"],$_GET["prix_par_jour"],$_GET["prix_par_semaine"]);
+            $_SESSION["message"] = "Votre produit a été modifié"; // servira dans editerChalet_html
+            self::req_editerChalet_html();
+        }
+        catch(Exception $e)
+        {
+            $_GET['erreur']  = $e->getMessage();
+            VueMaitre::formulaire_menu_principal_admin();
+            VueMaitre::formulaire_erreur();
+        }   
+    } 
 
     // traitement extraire des produits
     private static function req_selectTousProduits()

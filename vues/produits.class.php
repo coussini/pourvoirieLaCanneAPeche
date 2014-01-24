@@ -145,7 +145,7 @@ class VueProduits
         $form = '';
 
         $form .= '<div class="container">';
-        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
+        $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="GET">';
         $form .= '<div class="row">';
         $form .= '<div class="col-lg-12">';
         $form .= '<h4><p class="img-thumbnail">Page administration des chalets :</p></h4>';
@@ -185,6 +185,11 @@ class VueProduits
         $form .= '<hr>';
         $form .= '<li class="list-group-item"><label>Prix par semaine: <input size="10" type="text" name="prix_par_semaine" value="' . $Produits["prix_par_semaine"] . '"></label> $can</li>';
         $form .= '<br/>';
+        $form .= '<input type="hidden" name="requete" value="' . $prochaineRequete . '">';
+        if ($message != "")
+        {
+            $form .= '<div class="alert alert-info"><span class="glyphicon glyphicon-ok">&nbsp</span>'. $message . '</div>';     
+        }
         $form .= '<button type="submit" class="btn btn-custom-vert btn-lg">MODIFIER</button><br/><br/>';
         $form .= '</div>';
         $form .= '</div>';
