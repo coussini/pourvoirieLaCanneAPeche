@@ -83,7 +83,7 @@ class VueUtilisateurs
         $form .= '<div class="row">';
         $form .= '<div class="col-md-8 frm_general">';
         $form .= '<div class="col-md-8 grostitres">';
-        $form .= '<p>BONJOUR, INSCRIVEZ VOUS POUR RESERVER NOS CHALETS !</p>';
+        $form .= '<p>INSCRIVEZ VOUS POUR RESERVER NOS CHALETS !</p>';
         $form .= '</div>';
         $form .= '<div class="formlogin col-md-10"><!--formulaire -->';
         $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
