@@ -20,7 +20,7 @@ class VueStatiques
     {
         $form = '<div class="container banniere">';
         $form .= '<div class="row">';
-        $form .= '<object width="950" height="250"><param name="movie" value="./images/banniere.swf"><embed src="./images/banniere.swf" width="800" height="250"></embed></object>';
+        $form .= '<object width="960" height="250"><param name="movie" value="./images/banniere.swf"><embed src="./images/banniere.swf" width="960" height="250"></embed></object>';
         $form .= '</div><!-- /.row -->';
         $form .= '</div> <!-- /.container -->';
         echo $form;
