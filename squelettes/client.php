@@ -28,6 +28,7 @@
     <script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script src="./js/vendor/bootstrap.min.js"></script>
     <script src="./js/jquery.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <?php
       if ($_GET['requete'] == 'reserver_html')
       {
