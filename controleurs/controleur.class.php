@@ -691,6 +691,7 @@ class Controleur
             $contenuStatiquePolitiqueE = $oStatiques->getContenuStatique('Politique environnementale');
 
             self::gererMenuPrincipal();
+            VueStatiques::afficherVideo();
             VueStatiques::afficherContenuStatique($contenuStatiqueInformations);
             VueStatiques::afficherContenuStatique($contenuStatiqueActivités);
             VueStatiques::afficherContenuStatique($contenuStatiquePeche);

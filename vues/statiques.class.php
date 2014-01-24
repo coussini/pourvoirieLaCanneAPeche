@@ -20,10 +20,19 @@ class VueStatiques
     {
         $form = '<div class="container banniere">';
         $form .= '<div class="row">';
-
         $form .= '<object width="800" height="250"><param name="movie" value="./images/banniere.swf"><embed src="./images/banniere.swf" width="800" height="250"></embed></object>';
-
         $form .= '</div><!-- /.row -->';
+        $form .= '</div> <!-- /.container -->';
+        echo $form;
+    }
+
+   // Afficher une video   
+    public static function afficherVideo()
+    {
+        $form = '<div class="container">';
+        $form .= '<div class="row">';
+        $form .= '<iframe src="//player.vimeo.com/video/84901046" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+        $form .= '</div></div><!-- /.row -->';
         $form .= '</div> <!-- /.container -->';
         echo $form;
     }
