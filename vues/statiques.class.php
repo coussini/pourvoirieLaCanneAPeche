@@ -41,7 +41,7 @@ class VueStatiques
     public static function afficherMap()
     {
         $form = '<div class="container">';
-        $form .= '<div class="row banniere">';
+        $form .= '<div class="row">';
         $form .= '<div id="map-canvas"></div>';
         $form .= '</div><!-- /.row -->';
         $form .= '</div> <!-- /.container -->';
