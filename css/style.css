@@ -536,3 +536,8 @@ width: 800px;
 .hidden {
     visibility: hidden;
 }
+
+#map-canvas {
+    width: 960px;        
+    height: 400px;     
+}

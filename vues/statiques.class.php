@@ -31,8 +31,8 @@ class VueStatiques
    // Afficher l'API Google Map   
     public static function afficherMap()
     {
-        $form = '<div class="container main">';
-        $form .= '<div class="row">';
+        $form = '<div class="container">';
+        $form .= '<div class="row banniere">';
         $form .= '<div id="map-canvas"></div>';
         $form .= '</div><!-- /.row -->';
         $form .= '</div> <!-- /.container -->';
