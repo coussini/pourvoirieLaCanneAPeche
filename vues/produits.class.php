@@ -83,7 +83,7 @@ class VueProduits
         $form .= '<div class="col-lg-4">';
         $form .= '<h4><p class="img-thumbnail">' . $produits["nom"] . '</p></h4>';
         $form .= '<img src="' . $produits["imageFacade"] . '" alt="chalet-accueil" class="img-thumbnail">';
-        $form .= '<p>Magnifique chalet possédant une grande et large galerie, avec une vue magnifique sur le lac. La location du chalet peu se faire peu importe le mois durant l\'année. Construction de 2010</p>';
+        $form .= '<p>' . $produits["description"] . '</p>';
         $form .= '</div>';
         $form .= '<div class="col-lg-4">';
         $form .= '<h4><p class="img-thumbnail"> Options du chalet : </p></h4>';
