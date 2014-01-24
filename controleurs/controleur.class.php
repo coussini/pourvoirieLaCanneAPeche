@@ -315,7 +315,7 @@ class Controleur
         try
         {
             $oUtilisateurs = new Utilisateurs();                                
-            $oUtilisateurs->majUtilisateur($_POST["nom"],$_POST["prenom"],$_POST["courriel"],$_POST["mot_de_passe"],$_POST["mot_de_passe2"],$_POST["date_de_naissance"]);
+            $oUtilisateurs->majUtilisateur($_POST["id_utilisateur"],$_POST["nom"],$_POST["prenom"],$_POST["courriel"],$_POST["mot_de_passe"],$_POST["mot_de_passe2"],$_POST["date_de_naissance"]);
             self::gererMenuPrincipal();
             VueUtilisateurs::formulaire_profilModif_html();
         }
