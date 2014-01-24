@@ -443,7 +443,7 @@ class Controleur
                 $_SESSION["message"] = "";
             } 
 
-            VueProduits::formulaire_editerChalet($tousProduits,$Produits,$message);
+            VueProduits::formulaire_editerChalet($tousProduits,$Produits,$prochaineRequete,$message);
         }
         catch(Exception $e)
         {
@@ -461,7 +461,7 @@ class Controleur
             $oProduits = new Produits(); 
             $oProduits->modifierUnProduit("actif",$_GET["imageFacade"],$_GET["imageInterieur1"],$_GET["imageInterieur2"],
             $_GET["imageInterieur3"],$_GET["nom"],$_GET["emplacement"],$_GET["description"],$_GET["nombre_de_chambre"],
-            $_GET["nombre_de_salle_de_bain"],$_GET["prix_par_jour"],$_GET["prix_par_semaine"]);
+            $_GET["nombre_de_salle_de_bain"],$_GET["prix_par_semaine"]);
             $_SESSION["message"] = "Votre produit a été modifié"; // servira dans editerChalet_html
             self::req_editerChalet_html();
         }

@@ -10,6 +10,11 @@ if (empty($_GET["statut"]))
     $_GET["statut"] = '';
 }
 
+if (empty($_GET["imageFacade"]))
+{
+    $_GET["imageFacade"] = '';
+}
+
 if (empty($_GET["imageInterieur1"]))
 {
     $_GET["imageInterieur1"] = '';

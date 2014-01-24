@@ -355,7 +355,7 @@ class Produits
     }
     // -----------------------------------------------------------------------------------------------------//
 
-    public function modifierUnProduit($statut,$imageFacade,$imageInterieur1,$imageInterieur2,$imageInterieur3,$nom,$emplacement,$description,$nombre_de_chambre,$nombre_de_salle_de_bain,$prix_par_jour,$prix_par_semaine)
+    public function modifierUnProduit($statut,$imageFacade,$imageInterieur1,$imageInterieur2,$imageInterieur3,$nom,$emplacement,$description,$nombre_de_chambre,$nombre_de_salle_de_bain,$prix_par_semaine)
     {
         /*if (!is_numeric($id_produit))
         {

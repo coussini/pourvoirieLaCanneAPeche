@@ -140,7 +140,7 @@ class VueProduits
     }
 
     // fonction qui retourne un chalet dans le but de le modifier (section administrateur)
-    public static function formulaire_editerChalet($tousProduits,$Produits)
+    public static function formulaire_editerChalet($tousProduits,$Produits,$prochaineRequete,$message)
     {
         $form = '';
 
@@ -186,6 +186,7 @@ class VueProduits
         $form .= '<li class="list-group-item"><label>Prix par semaine: <input size="10" type="text" name="prix_par_semaine" value="' . $Produits["prix_par_semaine"] . '"></label> $can</li>';
         $form .= '<br/>';
         $form .= '<input type="hidden" name="requete" value="' . $prochaineRequete . '">';
+        $form .= '<input type="hidden" name="id_produit" value="' . $Produits["id_produit"] . '">';
         if ($message != "")
         {
             $form .= '<div class="alert alert-info"><span class="glyphicon glyphicon-ok">&nbsp</span>'. $message . '</div>';     
