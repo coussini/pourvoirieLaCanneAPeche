@@ -132,7 +132,7 @@ class VueUtilisateurs
         $form .= '<div class="row">';
         $form .= '<div class="col-md-8 frm_general">';
         $form .= '<div class="col-md-8 grostitres">';
-        $form .= '<p>BIENVENU '. $utilisateurs["prenom"] .'</p>';
+        $form .= '<p>BIENVENUE '. $utilisateurs["prenom"] .'</p>';
         $form .= '</div>';
         $form .= '<div class="formlogin col-md-10"><!--formulaire-->';
         $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
@@ -184,7 +184,7 @@ class VueUtilisateurs
         $form .= '<div class="row">';
         $form .= '<div class="col-md-8 frm_general">';
         $form .= '<div class="col-md-8 grostitres">';
-        $form .= '<p>BIENVENU</p>';
+        $form .= '<p>BIENVENUE</p>';
         $form .= '</div>';
         $form .= '<div class="formlogin col-md-10"><!--formulaire-->';
         $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';

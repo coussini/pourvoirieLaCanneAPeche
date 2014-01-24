@@ -30,12 +30,26 @@ class VueReservations
         if ($_GET["erreur"] == "")
         {
             $form .= '<div class="col-lg-4">';
+            $form .= '<h4><p class="img-thumbnail">' . $produits["nom"] . '</p></h4>';
+            $form .= '<img src="' . $produits["imageFacade"] . '" alt="chalet-accueil" class="img-thumbnail">';
+            $form .= '<p>' . $produit["description"] .'</p>';
+            $form .= '<ul class="list-group">';
+            $form .= '<li class="list-group-item"><span class="badge pull-right">' . $produits["prix_par_semaine"] . '$</span>Par semaine:</li>';
+            $form .= '</ul>';
+            $form .= '</div>';
+
+
+
+/*
+            $form .= '<div class="col-lg-4">';
             $form .= '<h2>Réservation</h2>';
             $form .= '<h2>' . $produit["nom"] . '</h2>';
             $form .= '<img class="img-responsive" src="' . $produit["imageFacade"] . '" alt="image de façade">';
             $form .= '<h5>' . $produit["description"] .'</h5>';
             $form .= '<h4> Prix par semaine : ' . $produit["prix_par_semaine"] .'$</h4>';
             $form .= '</div> <!-- /.col-lg-4 -->';
+
+*/
             $form .= '<div class="col-lg-8">';
             $form .= '<h2>Semaine de réservation pour votre chalet</h2>';
             $form .= '<h4>Veuillez choisir la semaine de votre séjour</h4>';
