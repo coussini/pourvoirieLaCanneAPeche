@@ -30,28 +30,14 @@ class VueReservations
         if ($_GET["erreur"] == "")
         {
             $form .= '<div class="col-lg-4">';
-            $form .= '<h4><p class="img-thumbnail">' . $produits["nom"] . '</p></h4>';
-            $form .= '<img src="' . $produits["imageFacade"] . '" alt="chalet-accueil" class="img-thumbnail">';
-            $form .= '<p>' . $produit["description"] .'</p>';
-            $form .= '<ul class="list-group">';
-            $form .= '<li class="list-group-item"><span class="badge pull-right">' . $produits["prix_par_semaine"] . '$</span>Par semaine:</li>';
-            $form .= '</ul>';
-            $form .= '</div>';
-
-
-
-/*
-            $form .= '<div class="col-lg-4">';
-            $form .= '<h2>Réservation</h2>';
+            $form .= '<div class="img-thumbnail"><h3>Réservation</h3></div>';/////
             $form .= '<h2>' . $produit["nom"] . '</h2>';
-            $form .= '<img class="img-responsive" src="' . $produit["imageFacade"] . '" alt="image de façade">';
+            $form .= '<img class="img-responsive img-thumbnail" src="' . $produit["imageFacade"] . '" alt="image de façade">';////
             $form .= '<h5>' . $produit["description"] .'</h5>';
-            $form .= '<h4> Prix par semaine : ' . $produit["prix_par_semaine"] .'$</h4>';
+            $form .= '<div class="img-thumbnail"><h4> Prix par semaine : ' . $produit["prix_par_semaine"] .'$</h4></div>';////
             $form .= '</div> <!-- /.col-lg-4 -->';
-
-*/
             $form .= '<div class="col-lg-8">';
-            $form .= '<h2>Semaine de réservation pour votre chalet</h2>';
+            $form .= '<div class="img-thumbnail"><h3>Semaine de réservation pour votre chalet</h3></div>';/////
             $form .= '<h4>Veuillez choisir la semaine de votre séjour</h4>';
             $form .= '<div class="semaineChoisi"></div>';
             $form .= '<h4 class="msg_choix">Vous avez choisi la semaine :</h4>';
@@ -97,28 +83,28 @@ class VueReservations
             $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
             $form .= '<div class="row">';
             $form .= '<div class="col-lg-4">';
-            $form .= '<h2>Vos choix</h2>';
+            $form .= '<div class="img-thumbnail"><h3>Vos choix</h3></div>';////
             $form .= '<h2>' . $produit["nom"] . '</h2>';
-            $form .= '<img class="img-responsive" src="' . $produit["imageFacade"] . '" alt="image de façade">';
+            $form .= '<img class="img-responsive img-thumbnail" src="' . $produit["imageFacade"] . '" alt="image de façade">';/////
             $form .= '<h5>' . $produit["description"] .'</h5>';
-            $form .= '<h4> Prix par semaine:' . $produit["prix_par_semaine"] .'$</h4>';
-            $form .= '<h4>Vos choix de dates:</h4>';
-            $form .= '<h4>DU ' . $dateDebut . ' AU ' . $dateFin . '</h4>';
+            $form .= '<div class="img-thumbnail"><h4>Prix par semaine:' . $produit["prix_par_semaine"] .'$</h4></div>';//////
+            $form .= '<div class="img-thumbnail"><h4>Vos choix de dates:</h4>';///
+            $form .= '<h4>DU ' . $dateDebut . ' AU ' . $dateFin . '</h4></div>';////
             $form .= '</div> <!-- /.col-lg-4 -->';
             $form .= '<div class="col-lg-4">';
-            $form .= '<h2>Vos coordonnées</h2>';
+            $form .= '<div class="img-thumbnail"><h3>Vos coordonnées</h3></div>';/////
             $form .= '<p class="help-block">Veuillez vérifier vos coordonnées afin que nous puissions vous envoyez une confirmation de paiement</p>';
             $form .= '<label>NOM</label><br/>';
-            $form .= '<p>' . $utilisateur["nom"] . '</p><br/>';
+            $form .= '<p class="list-group-item">' . $utilisateur["nom"] . '</p><br/>';///////
             $form .= '<label>PRENOM</label><br/>';
-            $form .= '<p>' . $utilisateur["prenom"] . '</p><br/>';
+            $form .= '<p class="list-group-item">' . $utilisateur["prenom"] . '</p><br/>';/////
             $form .= '<label>ADRESSE COURRIEL</label><br/>';
-            $form .= '<p>' . $utilisateur["courriel"] . '</p><br/>';
+            $form .= '<p class="list-group-item">' . $utilisateur["courriel"] . '</p><br/>';/////
             $form .= '<label>DATE DE NAISSANCE</label><br/>';
-            $form .= '<p>' . $utilisateur["date_de_naissance"] . '</p><br/>';
+            $form .= '<p class="list-group-item">' . $utilisateur["date_de_naissance"] . '</p><br/>';/////
             $form .= '</div> <!-- /.col-lg-4 -->';
             $form .= '<div class="col-lg-4">';
-            $form .= '<h2>Carte de crédit</h2>';
+            $form .= '<div class="img-thumbnail"><h3>Carte de crédit</h3></div><br/>';////
             $form .= '<label>Carte de crédit</label><br/>';
             $form .= '<select name="nom_carte" size="1" >';
             $form .= '<option value="Mastercard">Mastercard</option>';
@@ -167,28 +153,28 @@ class VueReservations
         $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
         $form .= '<div class="row">';
         $form .= '<div class="col-lg-4">';
-        $form .= '<h2>Vos choix</h2>';
+        $form .= '<div class="img-thumbnail"><h3>Vos choix</h3></div>';///
         $form .= '<h2>' . $produit["nom"] . '</h2>';
-        $form .= '<img class="img-responsive" src="' . $produit["imageFacade"] . '" alt="image de façade">';
+        $form .= '<img class="img-responsive img-thumbnail" src="' . $produit["imageFacade"] . '" alt="image de façade">';///
         $form .= '<h5>' . $produit["description"] .'</h5>';
-        $form .= '<h4> Prix par semaine:' . $produit["prix_par_semaine"] .'$</h4>';
-        $form .= '<h4>Vos choix de dates:</h4>';
-        $form .= '<h4>DU ' . $dateDebut . ' AU ' . $dateFin . '</h4>';
+        $form .= '<div class="img-thumbnail"><h4> Prix par semaine:' . $produit["prix_par_semaine"] .'$</h4></div>';////
+        $form .= '<div class="img-thumbnail"><h4>Vos choix de dates:</h4>';////
+        $form .= '<h4>DU ' . $dateDebut . ' AU ' . $dateFin . '</h4></div>';////
         $form .= '</div> <!-- /.col-lg-4 -->';
         $form .= '<div class="col-lg-4">';
-        $form .= '<h2>Vos coordonnées</h2>';
+        $form .= '<div class="img-thumbnail"><h3>Vos coordonnées</h3></div>';/////
         $form .= '<p class="help-block">Veuillez vérifier vos coordonnées afin que nous puissions vous envoyez une confirmation de paiement</p>';
         $form .= '<label>NOM</label><br/>';
-        $form .= '<p>' . $utilisateur["nom"] . '</p><br/>';
+        $form .= '<p class="list-group-item">' . $utilisateur["nom"] . '</p><br/>';/////
         $form .= '<label>PRENOM</label><br/>';
-        $form .= '<p>' . $utilisateur["prenom"] . '</p><br/>';
+        $form .= '<p class="list-group-item">' . $utilisateur["prenom"] . '</p><br/>';////
         $form .= '<label>ADRESSE COURRIEL</label><br/>';
-        $form .= '<p>' . $utilisateur["courriel"] . '</p><br/>';
+        $form .= '<p class="list-group-item">' . $utilisateur["courriel"] . '</p><br/>';/////
         $form .= '<label>DATE DE NAISSANCE</label><br/>';
-        $form .= '<p>' . $utilisateur["date_de_naissance"] . '</p><br/>';
+        $form .= '<p class="list-group-item">' . $utilisateur["date_de_naissance"] . '</p><br/>';/////
         $form .= '</div> <!-- /.col-lg-4 -->';
         $form .= '<div class="col-lg-4">';
-        $form .= '<h2>Carte de crédit</h2>';
+        $form .= '<div class="img-thumbnail"><h3>Carte de crédit</h3></div><br/>';////
         $form .= '<label>Carte de crédit</label><br/>';
         $form .= '<select name="nom_carte" size="1">';
         if ($nom_carte == "Mastercard")
