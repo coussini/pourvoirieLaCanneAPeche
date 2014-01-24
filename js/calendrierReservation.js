@@ -27,6 +27,7 @@ var CalendrierReservation = (function(win,doc,$)
         {
             $(".msg_choix").hide();
             $(".btn_reserver").hide();
+            $(".choixDeSemaine").hide();
 
             $.datepicker.regional['fr'] = 
             {
@@ -131,11 +132,11 @@ var CalendrierReservation = (function(win,doc,$)
                 { 
                     $(".msg_choix").show();
                     $(".btn_reserver").show();
+                    $(".choixDeSemaine").show();
                     var date = $(this).datepicker('getDate');
                     startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
                     endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 6);
                     var dateFormat = inst.settings.dateFormat || $.datepicker._defaults.dateFormat;
-                    $('#semaine').text("(" + $.datepicker.iso8601Week(startDate) + ") du ");
                     $('#startDate').text($.datepicker.formatDate( dateFormat, startDate, inst.settings ) + " au ");
                     $('#endDate').text($.datepicker.formatDate( dateFormat, endDate, inst.settings ));
                     $('#numero_semaine').val($.datepicker.iso8601Week(startDate));

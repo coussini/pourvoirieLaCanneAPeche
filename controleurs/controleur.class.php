@@ -303,7 +303,7 @@ class Controleur
             $prochaineRequete = 'validerProfil';
             self::gererMenuPrincipal();
             $message = "";
-            if ($_SESSION["message"] != "")
+            if (!empty($_SESSION["message"]))
             {
                 $message = $_SESSION["message"];
                 $_SESSION["message"] = "";

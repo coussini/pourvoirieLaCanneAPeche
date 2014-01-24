@@ -20,6 +20,8 @@ class VueReservations
     }
 
     // function qui retourne le formulaire reserver.html
+    // les champs numero_semaine, date_debut et date_fin ont été manipulé dans calendrierReservation.js(preparerLeCalendrier)
+    // elle proviennent des champs id="semaine", id="startDate" et id="endDate"
     public static function formulaire_reserver($produit)
     {
         $form = '';
@@ -37,21 +39,19 @@ class VueReservations
             $form .= '<div class="img-thumbnail"><h4> Prix par semaine : ' . $produit["prix_par_semaine"] .'$</h4></div>';////
             $form .= '</div> <!-- /.col-lg-4 -->';
             $form .= '<div class="col-lg-8">';
-            $form .= '<div class="img-thumbnail"><h3>Semaine de réservation pour votre chalet</h3></div>';/////
+            $form .= '<div class="img-thumbnail"><h3>Semaine de réservation pour votre chalet</h3></div><br/><br/>';/////
             $form .= '<h4>Veuillez choisir la semaine de votre séjour</h4>';
             $form .= '<div class="semaineChoisi"></div>';
             $form .= '<h4 class="msg_choix">Vous avez choisi la semaine :</h4>';
+            $form .= '<div class="img-thumbnail choixDeSemaine"><h4><span id="startDate"></span><span id="endDate"></strong></span></h4></div>';
+            $form .= '<br/><br/>';
             $form .= '<input type="hidden" name="requetePage" value="' . $_GET["requetePage"] . '">';
             $form .= '<input type="hidden" name="id_utilisateur" value="' . $_GET["id_utilisateur"] . '">';
             $form .= '<input type="hidden" name="id_produit" value="' . $_GET["id_produit"] . '">';
-            // les champs numero_semaine, date_debut et date_fin ont été manipulé dans calendrierReservation.js(preparerLeCalendrier)
-            // elle proviennent des champs id="semaine", id="startDate" et id="endDate"
             $form .= '<input type="hidden" id="numero_semaine" name="numero_semaine" value="">';
             $form .= '<input type="hidden" id="date_debut" name="date_debut" value="">';
             $form .= '<input type="hidden" id="date_fin" name="date_fin" value="">';
             $form .= '<input type="hidden" name="prix_par_semaine" value="' . $produit["prix_par_semaine"] . '">';
-            $form .= '<h4><span id="semaine"></span> <span id="startDate"></span><span id="endDate"></strong></span></h4>';
-            $form .= '<br/><br/>';
             $form .= '<button type="submit" class="btn btn-custom-vert btn-lg btn_reserver">RÉSERVER</button>';
             $form .= '</div> <!-- /.col-lg-8 -->';
         }
@@ -88,23 +88,11 @@ class VueReservations
             $form .= '<img class="img-responsive img-thumbnail" src="' . $produit["imageFacade"] . '" alt="image de façade">';/////
             $form .= '<h5>' . $produit["description"] .'</h5>';
             $form .= '<div class="img-thumbnail"><h4>Prix par semaine:' . $produit["prix_par_semaine"] .'$</h4></div>';//////
-            $form .= '<div class="img-thumbnail"><h4>Vos choix de dates:</h4>';///
-            $form .= '<h4>DU ' . $dateDebut . ' AU ' . $dateFin . '</h4></div>';////
+            $form .= '<h4>Vos choix de dates:</h4>';///
+            $form .= '<div class="img-thumbnail"><h4>DU ' . $dateDebut . ' AU ' . $dateFin . '</h4></div>';////
             $form .= '</div> <!-- /.col-lg-4 -->';
             $form .= '<div class="col-lg-4">';
-            $form .= '<div class="img-thumbnail"><h3>Vos coordonnées</h3></div>';/////
-            $form .= '<p class="help-block">Veuillez vérifier vos coordonnées afin que nous puissions vous envoyez une confirmation de paiement</p>';
-            $form .= '<label>NOM</label><br/>';
-            $form .= '<p class="list-group-item">' . $utilisateur["nom"] . '</p><br/>';///////
-            $form .= '<label>PRENOM</label><br/>';
-            $form .= '<p class="list-group-item">' . $utilisateur["prenom"] . '</p><br/>';/////
-            $form .= '<label>ADRESSE COURRIEL</label><br/>';
-            $form .= '<p class="list-group-item">' . $utilisateur["courriel"] . '</p><br/>';/////
-            $form .= '<label>DATE DE NAISSANCE</label><br/>';
-            $form .= '<p class="list-group-item">' . $utilisateur["date_de_naissance"] . '</p><br/>';/////
-            $form .= '</div> <!-- /.col-lg-4 -->';
-            $form .= '<div class="col-lg-4">';
-            $form .= '<div class="img-thumbnail"><h3>Carte de crédit</h3></div><br/>';////
+            $form .= '<div class="img-thumbnail"><h3>Carte de crédit</h3></div><br/><br/>';////
             $form .= '<label>Carte de crédit</label><br/>';
             $form .= '<select name="nom_carte" size="1" >';
             $form .= '<option value="Mastercard">Mastercard</option>';
@@ -158,23 +146,11 @@ class VueReservations
         $form .= '<img class="img-responsive img-thumbnail" src="' . $produit["imageFacade"] . '" alt="image de façade">';///
         $form .= '<h5>' . $produit["description"] .'</h5>';
         $form .= '<div class="img-thumbnail"><h4> Prix par semaine:' . $produit["prix_par_semaine"] .'$</h4></div>';////
-        $form .= '<div class="img-thumbnail"><h4>Vos choix de dates:</h4>';////
-        $form .= '<h4>DU ' . $dateDebut . ' AU ' . $dateFin . '</h4></div>';////
+        $form .= '<h4>Vos choix de dates:</h4>';////
+        $form .= '<div class="img-thumbnail"><h4>DU ' . $dateDebut . ' AU ' . $dateFin . '</h4></div>';////
         $form .= '</div> <!-- /.col-lg-4 -->';
         $form .= '<div class="col-lg-4">';
-        $form .= '<div class="img-thumbnail"><h3>Vos coordonnées</h3></div>';/////
-        $form .= '<p class="help-block">Veuillez vérifier vos coordonnées afin que nous puissions vous envoyez une confirmation de paiement</p>';
-        $form .= '<label>NOM</label><br/>';
-        $form .= '<p class="list-group-item">' . $utilisateur["nom"] . '</p><br/>';/////
-        $form .= '<label>PRENOM</label><br/>';
-        $form .= '<p class="list-group-item">' . $utilisateur["prenom"] . '</p><br/>';////
-        $form .= '<label>ADRESSE COURRIEL</label><br/>';
-        $form .= '<p class="list-group-item">' . $utilisateur["courriel"] . '</p><br/>';/////
-        $form .= '<label>DATE DE NAISSANCE</label><br/>';
-        $form .= '<p class="list-group-item">' . $utilisateur["date_de_naissance"] . '</p><br/>';/////
-        $form .= '</div> <!-- /.col-lg-4 -->';
-        $form .= '<div class="col-lg-4">';
-        $form .= '<div class="img-thumbnail"><h3>Carte de crédit</h3></div><br/>';////
+        $form .= '<div class="img-thumbnail"><h3>Carte de crédit</h3></div><br/><br/>';////
         $form .= '<label>Carte de crédit</label><br/>';
         $form .= '<select name="nom_carte" size="1">';
         if ($nom_carte == "Mastercard")
@@ -213,11 +189,11 @@ class VueReservations
         {
             $form .= '<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign">&nbsp</span>' . $_GET["erreur"] . '</div>';            
             $form .= '<button type="submit" class="btn btn-custom-vert btn-lg">CONFIRMER</button><br/><br/>';
-            $form .= '<button type="button" class="btn btn-custom-gris btn-lg">&laquo; ÉTAPE PRÉCÉDENTE</button>';
+            $form .= '<a class="btn btn-custom-gris btn-lg" href="./index.php?requete=reserver_html&id_produit=' . $_GET["id_produit"] . '&id_utilisateur=' . $_GET["id_utilisateur"] . '">&laquo; ÉTAPE PRÉCÉDENTE</a>';                  
         }
         else
         {
-            $form .= '<button type="button" class="btn btn-custom-gris btn-lg">&laquo; QUITTER</button>';
+            $form .= '<a class="btn btn-custom-gris btn-lg" href="./index.php?requete=chalets_html">QUITTER</a>';                  
         }
         
         $form .= '<br/><br/>';
@@ -228,7 +204,7 @@ class VueReservations
         
         if (!empty($_GET["message_confirmation"]))
         {
-            $form .= '<div class="alert alert-info"><span class="glyphicon glyphicon-ok">&nbsp</span>' . $_GET["message_confirmation"] . '</div>';     
+            $form .= '<br/><div class="alert alert-info"><span class="glyphicon glyphicon-ok">&nbsp</span>' . $_GET["message_confirmation"] . '</div>';     
         }
         
         $form .= '</div> <!-- /.container -->';
