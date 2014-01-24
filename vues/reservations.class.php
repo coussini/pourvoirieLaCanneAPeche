@@ -88,7 +88,7 @@ class VueReservations
             $form .= '<h2>' . $produit["nom"] . '</h2>';
             $form .= '<img class="img-responsive img-thumbnail" src="' . $produit["imageFacade"] . '" alt="image de façade">';/////
             $form .= '<h5>' . $produit["description"] .'</h5>';
-            $form .= '<div class="img-thumbnail"><h4>Prix par semaine:' . $produit["prix_par_semaine"] .'$</h4></div>';//////
+            $form .= '<div class="img-thumbnail"><h4>Prix par semaine : ' . $produit["prix_par_semaine"] .'$</h4></div>';//////
             $form .= '<h4>Vos choix de dates:</h4>';///
             $form .= '<div class="img-thumbnail"><h4>DU ' . $dateDebut . ' AU ' . $dateFin . '</h4></div>';////
             $form .= '</div> <!-- /.col-lg-4 -->';
