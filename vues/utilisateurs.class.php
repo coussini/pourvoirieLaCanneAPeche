@@ -137,6 +137,7 @@ class VueUtilisateurs
         $form .= '<div class="formlogin col-md-10"><!--formulaire-->';
         $form .= '<form role="form" action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
         $form .= '<div class="form-group">';
+        $form .= '<input type="hidden" name="id_utilisateur" value="'. $utilisateurs["id_utilisateur"] .'"';
         $form .= '<label for="nom">NOM</label>';
         $form .= '<input type="text" class="form-control" name="nom" id="nom" value="'. $utilisateurs["nom"] .'" required>';
         $form .= '</div>';

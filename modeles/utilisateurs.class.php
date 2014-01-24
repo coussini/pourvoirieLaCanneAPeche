@@ -130,7 +130,8 @@ class Utilisateurs
         
         $id = $this->connexionBD;
         
-        $requete = $id->prepare("SELECT nom,
+        $requete = $id->prepare("SELECT id_utilisateur,
+                                        nom,
                                         prenom,
                                         courriel,
                                         mot_de_passe,
@@ -152,6 +153,7 @@ class Utilisateurs
             throw new Exception("Erreur d'extraction sur la table utilisateurs " . $id->errorCode());
         }
 
+        $requete->bindColumn('id_utilisateur',$id_utilisateur);
         $requete->bindColumn('nom',$nom);
         $requete->bindColumn('prenom',$prenom);
         $requete->bindColumn('courriel',$courriel);
@@ -162,6 +164,7 @@ class Utilisateurs
 
         if ($requete->rowCount() > 0)
         {
+            $utilisateurs["id_utilisateur"] = $id_utilisateur;
             $utilisateurs["nom"] = $nom;
             $utilisateurs["prenom"] = $prenom;
             $utilisateurs["courriel"] = $courriel;
@@ -170,6 +173,7 @@ class Utilisateurs
         }
         else
         {
+            $utilisateurs["id_utilisateur"] = "";
             $utilisateurs["nom"] = "";
             $utilisateurs["prenom"] = "";
             $utilisateurs["courriel"] = "";
@@ -184,7 +188,7 @@ class Utilisateurs
     }
     
     // function SQL qui permet de mettre a jour des détails d'un utilisateur
-    public function majUtilisateur($nom,$prenom,$courriel,$mot_de_passe,$mot_de_passe2,$date_de_naissance)
+    public function majUtilisateur($id_utilisateur,$nom,$prenom,$courriel,$mot_de_passe,$mot_de_passe2,$date_de_naissance)
     {
         if (strlen($mot_de_passe) < 6) 
         {
@@ -194,8 +198,9 @@ class Utilisateurs
         {
             throw new Exception("Votre mot de passe et la confirmation de votre mot de passe ne correspondent pas.");
         }
-        
+
         // enlever ou convertir les caractères spéciaux
+        $id_utilisateur = htmlentities($id_utilisateur, ENT_QUOTES, "UTF-8");
         $nom = htmlentities($nom, ENT_QUOTES, "UTF-8");
         $prenom = htmlentities($prenom, ENT_QUOTES, "UTF-8");
         $courriel = htmlentities($courriel, ENT_QUOTES, "UTF-8");
@@ -203,32 +208,32 @@ class Utilisateurs
         $date_de_naissance = htmlentities($date_de_naissance,ENT_QUOTES, "UTF-8");
 
         $id = $this->connexionBD;
-         
-        // pour permettre d'afficher les valuers dans un formulaire
+
         $requete = $id->prepare("UPDATE utilisateurs
-                                    SET nom = :nom,
-                                        prenom = :prenom,
-                                        courriel = :courriel,
-                                        mot_de_passe= :mot_de_passe,
-                                        date_de_naissance= :date_de_naissance
-                                  WHERE courriel = :courriel
-                                    AND statut  = 'actif'");
-                           
+                                    SET nom                 = :nom,
+                                        prenom              = :prenom,
+                                        courriel            = :courriel,
+                                        mot_de_passe        = :mot_de_passe,
+                                        date_de_naissance   = :date_de_naissance
+                                  WHERE id_utilisateur      = :id_utilisateur");
+
+        $requete->bindParam(':id_utilisateur',$id_utilisateur,PDO::PARAM_INT);
         $requete->bindParam(':nom',$nom,PDO::PARAM_STR);
         $requete->bindParam(':prenom',$prenom,PDO::PARAM_STR);
         $requete->bindParam(':courriel',$courriel,PDO::PARAM_STR);
         $requete->bindParam(':mot_de_passe',$mot_de_passe,PDO::PARAM_STR);
         $requete->bindParam(':date_de_naissance',$date_de_naissance,PDO::PARAM_INT);
         
-        $requete->execute();
-        
+        $result = $requete->execute();
+
         if (!$result) 
         {
             throw new Exception("Erreur de mise à jour sur la table utilisateur " . $id->errorCode());
         }
         
         $requete->closeCursor();
-        $id=null;
+        
+        $id = null;
 
         // retourne true si tout s'est bien passé
         return true;
