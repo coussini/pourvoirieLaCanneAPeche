@@ -171,10 +171,10 @@ class VueProduits
         $form .= '<h4><p class="img-thumbnail">' . $Produits["emplacement"] . '</p></h4>';
         $form .= '<img src="' . $Produits["imageFacade"] . '" alt="photo exterieur chalet" class="img-thumbnail">';
         $form .= '<div class="form-group">';
-        $form .= '<p><h4>URL de l\'image à modifier: <input type="text" value="' . $Produits["imageFacade"] . '"></h4></p>';
+        $form .= '<p><h4>URL de l\'image à modifier: <input type="text" name="imageFacade" value="' . $Produits["imageFacade"] . '"></h4></p>';
         $form .= '<p><h6>(Uniquement images au format jpg,gif ou png)</h6></p>';
         $form .= '<p><h4><p>Description :</h4>';
-        $form .= '<textarea cols="45" rows="4">' . $Produits["description"] . '</textarea>';
+        $form .= '<textarea name="description" cols="45" rows="4">' . $Produits["description"] . '</textarea>';
         $form .= '</div>';
         $form .= '</div>';
         $form .= '<div class="col-lg-6">';
@@ -187,6 +187,10 @@ class VueProduits
         $form .= '<br/>';
         $form .= '<input type="hidden" name="requete" value="' . $prochaineRequete . '">';
         $form .= '<input type="hidden" name="id_produit" value="' . $Produits["id_produit"] . '">';
+        $form .= '<input type="hidden" name="nom" value="' . $Produits["nom"] . '">';
+        $form .= '<input type="hidden" name="imageInterieur1" value="' . $Produits["imageInterieur1"] . '">';
+        $form .= '<input type="hidden" name="imageInterieur2" value="' . $Produits["imageInterieur2"] . '">';
+        $form .= '<input type="hidden" name="imageInterieur3" value="' . $Produits["imageInterieur3"] . '">';
         if ($message != "")
         {
             $form .= '<div class="alert alert-info"><span class="glyphicon glyphicon-ok">&nbsp</span>'. $message . '</div>';     
