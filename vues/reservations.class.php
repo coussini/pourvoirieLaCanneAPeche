@@ -45,6 +45,7 @@ class VueReservations
             $form .= '<h4 class="msg_choix">Vous avez choisi la semaine :</h4>';
             $form .= '<div class="img-thumbnail choixDeSemaine"><h4><span id="startDate"></span><span id="endDate"></strong></span></h4></div>';
             $form .= '<br/><br/>';
+            $form .= '<img class="img-responsive img-thumbnail" src="./images/legende.jpg" alt="légende">';////
             $form .= '<input type="hidden" name="requetePage" value="' . $_GET["requetePage"] . '">';
             $form .= '<input type="hidden" name="id_utilisateur" value="' . $_GET["id_utilisateur"] . '">';
             $form .= '<input type="hidden" name="id_produit" value="' . $_GET["id_produit"] . '">';
