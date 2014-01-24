@@ -299,7 +299,13 @@ class Controleur
             $utilisateurs = $oUtilisateurs->extraireUtilisateur($_SESSION["courriel"]);   
             $prochaineRequete = 'validerProfil';
             self::gererMenuPrincipal();
-            VueUtilisateurs::formulaire_profil_html($utilisateurs);
+            $message = "";
+            if ($_SESSION["message"] != "")
+            {
+                $message = $_SESSION["message"];
+                $_SESSION["message"] = "";
+            } 
+            VueUtilisateurs::formulaire_profil_html($utilisateurs,$prochaineRequete,$message);
         }
         catch(Exception $e)
         {
@@ -310,14 +316,14 @@ class Controleur
     }
     
     // valider le formulaire profil.html
-    private static function validerProfil()
+    private static function req_validerProfil()
     {
         try
         {
             $oUtilisateurs = new Utilisateurs();                                
             $oUtilisateurs->majUtilisateur($_POST["id_utilisateur"],$_POST["nom"],$_POST["prenom"],$_POST["courriel"],$_POST["mot_de_passe"],$_POST["mot_de_passe2"],$_POST["date_de_naissance"]);
-            self::gererMenuPrincipal();
-            VueUtilisateurs::formulaire_profilModif_html();
+            $_SESSION["message"] = "Votre profil a été modifié"; // servira dans profil_html
+            self::req_profil_html();
         }
         catch(Exception $e)
         {
